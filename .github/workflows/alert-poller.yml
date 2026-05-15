@@ -1,0 +1,67 @@
+name: AI Pulse Alerter
+
+on:
+  schedule:
+    # Every 15 min. Note: GitHub schedules with cron can be delayed by
+    # a few minutes during high load -- this is fine for our purposes.
+    - cron: '*/15 * * * *'
+  workflow_dispatch: {}
+
+# Prevent two runs from racing on the state file
+concurrency:
+  group: ai-pulse-alerter
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install Python deps
+        run: pip install -r scripts/requirements.txt
+
+      - name: Setup Node (for Claude Code CLI)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Poll + alert
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: python scripts/alert_new_posts.py
+
+      - name: Commit state changes
+        run: |
+          git config user.name "AI Pulse Alerter"
+          git config user.email "alerter@aipulse.local"
+          git add scripts/state/seen_alerts.json
+          if git diff --cached --quiet; then
+            echo "No state changes."
+            exit 0
+          fi
+          git commit -m "Alerter: update seen_alerts state"
+          # Retry-on-conflict: another worker may have pushed first
+          for i in 1 2 3; do
+            git pull --rebase --autostash && git push && exit 0
+            sleep 3
+          done
+          echo "Push failed after 3 retries"
+          exit 1

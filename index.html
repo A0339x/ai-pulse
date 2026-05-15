@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Pulse — Cutting-Edge Daily</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ═══════════════════════════════════════════════════════════════
+       BRAND TOKENS — AI Pulse (Patient Investor palette)
+    ═══════════════════════════════════════════════════════════════ */
+    :root {
+      --bg-base:       #0D0B07;
+      --bg-hero-glow:  #111009;
+      --bg-card:       #181510;
+      --bg-callout:    #1E1A10;
+
+      --border-card:   #2A2518;
+      --border-hi:     rgba(201,168,76,.18);
+
+      --accent:        #C9A84C;
+      --accent-bright: #D4A843;
+      --accent-dark:   #7A5C10;
+      --accent-circuit:#3D3520;
+      --accent-glow:   rgba(201,168,76,.10);
+      --accent-glow2:  rgba(201,168,76,.05);
+
+      --text-1:        #E8E8E4;
+      --text-2:        #888880;
+      --text-on-accent:#0D0B07;
+
+      --sp-2: .5rem;   --sp-3: .75rem;  --sp-4: 1rem;
+      --sp-6: 1.5rem;  --sp-8: 2rem;    --sp-12: 3rem;
+      --sp-16: 4rem;
+
+      --ease: cubic-bezier(.16,1,.3,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg-base);
+      color: var(--text-1);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    code, .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       PROGRESS BAR
+    ═══════════════════════════════════════════════════════════════ */
+    #progress-bar {
+      position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+      background: linear-gradient(90deg, var(--accent-dark), var(--accent-bright));
+      z-index: 999; pointer-events: none; transition: width 80ms linear;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       HEADER
+    ═══════════════════════════════════════════════════════════════ */
+    .site-header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(7,9,12,.88);
+      backdrop-filter: blur(20px) saturate(140%);
+      -webkit-backdrop-filter: blur(20px) saturate(140%);
+      border-bottom: 1px solid var(--border-card);
+      overflow: hidden;
+    }
+
+    .pcb {
+      position: absolute; top: 0; right: 0;
+      width: 220px; height: 58px;
+      pointer-events: none; opacity: 1;
+    }
+
+    .header-inner {
+      max-width: 880px; margin: 0 auto;
+      padding: 0 var(--sp-6); height: 58px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: var(--sp-4); position: relative; z-index: 1;
+    }
+
+    .brand {
+      display: flex; align-items: center; gap: var(--sp-2);
+      text-decoration: none; color: var(--text-1); flex-shrink: 0;
+    }
+    .brand-mark {
+      width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .brand-mark svg { width: 100%; height: 100%; display: block; }
+    .brand-text { font-size: .875rem; font-weight: 700; letter-spacing: -.02em; white-space: nowrap; }
+    .brand-divider { width: 1px; height: 13px; background: var(--border-card); }
+    .brand-sub {
+      font-size: .62rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--text-2); white-space: nowrap;
+    }
+
+    .issue-nav {
+      display: flex; align-items: center; gap: 6px;
+      overflow-x: auto; scrollbar-width: none;
+    }
+    .issue-nav::-webkit-scrollbar { display: none; }
+    .nav-label {
+      font-size: .62rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .1em; color: var(--accent-circuit); white-space: nowrap;
+      margin-right: 2px; flex-shrink: 0;
+    }
+    .nav-chip {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 10px; border-radius: 100px;
+      border: 1px solid var(--border-card);
+      background: transparent; color: var(--text-2);
+      font-family: inherit; font-size: .7rem; font-weight: 500;
+      cursor: pointer; text-decoration: none; white-space: nowrap; flex-shrink: 0;
+      transition: color .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease);
+    }
+    .nav-chip::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      background: var(--accent-circuit); flex-shrink: 0;
+      transition: background .2s var(--ease), box-shadow .2s var(--ease);
+    }
+    .nav-chip:hover { color: var(--text-1); border-color: var(--accent-dark); }
+    .nav-chip.active {
+      color: var(--accent); border-color: var(--accent-dark); background: var(--accent-glow2);
+    }
+    .nav-chip.active::before { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
+
+    /* ═══════════════════════════════════════════════════════════════
+       LAYOUT
+    ═══════════════════════════════════════════════════════════════ */
+    .content { max-width: 880px; margin: 0 auto; padding: 0 var(--sp-6); }
+
+    /* ═══════════════════════════════════════════════════════════════
+       ONBOARDING (intro panel — shown once at top)
+    ═══════════════════════════════════════════════════════════════ */
+    .onboarding {
+      padding: var(--sp-16) 0 var(--sp-12);
+      border-bottom: 1px solid var(--border-card);
+      position: relative;
+    }
+    .onboarding::before {
+      content: '';
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 320px;
+      background: radial-gradient(ellipse at 50% 20%, var(--accent-glow2) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+    .onboarding > * { position: relative; z-index: 1; }
+
+    .onboarding-title {
+      font-size: clamp(2rem, 4.5vw, 2.75rem);
+      font-weight: 900; line-height: 1.05; letter-spacing: -.04em;
+      background: linear-gradient(135deg, var(--accent-bright) 0%, var(--accent-dark) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: var(--sp-6);
+    }
+    .onboarding-body p {
+      font-size: 1.05rem; font-weight: 400; line-height: 1.8;
+      color: var(--text-2); margin-bottom: var(--sp-4);
+    }
+    .onboarding-body p:last-of-type { margin-bottom: 0; }
+    .onboarding-body strong { color: var(--text-1); font-weight: 600; }
+    .onboarding-body em { color: var(--accent); font-style: normal; font-weight: 500; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       ISSUE
+    ═══════════════════════════════════════════════════════════════ */
+    .issue { padding: var(--sp-16) 0; }
+    .issue + .issue { border-top: 1px solid var(--border-card); }
+
+    .issue.latest { position: relative; }
+    .issue.latest::before {
+      content: '';
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 400px;
+      background: radial-gradient(ellipse at 50% 20%, var(--bg-hero-glow) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+    .issue.latest > * { position: relative; z-index: 1; }
+
+    .issue-eyebrow {
+      display: flex; align-items: center; gap: var(--sp-3);
+      margin-bottom: var(--sp-3);
+    }
+    .issue-date {
+      font-size: .68rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .12em; color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .issue-tag {
+      font-size: .6rem; font-weight: 600; letter-spacing: .08em;
+      text-transform: uppercase; padding: 2px 8px;
+      border-radius: 4px; border: 1px solid var(--border-card); color: var(--text-2);
+    }
+
+    .issue-title {
+      font-weight: 900; line-height: 1.05; letter-spacing: -.04em;
+      background: linear-gradient(135deg, var(--accent-bright) 0%, var(--accent-dark) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; margin-bottom: var(--sp-3);
+    }
+    .issue.latest .issue-title { font-size: clamp(2.25rem, 5vw, 3.25rem); }
+    .issue.older  .issue-title { font-size: clamp(1.75rem, 4vw, 2.5rem); }
+
+    .issue-subtitle {
+      font-size: 1rem; font-weight: 300; color: var(--text-2);
+      font-style: italic; line-height: 1.6;
+    }
+
+    .issue-intro {
+      font-size: 1.05rem; font-weight: 400; line-height: 1.8; color: var(--text-2);
+      padding: var(--sp-8) 0; border-bottom: 1px solid var(--border-card);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTION (Features / Trending / Use Cases)
+    ═══════════════════════════════════════════════════════════════ */
+    .section { padding: var(--sp-8) 0; border-bottom: 1px solid var(--border-card); }
+    .section:last-of-type { border-bottom: none; }
+
+    .section-eyebrow {
+      display: flex; align-items: center; gap: var(--sp-3);
+      margin-bottom: var(--sp-4);
+    }
+    .section-marker {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent); box-shadow: 0 0 12px var(--accent);
+      flex-shrink: 0;
+    }
+    .section-label {
+      font-size: .68rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .14em; color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .section-count {
+      font-size: .6rem; color: var(--text-2);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .section-blurb {
+      font-size: .85rem; color: var(--text-2); margin-bottom: var(--sp-6);
+      line-height: 1.6;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       ITEMS (a story-like card per source)
+    ═══════════════════════════════════════════════════════════════ */
+    .item {
+      display: grid; grid-template-columns: 60px 1fr;
+      gap: 0 var(--sp-6); padding: var(--sp-6) 0;
+      border-bottom: 1px solid var(--border-card);
+    }
+    .item:last-child { border-bottom: none; }
+
+    .item-num {
+      font-size: 2rem; font-weight: 900; letter-spacing: -.06em;
+      line-height: 1; padding-top: 4px;
+      color: var(--accent); opacity: .12;
+      font-variant-numeric: tabular-nums;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .item-title {
+      font-size: 1.1rem; font-weight: 700; letter-spacing: -.02em;
+      line-height: 1.3; color: var(--text-1); margin-bottom: 6px;
+    }
+    .item-title a { color: inherit; text-decoration: none; border-bottom: 1px dashed transparent; transition: border-color .2s var(--ease), color .2s var(--ease); }
+    .item-title a:hover { color: var(--accent); border-bottom-color: var(--accent-dark); }
+
+    .item-meta {
+      font-size: .7rem; color: var(--text-2); margin-bottom: var(--sp-3);
+      font-family: 'JetBrains Mono', monospace;
+      display: flex; flex-wrap: wrap; gap: var(--sp-3); align-items: center;
+    }
+    .item-meta .dot { color: var(--accent-circuit); }
+    .item-meta .stars { color: var(--accent); }
+
+    .item-body {
+      font-size: .92rem; line-height: 1.75; color: var(--text-2);
+      margin-bottom: var(--sp-3);
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       CLOSING
+    ═══════════════════════════════════════════════════════════════ */
+    .issue-closing {
+      margin-top: var(--sp-8);
+      background: var(--bg-card); border: 1px solid var(--border-card);
+      border-radius: 12px; padding: var(--sp-6);
+      font-size: .9rem; line-height: 1.75; color: var(--text-2); font-style: italic;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SCROLL-TO-TOP
+    ═══════════════════════════════════════════════════════════════ */
+    #scroll-top {
+      position: fixed; bottom: var(--sp-8); right: var(--sp-8);
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--bg-card); border: 1px solid var(--border-card);
+      color: var(--text-2); font-size: 1rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; z-index: 50;
+      transition: opacity .25s var(--ease), color .2s, border-color .2s, transform .2s var(--ease);
+    }
+    #scroll-top.show { opacity: 1; pointer-events: auto; }
+    #scroll-top:hover { color: var(--accent); border-color: var(--accent-dark); transform: translateY(-2px); }
+
+    /* ═══════════════════════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════════════════════ */
+    .site-footer {
+      border-top: 1px solid var(--border-card);
+      padding: var(--sp-12) var(--sp-6);
+      text-align: center; font-size: .75rem; line-height: 2;
+      color: var(--text-2); position: relative; overflow: hidden;
+    }
+    .site-footer strong { color: var(--accent); font-weight: 600; }
+
+    .pcb-footer {
+      position: absolute; bottom: 0; left: 0;
+      width: 180px; height: 80px; pointer-events: none; opacity: 1;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       REVEAL ANIMATION
+    ═══════════════════════════════════════════════════════════════ */
+    .reveal {
+      opacity: 0; transform: translateY(14px);
+      transition: opacity .55s var(--ease), transform .55s var(--ease);
+    }
+    .reveal.in { opacity: 1; transform: none; }
+    .reveal[data-d="1"] { transition-delay:  60ms; }
+    .reveal[data-d="2"] { transition-delay: 120ms; }
+    .reveal[data-d="3"] { transition-delay: 180ms; }
+    .reveal[data-d="4"] { transition-delay: 240ms; }
+    .reveal[data-d="5"] { transition-delay: 300ms; }
+
+    @media (max-width: 680px) {
+      .brand-divider, .brand-sub, .nav-label { display: none; }
+      .item { grid-template-columns: 1fr; }
+      .item-num { font-size: 1.1rem; margin-bottom: 6px; opacity: .16; }
+      .issue { padding: 3rem 0; }
+      #scroll-top { bottom: 1rem; right: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- ── HEADER ──────────────────────────────────────────────────── -->
+<header class="site-header">
+  <svg class="pcb" viewBox="0 0 220 58" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g stroke="#3D3520" stroke-width="1">
+      <line x1="220" y1="8"  x2="160" y2="8"/>
+      <line x1="160" y1="8"  x2="140" y2="28"/>
+      <line x1="140" y1="28" x2="100" y2="28"/>
+      <line x1="220" y1="22" x2="175" y2="22"/>
+      <line x1="175" y1="22" x2="155" y2="42"/>
+      <line x1="155" y1="42" x2="115" y2="42"/>
+      <line x1="220" y1="40" x2="195" y2="40"/>
+      <line x1="195" y1="40" x2="185" y2="50"/>
+      <line x1="185" y1="50" x2="150" y2="50"/>
+    </g>
+    <g fill="#3D3520">
+      <circle cx="160" cy="8"  r="2.5"/>
+      <circle cx="140" cy="28" r="2.5"/>
+      <circle cx="100" cy="28" r="2.5"/>
+      <circle cx="175" cy="22" r="2.5"/>
+      <circle cx="155" cy="42" r="2.5"/>
+      <circle cx="115" cy="42" r="2.5"/>
+      <circle cx="195" cy="40" r="2.5"/>
+      <circle cx="185" cy="50" r="2.5"/>
+      <circle cx="150" cy="50" r="2.5"/>
+    </g>
+  </svg>
+
+  <div class="header-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="14" cy="14" r="11" stroke="#C9A84C" stroke-width="1.5"/>
+          <circle cx="14" cy="14" r="5" fill="#C9A84C"/>
+          <circle cx="14" cy="14" r="2" fill="#0D0B07"/>
+        </svg>
+      </span>
+      <span class="brand-text">AI Pulse</span>
+      <span class="brand-divider"></span>
+      <span class="brand-sub">Cutting-Edge Daily</span>
+    </a>
+    <nav class="issue-nav" id="issue-nav" aria-label="Jump to issue">
+      <span class="nav-label">Issues</span>
+    </nav>
+  </div>
+</header>
+
+<!-- ── CONTENT ─────────────────────────────────────────────────── -->
+<div class="content" id="top">
+  <section class="onboarding reveal">
+    <h2 class="onboarding-title">A quick read, every morning.</h2>
+    <div class="onboarding-body">
+      <p>The AI space moves faster than any newsletter can keep up with -- so this is built to be the opposite of a newsletter. A two-minute scan of what's <em>shipping</em>, what's <em>climbing</em>, and what people are <em>actually building</em> with it -- so you can stay on the cutting edge of the tools you can use yourself.</p>
+      <p>Three sections every day:</p>
+      <p><strong>Shipping</strong> -- new features from Anthropic, OpenAI, Google, and the labs that matter. What changed, and what it unlocks. <br/><strong>Climbing</strong> -- AI repos pulling in GitHub stars right now. What people are voting on with their attention. <br/><strong>Built with AI</strong> -- the wild, well-documented use cases. End-to-end workflows. The "someone made a whole K-pop band with AI and shared how" stories.</p>
+      <p>One read in the morning. Up to speed on what's possible by lunch.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ── FOOTER ──────────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <svg class="pcb-footer" viewBox="0 0 180 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g stroke="#3D3520" stroke-width="1">
+      <line x1="0" y1="72" x2="60"  y2="72"/>
+      <line x1="60"  y1="72" x2="80"  y2="52"/>
+      <line x1="80"  y1="52" x2="120" y2="52"/>
+      <line x1="0" y1="58" x2="45"  y2="58"/>
+      <line x1="45"  y1="58" x2="65"  y2="38"/>
+      <line x1="65"  y1="38" x2="100" y2="38"/>
+      <line x1="0" y1="40" x2="30"  y2="40"/>
+      <line x1="30"  y1="40" x2="50"  y2="20"/>
+    </g>
+    <g fill="#3D3520">
+      <circle cx="60"  cy="72" r="2.5"/>
+      <circle cx="80"  cy="52" r="2.5"/>
+      <circle cx="120" cy="52" r="2.5"/>
+      <circle cx="45"  cy="58" r="2.5"/>
+      <circle cx="65"  cy="38" r="2.5"/>
+      <circle cx="100" cy="38" r="2.5"/>
+      <circle cx="30"  cy="40" r="2.5"/>
+      <circle cx="50"  cy="20" r="2.5"/>
+    </g>
+  </svg>
+
+  <strong>AI Pulse</strong><br>
+  Cutting-Edge Daily &nbsp;·&nbsp; Generated fresh every morning<br>
+  Stay on the leading edge of the tools you can actually use.
+</footer>
+
+<button id="scroll-top" aria-label="Scroll to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script src="data.js"></script>
+<script>
+
+/* ── BUILD NAV ─────────────────────────────────────────────────── */
+function buildNav() {
+  const nav = document.getElementById('issue-nav');
+  DIGESTS.forEach((d, i) => {
+    const a = document.createElement('a');
+    a.href = '#' + d.id;
+    a.className = 'nav-chip' + (i === 0 ? ' active' : '');
+    a.dataset.id = d.id;
+    a.textContent = d.date;
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      document.getElementById(d.id)?.scrollIntoView({ behavior: 'smooth' });
+    });
+    nav.appendChild(a);
+  });
+}
+
+/* ── BUILD ITEMS ───────────────────────────────────────────────── */
+function buildItem(item, idx) {
+  const titleHTML = item.url
+    ? `<a href="${item.url}" target="_blank" rel="noopener">${item.title}</a>`
+    : item.title;
+
+  const metaBits = [];
+  if (item.source) metaBits.push(`<span>${item.source}</span>`);
+  if (item.stars)  metaBits.push(`<span class="stars">★ ${item.stars}</span>`);
+  if (item.lang)   metaBits.push(`<span>${item.lang}</span>`);
+  if (item.author) metaBits.push(`<span>${item.author}</span>`);
+  const metaHTML = metaBits.length
+    ? `<div class="item-meta">${metaBits.join('<span class="dot">·</span>')}</div>`
+    : '';
+
+  const numStr = String(idx + 1).padStart(2, '0');
+
+  return `
+    <div class="item">
+      <div class="item-num">${numStr}</div>
+      <div>
+        <div class="item-title">${titleHTML}</div>
+        ${metaHTML}
+        <div class="item-body">${item.body}</div>
+      </div>
+    </div>`;
+}
+
+/* ── BUILD SECTION ─────────────────────────────────────────────── */
+function buildSection(sec) {
+  if (!sec || !sec.items || !sec.items.length) return '';
+  const itemsHTML = sec.items.map(buildItem).join('');
+  return `
+    <div class="section reveal">
+      <div class="section-eyebrow">
+        <span class="section-marker"></span>
+        <span class="section-label">${sec.label}</span>
+        <span class="section-count">${sec.items.length} ${sec.items.length === 1 ? 'item' : 'items'}</span>
+      </div>
+      ${sec.blurb ? `<div class="section-blurb">${sec.blurb}</div>` : ''}
+      ${itemsHTML}
+    </div>`;
+}
+
+/* ── BUILD ISSUES ──────────────────────────────────────────────── */
+function buildIssues() {
+  const container = document.getElementById('top');
+  DIGESTS.forEach((d, idx) => {
+    const sec = document.createElement('section');
+    sec.className = 'issue ' + (idx === 0 ? 'latest' : 'older');
+    sec.id = d.id;
+
+    const titleHTML = (d.title || 'AI Pulse').split('\n').join('<br>');
+    const sectionsHTML = (d.sections || []).map(buildSection).join('');
+
+    sec.innerHTML = `
+      <div class="issue-eyebrow reveal">
+        <span class="issue-date">${d.date}</span>
+        <span class="issue-tag">Daily Edition</span>
+      </div>
+      <h1 class="issue-title reveal" data-d="1">${titleHTML}</h1>
+      ${d.subtitle ? `<p class="issue-subtitle reveal" data-d="2">${d.subtitle}</p>` : ''}
+      ${d.intro ? `<p class="issue-intro reveal" data-d="3">${d.intro}</p>` : ''}
+      <div class="sections">${sectionsHTML}</div>
+      ${d.closing ? `<div class="issue-closing reveal">${d.closing}</div>` : ''}`;
+
+    container.appendChild(sec);
+  });
+}
+
+/* ── OBSERVERS ─────────────────────────────────────────────────── */
+function initObservers() {
+  const fadeIO = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); fadeIO.unobserve(e.target); } });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.reveal').forEach(el => fadeIO.observe(el));
+
+  const navIO = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        document.querySelectorAll('.nav-chip').forEach(c => c.classList.remove('active'));
+        document.querySelector(`.nav-chip[data-id="${e.target.id}"]`)?.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-25% 0px -65% 0px' });
+  document.querySelectorAll('.issue').forEach(s => navIO.observe(s));
+}
+
+/* ── SCROLL ────────────────────────────────────────────────────── */
+function initScroll() {
+  const bar = document.getElementById('progress-bar');
+  const btn = document.getElementById('scroll-top');
+  let t = false;
+  window.addEventListener('scroll', () => {
+    if (!t) {
+      requestAnimationFrame(() => {
+        const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+        bar.style.width = Math.min(pct, 100) + '%';
+        btn.classList.toggle('show', window.scrollY > 500);
+        t = false;
+      });
+      t = true;
+    }
+  }, { passive: true });
+}
+
+buildNav();
+buildIssues();
+requestAnimationFrame(() => { initObservers(); initScroll(); });
+</script>
+</body>
+</html>
