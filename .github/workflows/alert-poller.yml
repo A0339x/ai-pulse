@@ -2,9 +2,11 @@ name: AI Pulse Alerter
 
 on:
   schedule:
-    # Every 15 min. Note: GitHub schedules with cron can be delayed by
-    # a few minutes during high load -- this is fine for our purposes.
-    - cron: '*/15 * * * *'
+    # Every 40 min. Note: `*/40` in cron fires at minute :00 and :40 of each
+    # hour, so actual intervals alternate 40/20/40/20 (cron can't express
+    # true even 40-min cadence). GitHub schedules can also be delayed by a
+    # few minutes during high load -- fine for our purposes.
+    - cron: '*/40 * * * *'
   workflow_dispatch: {}
 
 # Prevent two runs from racing on the state file
