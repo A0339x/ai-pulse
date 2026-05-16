@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-05-16",
+    "date": "May 16, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Opus 4.7 lands, agents get cheaper on GitHub, and ChatGPT wants your bank login",
+    "intro": "Anthropic ships Opus 4.7 and OpenAI pushes GPT-5.5 into Databricks enterprise pipelines -- two model updates on the same morning. GitHub's trending list is dominated by token-compression tools this week, which is a clear signal: the community is focused on cost, not capability. The personal finance feature from OpenAI is the most ambitious product bet in today's batch.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two model updates and a finance pivot share the day",
+        "items": [
+          {
+            "title": "Claude Opus 4.7",
+            "url": "https://www.anthropic.com/news/claude-opus-4-7",
+            "source": "Anthropic",
+            "body": "Opus 4.7 is Anthropic's latest update to their flagship model tier. Opus is the line you reach for on complex reasoning, long-context tasks, and anything requiring sustained multi-step thinking -- this release bumps that ceiling. Available now via the API and Claude.ai. No beta gating on the rollout."
+          },
+          {
+            "title": "Hermes Agent v0.14.0",
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.5.16",
+            "source": "NousResearch",
+            "body": "808 commits, 633 merged PRs, 165,000 lines added since v0.13.0 -- NousResearch is calling this \"The Foundation Release\" and meaning it. Two things that matter: native Windows support lands in early beta with a proper PowerShell installer story, and `pip install hermes-agent` now works via a real PyPI wheel. Lazy-deps keeps the install footprint small until you actually need a dependency. 545 closed issues including 12 P0 bugs, 215 contributors. This release is about distribution -- Hermes Agent now installs and runs everywhere."
+          },
+          {
+            "title": "Personal Finance in ChatGPT",
+            "url": "https://openai.com/index/personal-finance-chatgpt",
+            "source": "OpenAI",
+            "body": "A new personal finance feature is in preview for ChatGPT Pro users in the US. Connect your financial accounts and the model grounds its responses in your actual spending, balances, and stated goals instead of generic financial advice. It's read-only access -- no trading, no transactions. The shift is that ChatGPT now has structured financial data about you at query time, which makes budget and planning conversations meaningfully more useful than asking about money in the abstract."
+          },
+          {
+            "title": "Databricks brings GPT-5.5 to enterprise agent workflows",
+            "url": "https://openai.com/index/databricks",
+            "source": "OpenAI",
+            "body": "GPT-5.5 is now available inside Databricks for enterprise agent workflows. The integration follows GPT-5.5 posting a new state-of-the-art score on OfficeQA Pro -- a benchmark targeting multi-step information retrieval and document reasoning against enterprise data. For teams already running lakehouse pipelines on Databricks, you can now route agent tasks directly to GPT-5.5 without moving data out of your existing infrastructure."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token compression is this week's dominant theme on GitHub",
+        "items": [
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "60.9k",
+            "lang": "JavaScript",
+            "body": "A Claude Code skill that cuts 65% of tokens by forcing the model to communicate in terse, grammar-free caveman syntax. The idea is that LLMs can parse heavily compressed language just fine, so you lose no reasoning quality while paying a fraction of the token cost. It's a Claude Code skill, meaning it changes how the agent communicates internally during task execution -- your output stays readable. The compression works by register shift, not lossy summarization, which is why the quality holds."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "48.7k",
+            "lang": "Rust",
+            "body": "A CLI proxy that strips 60-90% of token usage on common dev commands before the request reaches the LLM. Ships as a single Rust binary with zero dependencies -- drop it in your PATH and it intercepts traffic from Claude Code, Codex CLI, or any other terminal-based agent. The bet is that most tokens in a coding session are repeated boilerplate: file headers, import blocks, test scaffolding the model has already processed. RTK identifies those patterns, strips redundant content, and caches relevant context locally."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "48.5k",
+            "lang": "HTML",
+            "body": "An AI coding assistant skill that turns any project folder into a queryable knowledge graph -- source code, SQL schemas, shell scripts, docs, images, and videos all land in a single graph you can query at inference time. Runs as a skill inside Claude Code, Codex, Cursor, Gemini CLI, and OpenCode. The novel part is the surface area: most RAG-for-code tools handle source files only. Graphify ingests the full project layer including infrastructure configs and recorded demos, so you can ask cross-layer questions like \"what database tables does this endpoint actually touch.\""
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "52.3k",
+            "lang": "Python",
+            "body": "The top-benchmarked open-source AI memory system, built on ChromaDB with native MCP support. Attach it to any LLM to give sessions a persistent, queryable memory layer -- facts accumulate across conversations, and relevant ones get retrieved at inference time without crowding the context window. Free and self-hostable. The MCP integration means it drops into Claude Code, Cursor, and any other MCP-aware client without custom wiring or a managed service."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's batch documents a reproducible end-to-end workflow",
+        "items": []
+      }
+    ],
+    "closing": "Back tomorrow."
+  },
+  {
     "id": "2026-05-15",
     "date": "May 15, 2026",
     "title": "AI Pulse",
