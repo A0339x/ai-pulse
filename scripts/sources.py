@@ -179,6 +179,7 @@ WATCHED_AGENT_REPOS = [
 # Get channel_id by visiting the channel page and grepping for `"browseId":"UC..."`.
 WATCHED_YOUTUBE_CHANNELS = [
     ("Nate Herk | AI Automation", "UC2ojq-nuP8ceeHqiroeKhBA"),
+    ("Bilawal Sidhu",             "UC7bGK0A1weWfNaRfO0hGVdg"),
 ]
 
 
