@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-05-17",
+    "date": "May 17, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Two new flagship models land, token-trimming tools dominate GitHub, and ChatGPT wants to see your bank statements",
+    "intro": "Anthropic and OpenAI both pushed new models today -- Opus 4.7 and GPT-5.5 ship within hours of each other. On GitHub, the dominant pattern is token efficiency: multiple high-climbing repos share the thesis that LLMs burn too many tokens and a thin proxy or skill layer can fix that. The personal finance angle is also worth tracking -- OpenAI is moving to put AI directly on top of your actual transaction data, not just hypothetical examples.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two new flagships and a pair of features that didn't exist yesterday.",
+        "items": [
+          {
+            "title": "Claude Opus 4.7",
+            "url": "https://www.anthropic.com/news/claude-opus-4-7",
+            "source": "Anthropic",
+            "body": "Anthropic's latest flagship is live. Opus 4.7 replaces Opus 4 at the top of the Claude 4.x line and is available now at model ID claude-opus-4-7 via the API, Claude.ai, and existing partner integrations -- no configuration changes required. Within the 4.x family, Opus sits above Sonnet 4.6 in both capability and price. Anthropic's .x cadence in this line has delivered incremental but real gains in reasoning accuracy, multi-step task completion, and long-context handling. The full benchmark breakdown and pricing specifics are in the announcement."
+          },
+          {
+            "title": "Databricks brings GPT-5.5 to enterprise agent workflows",
+            "url": "https://openai.com/index/databricks",
+            "source": "OpenAI",
+            "body": "GPT-5.5 is now available inside Databricks for enterprise agent workflows. The model set a new state of the art on the OfficeQA Pro benchmark -- a test targeting knowledge-worker tasks like document QA and structured data reasoning. The Databricks integration means teams already on the platform can route agentic pipelines through GPT-5.5 without standing up separate API infrastructure. For enterprise builders, this is the clearest signal that GPT-5.5 is production-ready rather than API preview."
+          },
+          {
+            "title": "A new personal finance experience in ChatGPT",
+            "url": "https://openai.com/index/personal-finance-chatgpt",
+            "source": "OpenAI",
+            "body": "ChatGPT Pro users in the U.S. can now connect their financial accounts directly to ChatGPT and get AI-powered analysis grounded in their actual balances, transactions, and spending patterns. This is in preview. The grounding is the differentiator -- the model works from your real data, not generic budgeting examples. Account connections go through a secure linking flow. The move puts OpenAI in direct competition with personal finance apps that have been adding LLM layers on top of Plaid-style connections."
+          },
+          {
+            "title": "Granite Embedding Multilingual R2",
+            "url": "https://huggingface.co/blog/ibm-granite/granite-embedding-multilingual-r2",
+            "source": "Hugging Face / IBM",
+            "body": "IBM shipped two new open embedding models under Apache 2.0 with a major jump from the R1 baseline. Context window goes from 512 to 32,768 tokens -- 64x -- using ModernBERT with rotary position embeddings and Flash Attention 2. MTEB Multilingual Retrieval scores improved +12 points (97M) and +13 points (311M) over R1. The 311M model lands at #2 on the open multilingual retrieval leaderboard and supports Matryoshka truncation to 128 dimensions with less than 2 points of quality loss. Drops into sentence-transformers, LangChain, LlamaIndex, and Haystack unchanged. Ships with ONNX and OpenVINO weights for CPU inference."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token efficiency is this week's dominant thesis on GitHub.",
+        "items": [
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "61.2k",
+            "lang": "JavaScript",
+            "body": "A Claude Code skill that cuts token output by 65% by making the model respond in stripped-down caveman syntax -- no articles, no conjunctions, no filler. The premise is that most LLM verbosity is stylistic overhead with no effect on reasoning quality. Install the skill file into Claude Code and it drops the padding while keeping the substance. The novel constraint works at the output syntax level rather than compressing prompts or truncating context. For high-volume coding sessions billed per token, the savings compound quickly across a full workday."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "49.1k",
+            "lang": "Rust",
+            "body": "A CLI proxy that reduces LLM token consumption 60-90% on common dev commands. Single Rust binary, zero dependencies. It recognizes patterns in dev command output -- git diffs, test failures, compiler errors -- and strips redundant context before the request reaches the model. Unlike generic compression approaches, rtk is tuned to the specific repetitive structures that show up in developer workflows. The 60-90% claim is specific to those dev patterns, not arbitrary prompts."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "48.7k",
+            "lang": "Python",
+            "body": "An AI coding assistant skill for Claude Code, Codex, Cursor, Gemini CLI, and others that converts any folder -- source code, SQL schemas, R scripts, shell scripts, docs, papers, images, videos -- into a queryable knowledge graph. Nodes are entities like functions, tables, and concepts; edges are relationships. Instead of dumping raw files into context or doing flat vector search over a directory, you query a structured graph that captures how your codebase, database, and infrastructure connect. Most useful when the relationships between components matter as much as the content of any individual file."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "52.3k",
+            "lang": "Python",
+            "body": "An open-source AI memory system claiming best-in-class benchmarks, free under a permissive license. Built on ChromaDB, it surfaces as an MCP server -- any MCP-compatible agent connects without custom integration work. The pitch to builders: stop implementing your own vector-backed memory layer for every agent project and use the one that has been benchmarked against the field. Supports standard memory operations (store, retrieve, forget) and is designed to slot into existing agent architectures without refactoring."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's source list documented a real end-to-end workflow.",
+        "items": []
+      }
+    ],
+    "closing": "Token efficiency is the new benchmark."
+  },
+  {
     "id": "2026-05-16",
     "date": "May 16, 2026",
     "title": "AI Pulse",
