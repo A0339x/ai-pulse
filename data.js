@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-05-18",
+    "date": "May 18, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic refreshes its flagship, ChatGPT gets a live money view, and GitHub fills up with token-slashing tools",
+    "intro": "Two model stories lead today: Anthropic ships Claude Opus 4.7 at the top of the 4.x line, and GPT-5.5 makes its enterprise debut inside Databricks workflows. ChatGPT Pro quietly becomes the first major general-purpose AI product to connect live financial accounts -- not an upload, a live feed. On GitHub, the fastest-climbing repos this week share one obsession: burning fewer tokens without burning quality.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "New models, live financial account access, and smarter provider routing land today",
+        "items": [
+          {
+            "title": "Claude Opus 4.7",
+            "url": "https://www.anthropic.com/news/claude-opus-4-7",
+            "source": "Anthropic",
+            "body": "Claude Opus 4.7 is out, the latest update to the top of Anthropic's model lineup. Opus is the tier Anthropic builds for the hardest reasoning loads, longest context, and most demanding agentic workflows. The 4.7 release continues the rapid iteration cadence across the 4.x cycle -- each version has tightened instruction-following, improved multi-step planning, and moved benchmark numbers further. Teams already on Opus 4.x can point to 4.7 with a model version change in the API call, no integration rework required."
+          },
+          {
+            "title": "Databricks brings GPT-5.5 to enterprise agent workflows",
+            "url": "https://openai.com/index/databricks",
+            "source": "OpenAI",
+            "body": "GPT-5.5 is now wired into Databricks for enterprise agent workflows, following the model's new state-of-the-art score on the OfficeQA Pro benchmark -- a test focused on the document and spreadsheet reasoning that shows up constantly in enterprise data work. The integration lets teams run GPT-5.5 agents directly against lakehouse data: read from structured sources, reason over results, write back outputs, without leaving the Databricks environment. If your team's agent work lives inside Databricks already, this is the fastest path to the new model."
+          },
+          {
+            "title": "A new personal finance experience in ChatGPT",
+            "url": "https://openai.com/index/personal-finance-chatgpt",
+            "source": "OpenAI",
+            "body": "ChatGPT Pro users in the U.S. can now connect live financial accounts and get AI-powered analysis grounded in their actual numbers. This is the first time a major general-purpose AI product has integrated direct financial data access at the consumer tier -- not a spreadsheet upload or a copy-paste, but a permissioned live connection. Once connected, the model answers questions, surfaces patterns, and gives guidance tied to your real balance sheet and stated goals. Currently in preview for Pro subscribers in the U.S."
+          },
+          {
+            "title": "Sort providers by cost, latency, or throughput on AI Gateway",
+            "url": "https://vercel.com/changelog/sort-providers-by-cost-latency-or-throughput-on-ai-gateway",
+            "source": "Vercel",
+            "body": "Vercel AI Gateway now lets you explicitly sort the providers backing any model by cost, time to first token (TTFT), or throughput (tokens per second). The default ordering already blends reliability, quality, cost, and speed -- this adds manual override for when you want to optimize on a single axis. Ranking is computed at request time, so new providers, price changes, and real-time latency shifts flow through without code changes. For production workloads where provider cost variance is meaningful, this is a one-line config change that compounds."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token compression, benchmarked memory, and graph-based code retrieval are where GitHub momentum is concentrating",
+        "items": [
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "61.7k",
+            "lang": "JavaScript",
+            "body": "Caveman is a Claude Code skill that forces the model to communicate in stripped-down, grammatically minimal language -- 'why use many token when few token do trick.' The project reports 65% token reduction on typical coding sessions. The mechanism is precise: most context burn in agentic coding happens in the connective prose between code blocks, not in the code itself. Caveman targets that prose specifically, leaving code output untouched. It's a Claude Code skill, so installation is one command and it requires no changes to your existing prompts or workflow."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "52.4k",
+            "lang": "Python",
+            "body": "MemPalace is an open-source AI memory system built on ChromaDB and exposed via MCP, positioning itself as the best-benchmarked free option in the space. The differentiator is the benchmarking claim itself -- most memory systems ship without rigorous recall quality tests. MemPalace publishes comparative results on retrieval precision, long-horizon recall, and cross-session coherence against other open alternatives. If you're building agents that need persistent, queryable memory across sessions and don't want a hosted solution, this is the current open-source benchmark to beat."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "49.7k",
+            "lang": "Rust",
+            "body": "rtk is a single Rust binary CLI proxy that intercepts common dev commands -- git status, ls, find, grep -- and compresses their output before it hits the LLM context window. The project claims 60-90% token reduction on typical coding tasks. Zero dependencies, drops in as a transparent proxy, no changes to your existing agent setup. The compression mechanism is smart truncation and deduplication of the repetitive shell output that dominates agentic coding sessions. If you run Claude Code or Codex on large repos, the savings are direct and immediate."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "49.0k",
+            "lang": "Python",
+            "body": "Graphify is an agent skill that converts any folder -- code, SQL schemas, shell scripts, docs, papers, images, videos -- into a queryable knowledge graph. Point it at a repo and it builds a unified graph linking app code, database schema, and infrastructure in one structure. Agents then query the graph instead of doing repetitive file reads. Works as a skill inside Claude Code, Codex, OpenCode, Cursor, and Gemini CLI. The GraphRAG approach fits large codebases where linear context loading hits its ceiling -- the graph becomes the retrieval layer so the agent always finds the right node instead of reading everything."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's sources documented a full end-to-end build workflow",
+        "items": []
+      }
+    ],
+    "closing": "Back tomorrow with more signal."
+  },
+  {
     "id": "2026-05-17",
     "date": "May 17, 2026",
     "title": "AI Pulse",
