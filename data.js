@@ -3,6 +3,111 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-05-20",
+    "date": "May 20, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Opus 4.7 drops, Google I/O floods the zone, and GitHub is obsessed with cutting token spend",
+    "intro": "Google I/O hit yesterday and two things stand out: Gemini 3.5 Flash is real and fast, and Google is serious about agentic tooling across Workspace and Search. Anthropic countered with Opus 4.7 and a strategic acquisition that tightens their SDK story. On GitHub, a clear meta is forming -- builders want to cut token costs by 60-90%, and three independent repos this week are attacking that from different angles.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "New models from Anthropic and Google, plus an acquisition that matters for API builders",
+        "items": [
+          {
+            "title": "Claude Opus 4.7",
+            "url": "https://www.anthropic.com/news/claude-opus-4-7",
+            "source": "Anthropic",
+            "body": "Opus 4.7 is the new top of Anthropic's model stack. It sits in the Claude 4 family alongside Sonnet and Haiku, positioned for the workloads where you need the most capable tool -- complex reasoning, multi-step agentic pipelines, and demanding coding tasks. If you were running Opus 4, this is the drop-in upgrade. Available now via the API as claude-opus-4-7 and through Claude.ai on Pro and Team plans."
+          },
+          {
+            "title": "Google I/O 2026: Gemini 3.5 Flash and the agentic era",
+            "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5/",
+            "source": "Google AI",
+            "body": "Gemini 3.5 Flash is the headline out of I/O -- a fast, cost-efficient model built for high-throughput workloads and the practical counterpart to Gemini 3.5 Pro. Beyond the model, Google's I/O keynote framed the year around agentic Gemini: the model is being wired into Workspace, AI Mode in Search, and a rebuilt developer toolchain. One immediate action item for builders: Gemini CLI stops working June 18 and transitions to Antigravity CLI, so any pipeline using the current CLI needs a migration plan."
+          },
+          {
+            "title": "OpenAI and Dell bring Codex to on-premise enterprise",
+            "url": "https://openai.com/index/dell-codex-enterprise-partnership",
+            "source": "OpenAI",
+            "body": "Codex, OpenAI's AI coding agent, was cloud-only until today. The Dell partnership changes that -- Codex can now run in hybrid and on-premise environments, with Dell handling the infrastructure. This directly unblocks regulated industries where code and data can't leave a controlled perimeter: finance, defense, healthcare. OpenAI handles the model; Dell handles the deployment layer. Enterprise builders who've been watching Codex from the sidelines due to data residency requirements have a path in."
+          },
+          {
+            "title": "Anthropic acquires Stainless",
+            "url": "https://www.anthropic.com/news/anthropic-acquires-stainless",
+            "source": "Anthropic",
+            "body": "Stainless auto-generates typed, idiomatic SDKs from OpenAPI specs -- and they already built and maintained the official Anthropic SDKs for Python, TypeScript, Go, Java, and more. Bringing them in-house means API changes ship to all language clients faster, with tighter parity and less lag between a new endpoint and a usable library. For builders on the Claude API, the practical effect is that SDK maintenance now has a dedicated team inside Anthropic rather than a contracted shop with competing priorities."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Three separate repos this week are attacking the same problem -- token spend -- from different angles",
+        "items": [
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "62.6k",
+            "lang": "JavaScript",
+            "body": "A Claude Code skill that makes the model respond in compressed caveman-speak during coding sessions -- 'why use many token when few token do trick.' The repo claims 65% token reduction by stripping hedging, filler, and verbosity from responses without losing the actual signal. You install it as a skill; Claude Code switches register for in-session responses while leaving file edits and code output untouched. Absurd premise, but token cost is one of the biggest friction points for heavy Claude Code users and this is a working, installable workaround."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "51.6k",
+            "lang": "Rust",
+            "body": "A CLI proxy written in Rust that sits between your shell and your AI coding assistant, intercepting common dev commands and compressing context before it hits the model. Claims 60-90% token reduction on dev command output -- git status, build logs, file reads -- which is typically the noisiest part of a coding session. Ships as a single binary with zero runtime dependencies. The approach is complementary to caveman: instead of changing how the model talks, it changes what the model sees. Practical for any AI coding workflow burning tokens on verbose terminal output."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "52.5k",
+            "lang": "Python",
+            "body": "Claims to be the best-benchmarked open-source AI memory system, and it's free. Built on ChromaDB with an MCP interface, so it drops into any agent that speaks MCP. The value prop is persistent cross-session memory with retrieval that the repo benchmarks against paid alternatives. Persistent memory is one of the genuinely unsolved pieces of production agent systems -- most options are either expensive, proprietary, or slow enough to hurt latency. This one is open, benchmarked publicly, and ships today."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "50.0k",
+            "lang": "Python",
+            "body": "An AI coding assistant skill that turns any folder of code, SQL schemas, shell scripts, docs, images, or videos into a queryable knowledge graph -- then connects app code, database schema, and infrastructure in one traversable structure. Works as a skill for Claude Code, Codex, Cursor, Gemini CLI, and others. Instead of dumping entire files into context, your agent queries the graph and pulls only the relevant subgraph. Tackles the same token-spend problem as rtk and caveman but from the retrieval side: give the model less, but give it exactly the right less."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Three documented builds this week: agentic radio, guardrails that rescue a small model, and a year of AI-assisted Rust",
+        "items": [
+          {
+            "title": "Forge -- Guardrails take an 8B model from 53% to 99% on agentic tasks",
+            "url": "https://github.com/antoinezambelli/forge",
+            "source": "Hacker News",
+            "author": "zambelli",
+            "body": "Antoine Zambelli documents how structured output guardrails -- schema validation, constrained generation, and retry loops with error-specific re-prompts -- push a vanilla 8B model from 53% to 99% on a standard agentic benchmark. No fine-tuning. No bigger model. The workflow: define the expected output schema per agent step, wrap each step with a validator that catches malformed or out-of-range responses, and on failure re-prompt with a targeted correction rather than a generic retry. The repo ships the benchmark harness so you can reproduce the numbers. For builders running cost-constrained pipelines on smaller models, this is the most immediately applicable technique in today's batch."
+          },
+          {
+            "title": "We let AIs run radio stations",
+            "url": "https://andonlabs.com/blog/andon-fm",
+            "source": "Hacker News",
+            "author": "lukaspetersson",
+            "body": "Andon Labs built and ran fully AI-operated radio stations -- DJ voice, song selection, between-track commentary, listener interactions, all without human intervention. The post documents the stack: a real-time audio pipeline feeding current listener count, track metadata, and request queue to the model; a voice synthesis layer for the on-air personality; and a scheduling system that keeps the station running continuously. The interesting parts are the documented failure modes -- the AI would fixate on a theme for hours, or select songs that matched a genre label but felt tonally wrong back-to-back. The rough edges are in the post alongside the architecture, which is exactly what makes it worth reading."
+          },
+          {
+            "title": "Learnings from 100K lines of Rust with AI",
+            "url": "https://zfhuang99.github.io/rust/claude%20code/codex/contracts/spec-driven%20development/2025/12/01/rust-with-ai.html",
+            "source": "Hacker News",
+            "author": "pramodbiligiri",
+            "body": "A developer documents the workflow behind 100K lines of production Rust written with Claude Code and Codex. The core method is spec-driven development: write a precise contract for each module -- expected inputs, outputs, invariants -- before touching implementation, then hand the spec to the AI. Rust's type system acts as a forcing function: the compiler surfaces exactly where AI-generated code drifted from the spec, loudly and immediately. Key finding is that AI-generated Rust fails faster and more visibly than in dynamically typed languages, which makes it safer to use -- drift accumulates silently in Python, but in Rust it blocks the build. The post includes the review cadence and what they'd change on the next project."
+          }
+        ]
+      }
+    ],
+    "closing": "Token efficiency is this week's metagame -- the repos winning GitHub are the ones making every prompt cheaper."
+  },
+  {
     "id": "2026-05-18",
     "date": "May 18, 2026",
     "title": "AI Pulse",
