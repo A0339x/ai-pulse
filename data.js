@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-05-21",
+    "date": "May 21, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic ships Opus 4.7 and acquires Stainless, an AI cracks an 80-year math problem, and token-trimming tools dominate GitHub",
+    "intro": "Anthropic is moving on two fronts today -- a new model and a significant acquisition. OpenAI's most-discussed result this week is not a benchmark: it is a verified math proof that disproves a conjecture that has been open since the 1940s. On GitHub, the repos gaining stars fastest share a single theme -- cutting token costs without giving up what agents can do.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new Anthropic model, an SDK acquisition, a math breakthrough, and a design tool from Anthropic Labs",
+        "items": [
+          {
+            "title": "Claude Opus 4.7",
+            "url": "https://www.anthropic.com/news/claude-opus-4-7",
+            "source": "Anthropic",
+            "body": "Opus 4.7 is live, the latest update to Anthropic's highest-capability model tier. The Opus line is where you go when reasoning depth, extended instruction-following, and output quality on hard tasks matter more than speed or cost. This is a model update, not a product launch -- the API model ID changes, the behavior improves. It is available in the API today. If you are running Opus 4 on anything latency-insensitive, the new version is the current production default."
+          },
+          {
+            "title": "Anthropic acquires Stainless",
+            "url": "https://www.anthropic.com/news/anthropic-acquires-stainless",
+            "source": "Anthropic",
+            "body": "SDK generation is now in-house at Anthropic. Stainless -- the company that auto-generates idiomatic client libraries from OpenAPI specs -- has been acquired. Stainless currently powers the SDKs for a number of well-known API businesses, producing Python, TypeScript, Go, and other client libraries that stay current as the underlying API evolves. For developers building on the Anthropic API, the implication is faster and more consistent SDK updates, and tighter coupling between model releases and the client libraries used to call them."
+          },
+          {
+            "title": "An OpenAI model has disproved a central conjecture in discrete geometry",
+            "url": "https://openai.com/index/model-disproves-discrete-geometry-conjecture",
+            "source": "OpenAI",
+            "body": "The unit distance conjecture -- open since Erdos posed it roughly 80 years ago -- is now disproved. An OpenAI model found a configuration of points in the plane that exceeds the previously conjectured maximum number of unit-distance pairs. The result has been verified. This is not an AI-assisted proof where a human did the key steps: the model produced the construction. It is the most concrete example to date of an AI making an original, verifiable contribution to pure mathematics rather than recombining known results."
+          },
+          {
+            "title": "Claude Design -- Anthropic Labs",
+            "url": "https://www.anthropic.com/news/claude-design-anthropic-labs",
+            "source": "Anthropic",
+            "body": "A design prototyping tool landed in Anthropic Labs today: Claude Design. It generates web, desktop, and mobile UI prototypes from prompts and exports to HTML and other formats. Claude Design lives in Labs, which means it is experimental -- not yet part of the main Claude product. A same-day open-source community fork (nexu-io/open-design, 48k stars within 24 hours) appeared the moment it shipped, which suggests the feature set was visible enough and useful enough to inspire immediate alternatives."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token efficiency, memory, and knowledge graphs are the ideas moving fastest this week",
+        "items": [
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "52.3k",
+            "lang": "Rust",
+            "body": "rtk is a CLI proxy that strips redundant context before it reaches your LLM-backed coding tool. Point it at Claude Code, Codex, or any CLI that reads from stdin, and it compresses or summarizes inputs -- git diffs, file reads, build logs -- that models do not need verbatim. The repo claims 60-90% token reduction on common dev commands. It ships as a single Rust binary with zero runtime dependencies. The approach is transparent to the model: the compressed input still carries the information the model needs, just without the noise."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "52.6k",
+            "lang": "Python",
+            "body": "MemPalace is an open-source memory system for AI agents that uses ChromaDB for vector storage and exposes an MCP interface. The claim is best-in-class retrieval accuracy among open-source alternatives -- and the benchmark comparisons are included in the repo, not just the README. It handles both episodic memory (what happened in prior sessions) and semantic memory (facts retrieved by similarity). Any agent harness that supports MCP can connect it without custom integration work."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "50.6k",
+            "lang": "Python",
+            "body": "Graphify turns a folder -- source code, SQL schemas, shell scripts, docs, images, videos -- into a queryable knowledge graph. Instead of flat vector similarity search, you get graph-aware retrieval: ask about relationships between components, dependencies between tables, or connections across infrastructure layers. It installs as a skill for Claude Code, Codex, Gemini CLI, and Cursor. The sharpest use case is large codebases where the question is less 'find the right file' and more 'how does this service connect to that schema.'"
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "48.6k",
+            "lang": "TypeScript",
+            "body": "Open Design is a local-first design prototyping tool that generates web, desktop, and mobile layouts from prompts. It ships 19 agent skills and 71 pre-built design systems, and exports to HTML, PDF, PPTX, and MP4. Prototypes render in a sandboxed local preview, so assets do not leave the machine. It runs as a skill on Claude Code, Codex, Cursor, Gemini CLI, and several others. It launched the same day as Anthropic's Claude Design and reached 48k stars within 24 hours."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Guardrails that turn a cheap 8B model into a reliable agent, and AI radio that actually broadcast",
+        "items": [
+          {
+            "title": "Forge -- Guardrails take an 8B model from 53% to 99% on agentic tasks",
+            "url": "https://github.com/antoinezambelli/forge",
+            "source": "Hacker News",
+            "author": "zambelli",
+            "body": "Forge is a guardrail framework for small-model agents, built and documented as a Show HN. The core result: wrapping an 8B model in structured output validation, retry logic on malformed tool calls, and response verification pushed its benchmark score on standard agentic tasks from 53% to 99% -- matching much larger models on the same eval. The repo documents which guardrail layers matter most and in what order to stack them. The central argument is that for most agentic workflows, output reliability is the bottleneck rather than raw reasoning capacity, and that gap is addressable without moving to a larger or more expensive model."
+          },
+          {
+            "title": "We let AIs run radio stations",
+            "url": "https://andonlabs.com/blog/andon-fm",
+            "source": "Hacker News",
+            "author": "lukaspetersson",
+            "body": "Andon Labs built and broadcast Andon FM: a set of AI-run radio stations that operated live, not as a demo clip. The blog post documents the full stack -- LLM for scripting and on-air persona, TTS for voice output, a music scheduling layer, and a streaming backend to push audio to listeners. They ran into latency issues at the TTS-to-stream handoff and document the specific fix they shipped. The stations ran long enough to accumulate real listener sessions. The post is structured as a build log: what they tried, what broke, what changed, and what the finished system looked like."
+          }
+        ]
+      }
+    ],
+    "closing": "That is the scan for May 21 -- back tomorrow."
+  },
+  {
     "id": "2026-05-20",
     "date": "May 20, 2026",
     "title": "AI Pulse",
