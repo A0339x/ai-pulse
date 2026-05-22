@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-05-22",
+    "date": "May 22, 2026",
+    "title": "AI Pulse",
+    "subtitle": "New Opus drops, AI cracks an 80-year-old math problem, and GitHub is obsessed with cutting token bills",
+    "intro": "Two things worth slowing down for today: an OpenAI model independently disproved a conjecture in discrete geometry that has been open since the 1940s -- that is not a benchmark, that is a resolved open problem in pure mathematics. Separately, Anthropic shipped Opus 4.7, acquired Stainless (the SDK generation company behind most of Anthropic's own client libraries), and launched a UI prototyping tool from its internal research group. On GitHub, the dominant theme is token reduction -- multiple high-star repos attacking the same cost problem from different angles.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "New flagship model, a math milestone, an SDK acquisition, and a design prototyping tool from Anthropic Labs",
+        "items": [
+          {
+            "title": "Claude Opus 4.7",
+            "url": "https://www.anthropic.com/news/claude-opus-4-7",
+            "source": "Anthropic",
+            "body": "Anthropic released Claude Opus 4.7, updating the top tier of the Claude model stack. Opus is the choice for the heaviest reasoning tasks -- long-horizon agentic runs, complex analysis, research synthesis, anything where output quality matters more than latency or cost. This release supersedes Opus 4.6 across the API. The full lineup now runs Opus 4.7 at the top, Sonnet 4.6 in the middle, and Haiku 4.5 at the bottom. Benchmark deltas from 4.6 and pricing details are in the full announcement."
+          },
+          {
+            "title": "An OpenAI model has disproved a central conjecture in discrete geometry",
+            "url": "https://openai.com/index/model-disproves-discrete-geometry-conjecture",
+            "source": "OpenAI",
+            "body": "An OpenAI model resolved the unit distance problem, an open question in discrete geometry that has been unsettled for roughly 80 years. The problem asks how many unit-distance pairs can appear among n points in the plane. The model produced a proof disproving the leading conjecture about the upper bound -- not assisting a human researcher, but closing the problem independently. Previous AI math results have mostly been verification or formalization of known proofs. This is different: novel proof discovery on a problem the field had not solved."
+          },
+          {
+            "title": "Anthropic acquires Stainless",
+            "url": "https://www.anthropic.com/news/anthropic-acquires-stainless",
+            "source": "Anthropic",
+            "body": "Anthropic bought Stainless, the company that auto-generates production-quality SDKs from OpenAPI specs. Stainless handles the painful parts -- pagination, retries, streaming, type safety -- across Python, TypeScript, Go, Java, and more. Anthropic has already been using Stainless-generated code for its official client libraries. Bringing the team in-house means API changes can propagate to SDKs faster, and the tooling layer sits closer to the people designing the model API surface."
+          },
+          {
+            "title": "Claude Design -- Anthropic Labs",
+            "url": "https://www.anthropic.com/news/claude-design-anthropic-labs",
+            "source": "Anthropic",
+            "body": "Anthropic Labs shipped Claude Design, a tool for generating UI prototypes from natural language. Describe an interface and it produces a sandboxed, working preview -- web, desktop, and mobile targets supported. The output is production-adjacent HTML rather than design files, which puts it in the same lane as v0 and Bolt rather than Figma. The Anthropic Labs label signals experimental rather than committed product. Open-source alternatives targeting the same use case were already circulating on GitHub before this announcement landed."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token reduction tools dominate the star charts, alongside a knowledge-graph skill and a benchmarked open-source memory system",
+        "items": [
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "63.6k",
+            "lang": "JavaScript",
+            "body": "A Claude Code skill that makes the model respond like a caveman -- short words, no filler, no hedging. The author measured a 65% token reduction on typical dev sessions compared to default Claude verbosity. The trade-off is obvious: you get terse responses that read like they came from a very competent grunt. For long agentic runs where you are paying per token and do not need structured prose explanations, it is a real cost lever. Install it as a skill and caveman mode becomes a toggle, not a permanent setting."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "52.7k",
+            "lang": "Rust",
+            "body": "A CLI proxy that intercepts LLM calls and compresses tokens before they go out, targeting the common dev-loop patterns -- file reads, git operations, shell output -- that tend to send the same boilerplate context on every call. Claims 60-90% token reduction on those patterns. It ships as a single Rust binary with zero external dependencies, so it drops into any workflow without a Python env or Node process. Works across Claude, GPT, and any OpenAI-compatible API endpoint."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "51.3k",
+            "lang": "Python",
+            "body": "An installable AI coding skill that ingests any project directory -- source code, SQL schemas, shell scripts, docs, images, videos -- and builds a queryable knowledge graph across the whole thing. The graph links code to the database tables it touches, the infrastructure it runs on, and the documentation that describes it. Query in natural language and get answers that span the full stack rather than the single file currently in context. Installable as a skill for Claude Code, Codex, Cursor, and Gemini CLI."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "52.7k",
+            "lang": "Python",
+            "body": "Claims the top position on open-source AI memory benchmarks. Stores conversation history, user preferences, and task context in a ChromaDB vector store and exposes retrieval via MCP, so any MCP-compatible agent plugs in without custom integration work. Runs fully local or self-hosted -- no hosted dependency, no per-seat fee. Memory is the layer that converts stateless LLM calls into something that behaves like it knows your context. MemPalace is the open alternative to the hosted memory tiers the major agent platforms are building out."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Two workflow writeups: formal verification as a hard gate in coding loops, and AI agents running distributed system tests",
+        "items": [
+          {
+            "title": "Formal Verification Gates for AI Coding Loops",
+            "url": "https://reubenbrooks.dev/blog/structural-backpressure-beats-smarter-agents/",
+            "source": "Hacker News",
+            "author": "pyrex41",
+            "body": "Reuben Brooks documented a workflow where formal verification tools act as hard exit gates in AI coding agent loops -- what he calls structural backpressure. The central argument: prompting an agent to validate its own output fails in interesting ways, but wiring a verifier into the loop exit condition forces correctness structurally. He walks through which verification approaches he connected to the agent loop, where agentic runs broke without them, how he handled verification failures without stalling the agent, and why he concluded the fix for flaky agents is not a smarter model but a harder structural definition of what done means. The 142-point HN thread and 31 comments suggest the framing resonated beyond his specific stack."
+          },
+          {
+            "title": "Testing distributed systems with AI agents",
+            "url": "https://github.com/shenli/distributed-system-testing",
+            "source": "Hacker News",
+            "author": "shenli3514",
+            "body": "shenli open-sourced a harness that uses AI agents to test distributed systems -- injecting faults, checking consistency properties, and generating test scenarios that would take hours to hand-author. The repo documents the multi-agent setup: which agent handles fault injection, which handles observation, how they coordinate, what the test oracle looks like, and where the approach broke during development. It is less a finished product and more a reproducible methodology with scaffolding included -- enough structure to fork, point at a different distributed system, and run the same workflow."
+          }
+        ]
+      }
+    ],
+    "closing": "Back tomorrow with whatever ships overnight."
+  },
+  {
     "id": "2026-05-21",
     "date": "May 21, 2026",
     "title": "AI Pulse",
