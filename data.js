@@ -3,6 +3,97 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-05-24",
+    "date": "May 24, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Opus 4.7 drops, Anthropic buys Stainless, and token compression becomes GitHub's obsession",
+    "intro": "Two Anthropic moves dominate today: Claude Opus 4.7 at the top of the model stack, and the acquisition of Stainless, which builds SDK generation tooling. The OpenAI math result -- a model disproving an 80-year-old geometry conjecture -- is a genuine research finding worth reading if you missed it earlier this week. On GitHub, the pattern is unmistakable: four of the hottest repos exist solely to shrink what you send upstream.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "New flagship model, a strategic acquisition, a math proof, and a new pricing tier",
+        "items": [
+          {
+            "title": "Claude Opus 4.7",
+            "url": "https://www.anthropic.com/news/claude-opus-4-7",
+            "source": "Anthropic",
+            "body": "Anthropic's latest flagship replaces Opus 4 at the top of the model stack. It slots into the same API surface -- existing integrations update by swapping the model ID. The release continues Anthropic's cadence of incremental Opus updates, pushing capability forward on reasoning-heavy and long-context tasks. No new API surface, no new pricing structure announced alongside it -- it's a straight model upgrade for teams already on the Opus tier."
+          },
+          {
+            "title": "Anthropic acquires Stainless",
+            "url": "https://www.anthropic.com/news/anthropic-acquires-stainless",
+            "source": "Anthropic",
+            "body": "Stainless builds tooling that generates idiomatic, production-quality client SDKs from OpenAPI specs -- the work that normally takes a team months to maintain across languages. Anthropic is bringing that capability in-house. The practical effect: Anthropic's official SDKs should improve in consistency and language coverage, and SDK generation becomes an internal asset rather than an external dependency. It also signals that Anthropic is thinking about the full developer surface, not just the model layer."
+          },
+          {
+            "title": "An OpenAI model has disproved a central conjecture in discrete geometry",
+            "url": "https://openai.com/index/model-disproves-discrete-geometry-conjecture",
+            "source": "OpenAI",
+            "body": "An OpenAI model solved the unit distance problem -- an open question in discrete geometry that had stood for roughly 80 years -- by constructing a counterexample that disproves the leading conjecture about how many times a single distance can appear among n points in the plane. The result has been independently verified by mathematicians. This isn't a benchmark score. It's a published finding that human researchers hadn't produced. It's the clearest case so far of a frontier model contributing a genuinely new result to pure math."
+          },
+          {
+            "title": "Claude for Small Business",
+            "url": "https://www.anthropic.com/news/claude-for-small-business",
+            "source": "Anthropic",
+            "body": "Anthropic is opening a dedicated small business tier for Claude -- team seats, centralized billing, and usage controls without a custom enterprise procurement process. It fills the gap between the consumer Pro plan and the enterprise contract that requires a sales conversation. For small teams running Claude in production who've been improvising with multiple individual subscriptions or hitting Pro plan limits, this is the tier they've been waiting for."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token compression dominates -- four repos this week exist to shrink your LLM spend before it shrinks your budget",
+        "items": [
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "53.5k",
+            "lang": "Rust",
+            "body": "A CLI proxy that sits between your dev commands and the LLM, cutting token consumption by 60-90% on common operations. Single Rust binary, zero runtime dependencies. It intercepts at the proxy layer -- stripping redundant context, deduplicating repeated symbols, and passing a leaner request upstream without changing the response the model sees. Targets the agentic coding loop specifically, where the same file headers get resent dozens of times per session. Works with Claude Code, Codex, Cursor, and anything else that speaks HTTP to a model endpoint."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "64.2k",
+            "lang": "JavaScript",
+            "body": "A Claude Code skill that cuts 65% of token usage by having the model respond in stripped-down caveman syntax -- short sentences, no articles, no hedging, minimal punctuation. The idea is that most of what fills a response is linguistic scaffolding the model adds for readability, not actual information. Caveman mode drops that scaffolding. For tight iteration loops where you're reading output programmatically or scanning fast, it's a real compression win. 64k stars in short order suggests a lot of builders are feeling the token bill."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "52.8k",
+            "lang": "Python",
+            "body": "A skill for Claude Code, Codex, Cursor, Gemini CLI, and others that converts a codebase into a queryable knowledge graph -- source files, SQL schemas, infrastructure definitions, docs, images, and videos land in one unified graph. Instead of dumping raw files into a prompt, the agent queries the graph for exactly what it needs. No preprocessing pipeline to configure, works on any folder you point it at. For large monorepos where context window management is the main bottleneck, this changes the retrieval model from brute-force inclusion to targeted lookup."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "52.7k",
+            "lang": "Python",
+            "body": "An open-source AI memory system backed by ChromaDB, exposed via MCP, and free to self-host. The project claims the best published benchmarks in the open-source memory category -- notable because most memory systems don't publish retrieval accuracy numbers at all. MCP support means it integrates directly into Claude Code and any other MCP-compatible agent without custom glue code. For teams building agents that need persistent, structured memory without paying for a managed memory service, this is the benchmark to beat."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One documented workflow that clears the bar today",
+        "items": [
+          {
+            "title": "Show HN: I Made a Claude Skill for Spec-Driven Development (SDD)",
+            "url": "https://github.com/FredAntB/Spec-Driven-Development",
+            "source": "Hacker News",
+            "author": "NTRIXLM",
+            "body": "The author built a Claude Code skill that enforces a spec-first workflow: before writing any code, the agent generates a formal specification document and waits for explicit approval before touching the codebase. The skill is designed to counter the default agentic behavior of immediately diving into implementation -- which frequently produces code that solves the wrong problem at high token cost. The repo includes the skill file itself plus documented guidance for structuring specs the model can execute against reliably. The approach is narrow and immediately adoptable: install the skill, run your next feature request through it, and see whether forcing a written spec before any code is generated changes the output quality. It targets the specific failure mode -- AI jumping to implementation before understanding requirements -- that trips up most teams using Claude Code on non-trivial work."
+          }
+        ]
+      }
+    ],
+    "closing": "Back tomorrow."
+  },
+  {
     "id": "2026-05-23",
     "date": "May 23, 2026",
     "title": "AI Pulse",
