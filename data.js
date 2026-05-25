@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-05-25",
+    "date": "May 25, 2026",
+    "title": "AI Pulse",
+    "subtitle": "New flagship from Anthropic, AI cracks an 80-year math problem, and GitHub can't stop building token cutters",
+    "intro": "Two releases from Anthropic today -- a new flagship model and an SDK acquisition that tightens their developer story -- plus an OpenAI model that disproved an 80-year-old conjecture in discrete geometry. That last result is easy to scroll past and shouldn't be. On GitHub, token reduction is the week's obsession: three different repos attack the same cost problem from different angles, and all three have cracked 50k stars.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new flagship model, an SDK acquisition, a math milestone, and content watermarking that's now production-ready.",
+        "items": [
+          {
+            "title": "Claude Opus 4.7",
+            "url": "https://www.anthropic.com/news/claude-opus-4-7",
+            "source": "Anthropic",
+            "body": "Anthropic released Opus 4.7, moving the top of its model lineup forward. Opus sits above Sonnet and Haiku in the capability stack, and this version is the most capable Claude available today. Access is through the API (model ID: claude-opus-4-7) and Claude.ai Pro and Team plans. The release continues Anthropic's cadence of point versions between major releases -- 4.7 ships while Sonnet 4.6 remains the default for most API traffic."
+          },
+          {
+            "title": "Anthropic acquires Stainless",
+            "url": "https://www.anthropic.com/news/anthropic-acquires-stainless",
+            "source": "Anthropic",
+            "body": "Anthropic bought Stainless, the startup that auto-generates production-quality SDKs from OpenAPI specs. Stainless already built the official Python and TypeScript SDKs for the Anthropic API. Bringing that team in-house means SDK updates can ship the moment the API surface changes -- new parameters, new endpoints, new models -- without the lag of a separate vendor relationship. For developers, the Anthropic client libraries should get tighter and faster to update going forward."
+          },
+          {
+            "title": "An OpenAI model has disproved a central conjecture in discrete geometry",
+            "url": "https://openai.com/index/model-disproves-discrete-geometry-conjecture",
+            "source": "OpenAI",
+            "body": "An OpenAI model disproved the unit distance conjecture, an open problem in discrete geometry that dates back roughly 80 years. The conjecture concerned how many pairs of points in a set can be exactly one unit apart. The model found a construction that exceeds the previously believed bound, settling the question in the negative. This is a concrete case of AI producing a genuinely new mathematical result -- not verifying known proofs or generating plausible-sounding steps, but finding an actual counterexample that human mathematicians hadn't."
+          },
+          {
+            "title": "Advancing content provenance for a safer, more transparent AI ecosystem",
+            "url": "https://openai.com/index/advancing-content-provenance",
+            "source": "OpenAI",
+            "body": "OpenAI shipped Content Credentials support and a public verification tool for checking whether content was AI-generated. Content Credentials use the C2PA standard to embed signed metadata directly into image and video files at creation time. The verification tool surfaces that metadata for anyone inspecting a file. For developers building on OpenAI's generation APIs, credentials can attach by default -- the attach-by-default option matters for products that need to disclose AI origin or meet emerging content-labeling requirements."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token cost is the problem everyone is solving this week, with three different approaches all hitting escape velocity simultaneously.",
+        "items": [
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "64.5k",
+            "lang": "JavaScript",
+            "body": "Caveman is a Claude Code skill that cuts token usage by 65% by instructing the model to respond in stripped-down caveman speech -- short words, no articles, minimal grammar. The repo name is a joke but the mechanism is real: verbose explanations and boilerplate are the biggest source of token waste in agentic loops, and reducing output verbosity compounds hard across long sessions. Install it as a Claude Code skill and the savings apply to every run automatically, with no changes to your own prompts."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "53.9k",
+            "lang": "Rust",
+            "body": "RTK is a CLI proxy written in Rust that sits between your terminal and the LLM API, stripping repeated context and compressing file contents before they reach the model. The claimed reduction is 60-90% on common dev commands -- file reads, diffs, grep outputs -- the kinds of repetitive operations that dominate long coding sessions. Ships as a single static binary with zero runtime dependencies. Compatible with any model provider, not just Anthropic."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "53.5k",
+            "lang": "Python",
+            "body": "Graphify is an installable skill for Claude Code, Codex, Cursor, Gemini CLI, and others that converts a codebase into a queryable knowledge graph. It ingests source files, SQL schemas, shell scripts, docs, papers, images, and videos, then builds a graph connecting them. Queries can traverse relationships that flat vector search misses -- which services call which tables, how a config change propagates, what's downstream of a given function. The graph persists across sessions so subsequent queries skip re-indexing."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "52.8k",
+            "lang": "Python",
+            "body": "MemPalace is an open-source memory layer for AI agents, built on ChromaDB and exposed as an MCP server. It stores, retrieves, and ranks memories across sessions and claims the best benchmark scores among open-source memory systems -- the specific comparisons are in the repo. Works with any MCP-compatible agent. For teams running long-running agents that need to recall user context, project state, or prior decisions across separate runs, it's the clearest free alternative to the paid memory providers."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "No builds this weekend cleared the bar for documented end-to-end workflow.",
+        "items": []
+      }
+    ],
+    "closing": "Back Monday."
+  },
+  {
     "id": "2026-05-24",
     "date": "May 24, 2026",
     "title": "AI Pulse",
