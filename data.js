@@ -3,6 +3,97 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-05-26",
+    "date": "May 26, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic drops Opus 4.7, acquires Stainless, and GitHub is in a token-efficiency frenzy",
+    "intro": "Two big Anthropic moves today: a new flagship model and an SDK-tooling acquisition that signals where their API platform is headed. On GitHub, the dominant theme is token cost -- multiple high-starred repos attacking the same problem from different angles. The OpenAI math result is also worth a closer look; it's the clearest demonstration yet of models doing genuine novel research.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "New model, a strategic acquisition, a design product, and an AI math breakthrough",
+        "items": [
+          {
+            "title": "Claude Opus 4.7",
+            "url": "https://www.anthropic.com/news/claude-opus-4-7",
+            "source": "Anthropic",
+            "body": "Anthropic's new flagship is available today via API and Claude.ai. Opus 4.7 sits at the top of the Claude 4 family and extends prior versions with improvements to reasoning, instruction-following, and long-context performance. Anthropic is positioning it as a drop-in upgrade -- same API surface as Opus 4.5 and 4.6, higher ceiling. If you're running production workloads on the previous Opus generation, this is the version to test against this week."
+          },
+          {
+            "title": "Anthropic acquires Stainless",
+            "url": "https://www.anthropic.com/news/anthropic-acquires-stainless",
+            "source": "Anthropic",
+            "body": "Anthropic bought Stainless, the startup that auto-generates typed, idiomatic SDKs from OpenAPI specs. Stainless already powered Anthropic's own Python and TypeScript client libraries, so this is an absorption of an existing relationship rather than a pivot. The practical upshot: SDK quality, update cadence, and multi-language coverage move in-house. The team that's been quietly making the Anthropic client feel well-built now owns that mandate directly."
+          },
+          {
+            "title": "Claude Design -- Anthropic Labs",
+            "url": "https://www.anthropic.com/news/claude-design-anthropic-labs",
+            "source": "Anthropic",
+            "body": "Anthropic Labs shipped Claude Design, a new product that generates UI and design artifacts directly inside Claude. It targets the prototype-to-build gap -- describe or iterate on a design in conversation and Claude outputs production-ready HTML, component code, or mockups. It's an early-access labs release, so rough edges are expected. Notably, the open-source community already built a 52k-star alternative (nexu-io/open-design) before this launched, which gives you a sense of how much demand was queued up."
+          },
+          {
+            "title": "An OpenAI model disproved a central conjecture in discrete geometry",
+            "url": "https://openai.com/index/model-disproves-discrete-geometry-conjecture",
+            "source": "OpenAI",
+            "body": "An OpenAI model solved the unit distance problem, an 80-year-old open conjecture in discrete geometry, by constructing a counterexample human mathematicians hadn't found. The unit distance problem asks how many unit-distance pairs of points can exist in the plane -- deceptively simple framing, deep combinatorial structure underneath. OpenAI describes a search-and-verify loop rather than a one-shot prompt: the model explored candidate constructions iteratively until one held. This is the clearest public demonstration so far of a model doing original mathematical research rather than reproducing known results."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token efficiency and agent memory are the two gravitational centers pulling GitHub this week",
+        "items": [
+          {
+            "title": "affaan-m/ECC",
+            "url": "https://github.com/affaan-m/ECC",
+            "source": "github.com",
+            "stars": "193.6k",
+            "lang": "JavaScript",
+            "body": "ECC is a performance optimization layer for Claude Code and compatible agents. It installs as a skill and adds structured memory, instinct definitions (reusable decision patterns the agent can invoke without re-reasoning), and security hardening on top of whatever base agent you're running. The core argument is that vanilla Claude Code wastes tokens rediscovering context it already worked out -- ECC caches and structures that state so subsequent calls start informed. Compatible with Codex, Opencode, and Cursor. The star count approaching 200k is the signal here; this is clearly landing for people running agents on non-trivial codebases."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "65.0k",
+            "lang": "JavaScript",
+            "body": "Caveman is a Claude Code skill that rewrites the agent's output into stripped-down, low-token language. The README tagline: 'why use many token when few token do trick.' It claims 65% token reduction by eliminating filler, collapsing verbose phrasing, and defaulting to short constructs throughout the reasoning chain. The branding is deliberately absurd, but the star count is real and several forks have documented measurable cost reductions on large projects. The underlying observation -- that verbose model output wastes tokens without improving correctness -- is serious even if the delivery isn't."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "54.1k",
+            "lang": "Python",
+            "body": "Graphify installs as a skill for Claude Code, Codex, Cursor, or Gemini CLI and indexes your entire project -- source files, SQL schemas, infrastructure config, docs, images, and videos -- into a queryable knowledge graph. The key idea: an agent navigating a large repo wastes context window on file-by-file reads. A knowledge graph lets it ask structural questions (what calls what, which tables does this service own, what does this schema reference) without loading source. GraphRAG as a drop-in coding-agent skill rather than a standalone pipeline to maintain separately."
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "52.7k",
+            "lang": "TypeScript",
+            "body": "Open Design is a local-first, open-source alternative to Anthropic's new Claude Design product. It runs on any Claude Code-compatible agent -- Codex, Cursor, Gemini CLI, Qwen, Copilot, and others -- and ships 19 skills and 71 brand-grade design systems. Output targets: web, desktop, and mobile prototypes, slides, images, videos, and HyperFrames (interactive layered mockups). HTML, PDF, PPTX, and MP4 export all work out of the box. The repo predates Claude Design's launch, which means it already has real usage data and community-contributed design systems that the Anthropic hosted version is starting without."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One developer's documented case for using AI coding tools as a deliberate slowdown",
+        "items": [
+          {
+            "title": "Using AI to write better code more slowly",
+            "url": "https://nolanlawson.com/2026/05/25/using-ai-to-write-better-code-more-slowly",
+            "source": "Hacker News",
+            "author": "signa11",
+            "body": "Nolan Lawson's post pulled 839 points and 328 comments, which means it landed on something real. The documented workflow is counterintuitive: use the model to generate a first draft, then read every line, use the model to explain anything you can't articulate yourself, and rewrite sections where you can't defend why the code is correct. The model becomes a thinking partner and code reviewer rather than an autocomplete engine. Lawson traces specific cases where this deliberate pace caught bugs and design problems that fast-generation workflows missed. The high comment count means there's substantial pushback and counter-methodology in the thread -- the discussion is as useful as the post itself for understanding where this approach breaks down."
+          }
+        ]
+      }
+    ],
+    "closing": "The math result and the Stainless acquisition are the two things most likely to matter six months from now."
+  },
+  {
     "id": "2026-05-25",
     "date": "May 25, 2026",
     "title": "AI Pulse",
