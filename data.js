@@ -3,6 +3,97 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-05-27",
+    "date": "May 27, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Opus 4.7 lands, Anthropic buys its own SDK vendor, and GitHub's token-cutting arms race heats up",
+    "intro": "Anthropic owns the feed today -- new flagship model, a design surface out of Anthropic Labs, and an acquisition of Stainless that brings their SDK pipeline fully in-house. On GitHub, multiple high-star repos are attacking the same problem from different angles: how to cut the token bill on agentic coding workflows. The approaches range from Rust proxy layers to literal caveman speak.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Anthropic drops a model, launches a design product, and acquires its own SDK vendor in one morning",
+        "items": [
+          {
+            "title": "Claude Opus 4.7",
+            "url": "https://www.anthropic.com/news/claude-opus-4-7",
+            "source": "Anthropic",
+            "body": "Anthropic shipped Claude Opus 4.7, the new top of the Claude 4.x model family. Opus is the flagship tier -- built for complex multi-step reasoning, long-horizon agentic work, and tasks where correctness matters more than latency or cost. 4.7 is the latest iteration in the 4.x line, sitting above Sonnet 4.6 and Haiku 4.5 in the current stack. API access is live today."
+          },
+          {
+            "title": "Claude Design",
+            "url": "https://www.anthropic.com/news/claude-design-anthropic-labs",
+            "source": "Anthropic",
+            "body": "Anthropic Labs launched Claude Design, a native design surface built on Claude. The open-source community already shipped an alternative this week -- nexu-io/open-design, 54k stars, describing support for web, desktop, and mobile prototypes across 71 design systems -- which gives a rough shape of what the official product targets. The Labs tag puts it in early-access territory, not full GA. This is the same playbook Anthropic ran with Claude Code: take a vertical workflow and build opinionated native tooling for it."
+          },
+          {
+            "title": "Anthropic acquires Stainless",
+            "url": "https://www.anthropic.com/news/anthropic-acquires-stainless",
+            "source": "Anthropic",
+            "body": "Anthropic acquired Stainless, the company that generates typed, idiomatic client SDKs from OpenAPI specs. Stainless already powers Anthropic's own Python and TypeScript SDKs, along with client libraries for OpenAI, Cloudflare, and others. Bringing the team in-house gives Anthropic direct control over the full stack from model API down to the client libraries developers call. SDK updates will ship faster on new model releases, with no coordination lag between Anthropic's API team and an outside vendor."
+          },
+          {
+            "title": "Nemotron-Labs Diffusion Language Models",
+            "url": "https://huggingface.co/blog/nvidia/nemotron-labs-diffusion",
+            "source": "Hugging Face / NVIDIA",
+            "body": "NVIDIA's Nemotron-Labs published diffusion language models on HuggingFace, targeting what the post calls speed-of-light text generation. Diffusion LLMs generate tokens in parallel rather than one at a time, breaking the sequential throughput ceiling of standard autoregressive transformers. The quality gap has historically kept diffusion text models from competing with autoregressive ones -- the post signals meaningful progress on closing it. The throughput implications matter most for latency-sensitive applications where autoregressive streaming is the current bottleneck."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token efficiency is the week's dominant theme on GitHub, with a few genuinely novel infrastructure bets mixed in",
+        "items": [
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "55k",
+            "lang": "Rust",
+            "body": "A single Rust binary, zero dependencies, that proxies between your terminal and your LLM provider and cuts token consumption 60-90% on common dev commands. It preprocesses tool results before they hit the context window -- compressing file trees, truncating verbose output, normalizing repetitive diffs. The approach is distinct from prompt-level compression: it operates on data going in, not language coming out. Heaviest gains come from agentic coding workflows where file reads and shell output fill most of the context."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "55k",
+            "lang": "Python",
+            "body": "Point this at any folder -- code, SQL schemas, shell scripts, docs, papers, images, or videos -- and it builds a queryable knowledge graph. The distinct idea is treating application code, database schema, and infrastructure as a single unified graph rather than separate indexed corpora. Cross-layer queries (which API endpoints touch which tables, and what infra those tables run on) become single-hop lookups instead of multi-search joins. Surfaces as a skill for Claude Code, Codex, Gemini CLI, and Cursor."
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "54k",
+            "lang": "TypeScript",
+            "body": "Local-first, open-source alternative to Claude Design, which Anthropic launched today. Ships with 19 skills and 71 brand-grade design systems covering web, desktop, and mobile prototypes. Exports HTML, PDF, PPTX, and MP4. Runs on Claude Code, Codex, Cursor, Gemini CLI, OpenCode, and several others. The HyperFrames feature generates multi-frame interactive layouts in a single pass. The self-hosted path for teams that want the Claude Design workflow without routing requests through Anthropic's servers."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "65k",
+            "lang": "JavaScript",
+            "body": "A Claude Code skill that rewrites model output in stripped-down language -- short words, no hedging, no filler -- claiming 65% token reduction. The model still reasons at full capacity; it just outputs in a compressed dialect the harness can act on. The joke is also a real engineering observation: most of what fills an LLM response is not load-bearing for the downstream tool call that follows. At 65k stars, it has landed as both a novelty and a legitimately deployed compression layer."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One solid end-to-end Claude Code workflow write-up that earns a bookmark",
+        "items": [
+          {
+            "title": "Claude Code as a Daily Driver: Claude.md, Skills, Subagents, Plugins, and MCPs",
+            "url": "https://arps18.github.io/posts/claude-code-mastery/",
+            "source": "Hacker News",
+            "author": "arps18",
+            "body": "arps18 documented their full Claude Code production setup across five areas: structuring CLAUDE.md files to actually shape model behavior, authoring and installing skills, chaining subagents for parallelizable multi-step work, wiring in MCP servers without name collisions, and managing plugin load order. The post covers what breaks in practice -- context drift in long sessions, skill collisions, MCP latency spikes -- not just the happy path. This is operational detail on a tool still moving fast, documented by someone running it daily rather than demoing it once."
+          }
+        ]
+      }
+    ],
+    "closing": "Three Anthropic announcements before noon -- the 4.x era is running hot."
+  },
+  {
     "id": "2026-05-26",
     "date": "May 26, 2026",
     "title": "AI Pulse",
