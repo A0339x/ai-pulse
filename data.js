@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-05-28",
+    "date": "May 28, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic ships Opus 4.7 and a design studio, GitHub floods with token-cutting tools",
+    "intro": "Anthropic is running the table today -- new flagship model, a new design product, and an SDK acquisition before noon. On GitHub, the dominant pattern is token efficiency: builders are stacking tricks to cut 60-90% of LLM spend, from Rust CLI proxies to caveman syntax constraints. Fine-tuning infrastructure gets a quiet win too.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Anthropic owns the shipping section today with three moves at once",
+        "items": [
+          {
+            "title": "Claude Opus 4.7",
+            "url": "https://www.anthropic.com/news/claude-opus-4-7",
+            "source": "Anthropic",
+            "body": "Anthropic's latest flagship, Opus 4.7, lands today. It's a new iteration of the Opus 4 family -- the top of the Claude capability stack for the most demanding agentic workloads: complex reasoning chains, long-context tasks, multi-step tool use where cost-per-token trades against quality-per-step. Available via API and Claude.ai. For teams already running Opus 4, the upgrade path is a model ID swap."
+          },
+          {
+            "title": "Claude Design from Anthropic Labs",
+            "url": "https://www.anthropic.com/news/claude-design-anthropic-labs",
+            "source": "Anthropic",
+            "body": "Anthropic Labs ships Claude Design today, a new product aimed at visual and design workflows. It's the first named product out of Anthropic's experimental arm. The open-source community was already moving on the gap -- nexu-io/open-design (54k stars, climbing section) shipped a local-first alternative simultaneously with 259+ agent skills and export to HTML, PDF, PPTX, and MP4. A competing repo at that star count on launch day signals genuine pent-up demand."
+          },
+          {
+            "title": "Anthropic acquires Stainless",
+            "url": "https://www.anthropic.com/news/anthropic-acquires-stainless",
+            "source": "Anthropic",
+            "body": "Stainless builds tooling that auto-generates typed, idiomatic SDKs from OpenAPI specs. Anthropic's own Python and TypeScript SDKs were already produced with Stainless -- this acquisition makes that relationship first-party. What changes: SDK quality, API ergonomics, and the speed of SDK updates when Anthropic ships new API features all become internal priorities instead of a vendor SLA. For builders who care about how cleanly the API wraps, this signals Anthropic is treating SDK quality as a product surface."
+          },
+          {
+            "title": "Shipping a Trillion Parameters With a Hub Bucket: Delta Weight Sync in TRL",
+            "url": "https://huggingface.co/blog/delta-weight-sync",
+            "source": "Hugging Face",
+            "body": "TRL now supports delta weight sync for fine-tuning iterations -- instead of uploading full model checkpoints between training runs, it syncs only the changed weights. At the scale the blog title references, this cuts checkpoint transfer time and cloud egress costs significantly. If you're running iterative fine-tuning loops and the bottleneck is checkpoint I/O rather than compute, this is the change to pull in. Works with TRL's existing training loop without major refactoring."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token efficiency and codebase-as-graph dominate this week's GitHub momentum",
+        "items": [
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "65.9k",
+            "lang": "JavaScript",
+            "body": "A Claude Code skill that forces the model into minimal 'caveman' syntax -- short phrases, no filler, no hedging. The claim is 65% token reduction with no meaningful quality loss on code tasks. The mechanism is real: most LLM output tokens in a coding session are grammatical padding that adds nothing to the actual result. Install it as a skill and the output style shifts to match. At 65k stars in the climbing window, this spread fast -- probably because the ROI is immediate and zero-config."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "55.4k",
+            "lang": "Python",
+            "body": "Turns a folder of code, SQL schemas, R scripts, shell scripts, docs, papers, images, or videos into a queryable knowledge graph. Works as an agent skill across Claude Code, Codex, OpenCode, Cursor, and Gemini CLI. The novel part is cross-artifact linking: your app code connects to your database schema connects to your infrastructure definitions in one traversable structure. For large repos where a question like 'what touches this table' requires a full context dump, having the graph pre-built changes the query from expensive to instant."
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "54.6k",
+            "lang": "TypeScript",
+            "body": "A local-first, open-source alternative to Claude Design, shipping the same day as Anthropic's official product. Includes 259+ agent skills, 142+ design systems, and generates web, desktop, and mobile prototypes with export to HTML, PDF, PPTX, and MP4. Supports 17+ coding CLIs via bring-your-own-key, including Claude Code, Codex, Cursor, and OpenClaw. The sandboxed preview environment is the key differentiator for teams that can't route design assets through cloud APIs -- competitive work, regulated industries, or local-first preference."
+          },
+          {
+            "title": "AlexsJones/llmfit",
+            "url": "https://github.com/AlexsJones/llmfit",
+            "source": "github.com",
+            "stars": "26.8k",
+            "lang": "Rust",
+            "body": "One command that tells you which models and providers will actually run on your hardware -- covers GGUF, MLX, and major cloud providers, filtered by your VRAM and RAM. The problem is mundane but real: figuring out whether a 34B GGUF fits your GPU before downloading 20GB involves math, model cards, and usually trial and error. llmfit collapses that to a lookup. Useful for anyone setting up local inference for the first time or tuning a hardware-to-model pairing for a specific task."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's source cleared the bar for a documented end-to-end workflow",
+        "items": []
+      }
+    ],
+    "closing": "Three Anthropic moves before noon, a caveman that saves 65% of your tokens, and a knowledge graph for your whole codebase -- good Thursday."
+  },
+  {
     "id": "2026-05-27",
     "date": "May 27, 2026",
     "title": "AI Pulse",
