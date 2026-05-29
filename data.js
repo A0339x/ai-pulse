@@ -3,6 +3,91 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-05-29",
+    "date": "May 29, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Opus 4.8 ships, Anthropic buys its SDK vendor, and token-cutting tools flood GitHub",
+    "intro": "The biggest model release in weeks drops today: Anthropic ships Opus 4.8 as the new ceiling of the Claude 4 family. In the same news cycle, they acquire Stainless -- the company that already builds their official developer SDKs -- signaling a push toward owning the full developer-experience stack. On GitHub, momentum this week converges on one obsession: cutting token consumption in agentic coding workflows, with multiple independent tools attacking it from different angles.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Anthropic ships a new top model and buys its SDK vendor; CrewAI patches a credential leak",
+        "items": [
+          {
+            "title": "Claude Opus 4.8",
+            "url": "https://www.anthropic.com/news/claude-opus-4-8",
+            "source": "Anthropic",
+            "body": "Anthropic's new frontier model is live in the API today as claude-opus-4-8. It tops the Claude 4 family -- above Sonnet 4.6 -- for tasks where you need maximum capability over cost-efficiency. The Opus tier targets complex reasoning, long-horizon agentic work, and tasks that push smaller models to their limits. The 4.8 increment reflects continued optimization on that profile. If you're already on an earlier Claude 4 model, the API model ID is the only change you need."
+          },
+          {
+            "title": "Anthropic Acquires Stainless",
+            "url": "https://www.anthropic.com/news/anthropic-acquires-stainless",
+            "source": "Anthropic",
+            "body": "Stainless is the SDK-generation platform behind Anthropic's official Python and TypeScript packages -- the tooling that auto-builds production-grade, type-safe SDKs from an OpenAPI spec. Anthropic has used Stainless as a vendor; now they own it. For developers, the near-term effect is faster, tighter SDK updates when new API features ship -- no external vendor handoff delay. Longer term, Anthropic now controls the full stack from model to SDK, which matters if they plan to surface SDK-generation tooling as part of the developer platform itself."
+          },
+          {
+            "title": "CrewAI 1.14.6",
+            "url": "https://github.com/crewAIInc/crewAI/releases/tag/1.14.6",
+            "source": "CrewAI",
+            "body": "Two fixes in this patch that matter in production. StdioTransport was leaking environment variables into subprocess spawns -- a real issue if API keys or secrets live in your shell env during agentic runs. Fixed. Structured output was also bleeding schema data across tool-calling loops, silently corrupting agent outputs in multi-tool pipelines. Fixed. Checkpoint serialization for type[BaseModel] fields now writes valid JSON, which stabilizes resume behavior in long workflows. Small version bump, significant security and reliability surface."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token-cutting proxies and graph-indexed codebases dominate this week's star momentum",
+        "items": [
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "56k",
+            "lang": "Rust",
+            "body": "A single Rust binary with zero dependencies that proxies common dev command output before it reaches your coding agent, stripping 60-90% of tokens. Git status, compiler errors, file listings -- all verbose by design -- get compressed into dense, agent-readable form. Drop it in your PATH, point your agent at it. Works with Claude Code, Codex CLI, and anything that consumes shell output. The savings compound over long sessions: if your agent calls git status fifty times in a run, you've paid full token price for that redundancy fifty times without this."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "56k",
+            "lang": "Python",
+            "body": "Indexes a project folder -- code, SQL schemas, shell scripts, docs, papers, images, videos -- into a unified, queryable GraphRAG knowledge graph, then ships as a skill for Claude Code, Codex, Cursor, and Gemini CLI. Your agent queries the graph for cross-file relationships instead of cramming raw files into context. Ask how a schema relates to a service, which functions reference a deprecated method, or how infrastructure maps to app code -- and get semantically-linked answers. Most useful on repos too large to fit in a single context window."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "66k",
+            "lang": "JavaScript",
+            "body": "A Claude Code skill that cuts token usage 65% by forcing the model to respond in minimal caveman grammar. The premise is blunt: in a tight coding loop, you need code and action, not prose. 'Me see bug. Me fix.' does the same work as a paragraph explaining intent. The constraint is applied at the system-prompt level and plugs into any Claude Code-compatible harness as a drop-in skill. Sounds like a stunt; the token math is real and compounds across long sessions where the model would otherwise narrate every step."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "53k",
+            "lang": "Python",
+            "body": "Open-source AI memory layer claiming the best benchmark scores among open alternatives. Ships as an MCP server backed by ChromaDB, free to self-host. Agents use it to persist and retrieve facts across sessions without bloating every prompt with conversation history. There are a dozen MCP memory servers; what differentiates this one is the explicit recall-accuracy benchmark claim. If it holds under independent testing, it becomes the default memory drop-in for any MCP-compatible agent stack."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Someone read the Claude Code source so you don't have to",
+        "items": [
+          {
+            "title": "Claude Code -- Everything You Can Configure That the Docs Don't Tell You",
+            "url": "https://buildingbetter.tech/p/i-read-the-claude-code-source-code",
+            "source": "Hacker News",
+            "author": "ankitg12",
+            "body": "ankitg12 went through the Claude Code source and surfaced configuration options, env vars, and behavior flags that Anthropic's official docs skip. The methodology is the build: pull the source, trace initialization paths, test undocumented settings against a live instance, document what changed. The output is a reference for builders who want fine-grained control over agent behavior -- hooks, permission overrides, CLAUDE.md conventions that alter how Claude Code operates in non-obvious ways. 224 points and 49 HN comments, which tracks for a post that closes a real documentation gap."
+          }
+        ]
+      }
+    ],
+    "closing": "Separately: a developer embedded a prompt injection in the jqwik Java testing library specifically to make AI coding agents delete app output -- the supply chain attack surface for agentic workflows is being actively probed."
+  },
+  {
     "id": "2026-05-28",
     "date": "May 28, 2026",
     "title": "AI Pulse",
