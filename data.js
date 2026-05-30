@@ -3,6 +3,97 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-05-30",
+    "date": "May 30, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic ships a model, a design tool, and buys SDK infrastructure in one week -- while GitHub floods with token cutters",
+    "intro": "Anthropic is having its loudest week of the year: Opus 4.8 lands, Claude Design ships through Anthropic Labs, and they acquired Stainless -- the company that auto-generated their own SDKs. On GitHub, an independent cluster of repos all converged on the same problem from different angles: your token bill is too high, and there are at least four ways to cut it. Built With AI is thin this week; the one item worth calling out is a game, not a tutorial, but it captures the state of agent UX better than most blog posts.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "New model, a design tool, an SDK acquisition, and a lean MoE from Liquid AI",
+        "items": [
+          {
+            "title": "Claude Opus 4.8",
+            "url": "https://www.anthropic.com/news/claude-opus-4-8",
+            "source": "Anthropic",
+            "body": "Anthropic's newest top-tier model is live. Opus 4.8 -- model ID: claude-opus-4-8 -- is the latest in the Claude 4 family and available now via the API and Claude.ai. It sits above Sonnet 4.6 in Anthropic's capability stack and is the default choice for any workflow that was running on the previous Opus version. If you're building on the API, this is your new production ceiling. Update your model string and run your evals."
+          },
+          {
+            "title": "Claude Design -- Anthropic Labs",
+            "url": "https://www.anthropic.com/news/claude-design-anthropic-labs",
+            "source": "Anthropic",
+            "body": "Anthropic Labs shipped Claude Design, a UI prototyping tool that turns natural language into web, mobile, and desktop interface mockups. You get a sandboxed live preview and export to HTML, PDF, PPTX, and video. The release looks like Anthropic's answer to AI design tools from Google and Figma. The fastest demand signal: an open-source alternative -- nexu-io/open-design -- appeared almost immediately and crossed 55k stars within days, with 259 skills and 142 design system integrations already packaged."
+          },
+          {
+            "title": "Anthropic acquires Stainless",
+            "url": "https://www.anthropic.com/news/anthropic-acquires-stainless",
+            "source": "Anthropic",
+            "body": "Anthropic bought Stainless, the company that auto-generates typed, idiomatic client SDKs from OpenAPI specs. Stainless already powered Anthropic's Python and TypeScript SDKs -- so this formalizes a dependency they had in production. For developers, the practical impact is faster SDK updates and tighter parity between API changes and client library releases. Anthropic now controls the full stack from model to client library. Stainless also powers SDKs for other AI companies, so this acquisition has implications beyond Anthropic's own surface area."
+          },
+          {
+            "title": "LFM2.5 8B-A1B",
+            "url": "https://www.liquid.ai/blog/lfm2-5-8b-a1b",
+            "source": "Liquid AI",
+            "body": "Liquid AI released LFM2.5 8B-A1B: 8 billion total parameters, 1 billion active at inference time, trained on 38 trillion tokens. The A1B mixture-of-experts design means inference cost tracks closer to a 1B dense model than an 8B one, while the 38T training corpus gives it knowledge density that most 8B models can't match. The architecture is Liquid Foundation Model -- not a transformer. This week's ITBench-AA results (frontier models scoring below 50% on enterprise IT agent tasks) make a strong case for efficient small models that can be deployed close to the work."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Four repos, four angles on the same problem: tokens cost too much",
+        "items": [
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "66.5k",
+            "lang": "JavaScript",
+            "body": "A Claude Code skill that instructs Claude to respond in compressed caveman pidgin -- 'why use many token when few token do trick' -- cutting response token count by 65%. The core insight: model reasoning quality holds up well when output is stripped of hedging, connective prose, and filler. You install it as a skill and it persists across sessions. At 66.5k stars it's the most-starred new AI tools repo this week. It also works as a clean proof-of-concept for a broader idea: LLM verbosity is a dial, not a requirement."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "56.4k",
+            "lang": "Rust",
+            "body": "A Rust CLI proxy that intercepts common dev commands -- git status, ls, test output -- and strips the noise before the tokens hit the API. Claims 60-90% token reduction on typical agentic coding sessions. Single binary, zero runtime dependencies. The approach is the inverse of caveman: instead of compressing what the LLM says, it compresses what the LLM reads. Both directions matter in long coding sessions where context accumulates fast. Point it at your LLM endpoint, run your agent as normal."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "56.4k",
+            "lang": "Python",
+            "body": "An AI coding assistant skill that ingests any folder -- app code, SQL schemas, R scripts, shell scripts, docs, papers, images, videos -- and builds a single queryable knowledge graph across all of it. Works with Claude Code, Codex, Cursor, and Gemini CLI. The novel angle is cross-format indexing: app code, database schema, and infrastructure documentation land in the same graph, so you can ask relational questions across them rather than doing flat context search. The payoff shows up on large monorepos where stuffing the full codebase into context stops working."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "53.1k",
+            "lang": "Python",
+            "body": "Claims to be the best-benchmarked open-source AI memory system. Built on ChromaDB and exposed via MCP, so it drops into any MCP-compatible agent without glue code. Free, no cloud dependency. Memory systems for agents are proliferating fast and most don't publish comparative performance numbers -- MemPalace does. That makes it the current reference point: if you're building persistent agent memory, this is the baseline to beat until something with better published numbers ships."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "A 60-second game that makes agent permission fatigue impossible to ignore",
+        "items": [
+          {
+            "title": "Continue? Y/N: A 60-second game about AI agent permission fatigue",
+            "url": "https://llmgame.scalex.dev",
+            "source": "Hacker News",
+            "author": "Wirbelwind",
+            "body": "Wirbelwind built a browser game that recreates the agent approval loop: you're presented with an endless stream of tool-use permission prompts and you approve or deny them until the clock runs out. It landed 376 points and 172 comments on HN -- unusually high engagement for a game. The build interest is what it reveals: current agentic coding tools interrupt constantly, most approvals are reflexive rubber-stamps, and nobody has shipped a better interaction model. Making that friction into a 60-second game makes the problem legible in a way that no amount of engineering blog posts has managed. The full stack isn't documented in the source, but the live demo is at llmgame.scalex.dev."
+          }
+        ]
+      }
+    ],
+    "closing": "Back tomorrow."
+  },
+  {
     "id": "2026-05-29",
     "date": "May 29, 2026",
     "title": "AI Pulse",
