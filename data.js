@@ -3,6 +3,98 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-05-31",
+    "date": "May 31, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic ships Opus 4.8 and Claude Design, Google drops two new models, and a developer weaponizes a library against AI coding agents",
+    "intro": "Anthropic and Google both shipped new models today -- Opus 4.8 and Claude Design from Anthropic, Gemini Omni and 3.5 from Google. The more interesting thread runs through GitHub and the security beat: repos attacking token cost and codebase context are spiking, and a story from the Java ecosystem shows a new attack vector that targets AI agents specifically, not human developers. The jqwik incident is the clearest proof yet that agentic coding workflows have a supply chain problem that traditional development doesn't.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two new model families and a design tool -- the most new surface area in a single day this year",
+        "items": [
+          {
+            "title": "Claude Opus 4.8",
+            "url": "https://www.anthropic.com/news/claude-opus-4-8",
+            "source": "Anthropic",
+            "body": "Opus 4.8 is the new ceiling of Anthropic's model lineup, available now via API as claude-opus-4-8. Anthropic's Opus tier is where you reach when Sonnet isn't enough -- complex multi-step agents, hard reasoning tasks, code that needs to be right not just plausible. The 4.8 release continues the pattern of each Opus pushing capability further up the line. For developers already on the Anthropic API, the switch is a model ID change."
+          },
+          {
+            "title": "Claude Design -- Anthropic Labs",
+            "url": "https://www.anthropic.com/news/claude-design-anthropic-labs",
+            "source": "Anthropic",
+            "body": "Claude Design is Anthropic Labs' entry into AI-native design tooling -- the design counterpart to Claude Code. It generates web, desktop, and mobile prototypes from natural language, with sandboxed preview and export to HTML, PDF, PPTX, and video. The Labs label puts it in early/experimental territory. Community response was immediate: nexu-io/open-design, an open-source local-first alternative, crossed 56k stars within days of the announcement and ships with 259 skills, 142 design systems, and support for 17+ CLIs."
+          },
+          {
+            "title": "9 demos of Gemini Omni and Gemini 3.5 in action",
+            "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-omni-3-5-videos/",
+            "source": "Google AI",
+            "body": "Google shipped two new models at I/O 2026: Gemini Omni and Gemini 3.5. The announcement post is a nine-demo reel -- show-don't-tell positioning rather than a benchmarks post. Gemini Omni extends the multimodal line with unified handling across modalities; Gemini 3.5 advances the flagship numbered series. Both are live. If you're actively evaluating frontier options beyond the Anthropic stack, this is where Google's current ceiling sits."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token cost, knowledge graphs, and a massive agent harness dominate this week's star momentum",
+        "items": [
+          {
+            "title": "affaan-m/ECC",
+            "url": "https://github.com/affaan-m/ECC",
+            "source": "github.com",
+            "stars": "199.8k",
+            "lang": "JavaScript",
+            "body": "ECC is a performance and reliability layer for agent harnesses -- it adds skills, instincts, memory management, and security primitives on top of Claude Code, Codex, Opencode, Cursor, and others. The core design principle is research-first: agents gather context and verify before acting rather than acting on first pass. At nearly 200k stars it's one of the most-starred agent tooling repos in the ecosystem right now. The skill and memory architecture is increasingly the reference design for serious agentic workflows."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "57.1k",
+            "lang": "Python",
+            "body": "graphify turns any codebase into a queryable knowledge graph -- code, SQL schemas, R scripts, shell scripts, docs, papers, images, and videos become connected nodes rather than flat RAG chunks. Works as a skill for Claude Code, Codex, Cursor, Gemini CLI, and OpenCode. The difference from standard RAG: when your agent asks about a function, it can traverse to the database schema that function queries and the business logic doc that explains the rule. App code, infrastructure, and data model end up in one graph you can walk across."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "56.7k",
+            "lang": "Rust",
+            "body": "rtk is a CLI proxy that intercepts calls between your terminal and any LLM, cutting token consumption by 60-90% on common dev commands. It handles predictably-large outputs -- git diff, directory listings, build logs -- before they hit the model's context window. Single Rust binary, zero dependencies, works with any agent runtime. Token costs compound fast on large codebases when an agent reads the full tree before every decision; rtk compresses the expensive parts before the meter runs."
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "56.2k",
+            "lang": "TypeScript",
+            "body": "An open-source, local-first alternative to Claude Design that ships as a native desktop app. Includes 259+ skills, 142+ design systems, and exports to HTML, PDF, PPTX, and MP4. Supports HyperFrames -- a structured design-to-animation format -- alongside standard web, desktop, and mobile prototyping. Works with 17+ CLIs: Claude Code, Codex, Cursor, OpenClaw, and more. Bring-your-own-keys. Crossed 56k stars on the same day Claude Design launched -- one of the fastest organic responses to an Anthropic Labs release."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "A supply chain attack designed for AI agents, and a static analysis CLI that smells AI-generated code",
+        "items": [
+          {
+            "title": "Undisclosed addition in jqwik instructed AI coding agents to delete app output",
+            "url": "https://arstechnica.com/security/2026/05/fed-up-with-vibe-coders-dev-sneaks-data-nuking-prompt-injection-into-their-code/",
+            "source": "Hacker News",
+            "author": "joozio",
+            "body": "A developer added a hidden prompt injection to jqwik -- a property-based testing library for Java -- that instructed AI coding agents to delete application output files when they ran. The injection is invisible to a human code reviewer but gets picked up and executed when an agent reads the file as context. The target: vibe-coders who paste library source into an agent session without reviewing it. The Ars Technica piece documents the mechanism end to end -- where the instruction was embedded, how it was structured to survive comment stripping, and what it actually triggered. This is a proof of concept for a supply chain attack vector specific to agentic workflows. It has no equivalent in traditional human-read code."
+          },
+          {
+            "title": "Show HN: AISlop, a CLI for catching AI generated code smells",
+            "url": "https://github.com/scanaislop/aislop",
+            "source": "Hacker News",
+            "author": "Heavykenny",
+            "body": "AISlop scans a codebase and flags patterns that are statistically common in AI-generated output -- excessive comments explaining obvious code, variables named 'result' and 'data', boilerplate error handling that catches everything and logs nothing, and structural patterns humans rarely write but agents produce constantly. It's not a style linter; it's static analysis with AI-specific heuristics. The practical application is running it in CI to flag when agentic output degrades in quality before it merges. Sixty-three comments on HN with active back-and-forth on which heuristics are reliable -- worth reading that thread alongside the repo."
+          }
+        ]
+      }
+    ],
+    "closing": "Biggest single-day AI surface area in a while -- check your model IDs."
+  },
+  {
     "id": "2026-05-30",
     "date": "May 30, 2026",
     "title": "AI Pulse",
