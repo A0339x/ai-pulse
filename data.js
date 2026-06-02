@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-02",
+    "date": "June 2, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic ships Opus 4.8 and a design tool, GitHub fills with token cutters",
+    "intro": "Anthropic had a busy morning -- Opus 4.8 updates the flagship model line and Claude Design ships as a new vertical product out of Labs. H Company's Holo3.1 pushes computer use onto local hardware. On GitHub, three different repos climbing simultaneously are all attacking the same problem: LLMs spend too many tokens on nothing. Caveman prompting, CLI proxies, and knowledge graphs -- different techniques, same direction.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two Anthropic releases, a local computer use model, and a new code-focused MoE from JetBrains",
+        "items": [
+          {
+            "title": "Claude Opus 4.8",
+            "url": "https://www.anthropic.com/news/claude-opus-4-8",
+            "source": "Anthropic",
+            "body": "Anthropic updated the top of the Claude model stack with Opus 4.8. This is the tier for maximum capability -- complex reasoning chains, long-context analysis, multi-step agentic work, and tasks where you need the model to stay coherent over many tool calls. The 4.8 designation is a new iteration in the Opus 4 line. If you're running Opus 4 in production, this is the version to benchmark against your current setup before switching."
+          },
+          {
+            "title": "Claude Design -- Anthropic Labs",
+            "url": "https://www.anthropic.com/news/claude-design-anthropic-labs",
+            "source": "Anthropic",
+            "body": "Anthropic Labs shipped Claude Design, a product for generating visual designs and prototypes from natural language. Like Claude Code before it, this is a focused vertical tool -- same model, interface built for a specific workflow. It extends the Labs pattern of shipping purpose-built products for technical and creative tasks rather than routing all capabilities through the chat interface. Design iteration, mockups, and visual assets are now a first-class use case with dedicated tooling."
+          },
+          {
+            "title": "Holo3.1: Fast & Local Computer Use Agents",
+            "url": "https://huggingface.co/blog/Hcompany/holo31",
+            "source": "H Company",
+            "body": "H Company dropped Holo3.1 today -- a computer use model built to run locally at speed. Computer use agents (models that see a screen and control a GUI) have lived mostly in cloud APIs. Holo3.1 pushes that capability onto local hardware with latency as the primary design constraint. If the speed holds in practice, this opens up desktop automation for workflows that need fast iteration, air-gapped environments, or simply can't send screenshots to a remote API."
+          },
+          {
+            "title": "Mellum2: A 12B Mixture-of-Experts Model by JetBrains",
+            "url": "https://huggingface.co/blog/JetBrains/mellum2-launch",
+            "source": "JetBrains",
+            "body": "JetBrains published Mellum2 on Hugging Face -- a 12B parameter Mixture-of-Experts model built for code. JetBrains has been training models to power their IDE AI features across IntelliJ, PyCharm, and the rest of the suite; Mellum2 is the latest open release from that work. A 12B MoE hits a useful point on the size-performance curve: enough capacity for real coding tasks, small enough to run locally on a workstation GPU without heroics."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token efficiency is the week's theme -- four repos, three different attacks on the same problem",
+        "items": [
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "67.8k",
+            "lang": "JavaScript",
+            "body": "A Claude Code skill that cuts token consumption by 65% by making the model respond in stripped-down 'caveman' language -- short sentences, no hedging, no filler. The idea is that technical content survives compression well; the tokens going toward elaborate sentence structure are mostly wasted. It installs as a Claude Code skill, changing response style globally across sessions. Blunt framing, but the math works: at frontier model API rates, verbose responses are a real and compounding cost."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "57.8k",
+            "lang": "Rust",
+            "body": "A CLI proxy that reduces LLM token consumption 60-90% on common dev commands. It intercepts verbose shell output -- git diffs, build logs, test results -- and compresses it before the text hits a model's context window. Ships as a single Rust binary with zero dependencies. The compression is invisible to whatever LLM tool sits above it, so it works with any agent or coding assistant that pipes shell output into prompts. High-leverage for agentic workflows that chew through long terminal outputs on every step."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "58.3k",
+            "lang": "Python",
+            "body": "A skill for AI coding assistants that converts a codebase into a queryable knowledge graph -- app code, SQL schemas, infrastructure config, docs, and even images and videos linked in one traversable structure. Works with Claude Code, Codex, Cursor, Gemini CLI, and others. The advantage over flat embedding search is traversal: questions that follow relationships (which services call this function? what tables does this query touch?) get answered from graph edges instead of nearby chunks. Useful at the scale where flat RAG starts missing cross-file connections."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "53.3k",
+            "lang": "Python",
+            "body": "An open-source AI memory system built on ChromaDB, exposed over MCP so any MCP-compatible agent can plug in. Claims best-in-class benchmarks among open alternatives. Agent memory -- what persists across sessions, how relevant context gets retrieved -- is still handled poorly by most teams: naive approaches, in-house hacks, or paid services. MemPalace is positioning as the serious free alternative, with actual benchmark claims backing the positioning rather than just a lighter-weight convenience wrapper."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's sources documented a real end-to-end workflow worth replicating",
+        "items": []
+      }
+    ],
+    "closing": "Back tomorrow."
+  },
+  {
     "id": "2026-05-31",
     "date": "May 31, 2026",
     "title": "AI Pulse",
