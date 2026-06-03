@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-03",
+    "date": "June 3, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic ships Opus 4.8 and a design tool, OpenAI goes GA on AWS, and GitHub can't stop counting tokens",
+    "intro": "Two Anthropic drops lead today -- a model update and a new design product out of Anthropic Labs. OpenAI's AWS deal flips from preview to generally available, which changes the procurement math for enterprise teams already running in that stack. On GitHub, the week's dominant theme is spending fewer tokens: multiple repos attacking the same cost problem from different angles, and a few of them actually working.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new flagship model, a design surface, and a major distribution deal all clear the runway today.",
+        "items": [
+          {
+            "title": "Claude Opus 4.8",
+            "url": "https://www.anthropic.com/news/claude-opus-4-8",
+            "source": "Anthropic",
+            "body": "Anthropic pushed a new point release of its flagship model. Opus 4.8 sits at the top of the Claude capability stack -- above Sonnet and Haiku -- and is the model to reach for when output quality and extended reasoning matter more than latency or cost. The version bump follows Opus 4's strong benchmark performance on complex multi-step tasks. Anthropic has been shipping incremental Opus updates faster than major version cycles suggest, which means the gap between frontier and mid-tier in their lineup keeps shifting."
+          },
+          {
+            "title": "Claude Design -- Anthropic Labs",
+            "url": "https://www.anthropic.com/news/claude-design-anthropic-labs",
+            "source": "Anthropic",
+            "body": "Anthropic Labs shipped Claude Design, a prompt-driven tool for generating UI mockups, slides, and visual assets. It comes with a library of design systems baked in and exports to HTML and presentation formats. The Labs tag means this is experimental -- Anthropic is testing the surface, not committing to it as a core product yet. It's the first native Anthropic design tool; until today, design-focused Claude workflows meant reaching for third-party wrappers. The open-source alternative (nexu-io/open-design, 58k stars) appeared almost simultaneously, which says something about how fast the ecosystem moves around Anthropic releases."
+          },
+          {
+            "title": "OpenAI frontier models and Codex now GA on AWS",
+            "url": "https://openai.com/index/openai-frontier-models-and-codex-are-now-available-on-aws",
+            "source": "OpenAI",
+            "body": "OpenAI moved its frontier models and Codex from AWS preview to general availability. Enterprise teams can now access them through existing AWS IAM controls, VPC configurations, and procurement contracts -- no separate OpenAI billing relationship required. For companies with data residency constraints or centralized cloud spend, this removes the main blocker to adopting OpenAI in production. The Codex agent runs inside the AWS environment rather than routing through OpenAI's own infrastructure, which matters for teams with strict data egress policies."
+          },
+          {
+            "title": "Codex for every role, tool, and workflow",
+            "url": "https://openai.com/index/codex-for-every-role-tool-workflow",
+            "source": "OpenAI",
+            "body": "OpenAI shipped a set of new Codex plugins, sites, and annotation tools aimed at non-engineering roles -- analysts, marketers, designers, and investors. The move signals OpenAI positioning Codex as a general productivity layer rather than a developer-only tool. New plugins extend Codex into data workflows and content pipelines. The annotations feature lets non-technical users mark up outputs and feed corrections back into the model's task context, which is a meaningful change from the current prompt-and-hope loop most knowledge workers are stuck in."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token budgets and codebase graphs are dominating GitHub momentum this week.",
+        "items": [
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "58.8k",
+            "lang": "Python",
+            "body": "Graphify turns a folder of code, SQL schemas, shell scripts, docs, papers, images, or videos into a queryable knowledge graph. The core idea is GraphRAG scoped to your actual repo: app code, database schema, and infrastructure end up in one connected graph, not isolated vector chunks. That matters when questions span abstraction layers -- tracing a field from an API endpoint through business logic to a database trigger requires joining context that naive RAG misses. Query frontend supports Claude Code, Codex, Gemini CLI, Cursor, and OpenCode."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "53.4k",
+            "lang": "Python",
+            "body": "MemPalace claims the top slot on open-source AI memory benchmarks and is free. ChromaDB handles storage, an MCP interface handles the connection, so any MCP-compatible agent plugs in persistent memory without building retrieval from scratch. The differentiator is the benchmarking -- most open-source memory implementations are untested against real retrieval workloads under varied query patterns. MemPalace publishes its methodology and comparative scores. For anyone building agents that need to carry user context, tool output, or long-running task state across sessions, this is the current reference implementation."
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "58.0k",
+            "lang": "TypeScript",
+            "body": "Open Design is a local-first, open-source alternative to the Claude Design tool Anthropic Labs shipped today. It runs as a native desktop app with 259+ skills, 142+ design systems, and exports to HTML, PDF, PPTX, and MP4. The notable feature is HyperFrames -- an interactive prototype format beyond static mockups. It connects to 17+ AI CLIs including Claude Code, Codex, Cursor, Gemini CLI, and Qwen, so design iteration stays inside the same agent loop as code. Useful for anyone who wants Claude Design's capabilities without Anthropic's data terms or pricing."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "68.3k",
+            "lang": "JavaScript",
+            "body": "Caveman is a Claude Code skill that instructs the model to respond in compressed, minimal language -- short words, no filler, no hedging. The result is a claimed 65% token reduction on typical development tasks. The underlying insight is real even if the execution is absurdist: most LLM verbosity in coding flows is explanation the developer didn't ask for. Caveman is the reductio ad absurdum of that problem. The repo includes a benchmark section comparing caveman output to standard Claude Code output on the same tasks, so the 65% number is verifiable."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Two tutorials document the exact mechanics of wiring up an agent tool loop from scratch.",
+        "items": [
+          {
+            "title": "Build a Basic AI Agent from Scratch: Tools",
+            "url": "https://www.ruxu.dev/articles/ai/build-an-ai-agent-with-tools/",
+            "source": "Hacker News",
+            "author": "ruxudev",
+            "body": "A step-by-step walkthrough for building an agent that calls external tools using raw API calls -- no framework. The article covers the full loop: prompt construction, tool schema definition, model call, parsing the tool call out of the response, executing it, feeding the result back into context, and running until the model stops invoking tools. The author documents the exact failure points: malformed JSON from the model, tools returning errors the model handles badly, and infinite loops when the model misreads a tool output. Building this without LangChain or any orchestration layer makes every design choice visible. Read this before reaching for an abstraction."
+          },
+          {
+            "title": "Build Your Own AI Agent CLI in 150 Lines",
+            "url": "https://go-micro.dev/blog/11",
+            "source": "Hacker News",
+            "author": "asim",
+            "body": "A working agent CLI in 150 lines of Go, no dependencies beyond the LLM API client. The hard constraint is pedagogical -- 150 lines means no abstraction layer can hide the agent loop, so tool registration, message accumulation, shell command execution, and loop exit conditions are all visible in one file. The author notes the one thing 150 lines can't fit: error recovery when the model produces malformed tool calls. That gap is documented explicitly, not glossed over, which is why the post is worth reading. A follow-up covering error recovery is flagged as next in the series."
+          }
+        ]
+      }
+    ],
+    "closing": "Back tomorrow with whatever ships overnight."
+  },
+  {
     "id": "2026-06-02",
     "date": "June 2, 2026",
     "title": "AI Pulse",
