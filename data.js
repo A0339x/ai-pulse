@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-04",
+    "date": "June 4, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Opus 4.8 lands, token-trimming repos own GitHub, and Anthropic enters the design-tool market",
+    "intro": "Anthropic ships two things today -- a new top-of-lineup model and a new product category -- while OpenAI quietly expands Codex past developers to the rest of the org. On GitHub, the dominant theme is cost: multiple fast-climbing repos are each betting that cutting LLM token consumption is the next infrastructure layer worth owning. Nothing in today's HN pool documented a full build workflow end-to-end, so the built-with section is empty.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A model bump, a new design product, and Codex expanding well past the eng team",
+        "items": [
+          {
+            "title": "Claude Opus 4.8",
+            "url": "https://www.anthropic.com/news/claude-opus-4-8",
+            "source": "Anthropic",
+            "body": "Anthropic ships Opus 4.8, the new top of the Claude 4 model family. Model ID is claude-opus-4-8. As the highest-capability Claude model, it targets the most demanding coding, reasoning, and agentic tasks where Sonnet-tier falls short. Claude Code fast mode runs on Opus. If you are calling the API directly and routing your hardest multi-step agent work to claude-opus-4-6 or an older string, update it -- claude-opus-4-8 is now the right ceiling to test against."
+          },
+          {
+            "title": "Claude Design -- Anthropic Labs",
+            "url": "https://www.anthropic.com/news/claude-design-anthropic-labs",
+            "source": "Anthropic",
+            "body": "Anthropic Labs ships Claude Design, a new product aimed at design workflows. The Labs tag means experimental, not yet a committed product line, but it is publicly available today. An open-source alternative (nexu-io/open-design, 58.6k stars and climbing) appeared on GitHub the same morning targeting the same surface with 259+ skills, 142+ design systems, and multi-provider support -- which tells you how fast the community read the opening. The exact feature set for what Claude Design generates and how designers interact with it is in the launch post."
+          },
+          {
+            "title": "Introducing new capabilities to GPT-Rosalind",
+            "url": "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind",
+            "source": "OpenAI",
+            "body": "GPT-Rosalind, OpenAI's life sciences model, gets a capability expansion today: enhanced biological reasoning, medicinal chemistry expertise, genomics analysis, and experimental workflow support. Rosalind is purpose-built for life sciences rather than general use. Medicinal chemistry and genomics are domains where general-purpose models reliably underperform -- narrow, structured, and full of domain conventions that don't survive prompt generalization. These additions target researchers and drug discovery teams running structured scientific workflows where Rosalind already lives in the stack."
+          },
+          {
+            "title": "Codex for every role, tool, and workflow",
+            "url": "https://openai.com/index/codex-for-every-role-tool-workflow",
+            "source": "OpenAI",
+            "body": "Codex ships new plugins, sites, and annotations aimed at analysts, marketers, designers, and investors -- roles that are not traditionally writing code. The plugins expand Codex into third-party tools beyond IDE integrations. The annotations feature adds structured context so domain experts can prompt with role-specific language without needing to frame everything as a coding task. This is a deliberate push from developer assistant to org-wide tool. New plugin endpoints mean new integration surface for anyone building Codex into internal workflows."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Four different bets on cutting LLM token costs, from Rust proxies to caveman grammar",
+        "items": [
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "68.7k",
+            "lang": "JavaScript",
+            "body": "Caveman is a Claude Code skill that cuts token usage by 65% by making the model communicate in compressed, minimal language -- dropping articles, conjunctions, and verbose sentence structure. The bet is that LLMs understand stripped-down language just fine but produce it at a fraction of the token cost. It is a prompt-layer trick, not a model change, and it works across Claude Code, Codex, and Cursor. Whether your downstream tooling can parse caveman-style output without breaking depends on the pipeline, but for agent-to-agent communication inside an orchestration loop the savings compound fast."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "59.2k",
+            "lang": "Python",
+            "body": "Graphify is a coding assistant skill for Claude Code, Codex, Cursor, Gemini CLI, and others that converts any folder -- source code, SQL schemas, shell scripts, docs, papers, images, videos -- into a queryable knowledge graph. Your app code, database schema, and infrastructure all land in one graph you can query instead of cramming raw files into context windows. It is GraphRAG-style retrieval automated from whatever you already have on disk. Built for large codebases where LLMs consistently lose track of the schema-to-code relationship across long sessions."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "58.7k",
+            "lang": "Rust",
+            "body": "rtk is a CLI proxy that sits between your dev tools and the LLM API and reduces token consumption by 60-90% on common dev commands. Single Rust binary, zero runtime dependencies -- drop it in, point your tools at it, it handles compression and optimization transparently. The 60-90% range is specific to dev command patterns: file reads, diffs, grep output, directory listings. Not general chat compression. If you are running Claude Code or Codex heavily against large codebases and watching tokens drain on repetitive read operations, this targets that specific cost center."
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "58.6k",
+            "lang": "TypeScript",
+            "body": "open-design is a local-first, open-source alternative to Anthropic's new Claude Design product, shipping as a native desktop app. It bundles 259+ skills and 142+ design systems and generates web, desktop, and mobile prototypes, slides, images, and videos. Export formats include HTML, PDF, PPTX, and MP4. BYOK support covers 17+ AI CLIs -- Claude Code, Codex, Cursor, Gemini CLI, Qwen, Copilot, and more. A sandboxed preview environment keeps generated code isolated until you export. Dropped the same day as the Claude Design launch, which explains the star velocity."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Today's HN pool skewed toward news and product launches rather than documented workflows",
+        "items": []
+      }
+    ],
+    "closing": "Back tomorrow with whatever ships overnight."
+  },
+  {
     "id": "2026-06-03",
     "date": "June 3, 2026",
     "title": "AI Pulse",
