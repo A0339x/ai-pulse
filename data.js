@@ -3,6 +3,111 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-05",
+    "date": "June 5, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Opus 4.8 drops, ChatGPT rewrites its memory, and GitHub is obsessed with token reduction",
+    "intro": "Two model updates today worth paying attention to: Anthropic ships Opus 4.8 at the top of the Claude 4 stack, and OpenAI extends GPT-Rosalind deeper into life sciences. The GitHub trend this week is infrastructure -- repos targeting token cost, memory quality, and codebase navigation are pulling the most stars. Closest attention belongs to ChatGPT's new Dreaming memory system and graphify's knowledge-graph approach, both of which change default assumptions about how agents accumulate and query context.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Model upgrades from Anthropic and OpenAI, a new memory architecture for ChatGPT, and a new design product from Anthropic Labs",
+        "items": [
+          {
+            "title": "Claude Opus 4.8",
+            "url": "https://www.anthropic.com/news/claude-opus-4-8",
+            "source": "Anthropic",
+            "body": "Opus 4.8 is now the top of the Claude 4 model stack, sitting above Sonnet 4.6 and Haiku 4.5 in the family. Available via the Anthropic API at model ID claude-opus-4-8. For agentic workflows where you have been running Sonnet and hitting quality ceilings on complex tasks -- extended code analysis, long-context reasoning, multi-step planning -- this is the version to benchmark. The 4.8 version number puts it ahead of every other Claude 4 variant currently in production. Cost and latency are higher than Sonnet, so the decision is whether your task class justifies the upgrade."
+          },
+          {
+            "title": "Claude Design -- Anthropic Labs",
+            "url": "https://www.anthropic.com/news/claude-design-anthropic-labs",
+            "source": "Anthropic",
+            "body": "Anthropic Labs shipped Claude Design, a new product for generating visual and UI work from natural language. It comes out of the Labs division, Anthropic's fast-cycle experimental product track. The community response was fast -- nexu-io/open-design launched the same day as a local-first open-source alternative, which signals real demand. Claude Design extends what Claude Code does for code into the design layer, targeting web, desktop, and mobile prototyping. The Labs framing means it moves faster and ships rougher than mainline Claude products."
+          },
+          {
+            "title": "Dreaming: Better memory for a more helpful ChatGPT",
+            "url": "https://openai.com/index/chatgpt-memory-dreaming",
+            "source": "OpenAI",
+            "body": "OpenAI shipped a new memory architecture for ChatGPT called Dreaming. The old system required you to explicitly tell ChatGPT to save something. Dreaming works passively -- it reviews past conversations in the background, extracts preferences and patterns, and integrates them going forward without any prompting from you. The analogy is sleep consolidation: memory gets distilled and refreshed outside the active conversation window. The practical effect is that ChatGPT should stop asking for context you have already given it, and should become more calibrated to your preferences over time with zero management overhead."
+          },
+          {
+            "title": "New capabilities in GPT-Rosalind",
+            "url": "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind",
+            "source": "OpenAI",
+            "body": "GPT-Rosalind, OpenAI's specialized life sciences model, got four new capability areas: enhanced biological reasoning, medicinal chemistry expertise, genomics analysis, and experimental workflow support. This is not a general model with a bio system prompt -- Rosalind is fine-tuned on scientific literature and lab workflows, and the new additions extend it into chemistry and genomics territory the previous version did not cover. For teams building tools around drug discovery pipelines, wet-lab automation, or computational biology, the updated API endpoint is worth testing against your current stack."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token reduction proxies, codebase knowledge graphs, and a local-first Claude Design alternative are pulling the most stars this week",
+        "items": [
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "59.6k",
+            "lang": "Python",
+            "body": "Point Graphify at a codebase, SQL schema, docs, R scripts, or video files and it builds a queryable knowledge graph of relationships between components. The shift: instead of asking an LLM to scan files linearly and hoping it retains the right context, you get a structured graph you can traverse -- what depends on what, which services share a schema, which functions chain together. Ships as an installable skill for Claude Code, Codex, Cursor, Gemini CLI, and others. The biggest win is on large repos where context window limits make full-file loading impractical and grep-based navigation misses the relationship layer entirely."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "59.1k",
+            "lang": "Rust",
+            "body": "A CLI proxy that intercepts dev commands before they hit your LLM API and strips 60-90% of tokens without degrading output quality. The mechanism is not lossy compression -- it normalizes repetitive patterns, strips redundant context, and caches reused fragments before the request goes out. Single Rust binary, zero dependencies, drops in front of Claude Code, Codex, or any CLI tool that shells out to a model. At current API pricing across an 8-hour coding session, the token savings are substantial. The right test is your actual workflow, not a benchmark, since the reduction varies heavily by task type."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "53.7k",
+            "lang": "Python",
+            "body": "The best-benchmarked open-source AI memory system -- and the maintainers publish the comparison numbers to back it up. Built in Python, backed by ChromaDB for vector storage, exposed via MCP so any MCP-compatible agent can integrate it without custom connectors. Free to run locally. The project differentiates itself in a crowded memory-layer space by leading with reproducible benchmark results against other open-source approaches rather than just asserting performance claims. If you are building agentic systems that need persistent retrievable memory without a hosted dependency, this is the current reference point for the category."
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "59.3k",
+            "lang": "TypeScript",
+            "body": "A local-first, open-source alternative to Anthropic's newly launched Claude Design, shipping as a native desktop app. Includes 259+ prebuilt skills and 142+ design systems, with output targets covering web, desktop, mobile, slides, images, and video in HTML, PDF, PPTX, and MP4. The standout feature is HyperFrames -- an interactive canvas format that wraps clickable prototypes instead of static mockups. Connects to Claude Code, Codex, Cursor, Gemini CLI, and 17 other coding CLIs. Built for teams that want Claude Design's output capability without routing designs through Anthropic's servers."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Fine-tuning for style, one-shot formal verification, and the 150-line agent that shows what frameworks hide",
+        "items": [
+          {
+            "title": "Fine-tuning an LLM to write docs like it's 1995",
+            "url": "https://passo.uno/fine-tuning-docs-llm/",
+            "source": "Hacker News",
+            "author": "taubek",
+            "body": "A developer fine-tuned a model to produce documentation in the style of 1990s technical writing -- terse, procedural, zero hand-holding. The post documents the full process: sourcing a dataset from period-accurate technical manuals, formatting examples for fine-tuning, iterating on the style signal, and validating output quality. The motivation was not nostalgia -- 1990s docs are information-dense and free of modern friendly filler that inflates word count while reducing precision. The replicable part is the dataset construction method: how you source and filter style examples, and what it takes to get a fine-tuned model to consistently hold a voice that the base model has been trained away from. The result is a specialized endpoint for doc-generation pipelines that need tight, scannable output."
+          },
+          {
+            "title": "Formally verified polygon intersection -- Opus 4.8 oneshots, prev failed",
+            "url": "https://github.com/schildep/verified-polygon-intersection",
+            "source": "Hacker News",
+            "author": "permute",
+            "body": "A developer published formally verified polygon intersection algorithms with a documented note: Claude Opus 4.8 produced a complete, machine-checkable proof in a single pass after previous models repeatedly failed. The repo includes the proof artifacts so you can inspect what a oneshot formal verification actually looks like in output form. The comparison is the useful data point -- if prior models required multiple iterations or human scaffolding to reach a verified proof, and Opus 4.8 closed it in one pass, that marks a concrete capability step for formal methods work. The scope is narrow, but the same question applies to whatever verification or proof-adjacent task you have been running and treating as out of reach for current models."
+          },
+          {
+            "title": "Build Your Own AI Agent CLI in 150 Lines",
+            "url": "https://go-micro.dev/blog/11",
+            "source": "Hacker News",
+            "author": "asim",
+            "body": "A tutorial at go-micro.dev strips an AI agent CLI down to 150 lines and walks through every decision. The core loop: parse a tool manifest, send it to the model, execute returned tool calls, feed results back, repeat. No framework dependencies. The 150-line constraint is intentional -- it forces each architectural decision to stay visible and explicit, which makes it the fastest way to understand what heavier agent frameworks are abstracting. Tool routing, context accumulation, the response loop -- all in the open. The post is worth reading before adopting a framework, so you can name exactly what you are trading complexity for."
+          }
+        ]
+      }
+    ],
+    "closing": "More tomorrow."
+  },
+  {
     "id": "2026-06-04",
     "date": "June 4, 2026",
     "title": "AI Pulse",
