@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-06",
+    "date": "June 6, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Opus 4.8 drops, GitHub floods with token-cutting tools, and a TDD agent skill worth forking",
+    "intro": "The big news today is Claude Opus 4.8 -- Anthropic's new flagship is live on the API. On GitHub, the dominant theme is cost: repo after repo targeting the same problem of LLM token consumption at scale. In Built With AI, a TDD agent skill and a formally verified geometry proof show two very different ways Opus 4.8 is being put to work.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "New flagship model, a native desktop agent app, and two distinct OpenAI capability pushes",
+        "items": [
+          {
+            "title": "Claude Opus 4.8",
+            "url": "https://www.anthropic.com/news/claude-opus-4-8",
+            "source": "Anthropic",
+            "body": "Anthropic released Claude Opus 4.8, a new version of its top-tier model. Available today on the API at model ID claude-opus-4-8. Opus sits above Sonnet and Haiku in the Claude 4.x hierarchy -- this is the model you reach for when capability ceiling matters more than cost per token. Anthropic has shipped meaningful jumps with each Opus point release in the 4.x line, making this the first thing to run against your hardest evals before the week is out."
+          },
+          {
+            "title": "Hermes Agent v0.16.0 -- The Surface Release",
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.6.5",
+            "source": "Nous Research",
+            "body": "Hermes Agent v0.16.0 ships a native desktop app for macOS, Linux, and Windows -- built across 100 PRs and 159 commits in a single week. This is the first time Hermes runs as a real OS-native application rather than a terminal process or web interface. The broader release is substantial: 874 commits, 542 merged PRs, 205k lines added, 16 security-tagged issues closed, and 170 community contributors since v0.15.2. The desktop app is the headline but the security surface cleanup is the more operationally relevant change for teams running Hermes in production."
+          },
+          {
+            "title": "ChatGPT Memory Dreaming",
+            "url": "https://openai.com/index/chatgpt-memory-dreaming",
+            "source": "OpenAI",
+            "body": "OpenAI shipped a new memory architecture for ChatGPT called Dreaming. Instead of relying on explicit saves or a flat list of stored facts, the system periodically consolidates what it knows about your preferences across sessions -- the analogy OpenAI is using is sleep-stage memory consolidation. Context stays current and relevant without manual management. This is distinct from the existing memory toggle, which required you to explicitly tell ChatGPT what to remember. The new system infers and updates on its own."
+          },
+          {
+            "title": "GPT-Rosalind: New Life Sciences Capabilities",
+            "url": "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind",
+            "source": "OpenAI",
+            "body": "GPT-Rosalind, OpenAI's life sciences-specialized model, got a meaningful capability expansion: enhanced biological reasoning, medicinal chemistry expertise, genomics analysis, and experimental workflow support. Previous versions handled literature synthesis and basic bio reasoning. The new pieces are the chemistry and genomics depth -- structure-activity relationship work in medicinal chemistry and analysis tasks across genomics pipelines -- plus explicit support for planning wet-lab experimental workflows, not just interpreting results."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token cost is the problem every third repo on GitHub is trying to solve right now",
+        "items": [
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "59.3k",
+            "lang": "Rust",
+            "body": "A CLI proxy that sits between your dev commands and the LLM and cuts token consumption 60-90% on common operations. Single Rust binary, zero dependencies -- drop it in front of any CLI that talks to an LLM and it handles compression transparently. The mechanism is normalization and deduplication of context that repeats across calls: file contents, shell output, stack traces. Nothing about the approach is exotic, but the Rust binary distribution model means there is genuinely nothing to install or configure beyond a single executable."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "60.2k",
+            "lang": "Python",
+            "body": "An AI coding assistant skill that converts any folder of code, SQL schemas, R scripts, shell scripts, docs, papers, images, or videos into a queryable knowledge graph. Works as a skill for Claude Code, Codex, OpenCode, Cursor, Gemini CLI, and others. The structurally novel part: app code, database schema, and infrastructure land in one unified graph, so an agent can traverse cross-layer relationships -- not just what a function does, but what infrastructure a specific API call touches and which tables it reads. Cross-layer tracing without manually stitching context is what makes this more than another RAG wrapper."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "54.1k",
+            "lang": "Python",
+            "body": "An open-source AI memory system claiming the top position on published benchmarks -- and free. Built on ChromaDB and exposed via MCP, so it plugs into any MCP-compatible agent or LLM client without a hosted memory layer in the stack. The benchmark claim is the thing to verify independently; if it holds up, this is a straightforward replacement for paid memory services in agentic pipelines. The MCP interface means swapping it in requires no changes to agent logic, only to the tool configuration."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "69.4k",
+            "lang": "JavaScript",
+            "body": "A Claude Code skill that cuts 65% of tokens by instructing the model to respond in stripped-down minimal English -- \"why use many token when few token do trick.\" The underlying idea is legitimate: verbose, polished prose in agent responses burns context window and costs money. In agentic coding workflows where you're reading diffs and shell output rather than narrative text, fluency is overhead. Caveman trades prose quality for compression in exactly those contexts. The 65% claim is per-workload -- results vary based on how verbose your model's baseline responses are."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "A reusable TDD agent skill and a formally verified geometry proof that earlier models couldn't crack",
+        "items": [
+          {
+            "title": "My Agent Skill for Test-Driven Development",
+            "url": "https://www.saturnci.com/my-agent-skill-for-test-driven-development.html",
+            "source": "Hacker News",
+            "author": "laxmena",
+            "body": "A documented agent skill for enforcing TDD discipline inside Claude Code and similar agentic coding environments. The core problem the skill solves: AI coding agents default to writing implementation first, skipping the red-green-refactor cycle entirely. This skill structures the agent's behavior so it writes a failing test first, implements until it passes, then refactors -- in that order, every time. The author published the skill as a reusable artifact, not just a description of the approach. With 192 points and 81 comments on HN, the discussion focused on whether agents can actually hold the TDD discipline across a full multi-function feature rather than just isolated units -- the comments are worth reading alongside the post."
+          },
+          {
+            "title": "Formally verified polygon intersection -- Opus 4.8 oneshots, previous models failed",
+            "url": "https://github.com/schildep/verified-polygon-intersection",
+            "source": "Hacker News",
+            "author": "permute",
+            "body": "The author published formally verified polygon intersection code to GitHub with explicit provenance: Opus 4.8 produced a passing proof in one shot, where previous models -- including earlier Claude versions -- repeatedly failed to generate output the formal verifier would accept. Formally verified geometry is a meaningful bar because the prover requires machine-checkable correctness, not code that looks plausible or passes unit tests. The repo is the artifact. The more interesting data point is what this reveals about the capability gap between Opus 4.8 and the models that preceded it on tasks requiring proof-level precision rather than approximate correctness."
+          }
+        ]
+      }
+    ],
+    "closing": "Back Monday."
+  },
+  {
     "id": "2026-06-05",
     "date": "June 5, 2026",
     "title": "AI Pulse",
