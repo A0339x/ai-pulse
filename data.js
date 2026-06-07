@@ -3,6 +3,111 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-07",
+    "date": "June 7, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic ships Opus 4.8, ChatGPT learns to dream, and GitHub fills up with token-cutters",
+    "intro": "Today's shipping story is Anthropic's Opus 4.8 alongside two OpenAI capability drops -- ChatGPT's async Dreaming memory and new domain depth in GPT-Rosalind. Meanwhile, GitHub's trending AI repos this week converge on a single problem: token waste in agentic workflows. The pattern is not a coincidence -- as agent pipelines lengthen, teams are treating token efficiency as infrastructure, not an afterthought.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "New flagship from Anthropic, a ChatGPT memory overhaul, a life-sciences capability drop, and a multimodal safety model from NVIDIA.",
+        "items": [
+          {
+            "title": "Claude Opus 4.8",
+            "url": "https://www.anthropic.com/news/claude-opus-4-8",
+            "source": "Anthropic",
+            "body": "Anthropic ships Opus 4.8, the new top of the Claude 4 model family, available in the API now under the model ID claude-opus-4-8. The release targets the tasks where generation gaps are most visible -- agentic coding, multi-step reasoning, and sustained accuracy across long context. Claude Code's Fast mode runs Opus for faster output, and Opus 4.8 inherits those optimizations. A Show HN this week documents it one-shotting formally verified algorithmic code that prior model generations failed to produce correctly -- a narrow but concrete indicator of where the capability floor moved."
+          },
+          {
+            "title": "Dreaming: Better memory for a more helpful ChatGPT",
+            "url": "https://openai.com/index/chatgpt-memory-dreaming",
+            "source": "OpenAI",
+            "body": "ChatGPT's new Dreaming system replaces explicit memory management with background consolidation. Between sessions, the model processes past conversations to identify recurring preferences, projects, and patterns, then updates its memory store without user prompting. The previous system relied on explicit flags or relied on recent context. Dreaming runs asynchronously -- closer to how biological memory consolidates during sleep than a key-value store you write to manually. Sessions now start with contextual awareness the model built on its own, without requiring you to re-establish who you are and what you're working on."
+          },
+          {
+            "title": "Introducing new capabilities to GPT-Rosalind",
+            "url": "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind",
+            "source": "OpenAI",
+            "body": "GPT-Rosalind adds enhanced biological reasoning, medicinal chemistry expertise, genomics analysis, and experimental workflow capabilities to its existing life sciences foundation. The previous version handled general biology questions; this update targets domain-specific depth -- compound interaction prediction, sequencing data interpretation, and multi-step lab protocol design. The new capabilities move it into territory that previously required fine-tuned biomedical models built on domain-specific corpora like PubMed and clinical notes, without the overhead of maintaining a domain-specific fine-tune."
+          },
+          {
+            "title": "Nemotron 3.5 Content Safety: Customizable Multimodal Safety for Global Enterprise AI",
+            "url": "https://huggingface.co/blog/nvidia/nemotron-3-5-content-safety",
+            "source": "NVIDIA / Hugging Face",
+            "body": "NVIDIA's Nemotron 3.5 Content Safety model ships on Hugging Face as a multimodal safety classifier built for enterprise customization. It handles text and image inputs, flags content policy violations, and is designed to be tuned on organization-specific guidelines rather than relying on a single default policy. The customization angle is the new capability -- earlier content safety models required significant fine-tuning infrastructure to adapt to regional compliance requirements. Nemotron 3.5 treats that workflow as a first-class use case, targeting deployments where safety policies differ by geography or product line."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's trending repos share one goal: get more done with fewer tokens.",
+        "items": [
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "59.6k",
+            "lang": "Rust",
+            "body": "rtk is a CLI proxy that sits between your shell and any LLM, compressing common dev command outputs before they reach the model. It reduces token consumption 60-90% on typical workflows by stripping irrelevant file contents, summarizing diffs, and trimming verbose tool output to what the model actually needs. Ships as a single Rust binary with zero runtime dependencies. The target is long-tail token waste in agentic coding sessions: full file reads where only a function was needed, complete diff output where only changed lines matter. Proxies existing tooling transparently -- no config changes required."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "61.0k",
+            "lang": "Python",
+            "body": "Graphify turns any folder -- code, SQL schemas, R scripts, shell scripts, docs, papers, images, videos -- into a queryable knowledge graph. The graph captures cross-layer relationships: app code referencing database tables referencing infrastructure definitions, in a single traversable structure instead of separate files an agent reads one by one. Ships as a skill for Claude Code, Codex, Cursor, and Gemini CLI. The use case is large repos where understanding cross-component dependencies at query time is faster than burning context with sequential file reads. Built on GraphRAG under the hood."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "54.5k",
+            "lang": "Python",
+            "body": "MemPalace claims the top benchmark scores among open-source AI memory systems and is free to self-host. The system manages storage and retrieval of facts, preferences, and conversation history across sessions, surfacing relevant memories at query time via ChromaDB for vector storage. It exposes a standard MCP interface, making it a drop-in memory backend for any MCP-compatible agent. The benchmark comparisons in the repo cover retrieval accuracy, latency, and hallucination rate on injected facts -- a more complete evaluation suite than most open-source memory projects publish."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "69.7k",
+            "lang": "JavaScript",
+            "body": "Caveman is a single-file Claude Code skill that instructs the model to communicate in compressed shorthand -- \"me fix bug\" instead of \"I have identified and corrected the issue in the function.\" The claimed reduction is 65% fewer tokens on typical coding sessions. The compression targets the filler acknowledgments, verbose explanations, and pleasantry layer the model defaults to by design. It installs into Claude Code's skill system in seconds. Some users in the repo report the terse output mode also speeds up scanning model actions during agentic runs where you need to track what's happening across many steps."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Real build posts this week: a Figma replacement workflow, a formally verified proof, and an agent harness teardown.",
+        "items": [
+          {
+            "title": "I design with Claude more than Figma now",
+            "url": "https://blog.janestreet.com/i-design-with-claude-code-more-than-figma-now-index/",
+            "source": "Hacker News",
+            "author": "MrBuddyCasino",
+            "body": "A designer on Jane Street's engineering blog documents replacing Figma with Claude Code as their primary design tool. The workflow: describe the component or layout in natural language with specific constraints, let Claude generate HTML/CSS or component code, preview in the browser, iterate. The post covers where this breaks -- complex interaction states, design system token management, handoff to engineers who expect Figma files -- and where it wins: rapid low-fidelity prototyping, one-off data visualizations, and layout experiments faster to generate and discard than to sketch in Figma. The author's working heuristic: if the artifact is closer to shipping code than a design spec, Claude Code is the faster path."
+          },
+          {
+            "title": "Show HN: Formally verified polygon intersection -- Opus 4.8 oneshots, prev failed",
+            "url": "https://github.com/schildep/verified-polygon-intersection",
+            "source": "Hacker News",
+            "author": "permute",
+            "body": "A Show HN with a clean premise: the author needed a formally verified polygon intersection implementation -- working code with a mechanical correctness proof -- and documented what happened when they ran the task through several model generations. Previous models either failed the verifier or produced code requiring extensive manual repair. Opus 4.8 produced a passing implementation in a single shot. The repo contains the code, the proof obligations, and verifier output showing clean compilation. The implied workflow is short: write a precise spec, include the formal verification toolchain in context, prompt Opus 4.8 directly. A narrow but concrete data point on where the new model generation separates on correctness-critical generation."
+          },
+          {
+            "title": "Harness engineering: Leveraging Codex in an agent-first world",
+            "url": "https://openai.com/index/harness-engineering/",
+            "source": "Hacker News",
+            "author": "pramodbiligiri",
+            "body": "An OpenAI engineering post that documents the scaffolding layer around Codex in agentic pipelines. The post covers context budget management across multi-step tool calls, how Codex behaves differently inside an agent loop vs. single-shot completion, and where the harness needs to validate, retry, or redirect output to keep a task on track. The stack: Codex as the code generation layer, tool call sequencing in the orchestrator, and output validation at each step before passing results downstream. Drew 143 comments on HN from engineers comparing notes on the same scaffolding challenges in their own agent builds."
+          }
+        ]
+      }
+    ],
+    "closing": "The token bill is the new latency bill."
+  },
+  {
     "id": "2026-06-06",
     "date": "June 6, 2026",
     "title": "AI Pulse",
