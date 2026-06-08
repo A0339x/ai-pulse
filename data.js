@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-08",
+    "date": "June 8, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Opus 4.8 lands, ChatGPT gets a redesigned memory layer, and GitHub fills up with token-cost experiments",
+    "intro": "The biggest release today is Anthropic's Opus 4.8 -- the new flagship is available now and sits at the top of the Claude 4 family. OpenAI also shipped something real: a redesigned memory architecture for ChatGPT that synthesizes your history rather than retrieving stored snippets. On GitHub, token cost reduction is the dominant theme, with multiple high-starred repos attacking the problem from different angles.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new Anthropic flagship, a memory redesign at OpenAI, and two specialized model updates.",
+        "items": [
+          {
+            "title": "Claude Opus 4.8",
+            "url": "https://www.anthropic.com/news/claude-opus-4-8",
+            "source": "Anthropic",
+            "body": "Opus 4.8 is Anthropic's new flagship, available now via API and Claude.ai. It tops the Claude 4 family alongside Sonnet 4.6 and Haiku 4.5, and is designed for complex, multi-step tasks where output quality matters more than speed or cost. The model ID is claude-opus-4-8. Extended agentic runs, long-context synthesis, and sustained reasoning tasks are where it's built to perform -- the tasks where Sonnet starts to show its limits."
+          },
+          {
+            "title": "Dreaming: Better memory for a more helpful ChatGPT",
+            "url": "https://openai.com/index/chatgpt-memory-dreaming",
+            "source": "OpenAI",
+            "body": "ChatGPT's memory system got a significant redesign. The new system, called Dreaming, actively synthesizes what it learns about you across conversations rather than retrieving raw stored facts. OpenAI says it keeps preferences fresh and contextually relevant -- the difference between a system that remembers you prefer concise answers and one that knows when to break that rule. Rolling out now to ChatGPT users."
+          },
+          {
+            "title": "Introducing new capabilities to GPT-Rosalind",
+            "url": "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind",
+            "source": "OpenAI",
+            "body": "GPT-Rosalind, OpenAI's specialized life sciences model, added enhanced biological reasoning, medicinal chemistry expertise, genomics analysis, and experimental workflow support. The update extends its usefulness across the drug discovery pipeline -- target identification, compound analysis, and experiment design all get more capable handling. If you're building biotech tooling, Rosalind is the model tier to benchmark against. This isn't a general model with a life-sci system prompt; it's trained specifically for the domain."
+          },
+          {
+            "title": "The Open Source Community is backing OpenEnv for Agentic RL",
+            "url": "https://huggingface.co/blog/openenv-agentic-rl",
+            "source": "Hugging Face",
+            "body": "The open-source community is coalescing behind OpenEnv, a shared environment standard for training agents with reinforcement learning. The goal is a common sandbox where RL training experiments are reproducible and comparable across research groups, startups, and individual contributors. OpenEnv is pitched as the successor to OpenAI Gym, designed for the current generation of LLM-based agents rather than classic control tasks -- a shared substrate the field has been missing."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token cost and codebase navigation are the two ideas driving GitHub momentum this week.",
+        "items": [
+          {
+            "title": "affaan-m/ECC",
+            "url": "https://github.com/affaan-m/ECC",
+            "source": "github.com",
+            "stars": "210.5k",
+            "lang": "JavaScript",
+            "body": "ECC is an agent harness optimization layer that sits on top of Claude Code, Codex, Cursor, and other AI coding tools. It adds a structured system of skills (reusable workflows), instincts (contextual decision heuristics), memory that persists across sessions, and security scaffolding. The research-first framing means it's built for experimenting with agent configurations systematically rather than just tweaking prompts. At 210k stars it's clearly struck a nerve -- the pitch is that your coding agent should have a coherent personality and memory, not just a context window."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "63.0k",
+            "lang": "Python",
+            "body": "Graphify turns any folder -- code, SQL schemas, shell scripts, docs, papers, images, videos -- into a single queryable knowledge graph. The novel part is the breadth: heterogeneous inputs, one unified graph. App code plus database schema plus infrastructure docs all become nodes you can query together. Ships as a skill for Claude Code, Codex, Gemini CLI, and others. The retrieval layer it creates is meaningfully different from standard RAG on individual files."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "70.1k",
+            "lang": "JavaScript",
+            "body": "Caveman is a Claude Code skill that constrains the model to respond in stripped-down, minimal language -- subject, verb, object, no filler, no hedging. The mechanism is simple: smaller outputs mean fewer tokens. The reported result is 65% token reduction. It installs as a skill, so it composes with other Claude Code configurations. The tradeoff is real -- documentation generation takes a hit, code generation mostly doesn't."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "60.0k",
+            "lang": "Rust",
+            "body": "RTK is a CLI proxy that compresses common dev commands before they reach your LLM. Git diffs, file reads, error messages -- it claims 60-90% token reduction on these patterns without changing outputs. Single Rust binary, zero dependencies. The compression is context-aware, not blind truncation, which is what separates it from a simple curl wrapper with a token budget."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Today's sources ran long on discussion threads and short on documented end-to-end builds.",
+        "items": []
+      }
+    ],
+    "closing": "See you tomorrow."
+  },
+  {
     "id": "2026-06-07",
     "date": "June 7, 2026",
     "title": "AI Pulse",
