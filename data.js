@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-09",
+    "date": "June 9, 2026",
+    "title": "AI Pulse",
+    "subtitle": "New Claude flagship, ChatGPT learns to dream, and GitHub fills up with token-trimming tools",
+    "intro": "Two significant model updates today: Anthropic ships Opus 4.8, and GPT-Rosalind gets upgraded for life sciences work. The more architectural story is ChatGPT's new Dreaming memory system -- a different approach to persistence, not just a bigger window. On GitHub, the dominant theme this week is token cost reduction, attacked from every angle: a Rust proxy, a knowledge-graph indexer, and a deadpan caveman dialect.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "New models on two fronts and a rethought memory architecture in ChatGPT",
+        "items": [
+          {
+            "title": "Claude Opus 4.8",
+            "url": "https://www.anthropic.com/news/claude-opus-4-8",
+            "source": "Anthropic",
+            "body": "Anthropic's new flagship is Opus 4.8. The API model ID is `claude-opus-4-8`, sitting at the top of the current Claude stack above the 4.6 and 4.7 series. It's the model powering Claude Code's fast mode -- full Opus quality at higher output throughput, no fallback to a lighter model. The 4.6 and 4.7 variants remain live, but 4.8 is now the current production target for integrations that care about the latest reasoning quality."
+          },
+          {
+            "title": "Dreaming: Better memory for a more helpful ChatGPT",
+            "url": "https://openai.com/index/chatgpt-memory-dreaming",
+            "source": "OpenAI",
+            "body": "ChatGPT's memory gets a new architecture called Dreaming. Rather than treating memories as a flat log of stored facts, the system periodically synthesizes and consolidates what it knows about a user -- the name nods to how biological memory consolidates during sleep. The result is context that stays fresh and coherent across long usage histories instead of growing stale or contradictory. This is a meaningful architectural change: the model is now actively reasoning about its memory store, not just appending to it."
+          },
+          {
+            "title": "Introducing new capabilities to GPT-Rosalind",
+            "url": "https://openai.com/index/introducing-new-capabilities-to-gpt-rosalind",
+            "source": "OpenAI",
+            "body": "GPT-Rosalind, OpenAI's domain-specific life sciences model, picks up four new capability areas: enhanced biological reasoning, medicinal chemistry expertise, genomics analysis, and experimental workflow support. This isn't a general model playing scientist -- Rosalind is purpose-built for research pipelines, and these additions push it deeper into drug discovery and genomics work. Researchers who've been routing those queries to general models or specialized academic tools now have a more capable dedicated option."
+          },
+          {
+            "title": "Nemotron 3.5 Content Safety: Customizable Multimodal Safety for Global Enterprise AI",
+            "url": "https://huggingface.co/blog/nvidia/nemotron-3-5-content-safety",
+            "source": "Hugging Face / NVIDIA",
+            "body": "NVIDIA dropped Nemotron 3.5 Content Safety on Hugging Face -- a multimodal safety classifier designed for enterprise deployments. It handles both text and images, and the key word is customizable: it's built to be fine-tuned for specific content policies rather than enforcing a one-size-fits-all rubric. Most production safety layers in use today are text-only. A customizable multimodal classifier at this scale fills a real gap for any team deploying vision-enabled models at enterprise volume."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token costs are this week's obsession -- four repos attacking the problem from different angles",
+        "items": [
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "70.4k",
+            "lang": "JavaScript",
+            "body": "Caveman is a Claude Code skill with a stupid-smart premise: cut 65% of tokens by stripping language down to caveman-speak. The repo describes itself as 'why use many token when few token do trick.' It rewrites prompts and outputs into minimal-vocabulary English before they hit the context window. The insight is that a huge fraction of tokens in most dev conversations is connective tissue -- filler the model doesn't actually need to reason correctly. For high-volume agent workloads running continuous loops, 65% off the token bill is real savings."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "63.9k",
+            "lang": "Python",
+            "body": "Graphify turns any folder -- code files, SQL schemas, R scripts, shell scripts, docs, papers, images, videos -- into a queryable knowledge graph. Works as a skill for Claude Code, Codex, Cursor, Gemini CLI, and OpenCode. The difference from naive RAG: relationships between files are explicit nodes in the graph, so cross-file reasoning, dependency tracing, and schema-to-code linkage work better than chunk-and-retrieve. App code, database schema, and infrastructure land in a single graph you can query by both semantic content and structural relationship."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "60.4k",
+            "lang": "Rust",
+            "body": "rtk is a CLI proxy written in Rust that intercepts requests between your terminal and your LLM API. It strips redundancy from common dev commands before they reach the API, reporting 60-90% token reduction. Single binary, zero dependencies -- you swap the API endpoint in your config, nothing else changes. It doesn't wrap your workflow or add opinions; it's a transparent compressor. For teams running heavy CLI agent workloads where the same file headers and boilerplate ship with every request, the savings accumulate fast."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "55.2k",
+            "lang": "Python",
+            "body": "MemPalace is an open-source AI memory system built on ChromaDB and exposed as an MCP server. It claims the best benchmark scores among open-source memory solutions and is free. The pitch: memory is the missing layer for useful long-running agents, and this is the open-source answer. With MCP support, it slots directly into Claude Code and other MCP-compatible toolchains without custom plumbing. Persistent, structured memory across sessions -- not just a longer context window, but a queryable store the agent can read and write over time."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One agentic chain and one edge runtime -- both documented well enough to replicate this weekend",
+        "items": [
+          {
+            "title": "How an Agent Built a 3D Paris Gallery by Chaining Two Hugging Face Spaces",
+            "url": "https://huggingface.co/blog/mishig/spaces-agents-md",
+            "source": "Hugging Face",
+            "author": "mishig",
+            "body": "A Hugging Face engineer documents how an AI agent assembled a 3D interactive gallery by treating two HF Spaces as callable tools in sequence -- the output of Space A feeds directly into Space B, with the agent managing state between steps. No human intervention beyond the initial prompt. The post details the chaining setup, the Markdown-based skill interface the agent used to invoke each Space, and where the pipeline broke during development. The Spaces-as-tools pattern generalizes: any two Spaces with a compatible interface can be chained this way, making it a practical template for multi-modal builds that exceed what any single model can produce alone."
+          },
+          {
+            "title": "How Wasmer used Codex to build a Node.js runtime for the edge",
+            "url": "https://openai.com/index/wasmer",
+            "source": "OpenAI",
+            "author": "Wasmer",
+            "body": "Wasmer built a Node.js-compatible runtime for edge deployments using Codex backed by GPT-5.5 throughout development. They report 10-20x acceleration -- work that would have taken months shipped in weeks. The workflow: Codex ran the implementation loop (write, test, iterate) while engineers owned architecture decisions and integration points. The build is a useful case because WebAssembly compatibility requirements make it unusually complex, with large interdependent surface areas across files -- exactly the condition where holding a broad working context matters most. The post breaks down which parts Codex handled well and where human review was required."
+          }
+        ]
+      }
+    ],
+    "closing": "Opus 4.8 third-party benchmarks should start landing tomorrow -- worth watching."
+  },
+  {
     "id": "2026-06-08",
     "date": "June 8, 2026",
     "title": "AI Pulse",
