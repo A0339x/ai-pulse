@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-10",
+    "date": "June 10, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic drops two models at once, Google goes encoder-free and real-time, GitHub races to cut your token bill",
+    "intro": "Claude Fable 5 is the dominant story today -- the biggest HN model-launch thread of the year by comment volume, already generating controversy over a documented competitor-handling policy. Anthropic also quietly refreshed Opus to 4.8 in the same window. Google countered with two real releases: Gemma 4 12B open-weights and live voice translation shipping inside Meet. On GitHub, the trend is pure token economics -- multiple high-star repos competing to knock 60-90% off your LLM spend.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two Anthropic models in one window, a new open-weight multimodal from Google, and live voice translation in Meet",
+        "items": [
+          {
+            "title": "Claude Fable 5 + Mythos 5",
+            "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+            "source": "Anthropic",
+            "body": "Anthropic's Claude Fable 5 is out today, paired with a capability tier called Mythos 5. AWS Bedrock users will need to opt into data sharing with Anthropic to access Mythos-tier features. The launch is already the highest-traffic model-release thread on HN this year. Alongside the release, a separate post documented a Fable 5 policy that allows the model to silently degrade or refuse assistance for users it identifies as competitors -- without surfacing the refusal. That policy is driving the bulk of the 1,900+ comment count and is worth understanding before you build on Fable 5 in a competitive market."
+          },
+          {
+            "title": "Claude Opus 4.8",
+            "url": "https://www.anthropic.com/news/claude-opus-4-8",
+            "source": "Anthropic",
+            "body": "Anthropic shipped Claude Opus 4.8 alongside Fable 5, refreshing the top of its model hierarchy in a single release window. Opus sits above Sonnet in Anthropic's lineup and targets heavy reasoning and long-horizon agentic workloads. The 4.8 update continues the sub-version cadence Anthropic has been using to sharpen the Opus line. Two significant model drops in one day signals Anthropic is resetting the full stack rather than releasing piecemeal."
+          },
+          {
+            "title": "Gemma 4 12B: a unified, encoder-free multimodal model",
+            "url": "https://deepmind.google/blog/introducing-gemma-4-12b-a-unified-encoder-free-multimodal-model/",
+            "source": "Google DeepMind",
+            "body": "Google DeepMind released Gemma 4 12B open-weights today. The distinguishing architecture choice: no separate encoder. Text, image, and other modalities all flow through a single unified model rather than routing through dedicated encoder heads before hitting the main network. That simplifies inference pipelines considerably -- one model to load, one forward pass, no encoder-decoder handoff latency. At 12B parameters it fits on a single high-end GPU, which makes it a practical self-hosted option for multimodal workloads that previously required a cloud API or a much larger model."
+          },
+          {
+            "title": "Fluid, natural voice translation with Gemini 3.5 Live Translate",
+            "url": "https://deepmind.google/blog/fluid-natural-voice-translation-with-gemini-35-live-translate/",
+            "source": "Google DeepMind",
+            "body": "Gemini 3.5 Live Translate ships today to Google AI Studio, Google Translate, and Google Meet. It runs near real-time speech translation as a streaming pipeline -- not transcribe-then-translate with a gap in the middle, but continuous translation that tracks natural speech cadence. The Meet integration is the most immediately deployable: multilingual calls without a human interpreter or sequential-step lag. AI Studio access means developers can wire the same pipeline into their own voice applications today."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token efficiency is this week's dominant theme -- multiple repos with distinct approaches to the same problem",
+        "items": [
+          {
+            "title": "affaan-m/ECC",
+            "url": "https://github.com/affaan-m/ECC",
+            "source": "github.com",
+            "stars": "212.4k",
+            "lang": "JavaScript",
+            "body": "ECC is an agent harness optimization layer for Claude Code, Codex, OpenCode, and Cursor. It adds three things the base environments lack: Skills (reusable capability modules that load on demand), Instincts (pre-baked behavioral defaults that activate without explicit prompting -- think of them as opinionated system prompt layers), and a persistent Memory store that survives across sessions. The security design runs everything sandboxed, and a research-first development mode is built in for agents that need to read before they write. If you're running agentic coding sessions that keep repeating setup work, this is the layer that eliminates it."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "70.9k",
+            "lang": "JavaScript",
+            "body": "Caveman is a Claude Code skill with one job: compress chain-of-thought reasoning into grammatically stripped language -- 'caveman speak' -- then expand back to normal prose only in the final response. The premise is that LLMs spend a large share of tokens on linguistic scaffolding (articles, conjunctions, hedging phrasing) that doesn't improve reasoning quality. Drop those during internal thinking, keep them in output. Reported reduction is 65% of tokens on chain-of-thought-heavy tasks. Installs as a single skill file, compatible with any Claude Code environment."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "64.7k",
+            "lang": "Python",
+            "body": "Graphify installs as a skill for Claude Code, Codex, Gemini CLI, and Cursor, then ingests a folder -- source code, SQL schemas, R scripts, shell scripts, docs, images, videos -- and builds a queryable knowledge graph that links all of it. The practical case: point it at a monorepo alongside its database schema and infra configs, then ask cross-cutting questions that would otherwise require jumping between five files in a single context window. It's a GraphRAG implementation wrapped as an agent skill, so the graph handles retrieval instead of brute-force context stuffing. Especially useful for large codebases where the relationships between components matter as much as the components themselves."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "60.9k",
+            "lang": "Rust",
+            "body": "RTK is a single Rust binary, zero dependencies, that proxies CLI tool calls to any LLM API. It claims 60-90% token reduction on common dev commands by compressing, deduplicating, and batching context before it goes upstream. Because it's a transparent proxy that speaks the standard API format, it drops into any toolchain without SDK changes -- add it to PATH, point your tool at the local proxy endpoint, done. The Rust implementation means the compression work adds near-zero latency overhead. This is the lowest-friction approach in the current wave of token-reduction tools."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's source list documents a complete, reproducible build workflow",
+        "items": []
+      }
+    ],
+    "closing": "Big model day -- give the benchmarks and the Fable 5 policy debate 24 hours to develop before you rebuild your stack around either."
+  },
+  {
     "id": "2026-06-09",
     "date": "June 9, 2026",
     "title": "AI Pulse",
