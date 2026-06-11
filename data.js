@@ -3,6 +3,97 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-11",
+    "date": "June 11, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Fable 5 ships with guardrail controversy, DeepMind goes diffusion for 4x speed, and GitHub is full of token-cutting tools",
+    "intro": "Anthropic dropped Fable 5 and Mythos 5 today and the security research community is already loudly unhappy about the guardrails. Separately, DeepMind published DiffusionGemma -- a text model that swaps autoregressive generation for a diffusion approach and claims a 4x throughput gain, which is the most architecturally interesting release in months. On GitHub, the week's momentum is nearly all about spending less: token proxies, compression tricks, and open memory systems that make agents cheaper to run at scale.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two Anthropic flagships and two DeepMind releases headline today",
+        "items": [
+          {
+            "title": "Claude Fable 5 and Mythos 5",
+            "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+            "source": "Anthropic",
+            "body": "Anthropic shipped Fable 5 (claude-fable-5) and Mythos 5, the new top of the Claude lineup. Two things are already generating friction: cybersecurity researchers are publicly pushing back on the guardrails Fable ships with, and Anthropic is requiring 30-day data retention for all Mythos-class model usage -- a non-negotiable policy that applies across API tiers. For teams building on the API, the retention requirement is a material change from standard enterprise data handling and worth reviewing before you route sensitive workloads through these models."
+          },
+          {
+            "title": "DiffusionGemma: 4x faster text generation",
+            "url": "https://deepmind.google/blog/diffusiongemma-4x-faster-text-generation/",
+            "source": "DeepMind",
+            "body": "DeepMind released DiffusionGemma, a text model that generates output via diffusion rather than autoregressive next-token prediction. Instead of producing tokens left-to-right one at a time, diffusion models refine text iteratively from a noisy starting point, which parallelizes generation and cuts wall-clock time. The claimed result is 4x faster throughput. The practical question -- how it handles tasks that require strict sequential reasoning -- is still open, but the raw speed number is the most significant claim in text generation architecture in a while."
+          },
+          {
+            "title": "Gemma 4 12B: a unified, encoder-free multimodal model",
+            "url": "https://deepmind.google/blog/introducing-gemma-4-12b-a-unified-encoder-free-multimodal-model/",
+            "source": "DeepMind",
+            "body": "Gemma 4 12B is out as an open model with one notable architectural call: no separate vision encoder. Standard multimodal models bolt a vision tower onto a language backbone; Gemma 4 12B handles image inputs natively in a unified architecture. At 12B parameters it runs on modest hardware. Encoder-free multimodal design has been an active research direction -- this is the first Gemma release that ships it at this scale and makes it open, which means the community can start stress-testing the tradeoffs immediately."
+          },
+          {
+            "title": "Fluid, natural voice translation with Gemini 3.5 Live Translate",
+            "url": "https://deepmind.google/blog/fluid-natural-voice-translation-with-gemini-35-live-translate/",
+            "source": "DeepMind",
+            "body": "Gemini 3.5 Live Translate is live in Google AI Studio, Google Translate, and Google Meet. It does near real-time speech-to-speech translation -- you speak, it translates and synthesizes in the target language while preserving natural speech rhythm and flow rather than producing stilted machine output. The Google Meet integration is the one that changes real workflows: live multilingual meetings without scheduling a human interpreter or passing a transcript back and forth."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token reduction and agent memory dominate this week's GitHub momentum",
+        "items": [
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "61.3k",
+            "lang": "Rust",
+            "body": "rtk is a CLI proxy that sits between your terminal and your LLM and strips 60-90% of tokens from common dev commands before they hit the API. Single Rust binary, zero dependencies. You route existing CLI calls through it and pay less. The approach is aggressive pattern-matching and context trimming on outputs like git diff, test runners, and build logs, where most tokens are noise a model doesn't need. Useful for any setup where you're running Claude Code or Codex against a large repo across a full workday."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "65.4k",
+            "lang": "Python",
+            "body": "Graphify is a coding assistant skill for Claude Code, Codex, Gemini CLI, and Cursor that ingests a folder of code, SQL schemas, scripts, docs, images, or videos and builds a queryable knowledge graph. You get code plus database schema plus infrastructure represented as one graph you can query, rather than embedding chunks and hoping retrieval finds the right ones. The graphRAG approach addresses a real failure mode in large codebases: flat vector search loses the structural relationships between files, tables, and services that actually matter for understanding a system."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "55.4k",
+            "lang": "Python",
+            "body": "MemPalace is an open-source AI memory system that connects via MCP and claims the strongest benchmarks of any open option. It stores and retrieves agent memory across sessions using ChromaDB, and it's free to self-host. The claim they're leading with is benchmark performance -- not just persistence but retrieval accuracy. That distinction matters for agents that need to surface the right past context from thousands of stored memories rather than just the most recent ones."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "71.4k",
+            "lang": "JavaScript",
+            "body": "Caveman is a Claude Code skill that cuts 65% of output tokens by making the model respond in stripped-down, compressed language. Install it as a skill and Claude shifts to terse, caveman-style output that drops articles, filler phrases, and verbose explanations. The token savings are real: shorter outputs mean lower cost per interaction and faster response times in tight agentic loops. Most useful for CI pipelines, automated loops where you don't need human-readable prose, or anyone running high-volume coding sessions and paying attention to their bill."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "A live bank account was the attack surface -- and the attacker charged €0.01",
+        "items": [
+          {
+            "title": "A €0.01 bank transfer could compromise a banking AI agent",
+            "url": "https://blue41.com/blog/how-we-helped-bunq-secure-their-financial-ai-assistant/",
+            "source": "Hacker News",
+            "author": "tvissers",
+            "body": "Blue41 documented a prompt injection attack against Bunq's financial AI assistant where embedding instructions inside a bank transfer description -- for €0.01 -- was enough to hijack the agent's behavior mid-session. The post walks through the full attack chain: the agent reads transaction history as part of its context, the attacker controls the memo field of an inbound transfer, and the injected instructions execute with the same trust level as direct user commands. The post also covers what Bunq fixed. For anyone building agents that ingest external data -- transaction records, emails, CRM entries -- and take real-world actions on behalf of users, this is the clearest recent example of indirect prompt injection in production. The fix isn't filtering keywords; it's treating any externally sourced text as untrusted and isolating it from the instruction context."
+          }
+        ]
+      }
+    ],
+    "closing": "The attack surface expands every time you give an agent a new data source -- budget time to test it."
+  },
+  {
     "id": "2026-06-10",
     "date": "June 10, 2026",
     "title": "AI Pulse",
