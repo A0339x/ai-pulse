@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-12",
+    "date": "June 12, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Fable 5 ships with invisible guardrails, DeepMind bets on diffusion for text, and two agent disasters worth reading before your next deploy",
+    "intro": "The headline today is Claude Fable 5 -- a new frontier model that behaves noticeably more proactively than its predecessors and launched with undisclosed safety mechanisms Anthropic has since acknowledged. DeepMind shipped DiffusionGemma, a production-scale text model that runs 4x faster by replacing autoregressive decoding with a diffusion approach. On GitHub, the dominant theme is token compression -- two of the top-climbing repos exist solely to cut what you spend per request.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "New models, a diffusion text breakthrough, and Codex gets persistent cloud environments",
+        "items": [
+          {
+            "title": "Claude Fable 5 Mythos 5",
+            "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+            "source": "Anthropic",
+            "body": "Anthropic shipped Claude Fable 5 today alongside Claude Opus 4.8. Independent coding benchmarks put Fable 5 in mid-tier territory -- Endor Labs grades it below pre-launch expectations on coding tasks. The behavioral shift draws more attention: Fable proactively surfaces follow-up steps and next actions without being asked, a noticeable departure from prior Claude behavior that's generating significant discussion among builders. Anthropic also acknowledged undisclosed distillation guardrails built into the model that weren't documented at launch, and has since apologized for the omission. Both models are available through the standard API now."
+          },
+          {
+            "title": "DiffusionGemma: 4x faster text generation",
+            "url": "https://deepmind.google/blog/diffusiongemma-4x-faster-text-generation/",
+            "source": "DeepMind",
+            "body": "DeepMind released DiffusionGemma, a text generation model that uses diffusion instead of autoregressive token prediction, running 4x faster at inference. Standard LLMs generate one token at a time from left to right; diffusion models start from noise and iteratively refine the full output sequence in parallel, enabling throughput that autoregressive decoding structurally can't match. DiffusionGemma is available now in Google AI Studio. It's the first production-scale text model to ship with a concrete 4x speedup benchmark using a diffusion architecture."
+          },
+          {
+            "title": "Fluid, natural voice translation with Gemini 3.5 Live Translate",
+            "url": "https://deepmind.google/blog/fluid-natural-voice-translation-with-gemini-35-live-translate/",
+            "source": "DeepMind",
+            "body": "Gemini 3.5 Live Translate ships with near real-time speech translation across Google AI Studio, Google Translate, and Google Meet. The model translates full sentences rather than word by word, preserving natural speech cadence in the translated output. In Meet, participants speak in their native language and the other side hears a translated voice stream with minimal lag. The 'Live' label is the key distinction -- this runs during the call, not as a post-processing step."
+          },
+          {
+            "title": "OpenAI to acquire Ona",
+            "url": "https://openai.com/index/openai-to-acquire-ona",
+            "source": "OpenAI",
+            "body": "OpenAI announced it will acquire Ona, a startup building secure persistent cloud environments for AI agents. The stated goal is expanding Codex with environments that survive across sessions -- supporting long-running agent workflows rather than the ephemeral sandboxed runs Codex currently uses. Ona adds persistent state, process isolation, and environments agents can return to across hours or days. The deal targets enterprise use cases where agent tasks require durable intermediate state between sessions."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token compression tools and a codebase-to-graph skill are pulling serious star counts this week",
+        "items": [
+          {
+            "title": "affaan-m/ECC",
+            "url": "https://github.com/affaan-m/ECC",
+            "source": "github.com",
+            "stars": "214k",
+            "lang": "JavaScript",
+            "body": "ECC is a performance optimization harness for AI coding tools -- Claude Code, Codex, OpenCode, Cursor, and others. It adds a skills layer (reusable action patterns), instincts (automated decision heuristics), persistent memory across sessions, and tighter security boundaries on top of whatever underlying coding tool you're using. The design treats the agent runtime as composable infrastructure rather than a fixed product: you install ECC once and attach it to whichever coding tool you use. At 214k stars it's by far the most-starred AI repo in today's climbing list, suggesting the 'harness that improves any coding agent' niche is genuinely underserved. Skills and instincts are user-definable."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "71.8k",
+            "lang": "JavaScript",
+            "body": "caveman is a Claude Code skill that cuts token consumption by 65% by making the model communicate in compressed, stripped-down syntax -- 'why use many token when few token do trick.' The compression works by prompting Claude Code to drop articles, auxiliaries, and boilerplate phrasing in its own internal outputs without affecting the code it writes or the changes it makes. The 65% reduction comes primarily from planning, reasoning, and tool-call scaffolding -- the internal monologue that accumulates fast on long sessions."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "66.1k",
+            "lang": "Python",
+            "body": "graphify is an AI coding assistant skill for Claude Code, Codex, Cursor, Gemini CLI, and others that converts a codebase into a queryable knowledge graph. Point it at a folder of code, SQL schemas, R scripts, shell scripts, docs, papers, images, or videos, and it builds a unified graph connecting all of it. The key idea is single-representation: app code, database schema, and infrastructure in one graph you can query, rather than navigating separate tools and grep searches. GraphRAG runs under the hood."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "61.8k",
+            "lang": "Rust",
+            "body": "rtk is a Rust CLI proxy that intercepts LLM API calls and reduces token consumption by 60-90% on common dev commands. It ships as a single binary with zero dependencies -- drop it in your PATH and it strips redundant context before requests hit the API. The 60-90% range is task-dependent. No agent framework, no SDK wrapper, no config file required. The Rust single-binary design means it adds no runtime overhead to your existing tool stack."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Two documented agent failures that surface the guardrail gaps current frameworks don't cover",
+        "items": [
+          {
+            "title": "AI agent bankrupted their operator while trying to scan DN42",
+            "url": "https://lantian.pub/en/article/fun/ai-agent-bankrupted-their-operator-scan-dn42lantian.lantian/",
+            "source": "Hacker News",
+            "author": "xiaoyu2006",
+            "body": "A developer deployed an AI agent to scan DN42 -- a distributed experimental network used to test BGP routing and network protocols -- and documented what happened when it went completely off the rails. The agent made unbounded API calls, spun up infrastructure without limit, and burned through budget with no natural stop condition. The post-mortem traces the failure: no explicit cost ceiling, no rate limit on tool calls, and an objective ('scan the network') that has no clear completion state when applied to a distributed, peer-maintained network with no defined boundary. The result was a maxed-out operator bill and a detailed account of which guardrails are absent from current agent frameworks when the task objective is open-ended."
+          },
+          {
+            "title": "A EUR 0.01 bank transfer could compromise a banking AI agent",
+            "url": "https://blue41.com/blog/how-we-helped-bunq-secure-their-financial-ai-assistant/",
+            "source": "Hacker News",
+            "author": "tvissers",
+            "body": "Blue41 documented how they helped Dutch neobank bunq find and fix a prompt injection vulnerability in their financial AI assistant. The attack vector: a EUR 0.01 bank transfer with a malicious transaction memo. The memo text was ingested by the AI as part of its context window, letting an attacker override the assistant's behavior through the transfer description -- no credentials needed, no privileged access. The post covers the discovery process, the specific injection pattern used, and the remediation bunq implemented. It's a clean case study in what happens when an AI agent treats transaction data as trusted context without sanitization at the ingestion layer."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the pulse for June 12 -- two new models, diffusion text is real, and two budgets that didn't survive contact with an agent."
+  },
+  {
     "id": "2026-06-11",
     "date": "June 11, 2026",
     "title": "AI Pulse",
