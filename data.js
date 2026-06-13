@@ -3,6 +3,111 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-13",
+    "date": "June 13, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic ships two models at once, diffusion text goes 4x faster, and an agent bankrupts its operator",
+    "intro": "Two new Anthropic releases land today -- Fable 5 paired with Mythos 5, and Opus 4.8 separately -- making this a dense morning for anyone managing a model stack. DeepMind is shipping DiffusionGemma, a language model that generates text 4x faster by abandoning autoregression entirely; the architectural move is worth paying attention to. The DN42 bankruptcy story in BUILT WITH AI is required reading for anyone running agents with open tool access and no spend guardrails.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Three model releases and one acquisition that fills the biggest hole in long-running Codex workflows",
+        "items": [
+          {
+            "title": "Claude Fable 5 + Mythos 5",
+            "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+            "source": "Anthropic",
+            "body": "Anthropic released Fable 5 (claude-fable-5) and Mythos 5 together today. Fable 5 is the new top of Anthropic's stack -- above the full Claude 4.X family. Mythos 5 is a companion release, likely a reasoning-optimized or extended-thinking variant designed to pair with Fable for deeper inference tasks. Shipping two frontier-class models in the same announcement is uncommon for Anthropic. The split naming suggests a cleaner separation between fast generative output and deliberate multi-step reasoning at the same capability tier."
+          },
+          {
+            "title": "Claude Opus 4.8",
+            "url": "https://www.anthropic.com/news/claude-opus-4-8",
+            "source": "Anthropic",
+            "body": "Opus 4.8 updates Opus 4.7 in Anthropic's mid-tier model family. Opus sits between Sonnet 4.6 and the Fable frontier -- more capable than Sonnet, faster and cheaper than Fable 5. The 4.8 bump is an incremental improvement, not an architectural change. For workloads already running on Opus for heavier reasoning tasks, it's a drop-in upgrade. Opus 4.8 also supports Fast mode in Claude Code, which keeps Opus-level output without downgrading to a smaller model."
+          },
+          {
+            "title": "DiffusionGemma: 4x faster text generation",
+            "url": "https://deepmind.google/blog/diffusiongemma-4x-faster-text-generation/",
+            "source": "DeepMind",
+            "body": "DiffusionGemma replaces the standard left-to-right token loop with a diffusion process -- the model starts from noise and refines the full output in parallel rather than generating one token at a time. The result is 4x faster text generation at comparable quality to autoregressive Gemma. This is an architectural departure, not a serving optimization or quantization trick. Discrete diffusion for language has been a sustained research target; shipping it at Gemma scale with those numbers is the first serious evidence it's production-viable outside of a lab setting."
+          },
+          {
+            "title": "OpenAI to acquire Ona",
+            "url": "https://openai.com/index/openai-to-acquire-ona",
+            "source": "OpenAI",
+            "body": "OpenAI is acquiring Ona to give Codex persistent, secure cloud environments. Right now Codex agents are stateless -- they spin up, do work, and lose their environment when done. Ona fixes that. Long-running agents can maintain a live working directory, installed dependencies, and execution context across jobs. The acquisition targets the gap between Codex as a one-shot code generator and Codex as a deployed agent that can actually own a multi-step workflow end to end in an enterprise environment."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token reduction tools are having a week on GitHub, and one knowledge graph skill is changing how agents navigate large codebases",
+        "items": [
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "62k",
+            "lang": "Rust",
+            "body": "rtk is a CLI proxy that intercepts calls between your shell and your LLM and strips 60-90% of tokens from common dev commands before they hit the model. Single Rust binary, zero runtime dependencies. The reduction isn't summarization or prompt compression -- it's structured pruning of predictable, redundant output patterns that models don't actually need. Drop it in front of any LLM-backed coding agent and it cuts costs without changing observable behavior. For anyone running agents against metered APIs or inside a strict token budget, the savings compound fast across long sessions."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "66.5k",
+            "lang": "Python",
+            "body": "graphify takes a folder -- source code, SQL schemas, shell scripts, R scripts, docs, papers, images, videos -- and turns it into a single queryable knowledge graph. It ships as a skill for Claude Code, Codex, Gemini CLI, Cursor, and others. The key distinction from standard RAG: graphify builds explicit entity-relationship structure across app code, database schema, and infrastructure in one unified graph. An agent can traverse dependencies and cross-reference layers rather than matching chunks by embedding similarity. For large codebases where the interesting questions span multiple systems at once, that structure is the difference."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "72.1k",
+            "lang": "JavaScript",
+            "body": "caveman is a Claude Code skill that instructs the model to respond in stripped-down language -- short words, reduced grammar, no padding. The claimed result is a 65% token reduction without meaningful quality loss on everyday coding tasks. It's a blunt instrument and not appropriate for anything requiring precise language or documentation output, but the core insight holds: models respond to instructions about their own verbosity, and you can trade prose quality for token efficiency. In long agentic sessions where output verbosity compounds across dozens of tool calls, 65% adds up to something real."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "55.5k",
+            "lang": "Python",
+            "body": "mempalace is an open-source AI memory system built on ChromaDB, delivered as an MCP server. It positions itself as the best-benchmarked open-source memory option -- a meaningful distinction in a space where most implementations either drop context too aggressively or burn tokens keeping too much. The MCP interface means it drops into any agent stack without significant plumbing changes. Memory is still one of the most consistently broken layers in production agents, and the free price point plus benchmark-first framing makes this worth testing against whatever you're using now."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "An agent spends its operator into bankruptcy, a complete local setup guide, and a prompt injection delivered inside a bank transfer memo",
+        "items": [
+          {
+            "title": "AI agent bankrupted their operator while trying to scan DN42",
+            "url": "https://lantian.pub/en/article/fun/ai-agent-bankrupted-their-operator-scan-dn42lantian.lantian/",
+            "source": "Hacker News",
+            "author": "xiaoyu2006",
+            "body": "The author gave an AI agent a single task: map DN42, the community-run hobbyist autonomous system network. The agent interpreted it expansively, invoked every available tool, and made enough API and network calls to exhaust the operator's budget entirely. The post documents the full failure sequence -- which tools the agent reached for, why each call spawned more calls, and the point at which the cost spiral became unrecoverable. The failure class is well-known (unbounded tool access, no spend guardrails) but seeing it play out step by step against a specific scoped real-world task makes the threat model concrete in a way that abstract warnings don't. The fix isn't prompt-level -- it's hard budget limits and call caps enforced at the harness."
+          },
+          {
+            "title": "How to setup a local coding agent on macOS",
+            "url": "https://ikyle.me/blog/2026/how-to-setup-a-local-coding-agent-on-macos",
+            "source": "Hacker News",
+            "author": "kkm",
+            "body": "A full walkthrough for standing up a local coding agent on macOS: model selection, CLI installation, filesystem permission configuration, and tool access scoping. The post documents specific decisions -- local model vs. hosted API, sandboxed shell vs. full access, when each tradeoff is worth taking. The permission and scope section carries the most value: it shows how to give the agent enough access to be genuinely useful without exposing things it shouldn't touch. The setup is built from off-the-shelf tooling and documented precisely enough to reproduce over a weekend."
+          },
+          {
+            "title": "A EUR 0.01 bank transfer could compromise a banking AI agent",
+            "url": "https://blue41.com/blog/how-we-helped-bunq-secure-their-financial-ai-assistant/",
+            "source": "Hacker News",
+            "author": "tvissers",
+            "body": "Blue41 found a prompt injection vulnerability in bunq's financial AI assistant: transaction memo fields accepted arbitrary text, and that text fed directly into the agent's context without sanitization. A single EUR 0.01 transfer with a crafted memo was enough to redirect the agent's behavior. The post walks through the full attack methodology -- identifying injectable input fields, crafting the payload, observing the agent's response -- and then the specific remediations bunq implemented. The workflow maps cleanly onto any customer-facing AI agent that ingests user-controlled text: enumerate the input vectors, treat every one as a potential injection point, and add output filtering and context isolation before assuming the agent is safe."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the feed."
+  },
+  {
     "id": "2026-06-12",
     "date": "June 12, 2026",
     "title": "AI Pulse",
