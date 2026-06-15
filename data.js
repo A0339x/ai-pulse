@@ -3,6 +3,97 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-15",
+    "date": "June 15, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic drops Fable 5, DeepMind rewrites text generation with diffusion, and GitHub fills up with token-cutting tools",
+    "intro": "Anthropic's biggest model release in months lands today -- Fable 5 and Mythos 5 sit at the top of a new lineup that steps outside the Claude 4.x naming convention entirely. DeepMind's DiffusionGemma is the most architecturally interesting thing shipping this week: text generation via diffusion instead of autoregressive token-by-token, claiming 4x speed. On GitHub, the repos climbing fastest are almost all about doing more with less -- cutting tokens, building better knowledge graphs, and giving agents persistent memory.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "New frontier models from Anthropic, a new text-generation architecture from DeepMind, and OpenAI moves to give Codex persistent environments",
+        "items": [
+          {
+            "title": "Claude Fable 5 + Mythos 5",
+            "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+            "source": "Anthropic",
+            "body": "Two new models from Anthropic ship today. Fable 5 (`claude-fable-5`) is the new flagship -- the highest-capability model in Anthropic's lineup, sitting above the entire Claude 4.x family. Mythos 5 releases alongside it as part of the same new model line. This is the first Anthropic model family outside the Claude 4.x naming convention. Access is expanding through the Fable Mythos Access program, opening availability beyond the initial rollout. Fable 5 is positioned for the hardest tasks: extended reasoning, multi-step agentic pipelines, large codebases, complex multi-turn work."
+          },
+          {
+            "title": "DiffusionGemma: 4x faster text generation",
+            "url": "https://deepmind.google/blog/diffusiongemma-4x-faster-text-generation/",
+            "source": "DeepMind",
+            "body": "DiffusionGemma ships today and the architecture is the headline. Standard LLMs generate one token at a time -- autoregressive, left to right, each token conditioned on the previous. DiffusionGemma instead generates text by iteratively denoising a block of tokens in parallel, the same core approach diffusion models use for images and audio. DeepMind reports 4x faster generation compared to the autoregressive Gemma baseline. The model builds on the open Gemma family. Diffusion-based text generation has been an active research direction for years; this is DeepMind's first production push of the approach into the Gemma ecosystem."
+          },
+          {
+            "title": "Gemma 4 12B: a unified, encoder-free multimodal model",
+            "url": "https://deepmind.google/blog/introducing-gemma-4-12b-a-unified-encoder-free-multimodal-model/",
+            "source": "DeepMind",
+            "body": "Gemma 4 12B is open and available today, and the encoder-free design is the technical story. Most vision-language models pipe images through a separate encoder -- CLIP or SigLIP -- before the main language model sees them. Gemma 4 12B handles images and text in one unified architecture, no dedicated vision encoder. At 12B parameters it's a practical size for local inference and fine-tuning. Fewer architectural components means fewer integration seams and a simpler surface for fine-tuning on domain-specific visual data."
+          },
+          {
+            "title": "OpenAI to acquire Ona",
+            "url": "https://openai.com/index/openai-to-acquire-ona",
+            "source": "OpenAI",
+            "body": "OpenAI is acquiring Ona to give Codex what it currently lacks: persistent, secure cloud environments for long-running agents. Codex handles discrete coding tasks well, but agents that need to run over hours, spin up processes, maintain state, and resume work need more infrastructure than Codex provides today. Ona closes that gap. The acquisition is a direct move toward making Codex a real enterprise execution environment -- one where agents don't just write code but actually run and maintain workflows over time."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token efficiency, knowledge graphs, and agent memory dominate this week's trending repos",
+        "items": [
+          {
+            "title": "affaan-m/ECC",
+            "url": "https://github.com/affaan-m/ECC",
+            "source": "github.com",
+            "stars": "215.9k",
+            "lang": "JavaScript",
+            "body": "ECC is an agent harness optimization framework for Claude Code, Codex, Cursor, and similar tools -- the highest-starred repo in today's list by a wide margin. It layers a system of skills (installable, task-specific capabilities), instincts (behavioral rules that execute before actions), and persistent memory across sessions onto existing AI coding tools. The security layer stands out: instincts can intercept destructive operations before your agent executes them. Research-first mode holds off on writes until the agent has read all relevant context. It's the most comprehensive public framework for making AI coding tools behave more like configured co-workers and less like autocomplete with a shell."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "67.5k",
+            "lang": "Python",
+            "body": "graphify turns any folder -- code, SQL schemas, shell scripts, docs, papers, images, videos -- into a queryable knowledge graph. The approach is GraphRAG-style: instead of chunking files and doing cosine similarity search, it models relationships between entities (functions calling functions, tables referencing tables, docs explaining components) so an agent can traverse the graph to surface relevant context. The result is more precise retrieval in large codebases where the connections between components matter as much as the components themselves. Works as a plugin skill across Claude Code, Codex, Cursor, and Gemini CLI."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "62.5k",
+            "lang": "Rust",
+            "body": "rtk is a CLI proxy that sits between your AI coding agent and the model API, compressing and normalizing command output before it hits the context window. Reported gains are 60-90% token reduction on common dev commands -- git status, build logs, test output, directory trees. Most of that output is structured noise the model doesn't need in full. rtk strips it. Single Rust binary, zero dependencies, drop it in your PATH and it works with any agent that calls shell commands. The biggest wins come from commands that produce verbose, repetitive output."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "55.6k",
+            "lang": "Python",
+            "body": "MemPalace is an open-source AI memory system claiming the best benchmark numbers among open alternatives, and it's free. It handles what every agent builder eventually hits: persistent memory across sessions without rolling your own. Under the hood it uses ChromaDB for vector storage. The MCP interface means it plugs into any agent that supports MCP without custom integration work. The benchmark-first positioning -- actual numbers published, not just a feature list -- makes it easier to evaluate against alternatives like mem0 or custom implementations rather than taking claims on faith."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "80 browser games, one closing access window, and a well-documented sprint",
+        "items": [
+          {
+            "title": "Show HN: I built 80 mini-games using Fable before it was shut down",
+            "url": "https://minigames.world/en",
+            "source": "Hacker News",
+            "author": "legocoder",
+            "body": "legocoder used Fable -- Anthropic's model, accessed during an earlier availability window -- to generate and ship 80 browser-based mini-games, all live at minigames.world. The 'before it was shut down' framing describes a deliberate sprint: access was closing, so the goal was to ship as many complete games as possible before it did. The comment thread (76 replies) covers the generation workflow -- how game projects were scaffolded, which genres Fable handled cleanly in one pass, which needed multiple iterations, and what manual cleanup was required post-generation. Shipping 80 complete browser games in a single AI-assisted sprint is one of the more concrete output-at-volume builds documented in public this week."
+          }
+        ]
+      }
+    ],
+    "closing": "The frontier just moved again."
+  },
+  {
     "id": "2026-06-13",
     "date": "June 13, 2026",
     "title": "AI Pulse",
