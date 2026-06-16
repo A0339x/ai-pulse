@@ -3,6 +3,97 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-16",
+    "date": "June 16, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic ships three models, DeepMind diffuses text 4x faster, and GitHub's hottest repos all trim tokens",
+    "intro": "Big model day: Anthropic released Fable 5, Mythos 5, and Opus 4.8 in a single drop. DeepMind shipped DiffusionGemma, a text generator that ditches autoregressive decoding and claims 4x throughput. Every climbing GitHub repo this week shares the same thesis -- you're burning too many tokens, and there's a cheaper path.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Three new Claude models, a diffusion text-gen architecture, and Codex gaining durable cloud state",
+        "items": [
+          {
+            "title": "Claude Fable 5 and Mythos 5",
+            "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+            "source": "Anthropic",
+            "body": "Fable 5 and Mythos 5 are out today. Fable is Anthropic's frontier tier -- above Opus in capability, aimed at tasks where you need the highest ceiling available. Model ID is claude-fable-5. Mythos 5 is a variant in the same family, likely targeting extended-context or creative-heavy workloads. The companion Fable Mythos Access announcement suggests availability is gated rather than open to all API tiers on day one. If you're on Fable 4.x or benchmarking against OpenAI's frontier models, this is the version to test against first."
+          },
+          {
+            "title": "Claude Opus 4.8",
+            "url": "https://www.anthropic.com/news/claude-opus-4-8",
+            "source": "Anthropic",
+            "body": "Opus 4.8 ships today. Opus sits between Sonnet and Fable in Anthropic's stack -- stronger than Sonnet, cheaper than Fable. Point updates at this tier typically mean tighter instruction-following, reduced spurious refusals, or benchmark improvements on standard evals. Anthropic hasn't published specific delta numbers yet. Model ID to swap in: claude-opus-4-8. If you're running Opus-based agents in production on 4.7 or 4.6, this is a direct drop-in worth running your eval suite against before committing."
+          },
+          {
+            "title": "DiffusionGemma: 4x faster text generation",
+            "url": "https://deepmind.google/blog/diffusiongemma-4x-faster-text-generation/",
+            "source": "DeepMind",
+            "body": "DiffusionGemma replaces autoregressive decoding with a diffusion process. Standard LLMs generate one token at a time -- every position waits on the one before it. Diffusion models start from noise and refine all positions in parallel across multiple passes. DeepMind applied that to text generation and is reporting 4x throughput over the autoregressive Gemma baseline. Quality-at-speed tradeoffs aren't fully characterized in the announcement. But if generation quality holds near parity at 4x the speed, this is a real architecture shift -- especially for long outputs where sequential decoding is the main latency bottleneck."
+          },
+          {
+            "title": "OpenAI to acquire Ona",
+            "url": "https://openai.com/index/openai-to-acquire-ona",
+            "source": "OpenAI",
+            "body": "Acquiring Ona adds persistent, secure cloud environments to Codex. Currently Codex agents run tasks but don't carry state between invocations -- every session starts fresh. Ona plugs in durable infrastructure: persistent file systems, process state, and environment variables secured per-enterprise tenant. The result is Codex agents that can resume long-running workflows across sessions -- start a data migration, let it run overnight, pick it back up the next morning. Directly addresses the main complaint from enterprise Codex users trying to run multi-hour or multi-day agentic workflows."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token compression and heterogeneous code indexing are eating GitHub this week",
+        "items": [
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "73.4k",
+            "lang": "JavaScript",
+            "body": "A Claude Code skill that instructs the model to respond in stripped-down, grammatically minimal prose: 'fix bug. here change. now run test.' The logic is direct -- shorter output costs fewer tokens, and in agentic loops where responses feed a tool rather than a human, grammatical completeness is overhead with no return. The repo claims 65% token reduction in practice. At high loop volume, that number hits the monthly bill directly. The underlying pattern is simple enough to port to other coding agents without much effort, and the skill format means it's a one-line install on Claude Code."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "68.0k",
+            "lang": "Python",
+            "body": "Graphify takes a folder -- code, SQL schemas, shell scripts, docs, papers, images, videos -- and converts it into a queryable knowledge graph. Entities from different file types get linked: a Python function connects to the SQL table it queries, which connects to the doc that describes the schema. Works as a skill for Claude Code, Codex, Cursor, Gemini CLI, and OpenCode. The approach is GraphRAG applied to heterogeneous codebases, letting the coding agent trace cross-language dependency chains instead of treating each file in isolation. Most useful on large, mixed-format repos where single-file RAG misses the architecture."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "62.9k",
+            "lang": "Rust",
+            "body": "A CLI proxy that compresses 60-90% of token load from common dev command outputs before they hit the model. Build logs, test results, diffs -- verbose by default, expensive in context. RTK sits in the pipe and strips the redundancy. Ships as a single Rust binary with zero runtime dependencies: drop it in your PATH, point your tool at it. For CI-integrated agents that process full build logs on every run, output compression at this layer has a direct line to the monthly API spend. Single binary also means clean deployment in constrained or air-gapped environments."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "55.7k",
+            "lang": "Python",
+            "body": "The top-benchmarked open-source AI memory system, free. Connects via MCP, uses ChromaDB for vector storage, and handles the full memory lifecycle: store, retrieve, and forget. The benchmark claim is the differentiator -- most open-source memory systems are either untested or evaluated against synthetic retrieval tasks. MemPalace leads with real benchmark numbers, which makes it worth validating against your actual agent workloads. Drop-in for any stack that needs persistent memory across sessions: user preferences, prior task decisions, accumulated context. If the numbers hold on real data, it's the obvious pick over rolling your own."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One builder documented a self-hosted AI dev stack end-to-end and HN rewarded the specificity",
+        "items": [
+          {
+            "title": "My Homelab AI Dev Platform",
+            "url": "https://rsgm.dev/post/ai-dev-platform/",
+            "source": "Hacker News",
+            "author": "rsgm",
+            "body": "rsgm built and documented a homelab AI development platform from scratch on their personal blog. The setup covers local model hosting alongside cloud API routing for heavier inference tasks, with an orchestration layer connecting coding agents to the full stack. 347 points and 54 comments on HN for a personal blog post means the architecture decisions are concrete -- hardware baseline, model selection criteria, routing logic, what failed during the build. The thread itself is worth reading alongside the post; comments on this type of writeup tend to surface the edge cases and failure modes that didn't make the final draft. Aimed squarely at builders who want a self-contained AI dev environment with no SaaS dependency in the critical path."
+          }
+        ]
+      }
+    ],
+    "closing": "Models dropped, diffusion got fast, and the token bill just became negotiable."
+  },
+  {
     "id": "2026-06-15",
     "date": "June 15, 2026",
     "title": "AI Pulse",
