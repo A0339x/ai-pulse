@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-17",
+    "date": "June 17, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic drops two model tiers at once, DeepMind bets on diffusion for text, and GitHub is obsessed with cutting your token bill",
+    "intro": "Anthropic landed multiple model releases in quick succession: Fable 5 and Mythos 5 at the frontier, Opus 4.8 as the updated 4.X workhorse. At the same time, DeepMind shipped DiffusionGemma, which swaps autoregressive generation for parallel diffusion and claims a 4x speed gain. On GitHub, the repos climbing hardest this week all share the same theme -- making AI agent sessions cheaper and faster to run.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "New model tiers from Anthropic, a different generation architecture from DeepMind, and two OpenAI moves worth tracking",
+        "items": [
+          {
+            "title": "Claude Fable 5 / Mythos 5",
+            "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+            "source": "Anthropic",
+            "body": "Anthropic's new frontier model family ships as a pair: Fable 5 (claude-fable-5) and Mythos 5 arrive together. A separate announcement covers Opus 4.8 (claude-opus-4-8), the updated top of the 4.X line. The current lineup now has clear rungs -- Fable 5 at the frontier, Opus 4.8 as the high-capability workhorse, Sonnet 4.6 below that, Haiku 4.5 at the fast end. More tiers means more cost-capability tradeoffs to tune in production builds."
+          },
+          {
+            "title": "DiffusionGemma: 4x faster text generation",
+            "url": "https://deepmind.google/blog/diffusiongemma-4x-faster-text-generation/",
+            "source": "DeepMind",
+            "body": "DiffusionGemma applies a diffusion process to text generation instead of the standard autoregressive loop -- refining output across all positions in parallel rather than producing one token at a time. DeepMind reports 4x faster generation as a result. Diffusion text models have historically struggled with coherence at longer outputs, so quality benchmarks matter as much as the speed number here. This is the most architecturally distinct text generation approach to ship from a major lab in some time."
+          },
+          {
+            "title": "Deployment Simulation",
+            "url": "https://openai.com/index/deployment-simulation",
+            "source": "OpenAI",
+            "body": "OpenAI published Deployment Simulation, a pre-release evaluation method that predicts model behavior in production by running it against real conversation data before it ships. The core argument: synthetic evals miss failure modes that only surface in actual user traffic, so this pipeline borrows from real deployment history to surface those gaps earlier. It's framed as internal methodology, not a product, but it's a concrete change in how OpenAI closes the lab-to-prod gap in safety evaluation."
+          },
+          {
+            "title": "OpenAI to acquire Ona",
+            "url": "https://openai.com/index/openai-to-acquire-ona",
+            "source": "OpenAI",
+            "body": "OpenAI is acquiring Ona to add persistent, secure cloud environments to Codex. Right now Codex agents run in ephemeral sandboxes -- fine for short tasks, limiting for anything that needs state across a session. Ona's infrastructure gives Codex agents the ability to hold context, resume interrupted runs, and operate across enterprise workflows without rebuilding state from scratch every time. Long-running agentic coding tasks are the clear target."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token efficiency and agent scaffolding are owning GitHub this week",
+        "items": [
+          {
+            "title": "affaan-m/ECC",
+            "url": "https://github.com/affaan-m/ECC",
+            "source": "github.com",
+            "stars": "217.1k",
+            "lang": "JavaScript",
+            "body": "ECC is a performance optimization harness for AI coding agents -- Claude Code, Codex, Cursor, and others. It adds a structured layer over raw agent sessions: skills (reusable sub-routines the agent can call), instincts (default behavioral heuristics), persistent memory across runs, and security guardrails. The idea is that a bare LLM coding agent is raw potential with no consistent behavior; ECC gives it scaffolding to act predictably and efficiently without manual prompting every session. Leading star count this week by a wide margin."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "73.9k",
+            "lang": "JavaScript",
+            "body": "Caveman is a Claude Code skill that instructs the model to communicate in stripped-down, simplified language -- the tagline is \"why use many token when few token do trick.\" The result is a reported 65% reduction in token usage. This sounds like a joke, and it is, but it also works: LLM output verbosity is a cost driver, not a quality driver, and steering the model toward dense, short output cuts bills without meaningfully degrading results. Install as a skill and it applies to every session."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "68.5k",
+            "lang": "Python",
+            "body": "Graphify takes a folder of code, SQL schemas, shell scripts, docs, papers, images, or videos and turns it into a queryable knowledge graph. It runs as a skill across Claude Code, Codex, Cursor, and Gemini CLI. The approach is GraphRAG -- building a graph of entities and relationships across your entire stack rather than embedding chunks for similarity search. That makes cross-layer queries tractable: which tables does this endpoint touch, what infra does this service depend on, where is this schema referenced."
+          },
+          {
+            "title": "chopratejas/headroom",
+            "url": "https://github.com/chopratejas/headroom",
+            "source": "github.com",
+            "stars": "30.8k",
+            "lang": "Python",
+            "body": "Headroom compresses tool outputs, log dumps, files, and RAG chunks before they reach the LLM context window -- 60-95% fewer tokens on the same information. It ships as three things: a Python library, a proxy you drop in front of any LLM endpoint, and an MCP server. The compression is targeted summarization tuned to preserve what the model needs, not just truncation. Most useful in agentic workflows where tool call responses are verbose by default and blow up context fast."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's feed documented a real end-to-end workflow -- the bar is a build someone else can attempt this weekend",
+        "items": []
+      }
+    ],
+    "closing": "Strong shipping day -- lots of rungs to climb."
+  },
+  {
     "id": "2026-06-16",
     "date": "June 16, 2026",
     "title": "AI Pulse",
