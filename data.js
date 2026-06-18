@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-18",
+    "date": "June 18, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic ships two creative models, GPT-5.4 runs a chemistry lab, and GitHub is obsessed with cutting tokens",
+    "intro": "Anthropic launched Fable 5 and Mythos 5 today -- two new models carved out for narrative and creative work, separate from the reasoning-first Opus and Sonnet lines. On GitHub, the week's top climbers almost all solve the same problem: stop sending unnecessary tokens to the LLM, whether through knowledge graphs, compressed output, or caveman grammar. Also worth watching: OpenAI's GPT-5.4 chemistry demo, where a near-autonomous agent improved a real drug synthesis step with a human barely in the loop.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two new Anthropic models, a near-autonomous lab assistant, and Google's medical AI landing in Nature.",
+        "items": [
+          {
+            "title": "Claude Fable 5 + Mythos 5",
+            "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+            "source": "Anthropic",
+            "body": "Anthropic launched Fable 5 (model ID: claude-fable-5) and Mythos 5 today -- two new models that sit outside the core Opus/Sonnet/Haiku reasoning stack. Fable is the creative-first line, tuned for fiction, roleplay, dialogue, and narrative tasks where reasoning-optimized models are wrong-shaped for the job. Mythos 5 ships alongside it as a companion for extended narrative and world-building work. Both are available via the API and the Anthropic console. Builders working on interactive fiction, character-driven apps, or creative writing tools now have a dedicated model family built specifically for those workloads."
+          },
+          {
+            "title": "A near-autonomous AI chemist improves a challenging reaction in medicinal chemistry",
+            "url": "https://openai.com/index/ai-chemist-improves-reaction",
+            "source": "OpenAI",
+            "body": "OpenAI and Molecule.one deployed a near-autonomous agent on GPT-5.4 and ran it against a real drug synthesis challenge. Operating with minimal human input, the system found a better reaction pathway for a difficult step in medicinal chemistry -- a concrete, verified improvement to an active synthesis pipeline, not a literature summary or a hypothesis. The key word is \"near-autonomous\": a human was still in the loop, but barely. For builders in bio or chem, this is the clearest signal yet that LLM agents can now contribute real experimental results. The gap between assistant and researcher is narrowing in wet lab domains."
+          },
+          {
+            "title": "Securing the future of AI agents",
+            "url": "https://deepmind.google/blog/securing-the-future-of-ai-agents/",
+            "source": "DeepMind",
+            "body": "DeepMind published their AI Control Roadmap -- a framework for securing systems where agents operate with real authority over internal infrastructure. It pairs traditional access controls (least privilege, audit logs) with real-time behavioral monitoring that flags agents acting outside expected patterns. This is aimed at production deployments, not research sandboxes: agents running tools, calling APIs, and executing code autonomously in live environments. It's the first detailed public framework from a major lab on how to detect and contain an agent going off-script without just killing the whole system."
+          },
+          {
+            "title": "AMIE for disease management published in Nature",
+            "url": "https://blog.google/innovation-and-ai/models-and-research/google-research/amie-for-disease-management-in-nature/",
+            "source": "Google AI",
+            "body": "Google's AMIE (Articulate Medical Intelligence Explorer) landed a disease management study in Nature. The paper shows AMIE matching primary care physicians in managing complex chronic conditions -- not triage or symptom lookup, but the full clinical reasoning loop across multiple conditions simultaneously. Nature peer review is a significantly higher bar than most AI health benchmarks, which tend to be self-published. For builders in health AI, this is the clearest external validation yet that a conversational AI system can carry the weight of real disease management, not just assist it from the edges."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token efficiency is the week's dominant GitHub theme, with knowledge graphs and memory infrastructure right behind it.",
+        "items": [
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "74.4k",
+            "lang": "JavaScript",
+            "body": "A Claude Code skill that forces the model to respond in stripped-down, simplified prose -- \"caveman speak\" -- during reasoning and scaffolding phases of a coding task. The repo claims 65% token reduction, and the mechanism is plausible: most of the token cost in agentic responses is grammatical filler the agent doesn't need in order to think. The skill switches to normal language only for outputs the human actually reads. Works with Codex and OpenCode too. The joke is the delivery; the actual technique -- constraining output verbosity during internal reasoning -- is a real prompt engineering lever that most builders haven't pulled hard enough."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "68.9k",
+            "lang": "Python",
+            "body": "Turns any folder -- code, SQL schemas, R scripts, shell scripts, docs, papers, images, videos -- into a queryable knowledge graph in one step. The resulting graph connects app code, database schema, and infrastructure into a single traversable structure, then serves it back to any AI coding assistant as a skill. The core idea: instead of dumping raw context at an LLM and hoping it infers relationships, precompute the graph and query what you need. Directly useful for large multi-technology repos where context windows fill up with noise before the actual structural relationships become visible."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "55.9k",
+            "lang": "Python",
+            "body": "Open-source AI memory system built on ChromaDB with an MCP server interface, so any agent or LLM can read and write to it directly. Claims the best benchmark scores of any open-source memory system and ships free. Memory in agentic systems is still largely ad-hoc -- most builders stitch together vector stores, session logs, and manual summaries by hand. MemPalace is trying to be the default layer: persistent, queryable, benchmark-verified. The MCP wrapper means it drops into Claude Code, Cline, or any MCP-compatible harness without custom plumbing."
+          },
+          {
+            "title": "Panniantong/Agent-Reach",
+            "url": "https://github.com/Panniantong/Agent-Reach",
+            "source": "github.com",
+            "stars": "34.1k",
+            "lang": "Python",
+            "body": "CLI tool that gives any AI agent read and search access to Twitter/X, Reddit, YouTube, GitHub, Bilibili, and XiaoHongShu -- without API keys for any of them. Zero API fees, single command. Official social APIs are rate-limited, expensive, or outright broken for most use cases; Agent-Reach handles the access layer itself and exposes it as a Claude Code skill. The practical payoff: research agents, trend monitors, and social listening tools that currently require costly API contracts can operate across all major platforms from one CLI call."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing cleared the end-to-end documentation bar today.",
+        "items": []
+      }
+    ],
+    "closing": "More models, fewer tokens -- the direction is clear."
+  },
+  {
     "id": "2026-06-17",
     "date": "June 17, 2026",
     "title": "AI Pulse",
