@@ -3,6 +3,83 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-19",
+    "date": "June 19, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic ships Fable 5 and Opus 4.8, OpenAI's health model gets physician evals, and GitHub bets on token efficiency",
+    "intro": "Anthropic is pushing two model releases today -- Fable 5 paired with Mythos 5 in one post, Opus 4.8 separately -- which is a lot of model news to absorb in one morning. Pay closest attention to the health intelligence update from OpenAI: physician-informed evaluation is a methodological shift, not just another capability bump. On GitHub, watch the token efficiency category -- multiple well-starred repos are attacking the same problem from different angles, and the Rust-binary approach from rtk-ai is the one making an interesting architectural bet.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Anthropic dominates the news cycle with back-to-back model releases while OpenAI raises the bar on health AI evaluation.",
+        "items": [
+          {
+            "title": "Claude Fable 5 + Mythos 5",
+            "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+            "source": "Anthropic",
+            "body": "Anthropic released Fable 5 and Mythos 5 together in one announcement. Fable 5 is Anthropic's current frontier model, available now via API as claude-fable-5. Mythos 5 is the paired release -- Anthropic is treating it as a joint launch, and a separate post covers Mythos access specifically, pointing to a tiered or gated access program for the higher-capability variant. The two models land on the same day as Opus 4.8, making this an unusually dense release cycle for the Claude lineup."
+          },
+          {
+            "title": "Claude Opus 4.8",
+            "url": "https://www.anthropic.com/news/claude-opus-4-8",
+            "source": "Anthropic",
+            "body": "Opus 4.8 is an updated build of Anthropic's Opus 4 line, available now via API as claude-opus-4-8. It slots into the Claude 4 family alongside Sonnet 4.6 and Haiku 4.5, covering sustained-reasoning workloads where depth matters more than speed. The update ships on the same day as Fable 5 and Mythos 5 -- which means Anthropic is pushing three separate Claude model announcements in a single news cycle. That's a pace that suggests the 4.X family is not done expanding."
+          },
+          {
+            "title": "Improving health intelligence in ChatGPT",
+            "url": "https://openai.com/index/improving-health-intelligence-in-chatgpt",
+            "source": "OpenAI",
+            "body": "GPT-5.5 Instant now powers ChatGPT's health and wellness responses, with physician-informed evaluations baked into how the model's answers were assessed during development. The update targets stronger reasoning on health topics, better context use, and clearer communication -- OpenAI specifically flags that how answers are framed for non-medical users was in scope, not just factual accuracy. Health AI has historically gotten generic capability improvements; using physicians in the eval loop is a methodologically meaningful shift, and OpenAI being explicit about the process change is notable on its own."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token efficiency is dominating GitHub this week, but the most interesting repos split into two camps: compression tools and structured knowledge.",
+        "items": [
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "69.4k",
+            "lang": "Python",
+            "body": "Graphify turns any folder into a queryable knowledge graph -- code, SQL schemas, R scripts, shell scripts, docs, papers, images, and video all included. App code, database schema, and infrastructure land in one unified graph you can query across. It works as a skill for Claude Code, Codex, OpenCode, Cursor, and Gemini CLI. The core idea is that most codebases have multiple artifact types living in separate silos -- Graphify collapses them into one queryable structure. Particularly useful for large mono repos, data engineering projects, or any setup where the schema and the code need to be understood together."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "63.9k",
+            "lang": "Rust",
+            "body": "RTK is a CLI proxy that intercepts common dev commands and compresses them before they hit the LLM, reporting 60-90% token reduction on typical workflows. The implementation detail that matters: it's a single Rust binary with zero dependencies. No Python environment, no npm, no runtime to manage. It proxies transparently, so existing tooling keeps working. For teams running Claude Code or Codex on agentic loops with high tool-call volume, the token savings compound quickly -- both on cost and on context window pressure."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "56.0k",
+            "lang": "Python",
+            "body": "MemPalace is an open-source AI memory system that leads with benchmarks -- it claims the best recall performance among open-source memory options and costs nothing. ChromaDB handles the storage layer; the system ships as an MCP server, so it drops into any MCP-compatible agent setup without custom integration work. Memory is the persistent unsolved problem for agents that need to track state across sessions. Having a benchmarked, free, MCP-native option matters for anyone building agent infrastructure who doesn't want to lock into a commercial memory layer."
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "67.7k",
+            "lang": "TypeScript",
+            "body": "Open Design is a local-first, open-source alternative to Claude Design -- a native desktop app with 259+ skills and 142+ design systems built in. It outputs prototypes for web, desktop, and mobile, plus slides, images, video, and HyperFrames. The model backend is pluggable: Claude Code, Codex, Cursor, OpenCode, Qwen, Copilot, and 17+ other CLIs all work with a bring-your-own-key setup. Export options cover HTML, PDF, PPTX, and MP4. The local-first architecture makes it viable for teams that can't route design assets through a hosted service."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's sources documented a real end-to-end build workflow.",
+        "items": []
+      }
+    ],
+    "closing": "Back tomorrow with whatever ships overnight."
+  },
+  {
     "id": "2026-06-18",
     "date": "June 18, 2026",
     "title": "AI Pulse",
