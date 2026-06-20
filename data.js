@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-20",
+    "date": "June 20, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic ships two new models, Hermes expands its reach, and GitHub is obsessed with token compression",
+    "intro": "Anthropic dropped Fable 5 and Opus 4.8 in the same news cycle -- two new models, different tiers. On GitHub, a cluster of repos are all attacking the same bottleneck from different angles: context bloat. The compression theme is worth following; the approaches are meaningfully different from each other.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two new Anthropic models and a 1,475-commit Hermes release headline the week",
+        "items": [
+          {
+            "title": "Claude Fable 5 and Mythos 5",
+            "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+            "source": "Anthropic",
+            "body": "Anthropic released Fable 5 and Mythos 5 in a joint announcement. Fable 5 (claude-fable-5) is the new flagship -- positioned above the Claude 4 family and currently the top of Anthropic's model lineup. Mythos 5 ships alongside it as a distinct model, with access details covered under a separate Fable Mythos Access program announced simultaneously, suggesting phased or tiered availability. A companion announcement covers the Claude Corps program. Two new models plus an access layer in one day is a significant release cadence from Anthropic."
+          },
+          {
+            "title": "Claude Opus 4.8",
+            "url": "https://www.anthropic.com/news/claude-opus-4-8",
+            "source": "Anthropic",
+            "body": "Opus 4.8 (claude-opus-4-8) is the latest increment to Anthropic's high-capability Opus tier. Opus 4 sits above Sonnet 4.6 in reasoning depth and is the default choice for long-context agentic workflows where latency tolerance is higher than cost sensitivity. The 4.8 update represents a capability step within that tier -- separate from the Fable 5 launch and targeted at the API workloads already running on Opus 4."
+          },
+          {
+            "title": "Hermes Agent v0.17.0 -- The Reach Release",
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.6.19",
+            "source": "NousResearch",
+            "body": "Hermes Agent v0.17.0 ships 1,475 commits and 235k net new lines across 1,693 changed files since v0.16.0. The release theme is reach: two new conversation channels (iMessage is one), deeper hooks into tools already in your workflow, and new multi-user / team management features for running Hermes across an org. v0.16.0 brought Hermes to the desktop. v0.17.0 is about how many surfaces it can operate across from there. 245 community contributors closed out 300+ issues in this cycle."
+          },
+          {
+            "title": "GPT-5.5 Instant now handles health queries in ChatGPT",
+            "url": "https://openai.com/index/improving-health-intelligence-in-chatgpt",
+            "source": "OpenAI",
+            "body": "OpenAI swapped GPT-5.5 Instant into ChatGPT's health and wellness response path. The model was specifically evaluated with physicians -- a structured review process that shaped its calibration on complex multi-condition questions. The improvements are stronger reasoning across longer health conversations, clearer communication without excessive hedging, and better context retention when a conversation spans multiple related conditions. GPT-5.5 Instant is a new model variant optimized for low latency without sacrificing accuracy on high-stakes queries."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token compression is this week's theme -- four repos solving the same cost problem from different layers",
+        "items": [
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "69.7k",
+            "lang": "Python",
+            "body": "Graphify turns any folder of code, SQL schemas, scripts, docs, papers, images, or videos into a queryable knowledge graph. It ships as a skill for Claude Code, Codex, OpenCode, Cursor, and Gemini CLI. The architecture is the interesting part: instead of shoving files into context at query time, you preprocess the entire repo into a graph where app code, database schema, and infrastructure all live as connected nodes. That's a structurally different approach from RAG -- better at capturing cross-file relationships and dependency chains rather than semantic similarity of isolated chunks."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "56.0k",
+            "lang": "Python",
+            "body": "MemPalace is an open-source agent memory system backed by ChromaDB, shipping as an MCP server. It claims the best benchmark numbers among open-source memory implementations. Most agent memory options are either proprietary, poorly benchmarked, or both -- MemPalace is positioning as the default open alternative with public benchmark data attached. The MCP server interface means it drops into any agent stack that speaks MCP without custom integration work."
+          },
+          {
+            "title": "chopratejas/headroom",
+            "url": "https://github.com/chopratejas/headroom",
+            "source": "github.com",
+            "stars": "40.4k",
+            "lang": "Python",
+            "body": "Headroom compresses tool outputs, logs, files, and RAG chunks before they hit the LLM -- targeting 60-95% token reduction with equivalent answer quality. It ships three ways: Python library, proxy, and MCP server. The proxy mode is the useful one for existing pipelines -- drop it in front of any agent without rewriting the agent. The underlying claim is that most of the tokens in a tool response are redundant relative to the actual question being answered, and a cheap compression pass upstream is cheaper than paying for those input tokens downstream."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "75.0k",
+            "lang": "JavaScript",
+            "body": "Caveman is a Claude Code skill that cuts 65% of tokens by having the AI communicate in stripped-down caveman English -- \"why use many token when few token do trick.\" The compression is real: most of the volume in LLM output is connective prose around the actual content, and removing it at the output layer costs almost nothing. It's a blunter approach than what headroom or rtk do at the infrastructure layer, and it requires zero setup beyond installing the skill. Works best on non-customer-facing tasks where output polish is not the point."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing cleared the bar today",
+        "items": []
+      }
+    ],
+    "closing": "Back tomorrow."
+  },
+  {
     "id": "2026-06-19",
     "date": "June 19, 2026",
     "title": "AI Pulse",
