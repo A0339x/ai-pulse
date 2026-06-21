@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-21",
+    "date": "June 21, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic ships Fable 5 and Opus 4.8, GitHub floods with token compression tooling",
+    "intro": "Anthropic dropped two model releases today -- Fable 5 and its Mythos 5 companion, plus an Opus update to 4.8. The GitHub picture this week is almost entirely agent infrastructure: token compression, context management, and harness tooling. Nothing in BUILT WITH AI cleared the bar today.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Anthropic leads with two new releases; OpenAI ships a domain-specialized model upgrade for health",
+        "items": [
+          {
+            "title": "Claude Fable 5 and Mythos 5",
+            "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+            "source": "Anthropic",
+            "body": "Anthropic released Claude Fable 5 and Mythos 5 together today -- a paired release at the top of their lineup. Fable 5 is the new flagship, available now in the API as claude-fable-5. Mythos 5 is the companion model, optimized for a different task profile, likely trading throughput for depth on longer, more complex reasoning chains. Shipping both simultaneously gives developers a structured tradeoff at the premium tier rather than a single model trying to be everything. Both are live in the API."
+          },
+          {
+            "title": "Claude Opus 4.8",
+            "url": "https://www.anthropic.com/news/claude-opus-4-8",
+            "source": "Anthropic",
+            "body": "Opus gets a capability increment today. Claude Opus 4.8 lands in the API under the claude-opus-4-8 model ID, sitting below the new Fable 5 tier but above Sonnet -- the middle-tier workhorse for tasks that need more reasoning depth than Sonnet without paying for flagship pricing. Anthropic's Opus releases have historically been quiet but substantive: better instruction-following on long-context tasks, tighter behavior on complex agentic loops. Drop-in replacement for earlier Opus versions."
+          },
+          {
+            "title": "Improving health intelligence in ChatGPT",
+            "url": "https://openai.com/index/improving-health-intelligence-in-chatgpt",
+            "source": "OpenAI",
+            "body": "GPT-5.5 Instant is now the model behind ChatGPT's health and wellness responses. OpenAI built physician-informed evaluations specifically for health queries, used them to validate the upgrade, and shipped the result as the new default -- no toggle, no opt-in. The improvements target three things: stronger clinical reasoning, better handling of context across a conversation, and clearer communication of uncertainty. If you or your product relies on ChatGPT for health Q&A, the floor just moved."
+          },
+          {
+            "title": "A near-autonomous AI chemist improves a challenging reaction in medicinal chemistry",
+            "url": "https://openai.com/index/ai-chemist-improves-reaction",
+            "source": "OpenAI",
+            "body": "OpenAI and Molecule.one ran a GPT-5.4-based agent through a genuine drug synthesis problem -- a reaction medicinal chemists consider hard to optimize -- and it landed on an improved version. The loop is hypothesis generation, lab feedback, model iteration, repeat. It's research-grade rather than a product, but the system operated with enough autonomy that calling it a 'chemist' isn't a stretch. The meaningful update here isn't the model; it's the closed-loop setup between model reasoning and wet-lab validation that's starting to generalize."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token compression and agent harness tooling dominate this week's trending repos",
+        "items": [
+          {
+            "title": "affaan-m/ECC",
+            "url": "https://github.com/affaan-m/ECC",
+            "source": "github.com",
+            "stars": "219k",
+            "lang": "JavaScript",
+            "body": "ECC is a performance optimization layer for agentic coding tools -- Claude Code, Codex, Cursor, and others. It adds four things the base tools lack: Skills (reusable agentic behaviors you can install and share), Instincts (always-on heuristics that fire before the model responds), structured Memory that persists across sessions, and security primitives for research-sensitive workflows. The bet is that raw model capability isn't the bottleneck in agentic coding -- the harness around it is. ECC tries to be the runtime optimization none of those tools ship with by default."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "70.1k",
+            "lang": "Python",
+            "body": "Graphify turns a folder -- code, SQL schemas, shell scripts, docs, images, videos -- into a queryable knowledge graph. Point it at a repo and it maps entities and relationships across every file type: app code, database schema, and infrastructure in one unified graph. The problem it's solving is real: RAG over flat files misses cross-file relationships; a graph preserves them. Useful for any agentic workflow where the model needs to reason about how parts of a codebase connect, not just find individual files. Ships as a Claude Code skill; also supports Codex, Cursor, and Gemini CLI."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "64.4k",
+            "lang": "Rust",
+            "body": "RTK is a CLI proxy that sits between your terminal and your LLM and cuts token consumption 60-90% on common dev commands. It works by compressing and normalizing tool outputs -- file reads, grep results, compiler output, diff chunks -- before they hit the model context window. Single Rust binary, zero dependencies, fast enough to be invisible in an interactive coding loop. At those compression rates, the savings translate directly into cost and latency reductions for any agentic coding workflow running at volume. The zero-dependency Rust binary is the right call for something this close to the hot path."
+          },
+          {
+            "title": "chopratejas/headroom",
+            "url": "https://github.com/chopratejas/headroom",
+            "source": "github.com",
+            "stars": "43k",
+            "lang": "Python",
+            "body": "Headroom compresses tool outputs, logs, files, and RAG chunks before they reach the LLM -- 60-95% fewer tokens, same answers. It ships three integration points: a Python library you drop inline, a proxy you put in front of any model endpoint, and an MCP server. The MCP server path is the most interesting: it intercepts tool results before they land in context, so compression is automatic regardless of which orchestration layer you're using above it. Designed specifically for the class of agentic tasks where context fills up on low-signal output before the useful work begins."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing cleared the bar this week -- real workflow write-ups are thin",
+        "items": []
+      }
+    ],
+    "closing": "Back tomorrow with whatever ships overnight."
+  },
+  {
     "id": "2026-06-20",
     "date": "June 20, 2026",
     "title": "AI Pulse",
