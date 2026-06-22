@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-22",
+    "date": "June 22, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic drops two new models, GitHub fills with token-slashers, and PaddlePaddle ships a 50-language OCR suite",
+    "intro": "Anthropic has a busy morning: Fable 5 and Mythos 5 land together, followed by an Opus 4.8 update. On GitHub, the clearest trend is independent teams attacking the same bottleneck -- keeping LLM context lean -- from three different angles simultaneously. The PP-OCRv6 release is easy to scroll past but relevant if you have any document pipeline with multilingual input.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two Anthropic model releases dominate, with a practical OCR upgrade and a health reasoning swap rounding out the week.",
+        "items": [
+          {
+            "title": "Claude Fable 5 and Mythos 5",
+            "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+            "source": "Anthropic",
+            "body": "Anthropic is releasing Fable 5 (model ID: claude-fable-5) as its new frontier release, paired with Mythos 5. The two ship together under a joint announcement, with API access opening through the separate Fable Mythos access program. Fable 5 sits above the Claude 4.x family -- if you've been benchmarking on Sonnet 4.6, this is the tier to test next. The Mythos pairing suggests Anthropic is shipping complementary capability profiles rather than a single top-of-stack model."
+          },
+          {
+            "title": "Claude Opus 4.8",
+            "url": "https://www.anthropic.com/news/claude-opus-4-8",
+            "source": "Anthropic",
+            "body": "Anthropic bumped Opus to 4.8 (model ID: claude-opus-4-8). Opus is the heavy-reasoning end of the Claude 4 family -- the model you reach for on long-context analysis, complex agentic chains, and tasks where latency is less of a constraint than getting the answer right. The 4.8 update is a drop-in replacement for prior Opus versions in the API."
+          },
+          {
+            "title": "PP-OCRv6: 50-Language OCR from 1.5M to 34.5M Parameters",
+            "url": "https://huggingface.co/blog/PaddlePaddle/pp-ocrv6",
+            "source": "Hugging Face / PaddlePaddle",
+            "body": "PaddlePaddle's PP-OCRv6 launches today on Hugging Face with support for 50 languages and a model family spanning 1.5M to 34.5M parameters. The small end is fast enough for on-device or embedded use; the large end targets accuracy on dense, mixed-layout documents. If you're running a document pipeline with multilingual input -- receipts, contracts, scanned forms -- this is a meaningful jump in the open-source OCR stack. No API fees, weights available directly."
+          },
+          {
+            "title": "GPT-5.5 Instant Now Powers ChatGPT Health Responses",
+            "url": "https://openai.com/index/improving-health-intelligence-in-chatgpt",
+            "source": "OpenAI",
+            "body": "OpenAI replaced the prior model handling health and wellness queries in ChatGPT with GPT-5.5 Instant. The new version was developed with physician-informed evaluations and shows stronger reasoning on symptom context, medication interactions, and chronic condition management. It also shifts behavioral defaults -- clearer source attribution and more calibrated thresholds for recommending professional consultation. This is a production behavioral change in a high-stakes vertical, not a benchmark post."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token compression is this week's dominant GitHub theme -- three repos independently solving context bloat from different stack positions.",
+        "items": [
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "70.6k",
+            "lang": "Python",
+            "body": "Graphify is a coding assistant skill that takes a folder of code, SQL schemas, R scripts, shell scripts, docs, papers, images, or videos and builds a unified queryable knowledge graph from all of it. The core idea is GraphRAG over heterogeneous repos -- instead of embedding chunks independently, it models the relationships between app code, database schema, and infrastructure together. Works as a skill across Claude Code, Codex, Gemini CLI, and Cursor. Useful if you've tried to get an agent to reason across a codebase that spans three languages and two SQL dialects and watched it fail."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "64.9k",
+            "lang": "Rust",
+            "body": "RTK is a CLI proxy that sits between your dev tooling and the LLM and strips 60-90% of tokens from common shell command output before it goes upstream. Single Rust binary, zero dependencies -- nothing to install beyond dropping it on your PATH. The approach is pattern-matched pre-processing, not LLM summarization: it recognizes known noisy output formats (stack traces, diff headers, compiler warnings, test output boilerplate) and trims them to the signal the model actually needs. Fast startup, transparent to the agent."
+          },
+          {
+            "title": "headroomlabs-ai/headroom",
+            "url": "https://github.com/headroomlabs-ai/headroom",
+            "source": "github.com",
+            "stars": "46.5k",
+            "lang": "Python",
+            "body": "Headroom compresses tool outputs, log files, and RAG chunks before they reach the LLM context window, claiming 60-95% token reduction at the same answer quality. It ships in three integration shapes: Python library, HTTP proxy, and MCP server. The MCP server mode is the most practical entry point for agent builders -- wrap your existing tool calls and Headroom handles trimming transparently without requiring you to restructure agent code. The proxy mode covers non-MCP setups."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "56.2k",
+            "lang": "Python",
+            "body": "MemPalace is an open-source AI memory system backed by ChromaDB with an MCP server interface. It positions itself as the best-benchmarked open option in the category and is free. For agent builders, the MCP interface means persistent memory plugs into any MCP-compatible agent without writing custom retrieval logic. ChromaDB handles the vector storage; MemPalace sits on top managing memory writes, reads, and decay. If you've been putting off adding memory to an agent because building the retrieval layer is annoying, this removes that excuse."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's sources documented a real end-to-end workflow.",
+        "items": []
+      }
+    ],
+    "closing": "Back tomorrow -- ship something."
+  },
+  {
     "id": "2026-06-21",
     "date": "June 21, 2026",
     "title": "AI Pulse",
