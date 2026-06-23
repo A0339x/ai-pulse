@@ -3,6 +3,83 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-23",
+    "date": "June 23, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic ships three models, OpenAI goes on security offense, GitHub bets on token compression",
+    "intro": "Today is dense on the model side: Anthropic drops Opus 4.8 and the new Fable and Mythos family in the same news cycle -- two distinct things happening at once. OpenAI flips the script on AI-powered security: the same capabilities that help attackers find bugs now patch them at scale. And across GitHub, token compression is this week's running theme, with three strong repos all attacking the same problem from different angles.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Anthropic drops three models, OpenAI launches a security toolset, and IBM Research ships a new agentic harness",
+        "items": [
+          {
+            "title": "Claude Fable 5, Mythos 5, and Opus 4.8",
+            "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+            "source": "Anthropic",
+            "body": "Three new models from Anthropic today. Opus 4.8 (model ID: claude-opus-4-8) is the latest point release in the Claude 4.X line for high-effort reasoning work. Fable 5 and Mythos 5 are a distinct departure -- a new family with its own naming convention, marking a separate capability branch rather than an incremental bump on the Opus/Sonnet/Haiku stack. An early-access program for the Fable and Mythos family opened alongside the launch, with API access available now via their respective model IDs."
+          },
+          {
+            "title": "OpenAI Daybreak: Codex Security and GPT-5.5-Cyber",
+            "url": "https://openai.com/index/daybreak-securing-the-world",
+            "source": "OpenAI",
+            "body": "OpenAI launched Daybreak, a security toolset built around two new things: Codex Security, which scans codebases for vulnerabilities and generates validated patches, and GPT-5.5-Cyber, a model tuned specifically for security reasoning. The combination is meant to close the loop that offensive AI opened -- the same capabilities that help red teams find bugs now also fix them. A companion initiative called Patch the Planet extends Daybreak to open source maintainers, pairing AI-generated patches with human expert review for projects too under-resourced to triage vulns manually."
+          },
+          {
+            "title": "IBM Research CUGA: two dozen real agentic apps on a lightweight harness",
+            "url": "https://huggingface.co/blog/ibm-research/cuga-apps",
+            "source": "Hugging Face",
+            "body": "IBM Research published CUGA on Hugging Face today: a lightweight agentic harness alongside two dozen working example applications. The emphasis is on runnable, end-to-end implementations rather than abstract framework primitives -- a direct response to the pattern where most agent frameworks ship extensive APIs but few working reference implementations builders can actually fork and run. The 24 examples span different task types, and the harness stays minimal enough to stay out of the way."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token compression dominates the week's GitHub momentum, alongside a codebase-to-knowledge-graph tool worth bookmarking",
+        "items": [
+          {
+            "title": "affaan-m/ECC",
+            "url": "https://github.com/affaan-m/ECC",
+            "source": "github.com",
+            "stars": "220.2k",
+            "lang": "JavaScript",
+            "body": "ECC is an agent harness optimization layer for Claude Code, Codex, Cursor, and similar coding agents. It adds skills (reusable action patterns), instincts (behavioral defaults the agent falls back to), and memory on top of the base runtime, plus a security layer and a research-first development mode that forces decision documentation before execution. At 220k stars it's the highest-starred AI agent optimization project on GitHub right now -- the field of 'what sits between the LLM and your codebase' is consolidating fast."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "71.0k",
+            "lang": "Python",
+            "body": "Graphify turns any folder of code, SQL schemas, R scripts, shell scripts, docs, papers, images, or videos into a queryable knowledge graph. The graph unifies app code, database schema, and infrastructure in one traversable structure -- making it possible to ask cross-cutting questions like 'what code touches this table' without manually juggling context across files. Works as a skill for Claude Code, Codex, Cursor, Gemini CLI, and OpenCode, so it slots into whichever agent CLI you're already running."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "65.3k",
+            "lang": "Rust",
+            "body": "RTK is a CLI proxy that sits between your terminal and your LLM, cutting token consumption 60-90% on common dev commands. Single Rust binary, zero dependencies -- no Python environment to manage, no config overhead. Point it at your existing agent CLI workflow and it compresses redundant context before it reaches the model. Targets Claude Code, Codex, and similar agentic coding CLIs where token overhead compounds quickly across multi-step sessions."
+          },
+          {
+            "title": "headroomlabs-ai/headroom",
+            "url": "https://github.com/headroomlabs-ai/headroom",
+            "source": "github.com",
+            "stars": "47.9k",
+            "lang": "Python",
+            "body": "Headroom compresses tool outputs, logs, files, and RAG chunks before they reach the LLM -- claiming 60-95% token reduction with equivalent answer quality. Ships as three integration options: a library you import, a proxy you run in front of existing LLM calls, and an MCP server. All three targets mean it fits most existing stacks without a rewrite. Pairs well with agent setups where tool outputs balloon the context window quickly across multi-step runs."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's source list cleared the full end-to-end workflow documentation bar",
+        "items": []
+      }
+    ],
+    "closing": "Back tomorrow -- same drill."
+  },
+  {
     "id": "2026-06-22",
     "date": "June 22, 2026",
     "title": "AI Pulse",
