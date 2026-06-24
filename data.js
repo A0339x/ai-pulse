@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-24",
+    "date": "June 24, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic drops two model lines, OpenAI builds its own chip, and GitHub is obsessed with spending fewer tokens",
+    "intro": "Anthropic launched Fable 5 and Mythos 5 today alongside Opus 4.8, making this one of the denser model-drop mornings in recent memory. On the hardware side, OpenAI and Broadcom went public with Jalapeño -- a custom inference chip aimed squarely at the cost of running large models at scale. Meanwhile the repos climbing fastest on GitHub share one theme: burning dramatically fewer tokens for the same output.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two Anthropic model launches, a new OpenAI chip, and a security-focused model tier all land today",
+        "items": [
+          {
+            "title": "Claude Fable 5 and Mythos 5",
+            "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+            "source": "Anthropic",
+            "body": "Anthropic shipped Fable 5 today -- now its most capable publicly available model -- alongside Mythos 5, a higher tier designed for demanding, context-heavy workloads. Fable 5 is accessible via the API at model ID 'claude-fable-5'. The dual-tier launch mirrors previous Sonnet/Opus pairings but pushes further up the capability stack. A companion post covers access details and availability windows for Mythos 5 specifically."
+          },
+          {
+            "title": "Claude Opus 4.8",
+            "url": "https://www.anthropic.com/news/claude-opus-4-8",
+            "source": "Anthropic",
+            "body": "Opus 4.8 is Anthropic's latest update to its flagship reasoning model, now live at model ID 'claude-opus-4-8'. It lands as part of the same 4.X refresh cycle that brought Sonnet 4.6 and Haiku 4.5, and sits in the extended-thinking tier alongside those predecessors. The 4.8 bump suggests updated weights and capability improvements over Opus 4.5, though it occupies a different position in the lineup than the newly announced Fable 5."
+          },
+          {
+            "title": "OpenAI and Broadcom unveil Jalapeño inference chip",
+            "url": "https://openai.com/index/openai-broadcom-jalapeno-inference-chip",
+            "source": "OpenAI",
+            "body": "OpenAI and Broadcom jointly announced Jalapeño, a custom chip purpose-built for LLM inference. The goal is better performance and efficiency at scale compared to running inference on general-purpose GPU clusters. This is OpenAI's first publicly named custom silicon, and signals the company is serious about owning more of the compute stack rather than depending on Nvidia supply chains. No detailed spec sheet or customer availability timeline was included in the announcement."
+          },
+          {
+            "title": "Daybreak: Codex Security and GPT-5.5-Cyber",
+            "url": "https://openai.com/index/daybreak-securing-the-world",
+            "source": "OpenAI",
+            "body": "OpenAI's Daybreak security suite adds two tools today: Codex Security, which automates finding and validating vulnerabilities in codebases, and GPT-5.5-Cyber -- a model fine-tuned for offensive and defensive security work. The pairing puts an AI on both ends of the vuln pipeline: Codex Security surfaces the issue, GPT-5.5-Cyber handles triage and patch suggestions. A companion initiative called Patch the Planet extends this to open-source maintainers specifically."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token budgets and persistent memory are dominating GitHub momentum this week",
+        "items": [
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "71.4k",
+            "lang": "Python",
+            "body": "Graphify turns any folder -- app code, SQL schemas, shell scripts, docs, images, videos -- into a queryable knowledge graph instead of dumping raw files into context. It installs as a skill for Claude Code, Codex, Cursor, Gemini CLI, and others. The core payoff: rather than feeding an LLM a flat pile of files, you query a graph that already knows how your code, schema, and infrastructure relate to each other. Particularly useful for large codebases where cross-file context balloons token cost fast."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "76.4k",
+            "lang": "JavaScript",
+            "body": "Caveman is a Claude Code skill that tells the model to respond in minimal caveman-speak -- 'why use many token when few token do trick.' The author benchmarks 65% token reduction. The mechanic is real: compressed, low-connective-tissue output uses fewer tokens than polished prose, and for intermediate agentic steps the substance is what matters, not the style. Genuinely useful for long-running agents where internal scratchpad output is eating your budget."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "56.3k",
+            "lang": "Python",
+            "body": "MemPalace is an open-source AI memory system built on ChromaDB and exposed over MCP, claiming the best benchmark scores among open-source options and shipping with no hosted dependency or API fee. The MCP interface is the practical differentiator: any MCP-compatible agent or assistant can plug it in without custom integration work. Persistent structured memory that survives across sessions has been a gap in the open-source agent stack; this is a serious attempt to fill it."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "65.7k",
+            "lang": "Rust",
+            "body": "RTK is a single Rust binary that acts as a CLI proxy between your terminal and the LLM, compressing common dev commands before they reach the model. The repo claims 60-90% token reduction on typical dev workflows with zero runtime dependencies. Because it operates as a transparent proxy, it works with any CLI tool that calls an LLM underneath -- no SDK changes required. The Rust implementation keeps added latency negligible."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's sources clears the bar for a documented end-to-end build post",
+        "items": []
+      }
+    ],
+    "closing": "Back tomorrow."
+  },
+  {
     "id": "2026-06-23",
     "date": "June 23, 2026",
     "title": "AI Pulse",
