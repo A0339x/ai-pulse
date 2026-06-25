@@ -3,6 +3,81 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-25",
+    "date": "June 25, 2026",
+    "title": "AI Pulse",
+    "subtitle": "New model lines from Anthropic, custom silicon from OpenAI, and GitHub trending reads like a token-cost problem sheet",
+    "intro": "Today's theme is infrastructure catching up to the models. The labs shipped new models and new hardware, while GitHub's trending page is dominated by tools treating token reduction as a solved engineering problem -- proxies, compression layers, and context managers showing up as standalone infra projects. The Fable 5 + Mythos 5 release is the headline, but the cost tooling in CLIMBING is where the week's momentum sits.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "New models, custom silicon, and a security toolkit shipped across three labs in two days",
+        "items": [
+          {
+            "title": "Claude Fable 5 and Mythos 5",
+            "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+            "source": "Anthropic",
+            "body": "Two new models shipped from Anthropic today -- Fable 5 (model ID: claude-fable-5) and Mythos 5. Fable 5 is the new flagship, sitting as a distinct generation from the Claude 4.x family (Opus 4.8, Sonnet 4.6, Haiku 4.5). Mythos 5 ships alongside it as a companion model. Both are available now through the Anthropic API. In a separate announcement, Anthropic also updated the Opus line to version 4.8 (claude-opus-4-8), a continued iteration on their extended-context reasoning model."
+          },
+          {
+            "title": "OpenAI and Broadcom unveil LLM-optimized inference chip",
+            "url": "https://openai.com/index/openai-broadcom-jalapeno-inference-chip",
+            "source": "OpenAI",
+            "body": "Jalapeño is a custom ASIC from OpenAI and Broadcom, built specifically for LLM inference workloads. Unlike general-purpose GPUs, it targets the specific memory access and compute patterns of transformer inference -- the autoregressive decode loop, attention, and large weight matrix loads. The stated goals are better performance-per-watt and lower cost-per-token at scale versus commodity datacenter hardware. OpenAI is already deploying it in production. Builders won't interact with it directly, but purpose-built inference silicon is what drives per-token pricing down over the next product cycle."
+          },
+          {
+            "title": "Introducing computer use in Gemini 3.5 Flash",
+            "url": "https://deepmind.google/blog/introducing-computer-use-in-gemini-3-5-flash/",
+            "source": "Google DeepMind",
+            "body": "Computer use landed in Gemini 3.5 Flash -- Google's fastest, cheapest model in the 3.5 family. The model can now navigate browser interfaces, click, type, read screen state, and drive GUI workflows without custom scripting per target. Adding this to Flash specifically changes the cost math for GUI automation pipelines: running a computer-use agent against a cheap, fast model is significantly more economical than against a frontier-tier model. Developers building web automation, browser testing, or desktop orchestration now have a low-cost option from Google to benchmark against Claude's computer use API."
+          },
+          {
+            "title": "Daybreak: Tools for securing every organization in the world",
+            "url": "https://openai.com/index/daybreak-securing-the-world",
+            "source": "OpenAI",
+            "body": "Two new security tools shipped under OpenAI's Daybreak initiative. Codex Security scans codebases for vulnerabilities and generates validated patches. GPT-5.5-Cyber is a model fine-tuned on offensive security knowledge, built for defenders and pen testers to reason about attack surface and exploitation paths. The tools are designed to work together -- Codex Security finds and validates bugs, GPT-5.5-Cyber helps assess severity and remediation. Alongside this, OpenAI launched Patch the Planet, a program funding open-source maintainers to run the tools against their repos."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token reduction dominated this week's GitHub momentum, alongside a code-graph tool and a local-first design alternative",
+        "items": [
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "71.9k",
+            "lang": "Python",
+            "body": "Graphify ingests any folder -- source code, SQL schemas, R scripts, shell scripts, docs, papers, images, videos -- and builds a queryable knowledge graph from it. You can then run queries that span the full artifact set: which services touch this table, what calls this function, where does data flow from ingestion to dashboard. This is GraphRAG applied to the heterogeneous artifact set of a real software project, not just text docs. The graph links code entities to schema entities to infrastructure entities, surfacing cross-cutting relationships that grep and LSP can't reach. Works as an AI coding assistant skill for Claude Code, Codex, Gemini CLI, and others."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "66.0k",
+            "lang": "Rust",
+            "body": "RTK is a CLI proxy that sits between your terminal and your LLM, compressing command output before it reaches the model. A git diff that would dump 30,000 tokens gets summarized to key changes. A log file that would overflow context gets distilled to signal. It intercepts any dev command you'd pipe through an AI coding assistant. Single Rust binary, zero runtime dependencies. The authors claim 60-90% token reduction on common dev workflows. For teams running automated coding agents at volume, the cost difference at this layer compounds quickly."
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "71.0k",
+            "lang": "TypeScript",
+            "body": "Open Design is a local-first, open-source desktop app that covers the same ground as Claude Design -- web, mobile, and desktop prototype generation, slides, images, and video -- without cloud dependency. It ships 259 built-in skills and 142 design systems, and runs against a wide range of AI backends: Claude Code, Codex, Cursor, Gemini CLI, Copilot, and more. Output formats include HTML, PDF, PPTX, and MP4. The sandboxed preview runs locally. For builders who don't want design tooling sending project assets to a third-party API, this is the BYOK alternative."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's source cleared the bar",
+        "items": []
+      }
+    ],
+    "closing": "That's your two minutes -- see you tomorrow."
+  },
+  {
     "id": "2026-06-24",
     "date": "June 24, 2026",
     "title": "AI Pulse",
