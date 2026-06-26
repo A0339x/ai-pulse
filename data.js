@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-26",
+    "date": "June 26, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Gemini gets hands, OpenAI goes custom silicon, and GitHub is fighting token bloat",
+    "intro": "Two threads worth following today: at the frontier, new capabilities (Gemini 3.5 Flash adds computer use) and new infrastructure bets (OpenAI and Broadcom's joint inference chip, plus a security-tuned model). On GitHub, the dominant signal is token efficiency -- multiple high-star repos this week are specifically built to compress what goes into context. That's a direct response to real cost pressure, and the tools are getting sophisticated.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "New hardware, new computer use, a security model, and crewAI gets declarative.",
+        "items": [
+          {
+            "title": "Introducing computer use in Gemini 3.5 Flash",
+            "url": "https://deepmind.google/blog/introducing-computer-use-in-gemini-3-5-flash/",
+            "source": "Google DeepMind",
+            "body": "Computer use -- click, type, scroll, navigate GUIs -- is now available in Gemini 3.5 Flash, the faster and cheaper tier of the Gemini 3.5 family. Previously this capability class required heavier, slower models. Putting it in Flash changes the economics for high-volume desktop automation: you can run more parallel agents, or tolerate more retries, without the cost of a full frontier call. DeepMind bringing this to Flash also narrows the gap with Claude's computer use offering, which has been a meaningful differentiator for Anthropic in agentic workflows."
+          },
+          {
+            "title": "OpenAI and Broadcom unveil LLM-optimized inference chip",
+            "url": "https://openai.com/index/openai-broadcom-jalapeno-inference-chip",
+            "source": "OpenAI",
+            "body": "Jalapeño is a custom silicon chip co-designed by OpenAI and Broadcom built specifically for LLM inference -- not training. The distinction matters: training chips like H100s are optimized for very different workloads than serving tokens at scale. A purpose-built inference chip can improve latency, throughput, and cost-per-token on the serving side. This moves OpenAI closer to Google's position with TPUs -- owning the full stack from model to silicon. No external availability details yet; this is OpenAI infrastructure, treating inference hardware as a strategic layer rather than a cloud line item."
+          },
+          {
+            "title": "Daybreak: Codex Security and GPT-5.5-Cyber",
+            "url": "https://openai.com/index/daybreak-securing-the-world",
+            "source": "OpenAI",
+            "body": "OpenAI's Daybreak security initiative ships two new things: Codex Security, a tool that finds and validates vulnerabilities in codebases automatically, and GPT-5.5-Cyber, a new model fine-tuned for offensive and defensive security tasks. The pitch is automated vulnerability discovery at scale -- find bugs, confirm they're real, generate patches -- without bottlenecking on human security researchers. GPT-5.5-Cyber is a new entry in the model lineup, sitting alongside GPT-5.5. A companion Patch the Planet program uses the same tools to help open-source maintainers specifically."
+          },
+          {
+            "title": "crewAI 1.15.0",
+            "url": "https://github.com/crewAIInc/crewAI/releases/tag/1.15.0",
+            "source": "crewAI",
+            "body": "The 1.15.0 release adds declarative flow loading -- you can now define crew orchestration in config files instead of Python. Key new primitives in the spec: an `each` composite action for iterating over collections, optional `if` expressions on individual steps, single-agent actions directly in flow definitions, and DMN (Decision Model and Notation) mode for structured decision logic in crew creation. The CLI TUI now supports conversational flows, and inline crew definition loading removes the need for separate file references. Together these move crewAI workflows from glue scripts toward version-controllable, shareable infrastructure artifacts."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token costs are clearly on developers' minds -- three of this week's breakout repos are specifically about spending fewer of them.",
+        "items": [
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "77.1k",
+            "lang": "JavaScript",
+            "body": "Caveman is a Claude Code skill with a deadpan premise: it makes your AI agent communicate in stripped-down caveman-speak, cutting 65% of tokens by removing the conjunctions, articles, filler phrases, and elaboration that burn context without adding information. The repo's own tagline -- 'why use many token when few token do trick' -- is also the implementation. Install it as a Claude Code skill and it modifies how the agent structures its internal and external communication. It's a sharp demonstration that communication style carries real token overhead, and that a consistent register change across a session adds up fast."
+          },
+          {
+            "title": "headroomlabs-ai/headroom",
+            "url": "https://github.com/headroomlabs-ai/headroom",
+            "source": "github.com",
+            "stars": "51.6k",
+            "lang": "Python",
+            "body": "Headroom compresses tool outputs, log lines, file contents, and RAG chunks before they reach the LLM -- claiming 60-95% token reduction with no answer quality loss. It ships in three forms: a Python library you import directly, a proxy that intercepts any LLM API call, and an MCP server for agent contexts. The core idea is that most of what gets stuffed into context (stack traces, verbose JSON, repetitive logs) contains far less information than its character count suggests, and a compression pass before the LLM sees it preserves what matters. Context engineering as infrastructure, not prompt engineering."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "72.4k",
+            "lang": "Python",
+            "body": "Graphify is a skill for Claude Code, Codex, Cursor, Gemini CLI, and others that turns a folder of code into a queryable knowledge graph. Feed it a Python codebase, SQL schemas, shell scripts, infrastructure configs, docs, research papers, images, or video, and it builds a graph connecting entities -- functions, tables, files, concepts -- across all of them. The payoff: your coding agent can answer cross-cutting questions ('what calls this function?' 'which services write to this table?') without loading every relevant file into context. The antigravity-tagged multi-modal intake is the unusual part -- most codebase indexing tools stop at text."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "56.4k",
+            "lang": "Python",
+            "body": "MemPalace is an open-source AI memory system built on ChromaDB that connects to LLMs and agents via MCP. It stores conversation and task history in a local vector store that agents can query by semantic similarity across sessions. The repo leads with benchmarked memory recall accuracy rather than architecture diagrams -- positioning itself explicitly as the best-performing free alternative to paid memory layers. The combination of MCP support, local-first storage, and published benchmarks makes it the current reference point for anyone building agents that need persistent memory without a hosted service."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing cleared the bar today -- no documented end-to-end workflows in the source list.",
+        "items": []
+      }
+    ],
+    "closing": "Back tomorrow."
+  },
+  {
     "id": "2026-06-25",
     "date": "June 25, 2026",
     "title": "AI Pulse",
