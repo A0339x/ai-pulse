@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-27",
+    "date": "June 27, 2026",
+    "title": "AI Pulse",
+    "subtitle": "All three major labs dropped models this week, and GitHub is quietly filling with token-compression tools",
+    "intro": "Anthropic, OpenAI, and Google each shipped something new today -- rare to see all three moving in the same window. The more interesting signal is on GitHub, where the dominant theme isn't new agents or new frameworks: it's compression. Multiple high-momentum repos are attacking the same problem of too many tokens reaching the LLM. Pay attention to that cluster.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "New models from all three major labs, plus OpenAI's first custom silicon",
+        "items": [
+          {
+            "title": "Claude Fable 5 and Opus 4.8",
+            "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+            "source": "Anthropic",
+            "body": "Anthropic released two models today. Fable 5 (`claude-fable-5`) is the new flagship. Opus 4.8 (`claude-opus-4-8`) is an updated point release on the Opus 4 line. A companion announcement around Mythos 5 access suggests the two are positioned differently -- Fable 5 likely for peak capability, Mythos 5 for a different speed or cost profile. All three model IDs are live in the API now."
+          },
+          {
+            "title": "Previewing GPT-5.6 Sol",
+            "url": "https://openai.com/index/previewing-gpt-5-6-sol",
+            "source": "OpenAI",
+            "body": "GPT-5.6 Sol is in preview, aimed squarely at coding, science, and cybersecurity workloads. OpenAI bundled it with what they're calling their most advanced safety stack to date. The 'Sol' naming follows the 5.x specialized-variant pattern -- this reads as a domain-tuned release rather than a general successor to GPT-5. Early API access is open now."
+          },
+          {
+            "title": "Computer Use in Gemini 3.5 Flash",
+            "url": "https://deepmind.google/blog/introducing-computer-use-in-gemini-3-5-flash/",
+            "source": "DeepMind",
+            "body": "Computer use -- clicking, typing, navigating desktop UIs -- just landed in Gemini 3.5 Flash, Google's faster and cheaper model tier. Previously, desktop control lived in heavier models where latency and cost were secondary. Moving it into Flash changes the economics for browser automation and desktop agent workflows where you need many interactions per session, not just a few."
+          },
+          {
+            "title": "OpenAI and Broadcom Jalapeño inference chip",
+            "url": "https://openai.com/index/openai-broadcom-jalapeno-inference-chip",
+            "source": "OpenAI",
+            "body": "Jalapeño is OpenAI's first custom silicon, built with Broadcom and designed specifically for LLM inference. The goal is fewer H100s needed per token served -- better performance and efficiency at scale. No ship date yet, but the announcement signals OpenAI is serious about owning the inference stack the same way Google owns TPUs. This is a multi-year bet, not a product you can use this week."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token-compression tooling is having a moment -- four repos, same underlying problem, very different approaches",
+        "items": [
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "72.8k",
+            "lang": "Python",
+            "body": "Graphify turns a folder of code, SQL schemas, shell scripts, docs, papers, images, or videos into a queryable knowledge graph. Works as a skill across Claude Code, Codex, Gemini CLI, OpenCode, and Cursor. The idea: instead of embedding chunks and hoping retrieval finds the right one, you build an explicit graph where relationships between files, schemas, and infrastructure are structured. Useful for large monorepos where an agent keeps losing track of how pieces connect -- the graph gives it something to traverse, not just search."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "66.5k",
+            "lang": "Rust",
+            "body": "RTK is a CLI proxy that intercepts common dev commands -- `git log`, `ls`, `cat`, and similar -- and compresses their output before the LLM sees it. Claims 60-90% token reduction on typical dev operations. Single Rust binary, zero dependencies, drops transparently into Claude Code or Codex workflows. Different from general-purpose context compressors: it targets the specific high-verbosity commands that blow up context windows during active coding sessions, not all input."
+          },
+          {
+            "title": "headroomlabs-ai/headroom",
+            "url": "https://github.com/headroomlabs-ai/headroom",
+            "source": "github.com",
+            "stars": "52.3k",
+            "lang": "Python",
+            "body": "Headroom compresses tool outputs, logs, files, and RAG chunks before they reach the LLM -- 60-95% fewer tokens with no meaningful accuracy loss, per their benchmarks. Ships as a Python library, an MCP server, or a transparent proxy, so you can slot it in front of whatever agent stack you're running. The problem it targets is real: raw tool outputs are one of the biggest unmanaged context hogs in agentic workflows, and most frameworks pass them through untouched."
+          },
+          {
+            "title": "Panniantong/Agent-Reach",
+            "url": "https://github.com/Panniantong/Agent-Reach",
+            "source": "github.com",
+            "stars": "43.0k",
+            "lang": "Python",
+            "body": "Agent-Reach gives a coding agent read and search access to Twitter, Reddit, YouTube, GitHub, Bilibili, and XiaoHongShu through a single CLI -- no platform API keys required. It scrapes rather than calls official APIs, which keeps cost at zero but introduces the usual uptime and rate-limit caveats. The workflow fit is agents that need live external context mid-session: pulling a thread, reading a repo discussion, or checking what a library's community is actually saying right now."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's source list documented a real end-to-end build",
+        "items": []
+      }
+    ],
+    "closing": "Back Monday."
+  },
+  {
     "id": "2026-06-26",
     "date": "June 26, 2026",
     "title": "AI Pulse",
