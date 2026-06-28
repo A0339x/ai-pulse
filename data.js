@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-28",
+    "date": "June 28, 2026",
+    "title": "AI Pulse",
+    "subtitle": "GPT-5.6 Sol previews, Gemini gets computer use, and GitHub is obsessed with the token bill",
+    "intro": "OpenAI had a dense week -- GPT-5.6 Sol in preview plus Daybreak, a dedicated security toolchain with its own cyber model, both landing simultaneously. The more immediately useful move for builders might be Google shipping computer use to Gemini 3.5 Flash, the fast-and-cheap tier, which changes the cost math for any agent that needs to drive a desktop. On GitHub, three separate repos surged this week all solving the same problem from different angles: spending 60-90% fewer tokens to get the same answers.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "New model preview, computer use on a budget tier, a dedicated security toolchain, and one-command vLLM hosting.",
+        "items": [
+          {
+            "title": "Previewing GPT-5.6 Sol: a next-generation model",
+            "url": "https://openai.com/index/previewing-gpt-5-6-sol",
+            "source": "OpenAI",
+            "body": "OpenAI previewed GPT-5.6 Sol, positioned as the next generation above GPT-5, with improvements targeted at three specific areas: coding, scientific reasoning, and cybersecurity. The model ships alongside what OpenAI calls its most advanced safety stack to date -- safety evaluation built into the release cycle rather than trailing behind it. The cybersecurity callout pairs with the Daybreak tools and GPT-5.5-Cyber shipping the same week, making this a coordinated push into security as a first-class vertical. GPT-5.6 Sol is preview-only; no general availability date was announced."
+          },
+          {
+            "title": "Introducing computer use in Gemini 3.5 Flash",
+            "url": "https://deepmind.google/blog/introducing-computer-use-in-gemini-3-5-flash/",
+            "source": "Google DeepMind",
+            "body": "Computer use is now in Gemini 3.5 Flash. Flash is Google's fast, low-cost model tier -- the opposite end of the spectrum from the frontier models where computer use has lived until now. Moving it down to Flash changes the economics: agents that need to operate a desktop, click through interfaces, or read screens can do so without paying frontier-model rates on every action. That makes computer-use workflows practical to run at scale or inside a tight inference budget for the first time in the Gemini family."
+          },
+          {
+            "title": "Daybreak: Tools for securing every organization in the world",
+            "url": "https://openai.com/index/daybreak-securing-the-world",
+            "source": "OpenAI",
+            "body": "Daybreak is OpenAI's new security initiative, shipping two concrete things: Codex Security, which scans codebases to find and validate vulnerabilities, and GPT-5.5-Cyber, a model tuned specifically for cybersecurity tasks. A sub-initiative called Patch the Planet targets open-source maintainers -- AI scans their code and expert reviewers validate findings before patches go in. This is the first time OpenAI has shipped a purpose-tuned security model alongside a structured workflow for acting on its output, rather than leaving that assembly to the user."
+          },
+          {
+            "title": "Run a vLLM Server on HF Jobs in One Command",
+            "url": "https://huggingface.co/blog/vllm-jobs",
+            "source": "Hugging Face",
+            "body": "Hugging Face Jobs now launches a vLLM inference server with a single CLI command. Getting vLLM running in a managed environment previously meant wiring up containers, hardware provisioning, networking, and auth yourself. The Jobs integration handles all of it -- specify the model, and the server is up. For teams self-hosting open models for inference, this removes the main operational burden. The single-command path also makes it practical to spin up a fresh server per project or experiment without maintaining a shared instance."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token compression, codebase knowledge graphs, and an open-source design suite all picking up serious momentum.",
+        "items": [
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "73.1k",
+            "lang": "Python",
+            "body": "Graphify takes a folder -- code, SQL schemas, R scripts, shell scripts, docs, papers, images, or videos -- and builds a queryable knowledge graph from all of it. The pitch is full-stack context: point it at a monorepo and get app logic, database schema, and infrastructure in one graph you can query in natural language. Works with Claude Code, Codex, OpenCode, Cursor, and Gemini CLI as frontends. The practical case is cross-cutting questions across a large codebase -- what touches this table, what does this service depend on -- without manually bundling context into every prompt."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "66.7k",
+            "lang": "Rust",
+            "body": "rtk is a CLI proxy that sits between your terminal and your LLM, compressing dev command output before it hits the model. Reports 60-90% token reduction on common operations -- git diffs, stack traces, file reads, log output -- by stripping noise before it gets counted. Ships as a single Rust binary with zero runtime dependencies. The savings compound in agentic sessions: every tool call is cheaper, context fills more slowly, and long coding sessions stop running out of window. Drop it in front of any Claude Code, Codex, or similar workflow without changing the setup."
+          },
+          {
+            "title": "headroomlabs-ai/headroom",
+            "url": "https://github.com/headroomlabs-ai/headroom",
+            "source": "github.com",
+            "stars": "52.8k",
+            "lang": "Python",
+            "body": "Headroom compresses what's about to go into the LLM -- tool outputs, logs, retrieved documents, RAG chunks, code files -- before the API call is made. Claims 60-95% token reduction while preserving answer quality. Available as a Python library, a drop-in HTTP proxy, or an MCP server. Where a CLI-layer tool trims shell output, headroom works at the application layer and covers everything the app is about to send, including fetched pages and database dumps. Add it as a sidecar to any existing pipeline without rewriting calling code."
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "72.2k",
+            "lang": "TypeScript",
+            "body": "Open Design is a local-first, open-source desktop app for AI-powered design and prototyping -- a free alternative to Claude's design products. Ships with 259+ installable skills and 142+ design systems, and exports to HTML, PDF, PPTX, or MP4 from the same canvas. HyperFrames let you target web, desktop, and mobile simultaneously in one file. Works with Claude Code, Codex, Cursor, Gemini CLI, and 17 other AI CLIs as the backend, so you're not locked to one provider. Local-first means your files and API keys stay on your machine."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "No builds from today's sources documented a real workflow end-to-end.",
+        "items": []
+      }
+    ],
+    "closing": "The cheapest token is the one you never sent."
+  },
+  {
     "id": "2026-06-27",
     "date": "June 27, 2026",
     "title": "AI Pulse",
