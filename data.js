@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-29",
+    "date": "June 29, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic ships Fable 5 and Mythos 5, OpenAI previews Sol and reveals custom silicon, GitHub fills with token trimmers",
+    "intro": "The big story this morning is Anthropic's Fable 5 and Mythos 5 -- the first model family to step past Claude 4. OpenAI is previewing GPT-5.6 Sol and revealing Jalapeño, a custom inference chip built with Broadcom. On GitHub, the top climbing repos share a single obsession: spend fewer tokens and get the same work done.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "New model families from Anthropic and OpenAI, plus Google puts computer use into its fast tier.",
+        "items": [
+          {
+            "title": "Claude Fable 5 and Mythos 5",
+            "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+            "source": "Anthropic",
+            "body": "Anthropic launched two new models today: Fable 5 and Mythos 5. Fable 5 (API: claude-fable-5) is the new general-purpose flagship -- the first Claude model family to step past the Claude 4 generation. Mythos 5 is the companion frontier model, with a dedicated access post covering its rollout. The names drop the Haiku/Sonnet/Opus convention entirely, which signals a generational break rather than a point update. Anthropic also posted today on Claude Corps and Project Glasswing, but the model launch is the anchor."
+          },
+          {
+            "title": "Previewing GPT-5.6 Sol",
+            "url": "https://openai.com/index/previewing-gpt-5-6-sol",
+            "source": "OpenAI",
+            "body": "OpenAI previewed GPT-5.6 Sol, the next model after GPT-5. The focus areas are coding, hard science, and cybersecurity -- three domains where GPT-5 still loses ground to specialized tools and fine-tunes. Sol also ships with what OpenAI calls their most advanced safety stack, built in at training time rather than layered on post-hoc. This is a preview, not a release -- selected researchers and partners get access first before it broadens."
+          },
+          {
+            "title": "OpenAI and Broadcom unveil Jalapeño inference chip",
+            "url": "https://openai.com/index/openai-broadcom-jalapeno-inference-chip",
+            "source": "OpenAI",
+            "body": "OpenAI and Broadcom revealed Jalapeño, a custom chip designed specifically for LLM inference. Unlike GPUs repurposed from graphics workloads, Jalapeño is built around transformer-specific compute patterns -- attention layers, feed-forward blocks, and the memory bandwidth profiles that dominate large model serving. The move follows Google's TPU playbook: own your silicon, control your cost-per-token curve long term. OpenAI hasn't disclosed production timelines or throughput numbers versus current H100 clusters, but the partnership is a significant infrastructure commitment."
+          },
+          {
+            "title": "Computer use in Gemini 3.5 Flash",
+            "url": "https://deepmind.google/blog/introducing-computer-use-in-gemini-3-5-flash/",
+            "source": "DeepMind",
+            "body": "DeepMind added computer use to Gemini 3.5 Flash, letting the model take actions in browser and desktop environments rather than generating text descriptions of what to click. The model sees a screenshot and emits clicks, keystrokes, and scroll commands. Moving this into Flash -- Google's faster, lower-cost tier -- changes the cost math for computer use agents substantially. Agents that click through UIs no longer require Opus-class model spend to run."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Token efficiency dominates the GitHub charts -- four of the top climbers are built around spending less to get the same output.",
+        "items": [
+          {
+            "title": "affaan-m/ECC",
+            "url": "https://github.com/affaan-m/ECC",
+            "source": "github.com",
+            "stars": "223.4k",
+            "lang": "JavaScript",
+            "body": "ECC is an agent harness system for Claude Code, Codex, Cursor, Opencode, and other coding assistants. Where most such projects are skill bundles or prompt collections, ECC goes deeper: it adds instinct layers (rules that fire without being explicitly prompted), persistent cross-session memory, configurable security postures, and a research-first development mode that slows the agent down to verify before acting. At 223k stars for a developer tooling repo, it's the highest-climbing project in this week's AI tools chart by a wide margin."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "74.1k",
+            "lang": "Python",
+            "body": "Graphify takes a folder -- source code, SQL schemas, R scripts, shell scripts, docs, papers, images, videos -- and builds a queryable knowledge graph from all of it. The novel move is multi-format ingestion: most code analysis tools stop at source files. Graphify connects app logic, database schema, and infrastructure config into one graph, which is useful for debugging cross-layer behavior or giving an agent a structured map of a complex repo rather than a flat file dump. Ships as an installable skill for Claude Code, Codex, Gemini CLI, and others."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "67.0k",
+            "lang": "Rust",
+            "body": "RTK is a CLI proxy that sits between your terminal and any LLM and compresses token usage on common dev operations -- git diffs, log tails, build outputs, and other verbose command output that bloats context windows. The claimed reduction is 60-90% on typical dev commands. It ships as a single Rust binary with zero dependencies, so it drops into any environment without a Node or Python runtime. The interception happens at the shell layer, before input reaches the agent's context window -- a different approach from library-level compression that operates inside the agent."
+          },
+          {
+            "title": "headroomlabs-ai/headroom",
+            "url": "https://github.com/headroomlabs-ai/headroom",
+            "source": "github.com",
+            "stars": "53.6k",
+            "lang": "Python",
+            "body": "Headroom compresses tool outputs, logs, files, and RAG chunks before they reach the LLM -- claiming 60-95% token reduction with equivalent answer quality. It ships three ways: a Python library for direct integration, a proxy that wraps any OpenAI-compatible endpoint, and an MCP server. The MCP server is the most interesting option for agent builders: any MCP-aware coding assistant routes its context through Headroom with a config change, no code modifications required. Context compression at the infrastructure layer rather than inside each application."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "No documented builds cleared the bar today -- sources came up dry.",
+        "items": []
+      }
+    ],
+    "closing": "See you tomorrow."
+  },
+  {
     "id": "2026-06-28",
     "date": "June 28, 2026",
     "title": "AI Pulse",
