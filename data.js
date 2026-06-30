@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-06-30",
+    "date": "June 30, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic drops a new model family, OpenAI previews its next-gen, and GitHub floods with token-cutting tools",
+    "intro": "The labs kept pace today. Anthropic launched the Fable 5 and Mythos 5 family -- a new named line outside the Claude 4 tier structure -- while OpenAI previewed GPT-5.6 Sol and co-launched a custom inference chip with Broadcom, and Google added computer use to Gemini 3.5 Flash. On GitHub, the dominant theme this week is compression: three of the top-climbing repos exist solely to cut how many tokens your agent burns before work starts.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "New models and capabilities across three labs today.",
+        "items": [
+          {
+            "title": "Claude Fable 5 and Mythos 5",
+            "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+            "source": "Anthropic",
+            "body": "Anthropic released Fable 5 and Mythos 5 today, a new model family that sits outside the Haiku/Sonnet/Opus tier structure of the Claude 4 line. The naming break -- model IDs like claude-fable-5 rather than claude-4.x -- signals a distinct product bet. Alongside the model, Anthropic published a separate access post, suggesting a staged rollout rather than an immediate open release. Whether this is a new capability direction or a restructured tier system, the naming convention itself is the first signal worth reading."
+          },
+          {
+            "title": "Previewing GPT-5.6 Sol: a next-generation model",
+            "url": "https://openai.com/index/previewing-gpt-5-6-sol",
+            "source": "OpenAI",
+            "body": "OpenAI previewed GPT-5.6 Sol, a model with targeted improvements in coding, science, and cybersecurity. The preview ships alongside what OpenAI calls its most advanced safety stack to date -- notable framing for a model whose stated strengths explicitly include cybersecurity. Sol reads as a specialist step within the GPT-5 generation rather than a full generational jump. The .6 minor version signals incremental refinement on a known base. Access is limited at preview launch."
+          },
+          {
+            "title": "Introducing computer use in Gemini 3.5 Flash",
+            "url": "https://deepmind.google/blog/introducing-computer-use-in-gemini-3-5-flash/",
+            "source": "DeepMind",
+            "body": "Google DeepMind added computer use to Gemini 3.5 Flash, putting the capability into the fast, cost-effective tier of the Gemini 3.5 family. Computer use lets the model navigate desktop and web UIs, click buttons, fill forms, and interact with apps without custom integrations per tool. Moving it to Flash rather than a heavier model tier puts it at a price point that makes sense for production agent workflows, not just demos."
+          },
+          {
+            "title": "OpenAI and Broadcom unveil LLM-optimized inference chip",
+            "url": "https://openai.com/index/openai-broadcom-jalapeno-inference-chip",
+            "source": "OpenAI",
+            "body": "OpenAI and Broadcom unveiled Jalapeño, a custom chip built specifically for LLM inference. Inference chips differ from training hardware -- they are built to serve model outputs at scale, optimizing for throughput, latency, and cost per token rather than large batch training runs. OpenAI has relied on Nvidia GPUs for most of its compute history; building custom silicon is the move you make when token-serving costs and supply chain control become as important as model quality. Jalapeño now powers the inference stack behind the API you are already hitting."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "GitHub is fixated on one problem: how many tokens your agent burns before it does anything useful.",
+        "items": [
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "78.1k",
+            "lang": "JavaScript",
+            "body": "caveman is a Claude Code skill with one job: make the AI use fewer words. Rather than compressing context before it hits the model, it changes how the model formats its own outputs -- minimal syntax, dropped articles, abbreviated phrasing. The repo claims 65% token reduction. It installs as a Claude Code skill, so there is no proxy or middleware to configure. The core insight is that if the model's explanations and internal narration can be abbreviated without losing meaning, you save tokens on the majority of every agentic coding session."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "67.2k",
+            "lang": "Rust",
+            "body": "rtk is a Rust CLI proxy that sits between your dev toolchain and the LLM, stripping 60-90% of tokens from common command outputs before they reach the model. A single zero-dependency binary intercepts things like git diffs, file listings, and build errors, then summarizes or reformats them before the model sees them. No service to run -- just a binary in your PATH. In any agentic coding loop where tool output is the primary cost driver, this cuts the bill without touching prompts or model config."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "74.7k",
+            "lang": "Python",
+            "body": "graphify turns any folder of code, SQL schemas, shell scripts, docs, papers, images, or videos into a queryable knowledge graph, then exposes it to coding assistants like Claude Code, Codex, and Gemini CLI. The GraphRAG approach means instead of dumping raw files into context, your agent queries a structured graph of relationships between components -- app code, database schema, and infrastructure in one connected view. Cross-file reasoning improves without the context explosion. Ships as a skill or plugin across most major AI coding CLIs."
+          },
+          {
+            "title": "headroomlabs-ai/headroom",
+            "url": "https://github.com/headroomlabs-ai/headroom",
+            "source": "github.com",
+            "stars": "54.3k",
+            "lang": "Python",
+            "body": "headroom compresses tool outputs, log lines, file contents, and RAG chunks before they reach the LLM -- the repo claims 60-95% token reduction while preserving answer quality. It ships three ways: a Python library you import, a proxy server you point model calls at, and an MCP server for Claude Code and compatible agents. The target use case is agentic loops where tool output expands fast -- long file reads, verbose API responses, stack traces that are 80% boilerplate. Compress before the model sees it, keep the signal."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing hit the bar this week.",
+        "items": []
+      }
+    ],
+    "closing": "Big week -- two new model lines, an inference chip, and a GitHub ecosystem that has clearly found its obsession."
+  },
+  {
     "id": "2026-06-29",
     "date": "June 29, 2026",
     "title": "AI Pulse",
