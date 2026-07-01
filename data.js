@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-01",
+    "date": "July 1, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Gemini gets hands, a Rust binary guts your token bill, and HTML becomes a video codec",
+    "intro": "No single headline model launch today -- instead a run of real infrastructure moves. Gemini 3.5 Flash picks up computer use at bargain pricing, DeepMind ships two cheaper multimodal models, and the GitHub charts are full of tools that make agents cheaper and more capable rather than flashier. Read shipping for what you can build against right now, climbing for what's worth cloning this weekend.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A quiet day for flagship launches, a busy one for the tools underneath them.",
+        "items": [
+          {
+            "title": "Previewing GPT-5.6 Sol: a next-generation model",
+            "url": "https://openai.com/index/previewing-gpt-5-6-sol",
+            "source": "OpenAI",
+            "body": "OpenAI put a preview of GPT-5.6 Sol out today, its next flagship model, with gains concentrated in coding, science, and cybersecurity -- the three fronts where recent frontier releases have been fighting hardest for ground. It ships alongside what OpenAI calls its most advanced safety stack yet, meaning tighter red-teaming and monitoring built into the release instead of bolted on after launch. This is a preview, not a full GA rollout, so expect API access to widen over the coming weeks rather than land all at once. If you're already building on the GPT-5.x line, this is the version to start testing against for anything security- or research-adjacent."
+          },
+          {
+            "title": "Introducing computer use in Gemini 3.5 Flash",
+            "url": "https://deepmind.google/blog/introducing-computer-use-in-gemini-3-5-flash/",
+            "source": "Google DeepMind",
+            "body": "Gemini 3.5 Flash can now drive a computer directly -- look at a screen, click, type, navigate apps -- the same category Anthropic and OpenAI have already shipped under computer use and operator. The difference is this lands in the Flash tier, DeepMind's cheap-and-fast line, not just the flagship model. That matters if you're building agents that need to click through legacy software or web UIs with no API on offer: you now get computer-use behavior at Flash pricing instead of paying frontier rates for what's usually a simple point-and-click task."
+          },
+          {
+            "title": "Start building with Nano Banana 2 Lite and Gemini Omni Flash",
+            "url": "https://deepmind.google/blog/start-building-with-nano-banana-2-lite-and-gemini-omni-flash/",
+            "source": "Google DeepMind",
+            "body": "Two new models are live in the API today: Nano Banana 2 Lite, a cheaper cut of DeepMind's image generation and editing model, and Gemini Omni Flash, a fast multimodal model handling text, image, and audio in a single call. Both target the same gap -- teams that liked what the bigger versions could do but couldn't justify the cost or latency at scale. If you were waiting for Nano Banana 2 to get affordable enough for a production image pipeline, or wanted one Flash-tier model instead of stitching together separate ones for audio and vision, both are buildable against right now."
+          },
+          {
+            "title": "OpenClaw v2026.6.11",
+            "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.6.11",
+            "source": "openclaw",
+            "body": "OpenClaw's latest release is a reliability patch, not a feature drop, aimed at the stuff that erodes trust in a messaging bot: misplaced replies, sends that get stuck, and reconnect failures across Telegram, WhatsApp, and Matrix. It also tightens model setup so a bad config fails loudly instead of silently, and locks down admin defaults so a fresh install isn't wide open by default. If you run OpenClaw in production, this is a straightforward upgrade -- nothing new to learn, just fewer 2am pages about a bot that quietly stopped responding."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's stars go to tools that make agents cheaper and better-informed, not just louder.",
+        "items": [
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "75.1k",
+            "lang": "Python",
+            "body": "Graphify turns a folder into a queryable knowledge graph -- point it at code, SQL schemas, R scripts, docs, papers, images, even video, and it builds one graph spanning app code, database schema, and infrastructure together instead of treating them as separate silos. That's the actual novel part: most RAG-over-codebase tools stop at source files, so a question like 'which endpoint writes to this column and what infra does it run on' needs three separate lookups. Graphify answers it in one query. It plugs into Claude Code, Codex, OpenCode, and Gemini CLI, so it's built to sit underneath whatever agent you're already using, not replace it."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "67.5k",
+            "lang": "Rust",
+            "body": "rtk is a CLI proxy that sits between your agent and everyday dev commands and strips 60-90% of the tokens out of their output before it reaches the model -- a single Rust binary, zero dependencies. The premise: most of what git status, test runners, and linters print is noise an LLM doesn't need to reason correctly, so filtering it at the proxy layer beats eating the full log in context every call. If your agent bill is dominated by tool-output tokens rather than reasoning tokens, this is a lower-effort fix than switching to a cheaper model."
+          },
+          {
+            "title": "heygen-com/hyperframes",
+            "url": "https://github.com/heygen-com/hyperframes",
+            "source": "github.com",
+            "stars": "32.5k",
+            "lang": "TypeScript",
+            "body": "Hyperframes renders video from HTML -- write a scene in HTML/CSS with GSAP animation, point Hyperframes at it, and FFmpeg outputs a real video file, frame by frame. It's built explicitly for agents: an LLM that already knows how to write HTML and CSS can now generate motion graphics and short video without learning a video API or a timeline tool. That flips the usual workflow, where video generation means prompting a diffusion model and hoping -- here the agent has deterministic control over layout, timing, and animation because it's just writing markup."
+          },
+          {
+            "title": "jamiepine/voicebox",
+            "url": "https://github.com/jamiepine/voicebox",
+            "source": "github.com",
+            "stars": "36.6k",
+            "lang": "TypeScript",
+            "body": "Voicebox is an open-source voice studio built on Qwen3-TTS -- clone a voice, dictate text-to-speech, generate audio locally with CUDA or MLX acceleration, no cloud API required. What makes it worth a look is that it's a full studio UI, not a script wrapper: you get a real interface for managing voices and takes instead of piping text through a command line. For builders who want ElevenLabs-quality cloning without sending voice data to a third party, this is the self-hosted option."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's feed documented a real build end-to-end.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-06-30",
     "date": "June 30, 2026",
     "title": "AI Pulse",
