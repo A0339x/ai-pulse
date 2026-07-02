@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-02",
+    "date": "July 2, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Sonnet 5 lands, OpenAI previews GPT-5.6 Sol, and GitHub goes all-in on squeezing tokens",
+    "intro": "Three labs put out real, usable-today releases instead of recaps, which is rare enough to notice. On GitHub, the throughline is context economy -- multiple top climbers this week exist purely to make agents say more with fewer tokens. Nothing in the built-with-AI pile cleared the bar today.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Four different flavors of new: a fresh flagship, a preview, cheap multimodal access, and an open-source project that zeroed out its bug backlog.",
+        "items": [
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Anthropic rounds out the Claude 5 lineup with Sonnet 5, slotting in between Opus 4.8 and Haiku 4.5 as the mid-tier workhorse. Model ID is claude-sonnet-5, live via the API and Claude Code today. It's positioned as the default pick for agentic coding and long-running tool-use loops, where Opus 4.8 is overkill on cost and Haiku 4.5 runs thin on reasoning for multi-step work. If you're already building on the Claude 4 family, swapping the model string is the whole migration -- you pick up better tool-calling and less hand-holding on longer agent runs without touching your harness code."
+          },
+          {
+            "title": "Previewing GPT-5.6 Sol: a next-generation model",
+            "url": "https://openai.com/index/previewing-gpt-5-6-sol",
+            "source": "OpenAI",
+            "body": "OpenAI opened a preview of GPT-5.6 Sol, the next model in the GPT-5 line, with gains specifically called out in coding, science, and cybersecurity tasks. It ships alongside what OpenAI calls its most advanced safety stack to date -- tighter guardrails paired with the capability jump rather than bolted on after. This is a preview, not a general rollout, so treat benchmarks as directional until wider access lands. Worth tracking if you're evaluating coding assistants or security tooling, since that's where OpenAI says the jump concentrates rather than a flat improvement across the board."
+          },
+          {
+            "title": "Start building with Nano Banana 2 Lite and Gemini Omni Flash",
+            "url": "https://deepmind.google/blog/start-building-with-nano-banana-2-lite-and-gemini-omni-flash/",
+            "source": "DeepMind",
+            "body": "Google DeepMind opened developer access to two new models today: Nano Banana 2 Lite, a cheaper and faster cut of its image generation model, and Gemini Omni Flash, a lightweight multimodal model built for latency-sensitive apps. Both are live in the API now, not just announced -- you can build against them immediately. The pairing chases the same niche Anthropic and OpenAI are also targeting: cheap, fast multimodal inference for real-time products like voice assistants and live image editing, where the flagship models are too slow or too expensive to run at scale."
+          },
+          {
+            "title": "Hermes Agent v0.18.0 (2026.7.1) -- The Judgment Release",
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.7.1",
+            "source": "NousResearch",
+            "body": "Nous Research spent a week and a half doing one thing: closing every open P0 and P1 issue and PR in the Hermes Agent repo. As of this release, that backlog is at zero -- across 998 merged PRs, 949 closed issues, and 370+ contributors touching ~251,000 inserted lines. If you've been holding off on Hermes Agent because of open crash bugs or broken integrations, that excuse is gone. Open-source agent frameworks rarely get a dedicated stabilization release at this scale; this is what it looks like when a team decides new features wait until the bug count actually hits zero."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's stars are obsessed with one thing: making agents say and see more using fewer tokens.",
+        "items": [
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "79.7k",
+            "lang": "JavaScript",
+            "body": "Caveman is a Claude Code skill that rewrites prompts and outputs in stripped-down, article-free \"caveman\" English, claiming a 65% cut in token usage. The bet: most of what a verbose LLM writes back to itself mid-agent-loop is grammatical scaffolding, not information, and stripping it doesn't hurt task tracking. It's a genuinely different lever from context compression or caching -- squeezing the model's own output style rather than trimming what goes in. Useful if you're running long autonomous loops and watching the token meter climb faster than the task progresses."
+          },
+          {
+            "title": "headroomlabs-ai/headroom",
+            "url": "https://github.com/headroomlabs-ai/headroom",
+            "source": "github.com",
+            "stars": "55.6k",
+            "lang": "Python",
+            "body": "Headroom sits between your tools and your LLM and compresses whatever passes through -- logs, file reads, RAG chunks, tool output -- claiming 60-95% token reduction with no drop in answer quality. It ships as a library, a proxy, and an MCP server, so it drops in front of an existing agent stack without a rewrite. Think of it as the production-grade cousin of prompt-compression tricks: instead of asking the model to write tersely, it shrinks the data before the model ever sees it. Worth a look if your agent's context is mostly tool output rather than reasoning."
+          },
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "75.7k",
+            "lang": "Python",
+            "body": "Graphify turns a folder of mixed sources -- code, SQL schemas, R and shell scripts, docs, papers, even images and video -- into one queryable knowledge graph spanning app code, database schema, and infra config together. Most GraphRAG tools index one modality at a time; this treats a whole repo plus its surrounding artifacts as a single connected graph. It ships as a skill across Claude Code, Codex, OpenCode, Gemini CLI, and others. Useful if you're onboarding an agent onto a large, polyglot codebase and want it to reason across layers instead of grepping files one at a time."
+          },
+          {
+            "title": "heygen-com/hyperframes",
+            "url": "https://github.com/heygen-com/hyperframes",
+            "source": "github.com",
+            "stars": "32.7k",
+            "lang": "TypeScript",
+            "body": "HyperFrames flips video generation around: instead of asking a diffusion model to hallucinate frames, you write HTML, CSS, and GSAP animations and it renders that straight to video through ffmpeg. Built explicitly for agents -- an LLM that's good at writing HTML and JS gets a reliable path to motion graphics and animated slides without touching an image-gen model. That sidesteps the usual video-model headaches (drift, inconsistency, per-second cost) by keeping the actual rendering deterministic. A solid building block if you're letting an agent produce presentations or marketing assets end to end."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's pull documented a real, repeatable workflow end to end.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-07-01",
     "date": "July 1, 2026",
     "title": "AI Pulse",
