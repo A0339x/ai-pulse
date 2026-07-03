@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-03",
+    "date": "July 3, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Sonnet 5 lands, DeepMind opens up two new models, and someone turned HTML into a video renderer for agents",
+    "intro": "Anthropic's new flagship model is the headline today, with DeepMind quietly shipping two new models of its own on the same day. On GitHub, the interesting stuff isn't another agent wrapper -- it's tools that compress what agents see and turn raw folders into queryable graphs.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new flagship model, two new DeepMind releases, and a genomics benchmark drop today.",
+        "items": [
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Anthropic pushed out Sonnet 5, the new mid-tier model in the Claude 5 lineup. It slots in as the default workhorse model -- the one behind Claude Code and most API traffic going forward -- replacing whatever you were pointing at yesterday. If you've got code or agents hardcoded to a specific Sonnet version string, check your config: this is the one to migrate to for the balance of speed, cost, and capability that most production workloads actually need. Available now through the API and in Claude apps."
+          },
+          {
+            "title": "Start building with Nano Banana 2 Lite and Gemini Omni Flash",
+            "url": "https://deepmind.google/blog/start-building-with-nano-banana-2-lite-and-gemini-omni-flash/",
+            "source": "DeepMind",
+            "body": "Two new models are live today: Nano Banana 2 Lite, a cheaper and faster cut of DeepMind's image model line, and Gemini Omni Flash, a low-latency multimodal model built for real-time use cases. Both are available to build with immediately via the API. If your image-gen bill or your latency budget has been the blocker on shipping a feature, these are the two to benchmark against what you're currently running -- Lite specifically targets the cost side, Omni Flash targets response time."
+          },
+          {
+            "title": "Hugging Face and Cerebras bring Gemma 4 to real-time voice AI",
+            "url": "https://huggingface.co/blog/cerebras-gemma4-voice-ai",
+            "source": "Hugging Face",
+            "body": "Cerebras hardware paired with Gemma 4 now runs real-time voice pipelines with open weights -- no closed API required. This matters because the latency floor for voice AI has mostly been set by proprietary inference stacks; running it on Cerebras silicon with an open model closes that gap for anyone willing to self-host. If you've been stuck using a hosted voice API because open-weight inference was too slow for natural conversation, this is the setup to try instead."
+          },
+          {
+            "title": "Introducing GeneBench-Pro",
+            "url": "https://openai.com/index/introducing-genebench-pro",
+            "source": "OpenAI",
+            "body": "OpenAI shipped GeneBench-Pro, a new benchmark testing model performance on genomics, biology, and scientific research using real-world datasets rather than toy problems. Alongside the benchmark itself, OpenAI published case studies showing how models score against it today. If you're building anything in computational biology or scientific research tooling, this is a fresh yardstick to check your model choice against -- it's specifically designed to expose the gap between benchmark-friendly performance and messy real lab data."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "The stars this week went to tools that make agents cheaper and more capable, not more of the same wrappers.",
+        "items": [
+          {
+            "title": "safishamsi/graphify",
+            "url": "https://github.com/safishamsi/graphify",
+            "source": "github.com",
+            "stars": "76.6k",
+            "lang": "Python",
+            "body": "Point this at any folder -- code, SQL schemas, R scripts, shell scripts, docs, papers, images, videos -- and it builds a queryable knowledge graph out of it, unifying app code, database schema, and infra into one graph your agent can query instead of grepping blind. It ships as a skill for Claude Code, Codex, OpenCode, Cursor, Gemini CLI, and others. The novel part is treating heterogeneous project artifacts as one graph rather than separate indexes, which is genuinely useful for agents working in large, messy repos where the schema and the code have drifted apart."
+          },
+          {
+            "title": "headroomlabs-ai/headroom",
+            "url": "https://github.com/headroomlabs-ai/headroom",
+            "source": "github.com",
+            "stars": "56.1k",
+            "lang": "Python",
+            "body": "Compresses tool outputs, logs, files, and RAG chunks before they ever reach the LLM, claiming 60-95% fewer tokens for the same answers. It ships as a library, a proxy, and an MCP server, so you can drop it in front of an existing agent stack without rewriting it. The idea is straightforward but underexploited: most token waste in agent loops isn't the prompt, it's the tool output getting dumped back in raw. Worth trying if your agent's context is getting eaten by verbose command output or log dumps."
+          },
+          {
+            "title": "heygen-com/hyperframes",
+            "url": "https://github.com/heygen-com/hyperframes",
+            "source": "github.com",
+            "stars": "32.9k",
+            "lang": "TypeScript",
+            "body": "Write HTML, get rendered video out -- built specifically so agents can produce video by generating markup instead of wrangling a video editing API or timeline format. It uses GSAP for animation and ffmpeg for the actual render. The pitch is that agents are already good at writing HTML/CSS, so instead of teaching them a new video-specific API, you let them work in a format they're fluent in and handle the render pipeline underneath. Useful if you're building anything that needs agent-generated video -- explainer clips, ads, motion graphics -- without a human in the editing loop."
+          },
+          {
+            "title": "koala73/worldmonitor",
+            "url": "https://github.com/koala73/worldmonitor",
+            "source": "github.com",
+            "stars": "61.3k",
+            "lang": "TypeScript",
+            "body": "A real-time situational awareness dashboard that uses AI to aggregate news, track geopolitical events, and monitor infrastructure signals in one interface. It's not a coding tool -- it's a fully open-source alternative to the kind of intelligence dashboards that usually sit behind enterprise contracts. Worth a look if you want a template for building AI-powered monitoring dashboards generally: the pattern of continuous ingestion plus LLM summarization plus a live UI applies well beyond geopolitics, to anything where you need a standing feed of structured signal pulled out of unstructured noise."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's feed cleared the bar for a real end-to-end build writeup.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-07-02",
     "date": "July 2, 2026",
     "title": "AI Pulse",
