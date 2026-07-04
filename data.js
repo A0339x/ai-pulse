@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-04",
+    "date": "July 4, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Sonnet 5 lands, Google ships two fast multimodal models, and GitHub goes all-in on context economy",
+    "intro": "Anthropic's Sonnet 5 is live as the new default for agentic coding, and Google matched it same week with two speed-tier multimodal models you can build with today. On GitHub, the theme is context economy -- knowledge graphs, video-from-HTML, and token-compression tools all trying to get more done with less shoved into the context window. Nothing in today's Built With AI queue cleared the bar, so that section's empty -- back tomorrow.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new flagship model and two fast multimodal siblings, plus a real benchmark for AI-in-biology.",
+        "items": [
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Anthropic shipped Sonnet 5, the new mid-tier model in the Claude 5 lineup alongside Opus 4.8 and Haiku 4.5. It's live now via the API, claude.ai, and Claude Code as the default model for coding and agentic work. The pitch: closer to Opus-level reasoning at Sonnet pricing and latency, with better long-horizon tool use and fewer dropped threads across multi-step agent tasks. If you were running Sonnet 4.x in production, swapping the model string is the whole migration -- no new API shape. Worth benchmarking your own agent harness against it today rather than trusting anyone's leaderboard numbers."
+          },
+          {
+            "title": "Start building with Nano Banana 2 Lite and Gemini Omni Flash",
+            "url": "https://deepmind.google/blog/start-building-with-nano-banana-2-lite-and-gemini-omni-flash/",
+            "source": "Google DeepMind",
+            "body": "Google opened API access today to two smaller, faster models: Nano Banana 2 Lite, a trimmed-down version of its image model built for high-volume, low-latency edits, and Gemini Omni Flash, a fast omni-modal model that takes text, image, audio, and video in one call. Both are priced and tuned for production apps that need speed over max quality -- real-time image editing tools or live multimodal assistants, not one-off creative generations. If you were stuck choosing between Gemini's flagship omni models and cheaper text-only Flash variants, this closes that gap with a multimodal option in the fast tier."
+          },
+          {
+            "title": "Hugging Face and Cerebras bring Gemma 4 to real-time voice AI",
+            "url": "https://huggingface.co/blog/cerebras-gemma4-voice-ai",
+            "source": "Hugging Face",
+            "body": "Hugging Face and Cerebras put Gemma 4 on Cerebras's inference chips and wired it into a real-time voice pipeline, cutting round-trip latency low enough for natural spoken conversation instead of the usual pause-then-reply of most voice bots. It's available today through Hugging Face's inference endpoints, so you can build a voice agent on Gemma 4 without running your own GPU cluster or stitching together separate STT/LLM/TTS latency budgets. For anyone shipping voice UIs, this is a ready-made low-latency backend to benchmark against whatever you're currently running on OpenAI or ElevenLabs stacks."
+          },
+          {
+            "title": "Introducing GeneBench-Pro",
+            "url": "https://openai.com/index/introducing-genebench-pro",
+            "source": "OpenAI",
+            "body": "OpenAI released GeneBench-Pro, a benchmark scoring model performance on real genomics and biology datasets instead of synthetic science trivia -- sequence analysis, experimental design, literature-grounded reasoning over actual lab data. It's open today for anyone building or evaluating models in computational biology, with accompanying case studies showing where current frontier models still fail on real research tasks. If you're building AI tools for scientific research, this is the first benchmark that separates 'sounds right about biology' from 'gets the right answer on data a wet lab actually produced.'"
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Every repo on today's list is chasing the same problem from a different angle: too much stuff, not enough context window.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "77.4k",
+            "lang": "Python",
+            "body": "Point graphify at a folder of anything -- code, SQL schemas, R scripts, docs, PDFs, images, video -- and it builds a queryable knowledge graph linking app code, database schema, and infrastructure together, then plugs into Claude Code, Codex, Cursor, and Gemini CLI as a skill. The novel part is treating GraphRAG as infrastructure-aware: instead of chunking text for vector search, it models the actual relationships between a function, the table it queries, and the service that deploys it. Useful for anyone whose coding agent keeps losing track of how a monorepo's pieces actually connect."
+          },
+          {
+            "title": "heygen-com/hyperframes",
+            "url": "https://github.com/heygen-com/hyperframes",
+            "source": "github.com",
+            "stars": "33.0k",
+            "lang": "TypeScript",
+            "body": "Hyperframes renders video from HTML instead of a traditional editing timeline -- write markup and CSS/GSAP animations, and it uses ffmpeg under the hood to output an actual video file. It's built explicitly for agents: an LLM that can already write HTML and CSS can now produce motion graphics, explainer clips, or animated social content without touching a video-generation API or format it's never seen. If you're building agents that need to generate video on demand, this swaps 'prompt a video model and hope' for 'write markup you can actually debug.'"
+          },
+          {
+            "title": "jamiepine/voicebox",
+            "url": "https://github.com/jamiepine/voicebox",
+            "source": "github.com",
+            "stars": "37.5k",
+            "lang": "TypeScript",
+            "body": "Voicebox is an open-source, local-first voice studio built on Qwen3-TTS -- clone a voice, dictate text into speech, and edit the output, all running on your own GPU (CUDA or Apple MLX) instead of a paid API. It's aimed at builders who want voice cloning and generation without sending audio to a third-party service or paying per character. The desktop app wraps what's usually a command-line-only workflow -- voice cloning, fine-tuning, batch generation -- into something you can actually use without stitching scripts together yourself."
+          },
+          {
+            "title": "headroomlabs-ai/headroom",
+            "url": "https://github.com/headroomlabs-ai/headroom",
+            "source": "github.com",
+            "stars": "56.4k",
+            "lang": "Python",
+            "body": "Headroom sits between your tools and your LLM and compresses everything before it hits the context window -- logs, file contents, RAG chunks, tool output -- claiming 60-95% token reduction with no answer-quality loss. It ships three ways: an importable library, a standalone proxy, or an MCP server, so it drops into an existing agent stack without a rewrite. For anyone running Claude Code or a custom agent against large repos or noisy tool output, this targets the actual cost driver -- not model choice, but how much junk gets stuffed into every turn."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's source list documented a full build end-to-end, so we're skipping filler.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- go build something."
+  },
+  {
     "id": "2026-07-03",
     "date": "July 3, 2026",
     "title": "AI Pulse",
