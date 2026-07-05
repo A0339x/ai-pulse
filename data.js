@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-05",
+    "date": "July 5, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Sonnet 5 goes live, Gemini's flash tier gets a cheap lane, and Claude Code learns to grunt like a caveman",
+    "intro": "Anthropic rounds out its Claude 5 lineup with Sonnet 5, while DeepMind and Hugging Face both shipped cheaper, faster variants of existing models rather than net-new ones -- this is an optimization week, not a moonshot week. On GitHub the theme is squeezing more out of agents: fewer tokens, richer context, wider reach across the internet. Nothing in today's build write-ups cleared the bar, so that section sits empty.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new flagship model, two cheaper multimodal tiers, and the first real benchmark for AI in biology.",
+        "items": [
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Anthropic shipped Claude Sonnet 5, the new mid-tier model in the Claude 5 lineup alongside Opus 4.8 and Haiku 4.5. It's now the default model behind Claude Code and the API's claude-sonnet-5 model ID, replacing whatever you had pinned on the 4.x line. Early positioning: faster and cheaper than Opus 4.8 while staying close on coding and reasoning benchmarks -- exactly the tier most agent builders actually live in day to day. If you've got a hardcoded model string in your agent config, today's the day to swap it and re-run your eval suite before you trust it in prod."
+          },
+          {
+            "title": "Start building with Nano Banana 2 Lite and Gemini Omni Flash",
+            "url": "https://deepmind.google/blog/start-building-with-nano-banana-2-lite-and-gemini-omni-flash/",
+            "source": "DeepMind",
+            "body": "DeepMind opened API access to two new models: Nano Banana 2 Lite, a cheaper cut of its image generation and editing model, and Gemini Omni Flash, a fast multimodal model built for low-latency, always-on tasks like live video or voice agents. Both are live in the Gemini API and AI Studio today, no waitlist. The pitch is cost and speed: Lite variants exist so you can run image edits or omni-modal inference at a fraction of the price of the full-size models, which changes the math on any product that calls these models per-request instead of per-session."
+          },
+          {
+            "title": "Hugging Face and Cerebras bring Gemma 4 to real-time voice AI",
+            "url": "https://huggingface.co/blog/cerebras-gemma4-voice-ai",
+            "source": "Hugging Face",
+            "body": "Hugging Face and Cerebras put Gemma 4 on Cerebras' wafer-scale inference hardware and got it fast enough for real-time voice conversation -- no more turn-based TTS-to-LLM-to-STT round trips. The integration ships today as a hosted endpoint plus reference code, so you can build a full-duplex voice agent on an open-weight model instead of routing through a closed API. Open models have historically struggled to hit conversational latency on typical GPUs; this is one of the first setups that clears that bar without a proprietary model in the loop."
+          },
+          {
+            "title": "Introducing GeneBench-Pro",
+            "url": "https://openai.com/index/introducing-genebench-pro",
+            "source": "OpenAI",
+            "body": "OpenAI released GeneBench-Pro, a benchmark that scores models on genomics and biology tasks using real experimental datasets rather than curated trivia -- things like predicting gene function or interpreting lab results end to end. A companion case-study post shows research teams already using it to grade models before deploying them on live biology workflows. If you're building anything in computational biology, this is the first standardized yardstick for whether a model's output is usable science, not just plausible-sounding text."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's stars go to agents that read more of the internet, remember more of your codebase, and cost fewer tokens doing it.",
+        "items": [
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "84.5k",
+            "lang": "JavaScript",
+            "body": "This Claude Code skill rewrites your prompts and context into stripped-down, grammar-free \"caveman speak\" before they hit the model, claiming a 65% cut in token usage with no real quality loss. It's a joke wrapper on a real technique: verbose, grammatically complete prompts burn tokens that add no information density, and most agent harnesses waste budget restating structure the model already infers. Worth a look if you're blowing through context windows on repetitive agent loops and want a drop-in compression layer instead of rewriting your own prompt templates from scratch."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "77.9k",
+            "lang": "Python",
+            "body": "Point Graphify at a folder of anything -- code, SQL schemas, R scripts, docs, PDFs, even video -- and it builds a queryable knowledge graph linking your app code, database schema, and infrastructure together. It plugs into Claude Code, Codex, Gemini CLI and other agents as a skill, so an agent can ask \"what tables does this endpoint touch\" and get a real structural answer instead of grepping blind. That's a step up from typical RAG-over-docs setups: it's tracked relationships across your whole stack, not just semantic search over chunks."
+          },
+          {
+            "title": "Panniantong/Agent-Reach",
+            "url": "https://github.com/Panniantong/Agent-Reach",
+            "source": "github.com",
+            "stars": "51.0k",
+            "lang": "Python",
+            "body": "Agent-Reach gives a coding agent one CLI to read and search Twitter, Reddit, YouTube, GitHub, Bilibili and Xiaohongshu, with zero API fees. Instead of wiring up separate keys and rate limits for every platform you want an agent to research, it normalizes all of them behind a single interface. That matters for agents doing competitive research, trend-spotting, or gathering real-world context before writing code -- the bottleneck usually isn't the model's reasoning, it's assembling a clean multi-platform feed for it to read in the first place."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "33.4k",
+            "lang": "Python",
+            "body": "OpenMontage turns a coding agent into a video production studio: 12 pipelines and 52 tools covering scripting, shot selection, editing, and rendering, driven from Claude, Copilot, Cursor or similar. It bills itself as the first open-source agentic video system, and the scope backs that up -- this isn't a single ffmpeg wrapper, it's enough tooling to take a prompt to a cut video with 500-plus agent skills behind it. Worth watching if you've wanted to automate video content the way agent frameworks already automate code and docs."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's pile documented a full build end to end, so we're sitting this section out.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- go swap your model strings and touch grass."
+  },
+  {
     "id": "2026-07-04",
     "date": "July 4, 2026",
     "title": "AI Pulse",
