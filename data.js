@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-06",
+    "date": "July 6, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Sonnet 5 and Fable 5 both go live, and GitHub's obsessed with turning agents into designers and video editors",
+    "intro": "Anthropic drops two model updates on the same day -- a new Sonnet and a redeployed Fable 5 with fresh jailbreak safeguards. OpenAI and DeepMind round out shipping with a real-science benchmark and two lightweight models built for latency-sensitive apps. On GitHub, the interesting repos aren't more agent wrappers -- they're agents doing design, video, and whole-stack knowledge graphs.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two Anthropic model updates lead, with OpenAI and DeepMind shipping narrower but concrete new capability.",
+        "items": [
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Anthropic's new mid-tier model is live today, replacing the previous Sonnet as the default across Claude.ai and the API. It's pitched as the everyday driver: fast enough for interactive coding and agent loops, capable enough for reasoning-heavy work that used to mean stepping up to Opus. If you're building on the Anthropic API, Sonnet 5 is now the model ID to reach for by default -- same pricing tier as before, with the bigger jump showing up on long-horizon agentic tasks, the kind Claude Code runs continuously rather than single-shot prompts."
+          },
+          {
+            "title": "Redeploying Fable 5",
+            "url": "https://www.anthropic.com/news/redeploying-fable-5",
+            "source": "Anthropic",
+            "body": "Fable 5, Anthropic's top-end model, is back online today after a redeployment tied to a new jailbreak safeguards framework published alongside it. Anthropic is making the red-team methodology it uses to harden Fable models against adversarial prompts public, rather than keeping it internal. If your access to Fable 5 was paused, it should be restored now. The tradeoff to expect: stricter refusal behavior on adversarial or edge-case prompts as the new safeguards kick in."
+          },
+          {
+            "title": "Introducing GeneBench-Pro",
+            "url": "https://openai.com/index/introducing-genebench-pro",
+            "source": "OpenAI",
+            "body": "OpenAI released GeneBench-Pro today, a benchmark that scores models on genomics, biology, and scientific-research tasks using complex real-world datasets instead of textbook-style questions. It's built to expose the gap between an answer that sounds right and one that holds up against actual lab data. Case studies published alongside the benchmark show where current frontier models still get real datasets wrong. If you're evaluating a model for biology or genomics work, this is a harder and more realistic bar than the general science benchmarks currently in circulation."
+          },
+          {
+            "title": "Start building with Nano Banana 2 Lite and Gemini Omni Flash",
+            "url": "https://deepmind.google/blog/start-building-with-nano-banana-2-lite-and-gemini-omni-flash/",
+            "source": "DeepMind",
+            "body": "Google DeepMind opened up two lightweight models today: Nano Banana 2 Lite for image generation and editing, and Gemini Omni Flash for fast multimodal tasks. Both trade some capability for latency and cost, aimed at real-time use cases like live image edits or multimodal apps that can't afford a multi-second round trip. They're available now through the standard Gemini API, sitting a tier below the full Nano Banana 2 and Gemini Omni models for teams that don't need the heaviest model on every call."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's momentum is agents doing jobs outside of coding -- design, video, whole-stack knowledge graphs -- plus one genuinely weird token-saving trick.",
+        "items": [
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "85.5k",
+            "lang": "JavaScript",
+            "body": "This Claude Code skill rewrites your prompts into blunt, caveman-style phrasing before they hit the model and claims a 65% cut in token usage from doing it. The premise: most prompt boilerplate -- politeness, hedging, restating context -- is pure token waste that terse grammar doesn't need. It's a testable claim: install it, watch your token counts, and see if stripped-down prompting holds up on your actual workloads. Whether the 65% number survives real usage or not, it's a sharp jab at how much padding sits in typical agent prompts today."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "78.5k",
+            "lang": "Python",
+            "body": "Graphify turns a folder of anything -- code, SQL schemas, R scripts, shell scripts, docs, papers, images, video -- into a queryable knowledge graph your coding agent can traverse instead of grepping blind. It ships as a skill for Claude Code, Codex, Gemini CLI, and others, and covers app code, database schema, and infrastructure in a single connected graph rather than three separate mental models. Most GraphRAG tools stop at source code; this one treats your whole stack as one graph, which matters once you're debugging something that spans a migration, a config file, and the code reading it."
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "75.5k",
+            "lang": "TypeScript",
+            "body": "Open Design turns your coding agent into a design tool: prompt it and get real prototypes, landing pages, dashboards, slides, images, and video -- exported as actual HTML, PDF, PPTX, or MP4 files, not mockup screenshots. It's local-first, BYOK, and works across 20+ CLIs including Claude Code, Codex, and Cursor. Coding agents are good at logic and weak at visual output; this routes the design half of the work through the same agent loop you already use for code, instead of forcing a context switch to Figma."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "34.1k",
+            "lang": "Python",
+            "body": "OpenMontage bills itself as the first open-source agentic video production system: 12 pipelines, 52 tools, and 500+ skills that turn a coding assistant into a full video studio -- scripting, editing, sequencing, output. It plugs into Claude, Copilot, Cursor, and others as an agent skill set rather than a standalone app. Video has lagged behind text and code as an agent target because there's no clean text interface to it; this is a serious attempt at building one, shipped as tooling you drop into an existing coding agent instead of a new product to learn."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's sources documented a full build end to end -- back tomorrow with real workflows.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-07-05",
     "date": "July 5, 2026",
     "title": "AI Pulse",
