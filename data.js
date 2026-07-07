@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-07",
+    "date": "July 7, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Sonnet 5 goes live, DeepMind opens two new models, and someone renders video from HTML",
+    "intro": "Quiet week for genuinely new capability, but a few real ones landed: Anthropic's next Sonnet is live in Claude Code today, and Vercel gave AI Gateway a firewall-style routing layer. On GitHub, the interesting repos aren't wrappers -- they're a repo-to-knowledge-graph tool and two different bets on cutting token spend.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new default model and some real infra upgrades, not much noise.",
+        "items": [
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Anthropic released Sonnet 5, the next model in the Claude family, now live in the API, Claude Code, and claude.ai. It's positioned as the workhorse tier -- the model builders reach for by default on coding, agents, and long tool-use sessions, rather than the flagship Opus tier reserved for the hardest problems. If you're already running Claude Code today, this is likely the model already handling your requests, since it becomes the default without any config change on your end. No separate signup, no waitlist, no beta flag -- it slots into the existing Sonnet pricing tier and is just live."
+          },
+          {
+            "title": "Start building with Nano Banana 2 Lite and Gemini Omni Flash",
+            "url": "https://deepmind.google/blog/start-building-with-nano-banana-2-lite-and-gemini-omni-flash/",
+            "source": "DeepMind",
+            "body": "DeepMind opened API access to two new models: Nano Banana 2 Lite, a faster, cheaper cut of its image generation model, and Gemini Omni Flash, a low-latency multimodal model built for real-time voice and mixed-media use. Both are available to build with today, no waitlist. Nano Banana 2 Lite trades some output quality for speed and cost, which matters if you're running image generation at volume rather than one-off creative work. Omni Flash targets latency-sensitive apps -- voice agents, live multimodal interfaces -- where the full Omni model's quality is overkill for the response-time budget you actually have."
+          },
+          {
+            "title": "OpenHands cloud-1.41.0",
+            "url": "https://github.com/OpenHands/OpenHands/releases/tag/cloud-1.41.0",
+            "source": "All-Hands-AI/OpenHands",
+            "body": "OpenHands shipped semantic file chunking using tree-sitter AST parsing -- the agent now splits code by actual syntactic boundaries instead of raw line counts, which directly improves retrieval and context-fitting on large repos. The release also adds an organization conversation admin dashboard for teams running OpenHands at scale, plus production workspace snapshotting: an initial state capture at session start and an archive before teardown, so you can inspect exactly what an agent changed in a live environment after the fact. Useful if you're running OpenHands against anything you can't afford to debug blind."
+          },
+          {
+            "title": "Routing rules now available on AI Gateway",
+            "url": "https://vercel.com/changelog/ai-gateway-routing-rules",
+            "source": "Vercel",
+            "body": "Vercel AI Gateway now supports routing rules -- firewall-style controls on which models your team can use, enforced at the gateway instead of in application code. Rewrite rules serve one model in place of another, handy when a model gets deprecated or goes down and you'd otherwise need a code deploy to move off it. Other rules cap or redirect expensive models to cheaper ones automatically. Push a rule and every request reroutes instantly across your whole team. It turns model routing into an ops lever you pull from a dashboard, not a change you ship."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Less wrapper, more idea: a code-to-graph tool and two competing bets on cutting token spend.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "79.2k",
+            "lang": "Python",
+            "body": "Graphify turns any folder -- code, SQL schemas, R scripts, docs, PDFs, even video -- into a queryable knowledge graph your coding agent can traverse. It's GraphRAG applied directly to a repo: app code, database schema, and infrastructure config land in one graph instead of three separate mental models. Ships as a skill across Claude Code, Codex, OpenCode, Cursor, and Gemini CLI. The bet is that most agent failures on large codebases come from missing cross-file context -- a schema change that breaks a query three services away -- and a graph catches that where flat file search doesn't."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "69.2k",
+            "lang": "Rust",
+            "body": "rtk is a CLI proxy that sits between your dev commands and the model, claiming 60-90% token reduction on common agentic-coding workflows -- shipped as a single Rust binary with zero dependencies. Instead of resending full file contents and command output on every turn, it intercepts and compresses that traffic before it reaches the model. For anyone burning through usage limits on large repos with Claude Code or similar tools, that's a direct cost and speed win, and it's a drop-in: point your CLI through the proxy and nothing else about your workflow changes."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "86.1k",
+            "lang": "JavaScript",
+            "body": "Caveman is a Claude Code skill that rewrites the agent's internal reasoning and tool chatter into stripped-down, grammar-free phrasing, and claims a 65% cut in token usage doing it. The bet: most of an agent's verbose self-narration and boilerplate explanation costs tokens without adding accuracy, so forcing terse output is a legitimate lever, not just a bit. It's the same instinct as rtk -- cut token spend -- attacked from the prompt-style side instead of the transport side, which says something about how much headroom is still sitting in how agents talk to themselves."
+          },
+          {
+            "title": "heygen-com/hyperframes",
+            "url": "https://github.com/heygen-com/hyperframes",
+            "source": "github.com",
+            "stars": "33.6k",
+            "lang": "TypeScript",
+            "body": "Hyperframes renders video from plain HTML -- write markup and GSAP animation timelines, and it outputs an actual video file via ffmpeg, no editor involved. It's built specifically for agents: an LLM generates the HTML/CSS/animation the same way it generates a webpage, and hyperframes turns that into an MP4. That reframes video generation as a code-generation problem instead of a diffusion-model problem, which plays a lot better with existing coding agents, diffing, and version control than prompting a video model does."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing today met the bar for a real, attemptable build writeup.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-07-06",
     "date": "July 6, 2026",
     "title": "AI Pulse",
