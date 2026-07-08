@@ -3,6 +3,90 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-08",
+    "date": "July 8, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic ships the Sonnet 5 family, Gemini agents go fully managed, and GitHub's climbing token-shaving CLIs and agent-built video tools",
+    "intro": "Anthropic's Claude 5 lineup lands today alongside a science-focused workbench, while Google pushes Gemini's Managed Agents further into background-task territory. On GitHub, the fastest-climbing repos are all about squeezing more out of your existing agent setup: fewer tokens, richer context, and new output formats like video and design files.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new Claude model family and a bigger Gemini agent runtime headline today.",
+        "items": [
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Anthropic launched Claude Sonnet 5, part of the new Claude 5 family alongside Opus 4.8 and Haiku 4.5. It slots in as the mid-tier model for day-to-day coding and agent work, replacing Sonnet 4.5 as the default balance of speed and capability. If you're calling Claude through the API or using Claude Code, this is the model you're likely on as of today. Model IDs have shifted too, so check your integration if you pin a specific version string rather than an alias."
+          },
+          {
+            "title": "Claude Science AI Workbench",
+            "url": "https://www.anthropic.com/news/claude-science-ai-workbench",
+            "source": "Anthropic",
+            "body": "Anthropic rolled out a dedicated workbench for scientific work built on Claude, aimed at researchers running literature review, hypothesis generation, and data analysis in one place instead of stitching together separate tools. It's a new surface, not just a prompt template: a purpose-built environment sitting on top of the Claude 5 models rather than the general chat or API interface. Worth a look if your work involves lab data, papers, or experiment design and you've been improvising with the standard Claude app."
+          },
+          {
+            "label": null,
+            "title": "Expanding Managed Agents in Gemini API: background tasks, remote MCP and more",
+            "url": "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api/",
+            "source": "Google AI",
+            "body": "Gemini's Managed Agents now support background tasks and remote MCP connections, meaning you can kick off long-running agent jobs that keep working after your client disconnects, and point an agent at MCP servers hosted elsewhere instead of running everything locally. That's a real gap closed: previously managed agents were tied to your session and local tool setup. If you're building anything that needs to survive a dropped connection or pull from a shared MCP server, this is now handled by the API instead of your own infra."
+          },
+          {
+            "title": "crewAI 1.15.2",
+            "url": "https://github.com/crewAIInc/crewAI/releases/tag/1.15.2",
+            "source": "crewAI",
+            "body": "crewAI's crew wizard now pulls available LLM models dynamically instead of showing a hardcoded list, so new models show up without a client update. The release also adds inline skill definitions and a generated Flow Definition authoring skill, letting you define and template flow actions directly rather than wiring them up by hand. There's also a new stream frame protocol for flows, which standardizes how flow state gets pushed to clients in real time. Useful if you're building multi-agent flows and were previously hand-rolling model lists or flow scaffolding."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's fast climbers all extend what an agent can output or how cheaply it runs.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "80.0k",
+            "lang": "Python",
+            "body": "Graphify turns a folder of anything -- code, SQL schemas, R scripts, shell scripts, docs, papers, images, video -- into a queryable knowledge graph that your coding agent can traverse. Instead of an agent grepping through files or relying on a flat vector index, it gets app code, database schema, and infra represented as connected nodes it can query directly. It plugs into Claude Code, Codex, OpenCode, Cursor, Gemini CLI, and more as a skill. Worth trying if your codebase spans multiple languages and formats and your agent keeps missing cross-file relationships that a graph would make explicit."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "69.5k",
+            "lang": "Rust",
+            "body": "rtk is a CLI proxy that sits between your agent and the model, cutting token consumption 60-90% on common dev commands. It's a single Rust binary with zero dependencies, so it's a drop-in rather than a new framework to learn. The core idea is compressing or restructuring the repeated context (file listings, command output, tool schemas) that agent harnesses resend every turn, rather than touching the model itself. If your Claude Code or Codex sessions are burning tokens on repetitive commands, this targets exactly that waste without changing how you prompt."
+          },
+          {
+            "title": "heygen-com/hyperframes",
+            "url": "https://github.com/heygen-com/hyperframes",
+            "source": "github.com",
+            "stars": "33.7k",
+            "lang": "TypeScript",
+            "body": "Hyperframes renders video from HTML instead of a timeline editor or a video-specific API. You write markup and animation (GSAP-driven) and it compiles to actual video output via ffmpeg, which means an agent that already knows how to write HTML/CSS can now produce motion graphics and video without learning a separate video toolchain. It's explicitly built for agents to drive: prompt-generated HTML in, rendered MP4 out. Interesting building block if you want an agent to produce short video assets -- explainers, ads, social clips -- as part of a larger pipeline."
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "76.2k",
+            "lang": "TypeScript",
+            "body": "Open Design is a local-first desktop app that turns your existing coding agent into a design engine, producing prototypes, landing pages, dashboards, slides, images, and video as real exportable files (HTML, PDF, PPTX, MP4) rather than throwaway mockups. It works BYOK across 20+ CLIs including Claude Code, Codex, Cursor, Gemini, and OpenCode, so you're not locked into one vendor's design tool. The pitch is a genuine gap: agent coding tools are good at code but clumsy at producing polished design deliverables, and this routes that work through the same agent instead of a separate app."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's feed documented a full build end-to-end -- skipping this section.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-07-07",
     "date": "July 7, 2026",
     "title": "AI Pulse",
