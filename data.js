@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-09",
+    "date": "July 9, 2026",
+    "title": "AI Pulse",
+    "subtitle": "New voice models, expanded managed agents, and a 227k-star agent harness",
+    "intro": "Three labs pushed real capability updates today: new voice models from OpenAI, expanded managed agents from Google, and a fresh Sonnet from Anthropic. On GitHub, the agent-tooling gold rush keeps compounding, led by a cross-CLI skills-and-memory framework that just crossed 227k stars. Nothing in the build-log space cleared the bar today.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "New models and agent features landed across Anthropic, OpenAI, Google, and ByteDance.",
+        "items": [
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Anthropic rolled out Claude Sonnet 5, the mid-tier model in its refreshed Claude 5 lineup alongside Opus 4.8 and Haiku 4.5. It's now the default model behind Claude Code and the API, taking over from Sonnet 4.5 as the workhorse for agentic coding and long-running tasks. If you're on the API or Claude Code today, you're already talking to it -- no flag to flip, no opt-in required. Worth re-running your eval suite against it rather than assuming behavior matches the previous Sonnet: model swaps like this can shift tool-call formatting and instruction-following on edge cases even when the interface stays identical."
+          },
+          {
+            "title": "Introducing GPT-Live",
+            "url": "https://openai.com/index/introducing-gpt-live",
+            "source": "OpenAI",
+            "body": "OpenAI shipped GPT-Live, a new generation of voice models now powering ChatGPT Voice, replacing the prior Realtime-based stack. Turn-taking is faster and interruption handling is smoother -- the model reacts mid-sentence instead of waiting for a full pause before responding. It's live in the ChatGPT app now; API access isn't confirmed in the announcement itself, so if you're building voice features on OpenAI's stack, check the developer docs before assuming parity. This is the biggest voice-quality jump from OpenAI since the original Realtime API landed, and the first place to test if voice UX has been your weak link."
+          },
+          {
+            "title": "Expanding Managed Agents in Gemini API: background tasks, remote MCP and more",
+            "url": "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api/",
+            "source": "Google AI",
+            "body": "Google expanded Managed Agents in the Gemini API with background tasks and remote MCP support. Background tasks let an agent keep running after you close the connection -- you poll or get a callback when it's done instead of holding a socket open for a long job. Remote MCP means a Gemini agent can call tools served from an MCP server hosted elsewhere, not just ones bundled locally, so multi-service agent setups don't need everything running on the same box. Both ship directly in the Gemini API today -- worth a look if you've been holding Gemini agents together with your own polling and remote-tool glue code."
+          },
+          {
+            "title": "Seedream 5.0 Pro",
+            "url": "https://seed.bytedance.com/en/seedream5_0_pro",
+            "source": "ByteDance Seed",
+            "body": "ByteDance's Seed team released Seedream 5.0 Pro, a step up from the standard Seedream 5.0 image generation model. The Pro tag follows the pattern of ByteDance's past Seedream tiers -- a higher-quality variant sitting above the base model rather than a new architecture. No benchmark numbers in the announcement itself, so the real test is running your own prompts through it. If you've been using Seedream for image generation and hit quality ceilings on the standard tier, this is the one to try next."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent tooling keeps eating GitHub -- skills, memory, and token-efficiency plays dominate this week.",
+        "items": [
+          {
+            "title": "affaan-m/ECC",
+            "url": "https://github.com/affaan-m/ECC",
+            "source": "github.com",
+            "stars": "227.7k",
+            "lang": "JavaScript",
+            "body": "ECC bills itself as a performance-optimization layer for agent harnesses: skills, instincts, memory, and security scaffolding that sits on top of Claude Code, Codex, OpenCode, Cursor, and others. Instead of one more wrapper around a single vendor's SDK, it's tool-agnostic -- the same skill and memory setup follows you whether you're driving Claude Code or Cursor that day. At 227k stars it's the single biggest mover in the agent-tooling space this week, which suggests plenty of builders are tired of re-configuring memory and safety rules separately for every CLI they touch."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "80.9k",
+            "lang": "Python",
+            "body": "Graphify turns a folder of code, SQL schemas, scripts, docs, papers, images, or video into a queryable knowledge graph your coding agent can traverse. Instead of an agent grepping through files cold every session, it gets app code, database schema, and infra wired together in one graph it can query directly -- so a question like \"what touches this table\" resolves against real structure instead of text search. Ships as a skill for Claude Code, Codex, OpenCode, Cursor, and Gemini CLI. Useful in a large, mixed-language repo where the context window can't hold the whole picture at once."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "69.8k",
+            "lang": "Rust",
+            "body": "rtk is a CLI proxy that sits in front of common dev commands and cuts LLM token consumption 60-90% by trimming what actually gets sent to the model -- output noise, redundant context, boilerplate. It's a single Rust binary with zero dependencies, so it drops into an existing Claude Code or agent setup with no runtime to install. If your agent bills are dominated by verbose command output getting re-fed into context on every turn, this is a direct fix instead of a prompting workaround."
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "76.7k",
+            "lang": "TypeScript",
+            "body": "open-design turns your coding agent into a design engine: prototypes, landing pages, dashboards, slides, images, and video, exported as real files (HTML, PDF, PPTX, MP4) instead of throwaway previews. It's a local-first desktop app that works BYOK with Claude Code, Codex, Cursor, Gemini, OpenCode, and 20+ other CLIs, positioning itself as an open alternative to Anthropic's own Claude Design. Worth a look if you've been bouncing between a separate design tool and a coding agent just to ship a landing page -- this keeps it in one loop."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "No build logs cleared the bar today.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- see you tomorrow."
+  },
+  {
     "id": "2026-07-08",
     "date": "July 8, 2026",
     "title": "AI Pulse",
