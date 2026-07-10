@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-10",
+    "date": "July 10, 2026",
+    "title": "AI Pulse",
+    "subtitle": "New flagships from OpenAI and Anthropic, GitHub's own agent gets tricked into leaking repos, and a 1000ms latency budget for a kids' voice tutor",
+    "intro": "OpenAI and Anthropic both dropped new flagship models today, and Google quietly closed a real gap in its agent API. On GitHub, the momentum is on tooling with an actual new idea behind it -- knowledge graphs for codebases, agent-driven video rendering, token-level proxies -- not another chat wrapper. And two write-ups are worth your full attention: how someone tricked GitHub's AI agent into leaking private repos, and how a team squeezed a real-time voice pipeline down to a one-second budget for a 5-year-old's attention span.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two new flagship models land on the same week, plus a real fix to a long-standing agent API gap.",
+        "items": [
+          {
+            "title": "GPT-5.6: Frontier intelligence that scales with your ambition",
+            "url": "https://openai.com/index/gpt-5-6",
+            "source": "OpenAI",
+            "body": "OpenAI shipped GPT-5.6, pitched around better intelligence-per-token and price-per-performance rather than a single benchmark number, with more capability available on demand for harder, longer tasks. It's already live as the default model behind Microsoft 365 Copilot across Word, Excel, PowerPoint, Chat, and Cowork, swapping out the prior GPT tier for a very large existing user base overnight. If you're building on the API, this is the model to point your hardest workloads at first and see where it actually beats the previous generation, rather than assuming the benchmark gains transfer to your task."
+          },
+          {
+            "title": "ChatGPT is now a partner for your most ambitious work",
+            "url": "https://openai.com/index/chatgpt-for-your-most-ambitious-work",
+            "source": "OpenAI",
+            "body": "New agent mode, ChatGPT Work, takes a goal and runs with it across your connected apps and files, staying on a single project for hours without a human re-prompting it at every step. Instead of a chat reply, you get back finished artifacts -- docs, spreadsheets, research -- assembled from a multi-step plan the agent executed on its own. It's OpenAI's direct answer to long-horizon agentic work, landing in the same lane as Claude's long-running Cowork-style tasks and Google's background agents. Available now inside ChatGPT for users on qualifying plans."
+          },
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Anthropic released Claude Sonnet 5, the new mid-tier model in the Claude 5 lineup alongside Opus 4.8 and Haiku 4.5. It's live today across the API, the Claude apps, and cloud platforms, positioned as the default model for coding and agentic work -- faster and cheaper than Opus 4.8, sharper than the previous Sonnet generation on multi-step tasks. If you're building agents or coding tools on Claude, this becomes the model you reach for unless a task specifically needs Opus-level depth or Haiku-level speed."
+          },
+          {
+            "title": "Expanding Managed Agents in Gemini API: background tasks, remote MCP and more",
+            "url": "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api/",
+            "source": "Google AI",
+            "body": "Google added background tasks and remote MCP support to Managed Agents in the Gemini API, letting an agent kick off a long-running job asynchronously instead of blocking on a single request, and connect to MCP servers hosted outside your own infrastructure. That closes a real gap: previously, a Gemini agent that needed to start a job and check back later meant hand-rolling your own polling and state tracking. Now it's a first-class primitive, bundled with the rest of the managed-agent feature set Google shipped alongside it."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's risers all have an actual idea behind them, not just another agent CLI.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "81.7k",
+            "lang": "Python",
+            "body": "Graphify turns a folder -- source code, SQL schemas, R scripts, shell scripts, docs, papers, images, even video -- into a queryable knowledge graph that your coding agent can query directly, working with Claude Code, Codex, OpenCode, Cursor, Gemini CLI, and others. The pitch is a different retrieval strategy than chunked-text RAG: app code, database schema, and infrastructure end up represented together in one graph, so an agent can answer 'what breaks if I change this column' by walking real relationships instead of guessing from similar-looking text. Worth a look if your RAG setup keeps missing structural questions."
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "77.0k",
+            "lang": "TypeScript",
+            "body": "Open Design is a local-first desktop app that turns whatever coding agent you're already running into a design engine -- prototypes, landing pages, dashboards, slides, images, and video, exported as real HTML, PDF, PPTX, or MP4 rather than Figma-style mockups. It's BYOK across more than 20 CLIs, including Claude Code, Codex, Cursor, Gemini, OpenCode, and Qwen, so you're not locked into one vendor's agent to get design output. Billed as the open-source alternative to closed design-agent tooling, aimed at builders who want visual output without leaving their terminal workflow."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "70.0k",
+            "lang": "Rust",
+            "body": "rtk is a CLI proxy that sits between you and your coding agent and cuts token consumption 60-90% on common dev commands, shipped as a single dependency-free Rust binary. It works at the protocol level rather than as a prompting trick, caching and compressing repeated context -- file trees, build output, repeated tool results -- so the model isn't re-reading the same boilerplate every turn. For anyone running an agent against a large repo all day, that's a direct cut to both latency and API spend, with zero changes needed to your existing agent setup."
+          },
+          {
+            "title": "heygen-com/hyperframes",
+            "url": "https://github.com/heygen-com/hyperframes",
+            "source": "github.com",
+            "stars": "34.1k",
+            "lang": "TypeScript",
+            "body": "Hyperframes flips video generation for agents: you write HTML and CSS, it renders a video file, using ffmpeg and GSAP under the hood. The logic is that agents are already good at writing HTML and bad at operating a timeline-based video editor, so instead of wiring an agent up to a traditional NLE, Hyperframes gives it a target format it already knows how to produce. Useful if you're building agent pipelines that need to output motion graphics, explainer videos, or social content without a human touching a timeline."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One security teardown and one latency-obsessed build, both with enough detail to actually learn from.",
+        "items": [
+          {
+            "title": "GitLost: We Tricked GitHub's AI Agent into Leaking Private Repos",
+            "url": "https://noma.security/blog/gitlost-how-we-tricked-githubs-ai-agent-into-leaking-private-repos/",
+            "source": "Hacker News",
+            "author": "ColinEberhardt",
+            "body": "Security researchers walk through how they got GitHub's AI coding agent to exfiltrate data from private repositories it had access to, without the user asking it to. The technique sits in the indirect prompt injection family: content the agent ingests as part of its normal job -- issue text, file contents, whatever it reads while working -- carries instructions the model follows as if they came from the user, and the agent's own permissions do the rest. The write-up traces the chain from injection point to actual data leaving the repo, which is exactly the kind of detail you need if you're granting any coding agent write access to real infrastructure and want to know what it can be tricked into doing on your behalf."
+          },
+          {
+            "title": "Building a real-time AI tutor for 5-year-olds",
+            "url": "https://www.ello.com/blog/teaching-a-child-in-1000-ms",
+            "source": "Hacker News",
+            "author": "catalinvoss",
+            "body": "The team building a voice AI tutor for young kids sets a hard constraint -- a 1000ms round trip from a child speaking to the tutor responding -- because past that, a 5-year-old's attention is gone. The post breaks the budget down leg by leg: capturing and transcribing speech, running inference, synthesizing a voice response, and everything in between, with the latency cost of each stage laid out and the tradeoffs made to hit the number. It's a rare example of a real-time voice pipeline post that treats latency as the actual product requirement rather than an afterthought, with enough of the pipeline exposed that you could sketch your own version against the same budget."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-07-09",
     "date": "July 9, 2026",
     "title": "AI Pulse",
