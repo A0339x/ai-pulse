@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-11",
+    "date": "July 11, 2026",
+    "title": "AI Pulse",
+    "subtitle": "OpenAI and Google both ship agent upgrades, and Claude Code's GitHub ecosystem gets serious about memory and cost",
+    "intro": "OpenAI and Google both shipped meaningful agent capability today -- a new frontier model with an always-on work mode from OpenAI, and background execution plus remote tool access from Google. On GitHub, the climbing list has moved past generic agent wrappers into infrastructure: token cost, memory, and knowledge graphs. Nothing in today's build roundup had enough documented detail to earn a slot, so that section sits empty.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two labs pushed new model and agent capability live today.",
+        "items": [
+          {
+            "title": "GPT-5.6: Frontier intelligence that scales with your ambition",
+            "url": "https://openai.com/index/gpt-5-6",
+            "source": "OpenAI",
+            "body": "OpenAI shipped GPT-5.6, built to scale reasoning depth on demand rather than forcing a model swap for harder problems -- routine calls stay fast and cheap, and you dial up compute only when a task needs it. OpenAI is pitching it on performance-per-dollar over raw benchmark gains. It's already live in the API and is now the default model behind Microsoft 365 Copilot across Word, Excel, PowerPoint, and Cowork. If you're already on the API, this is a drop-in upgrade: same interface, more headroom for hard tasks that used to require a separate high-compute tier."
+          },
+          {
+            "title": "ChatGPT is now a partner for your most ambitious work",
+            "url": "https://openai.com/index/chatgpt-for-your-most-ambitious-work",
+            "source": "OpenAI",
+            "body": "OpenAI launched ChatGPT Work, an agent mode that acts across your apps and files instead of just answering inside a chat window. Give it a goal and it stays on the project for hours, working through the steps and coming back with finished output rather than a plan you still have to execute. That's a real shift from \"ChatGPT answers questions\" to \"ChatGPT goes and does the thing,\" closer to what computer-use agents have promised for a while now folded directly into the flagship product instead of a separate experimental tool."
+          },
+          {
+            "title": "Expanding Managed Agents in Gemini API: background tasks, remote MCP and more",
+            "url": "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api/",
+            "source": "Google AI",
+            "body": "Google added background task execution and remote MCP support to Managed Agents in the Gemini API. Background tasks let an agent keep running after your client disconnects, so you stop holding a connection open for long jobs. Remote MCP support means a Gemini agent can call an MCP server hosted anywhere, not just one running alongside your code, so tool access no longer requires colocating infrastructure. Together they close two real production gaps: long-running work and distributed tool access, both of which previously meant rolling your own orchestration layer around the API."
+          },
+          {
+            "title": "OpenHands cloud-1.46.0",
+            "url": "https://github.com/OpenHands/OpenHands/releases/tag/cloud-1.46.0",
+            "source": "All-Hands-AI/OpenHands (GitHub)",
+            "body": "OpenHands cut a new cloud release with two changes worth knowing if you run it in production. Final archive manifests now get enriched and initial snapshots are dropped, trimming storage overhead that used to duplicate data on every long agent run. Enterprise users can also now configure the BYOR (bring-your-own-router) key alias pattern instead of a fixed scheme, useful if you're routing agent traffic through your own model providers. Small release, but the archive change alone is worth the upgrade if you're running OpenHands agents at any real volume."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "GitHub's agent-tooling momentum this week is about cost, memory, and structure -- not another wrapper.",
+        "items": [
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "70.3k",
+            "lang": "Rust",
+            "body": "rtk sits between your terminal and your LLM provider as a proxy that cuts token consumption on common dev commands by 60-90%. Instead of shipping full file contents and verbose tool output straight into context, it compresses and dedupes what actually gets sent, then reconstructs it on the way back. It's a single Rust binary with zero dependencies, so it drops into an existing Claude Code, Codex, or Cursor setup without touching your workflow. For anyone running agents against a metered API bill, this is a direct lever on cost rather than another orchestration layer."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "82.2k",
+            "lang": "Python",
+            "body": "Graphify turns a folder of code, SQL schemas, scripts, docs, papers, images, or videos into a single queryable knowledge graph, then wires that graph into Claude Code, Codex, Cursor, Gemini CLI, and others as a skill. The pitch: instead of an agent re-reading your repo on every task, it queries a graph that already links app code, database schema, and infrastructure together. That's a meaningfully different retrieval strategy from plain RAG over chunked files -- asking \"what depends on this table\" instead of \"what text looks similar to this query.\""
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "77.2k",
+            "lang": "TypeScript",
+            "body": "open-design turns your coding agent into a design tool. It's a local-first desktop app that lets Claude Code, Codex, Cursor, Gemini, or 20+ other CLIs (bring your own key) generate prototypes, landing pages, dashboards, slides, images, and video as real files -- HTML, PDF, PPTX, MP4 -- not just descriptions of a design. Positioned as an open alternative to Claude Design, it's for builders who want their existing agent setup to also own the visual and presentation layer instead of routing that work through a separate tool."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "57.2k",
+            "lang": "Python",
+            "body": "MemPalace is an open-source memory layer for AI agents, built on ChromaDB and exposed over MCP so any agent that speaks MCP can read and write to it. The project leads with benchmark numbers rather than marketing claims, positioning itself as the best-tested open memory system available for free. For builders who've hit the ceiling of stuffing context windows or hand-rolling a vector store for agent memory, it's a drop-in alternative that comes with actual evaluation data instead of just a demo."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's queue documented a full build end-to-end, so this section is empty.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-07-10",
     "date": "July 10, 2026",
     "title": "AI Pulse",
