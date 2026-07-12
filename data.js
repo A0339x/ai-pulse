@@ -3,6 +3,111 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-12",
+    "date": "July 12, 2026",
+    "title": "AI Pulse",
+    "subtitle": "GPT-5.6 goes frontier, Gemini agents go remote, and someone put your codebase in 3D",
+    "intro": "OpenAI pushed GPT-5.6 out everywhere at once -- API, ChatGPT, and now the default inside Microsoft 365 Copilot -- while Google made its Gemini agents long-running instead of request/response. On GitHub, the agent-tooling stack keeps compounding around knowledge graphs, memory, and token bills. And one Show HN replays your coding agent's session as a 3D walk through your repo.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "OpenAI's frontier model lands everywhere at once, Google opens up its agent API, and Hugging Face closes the inference speed gap.",
+        "items": [
+          {
+            "title": "GPT-5.6: Frontier intelligence that scales with your ambition",
+            "url": "https://openai.com/index/gpt-5-6",
+            "source": "OpenAI",
+            "body": "OpenAI shipped GPT-5.6 today, built around getting more intelligence out of every token. The pitch is better performance per dollar plus more capability on demand -- you dial up reasoning depth for hard problems without switching models or eating a flat cost increase on every request. It's live now across the API and ChatGPT, and the same day, Microsoft made GPT-5.6 the default model behind Microsoft 365 Copilot across Word, Excel, PowerPoint, Chat, and Cowork. If you were already running GPT-5.x in production, this is a drop-in upgrade -- same interface, sharper outputs, pricing that scales with how you actually use it."
+          },
+          {
+            "title": "ChatGPT is now a partner for your most ambitious work",
+            "url": "https://openai.com/index/chatgpt-for-your-most-ambitious-work",
+            "source": "OpenAI",
+            "body": "ChatGPT Work is a new agent mode that takes action across your apps and files and can stay on a single project for hours, not just one turn. Give it a goal instead of a task, and it plans a sequence of concrete actions, executes them, and only checks back in when it needs a decision from you. That's a step past the chat-and-copy-paste loop most people run today -- it's built for multi-hour work like research synthesis, multi-file refactors, or assembling a report from a dozen sources, without you babysitting every intermediate step."
+          },
+          {
+            "title": "Expanding Managed Agents in Gemini API: background tasks, remote MCP and more",
+            "url": "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api/",
+            "source": "Google AI",
+            "body": "Gemini API's managed agents can now run as background tasks -- kick one off and it keeps working after your client disconnects, instead of needing an open connection for the entire run. The bundle also adds remote MCP support, so an agent can call tools hosted on someone else's server rather than everything living in your own process. Together that turns managed agents from a request/response feature into something closer to a real long-running worker you can fire and forget -- the piece that was missing if you wanted to build anything that outlives a single session."
+          },
+          {
+            "title": "Native-speed vLLM transformers modeling backend",
+            "url": "https://huggingface.co/blog/native-speed-vllm-transformers-backend",
+            "source": "Hugging Face",
+            "body": "Hugging Face's transformers library now runs models at vLLM-level inference speed natively, without swapping to a separate serving stack. Until now, going from a transformers checkpoint to production-grade throughput usually meant re-exporting into vLLM or another dedicated engine. This backend closes that gap inside the library you already prototype in, so the same code path you use for research can hit serving speed without a rewrite. Useful if you've been maintaining two versions of your inference code -- one for iterating, one for actually serving traffic."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent tooling keeps compounding -- knowledge graphs, memory, and token bills all got attention this week.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "82.7k",
+            "lang": "Python",
+            "body": "Graphify turns a folder of code, SQL schemas, scripts, docs, papers, and even videos into one queryable knowledge graph, then plugs into your coding agent as a skill. Instead of an agent grepping across a repo and guessing at relationships, it can query app code, database schema, and infra config as a single connected graph -- so \"what calls this table\" or \"what breaks if I change this field\" becomes a lookup instead of a hunt. Works with Claude Code, Codex, OpenCode, Cursor, Gemini CLI, and others. It's aimed at anyone whose codebase is bigger than an agent's context window can hold at once."
+          },
+          {
+            "title": "Panniantong/Agent-Reach",
+            "url": "https://github.com/Panniantong/Agent-Reach",
+            "source": "github.com",
+            "stars": "55.1k",
+            "lang": "Python",
+            "body": "Agent-Reach gives your agent a single CLI to read and search Twitter, Reddit, YouTube, GitHub, Bilibili, and Xiaohongshu, with zero API fees. Most agent-web tools either lean on paid search APIs or scrape one platform at a time; this bundles several of the sites builders actually want signal from into one tool call. That matters for anything that needs current sentiment or discussion rather than static web pages -- market research agents, trend trackers, competitive monitoring -- without stitching together five different API keys and rate limits."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "70.5k",
+            "lang": "Rust",
+            "body": "rtk is a CLI proxy that sits between you and your coding agent and cuts token consumption 60-90% on common dev commands, shipped as a single dependency-free Rust binary. Instead of feeding the model the same file diffs, lint output, or command results verbatim over and over, it intercepts and compresses the repetitive parts before they hit the context window. For anyone running agentic coding sessions all day, that's a direct cut to your API bill without changing which model you use or how you prompt it."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "57.2k",
+            "lang": "Python",
+            "body": "MemPalace bills itself as the best-benchmarked open source AI memory system, built on ChromaDB and exposed over MCP so any agent can read and write to it. The pitch isn't a new vector store -- it's that most \"agent memory\" projects ship without benchmarks proving they actually retrieve the right thing later, and this one does. If you've been rolling your own memory layer for a long-running agent and wondering whether it beats just stuffing everything back into the prompt, this is worth comparing against."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One post stood out for actually showing its work end to end.",
+        "items": [
+          {
+            "title": "Mesh LLM: distributed AI computing on iroh",
+            "url": "https://www.iroh.computer/blog/mesh-llm",
+            "source": "Hacker News",
+            "author": "tionis",
+            "body": "Mesh LLM runs LLM inference distributed across machines using iroh, a peer-to-peer networking library, instead of a central server coordinating everything. Nodes discover each other directly over iroh's QUIC-based connections and split up inference work, so you can pool spare compute across machines you own -- a home GPU box, a laptop, a cloud instance -- without standing up your own orchestration layer or exposing ports. It's directly attemptable this weekend if you've got iroh installed and more than one machine with a GPU sitting around. The interesting part isn't the model, it's using a p2p networking primitive to sidestep the usual distributed-inference plumbing."
+          },
+          {
+            "title": "Mindwalk: Replay coding-agent sessions on a 3D map of your codebase",
+            "url": "https://github.com/cosmtrek/mindwalk",
+            "source": "Hacker News",
+            "author": "cosmtrek",
+            "body": "Mindwalk takes the logs from a coding agent session -- which files it touched, in what order, what it changed -- and replays them as a walk through a 3D map of your codebase. Instead of scrolling a transcript trying to reconstruct what Claude Code or Codex actually did across forty tool calls, you watch the agent move through the repo spatially: which modules it opened, where it doubled back, where it got stuck. It's a genuinely new way to debug agent behavior after the fact, useful for anyone trying to figure out why a long agentic session went sideways without re-reading the whole log."
+          },
+          {
+            "title": "Show HN: FableCut – A browser video editor AI agents can drive (zero deps)",
+            "url": "https://github.com/ronak-create/FableCut",
+            "source": "Hacker News",
+            "author": "ronak_parmar",
+            "body": "FableCut is a video editor that runs entirely in the browser with zero dependencies, built specifically so an AI agent can drive the timeline the way a human would -- clicking, dragging, cutting -- rather than needing a separate programmatic API. That design choice matters: most \"AI video\" tools expose a code interface and skip the UI, which means agents built to browse and click can't use them. FableCut flips that, so an agent that already knows how to operate a webpage can edit video with no special-case tooling. Worth a look if you're building agents that need to produce video output through an interface instead of a render script."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow with whatever ships overnight."
+  },
+  {
     "id": "2026-07-11",
     "date": "July 11, 2026",
     "title": "AI Pulse",
