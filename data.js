@@ -3,6 +3,97 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-14",
+    "date": "July 14, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic tags AI content right as Hacker News begs for it, OpenClaw ships its biggest update yet, and GitHub answers with a leaner alternative",
+    "intro": "Anthropic shipped Claude Tag today, a provenance marker for AI-generated content, landing the same day the top Hacker News post is a 1,044-point plea to flag AI-written articles. OpenClaw pushed its biggest release in a while, and within hours GitHub had a leaner, container-isolated alternative sitting right next to it on the climbing list. Elsewhere, the build worth reading is a blunt writeup on what actually breaks when you migrate a production agent to a new model.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A content-provenance feature, OpenClaw's biggest release yet, and two new ways to get Hugging Face models into production.",
+        "items": [
+          {
+            "title": "Introducing Claude Tag",
+            "url": "https://www.anthropic.com/news/introducing-claude-tag",
+            "source": "Anthropic",
+            "body": "Anthropic shipped Claude Tag today, a way to mark content Claude generates -- text, images, whatever -- with a provenance tag identifying it as model output. The timing isn't subtle: it landed the same day the top story on Hacker News is a 1,044-point plea to add an AI-generated flag to online articles. If you're publishing Claude output directly to an audience -- articles, product copy, generated images -- you can now attach that tag instead of leaving readers to guess or relying on a third-party detector that's guessing too. Worth checking whether your publishing pipeline should be reading and surfacing it."
+          },
+          {
+            "title": "openclaw 2026.7.1",
+            "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.7.1",
+            "source": "GitHub",
+            "body": "OpenClaw's latest release overhauls the Control UI and onboarding flow, with matching updates across the iOS, Android, and macOS apps. Model support expands to GPT-5.6, Tencent's Hy3, and Meta's Muse Spark 1.1, and Codex plus other connected coding-agent workflows get first-class treatment. Telegram, Slack, Discord, and Apple Messages integrations all get substantial rework, long-standing Gateway crash loops get fixed, and scheduled work, remote browser control, workspace terminals, sessions, and goals all improve. If you run OpenClaw as your agent gateway across messaging apps, this is the biggest single-release jump in a while -- expect a different onboarding experience after updating."
+          },
+          {
+            "title": "From Hugging Face to Amazon SageMaker Studio in one click",
+            "url": "https://huggingface.co/blog/amazon/one-click-to-sagemaker-studio",
+            "source": "Hugging Face",
+            "body": "Hugging Face models now deploy straight into Amazon SageMaker Studio with one click, no manual export or container setup in between. Before this, getting a Hub model into SageMaker meant packaging weights, writing an inference script, and configuring the endpoint by hand. Now the Hub handles the handoff directly: pick a model, click deploy, and it shows up as a running SageMaker endpoint. Useful if your team already lives in AWS for everything else and didn't want to stand up a separate deployment pipeline just for models you found on the Hub."
+          },
+          {
+            "title": "Data for Agents",
+            "url": "https://huggingface.co/blog/nvidia/open-data-for-agents",
+            "source": "Hugging Face",
+            "body": "Hugging Face and NVIDIA released an open dataset built specifically for training and evaluating agents rather than chat models -- tool-use trajectories and multi-step task completions instead of single-turn instruction-following pairs. That's the part that's been hardest to source: most open datasets transfer poorly to agents that need to plan, call tools, and recover from errors across many turns. If you've been hand-assembling your own agent training data because nothing usable existed off the shelf, this is a real starting point instead of another chat corpus repackaged as agent data."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "GitHub's newest agent tooling gives agents a new format to output in, and gives OpenClaw a smaller, safer sibling on the same day it ships big.",
+        "items": [
+          {
+            "title": "heygen-com/hyperframes",
+            "url": "https://github.com/heygen-com/hyperframes",
+            "source": "github.com",
+            "stars": "34.9k",
+            "lang": "TypeScript",
+            "body": "Hyperframes flips video generation for agents: write HTML and CSS, and it renders a video file via ffmpeg and GSAP-style animation underneath. The logic is straightforward -- agents are already good at writing markup and bad at operating a timeline-based editor, so instead of wiring an agent up to a traditional NLE, this gives it an output format it already knows how to produce. Useful if you're building pipelines that need to spit out motion graphics, explainer videos, or social clips without a human touching a timeline or the agent needing a dedicated video-generation model."
+          },
+          {
+            "title": "DeusData/codebase-memory-mcp",
+            "url": "https://github.com/DeusData/codebase-memory-mcp",
+            "source": "github.com",
+            "stars": "31.4k",
+            "lang": "C",
+            "body": "This MCP server indexes a codebase into a persistent knowledge graph in milliseconds, covering 158 languages with sub-millisecond queries, and claims 99% fewer tokens spent than dumping file contents straight into context. It ships as a single static binary, so any MCP-compatible agent -- Claude Code, Codex, aider -- can query it directly instead of re-reading files fresh every turn. The pitch is code intelligence that persists across sessions rather than getting rebuilt from scratch each time you open a new agent conversation on the same repo."
+          },
+          {
+            "title": "nanocoai/nanoclaw",
+            "url": "https://github.com/nanocoai/nanoclaw",
+            "source": "github.com",
+            "stars": "30.2k",
+            "lang": "TypeScript",
+            "body": "Nanoclaw is a lighter alternative to OpenClaw that runs each connection -- WhatsApp, Telegram, Slack, Discord, Gmail -- in its own container instead of one shared process, so a compromised integration doesn't get access to everything else you've connected. It's built directly on Anthropic's Agents SDK rather than wrapping OpenClaw, and still covers the basics: memory, scheduled jobs, multi-platform messaging. Worth a look given OpenClaw's growing surface area -- today's release adds even more app integrations and model support -- if that's more than you want running as one process holding every account you've linked."
+          },
+          {
+            "title": "santifer/career-ops",
+            "url": "https://github.com/santifer/career-ops",
+            "source": "github.com",
+            "stars": "60.0k",
+            "lang": "JavaScript",
+            "body": "Career-ops runs an entire job search as an agent workflow inside whatever coding CLI you already have open: it scans job portals, scores each listing A through F against your background, tailors your CV per application, and tracks status as you apply. It's a genuinely full pipeline rather than a single-step tool, and it runs locally in Claude Code, Gemini, Codex, or OpenCode instead of a hosted service holding your job-search data. If you've been manually reformatting a resume for every posting, this replaces that with a repeatable local workflow."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One writeup actually showed its work: what breaks, and what you gain, migrating a production agent to a new model.",
+        "items": [
+          {
+            "title": "Migrating a production AI agent to GPT-5.6: 2.2x faster, 27% cheaper",
+            "url": "https://ploy.ai/blog/migrating-a-production-ai-agent-to-gpt-5-6",
+            "source": "Hacker News",
+            "author": "brryant",
+            "body": "Ploy documented moving a live production agent off its previous model and onto GPT-5.6, posting the before-and-after: 2.2x faster responses and 27% lower cost per run on the same workload. The useful part isn't the headline numbers, it's the writeup of what actually breaks in a model migration -- prompts tuned around the old model's quirks, tool-call schemas that need re-validating against the new model's format, and eval suites that have to be re-run before you trust the swap in production rather than just pointing traffic at it on faith. Worth reading if you've got an agent running on an older model and have been putting off the migration because you don't know what silently breaks."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-07-12",
     "date": "July 12, 2026",
     "title": "AI Pulse",
