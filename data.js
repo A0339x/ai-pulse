@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-15",
+    "date": "July 15, 2026",
+    "title": "AI Pulse",
+    "subtitle": "GPT-5.6 and Claude Sonnet 5 both land, and GitHub's agent tooling pushes into design, video, and code intelligence",
+    "intro": "OpenAI and Anthropic both moved on the model front today, and the practical news is the pricing/performance curve shifted, not just the marketing copy. GitHub's agent-tooling scene keeps finding new surface area beyond chat wrappers -- design engines, HTML-to-video rendering, code intelligence servers. Two builders also published real before/after numbers instead of vibes.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two frontier model updates and two concrete developer-tool upgrades landed today.",
+        "items": [
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Anthropic shipped Claude Sonnet 5, the new default model behind Claude Code and the Claude apps. Existing API integrations point at it with a one-line swap of the model string -- no new endpoint, no migration guide required. It replaces the previous Sonnet as the mid-tier workhorse: cheaper and faster to serve than Opus, aimed at the bulk of day-to-day coding and agent work. If you're running evals against Sonnet already, today's the day to re-run them against 5 and see where the numbers move."
+          },
+          {
+            "title": "GPT-5.6: Frontier intelligence that scales with your ambition",
+            "url": "https://openai.com/index/gpt-5-6",
+            "source": "OpenAI",
+            "body": "OpenAI shipped GPT-5.6, pitched around performance-per-dollar rather than a raw capability jump: more intelligence per token, better cost efficiency, and more capability available on demand for harder tasks. It's rolling out as the new frontier model across the API and ChatGPT tiers, and same-day it's already been named the preferred model inside Microsoft 365 Copilot across Word, Excel, PowerPoint, Chat, and Cowork. For builders, the practical news is the cost curve moved -- worth re-benchmarking any GPT-5.5-era agent against it before assuming your current model choice is still optimal."
+          },
+          {
+            "title": "Vercel Blob now supports consistent reads on private storage",
+            "url": "https://vercel.com/changelog/vercel-blob-now-supports-consistent-reads-on-private-storage",
+            "source": "Vercel",
+            "body": "Vercel Blob's get() and presignUrl() now take a useCache: false flag that forces a read straight from origin instead of the CDN cache. Overwriting a blob at an existing pathname used to mean readers could see a stale cached version for up to 60 seconds -- fine for static assets, broken for anything an agent is actively writing to, like a memory file, a session transcript, or a scheduled JSON report. The tradeoff is real: bypassing cache means slower reads and Fast Origin Transfer charges, so you opt in per call rather than globally. Small change, but it fixes a real class of bug for anyone building stateful agents on Vercel storage."
+          },
+          {
+            "title": "Vercel Plugin now available in VS Code and GitHub Copilot CLI",
+            "url": "https://vercel.com/changelog/vercel-plugin-now-available-in-vs-code-and-github-copilot-cli",
+            "source": "Vercel",
+            "body": "GitHub Copilot can now pull Vercel platform knowledge on demand -- skills for Next.js, the AI SDK, Vercel Functions, and other Vercel-specific APIs -- directly inside VS Code's Copilot Chat and the Copilot CLI. Install it in VS Code by searching @agentPlugins vercel in the Extensions panel, or in the CLI with npx plugins add vercel/vercel-plugin. The plugin keeps Copilot current on Vercel's latest APIs and recommended patterns instead of relying on stale training data, which matters for anyone shipping fast-moving Next.js or AI SDK code."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "GitHub's agent-tooling wave keeps finding new surface area -- design, video, memory, and raw token efficiency.",
+        "items": [
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "78.4k",
+            "lang": "TypeScript",
+            "body": "Open Design turns whatever coding agent you already use -- Claude Code, Codex, Cursor, Gemini CLI, 20+ CLIs via bring-your-own-key -- into a design engine that outputs real files: prototypes, landing pages, dashboards, slides, images, and video, exported as HTML, PDF, PPTX, or MP4. It's a local-first desktop app rather than a hosted service, so your designs and keys stay on your machine. The pitch: instead of a separate design tool your agent has to describe things to, the agent produces the artifact directly. Worth a look if you've been bolting design-tool exports onto an agent workflow and want one less handoff."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "71.1k",
+            "lang": "Rust",
+            "body": "rtk is a CLI proxy that sits between your agent and its shell commands, caching and compressing the noisy parts of common dev output before it hits the model's context -- claimed 60-90% token reduction on everyday commands. It ships as a single static Rust binary with zero dependencies, so it's a drop-in wrapper rather than a new tool to learn. For anyone running agent loops that burn budget on repeated git diff, npm test, or directory listings, this targets a real, boring cost center that most harnesses just ignore."
+          },
+          {
+            "title": "DeusData/codebase-memory-mcp",
+            "url": "https://github.com/DeusData/codebase-memory-mcp",
+            "source": "github.com",
+            "stars": "31.7k",
+            "lang": "C",
+            "body": "This MCP server indexes an entire codebase into a persistent knowledge graph in milliseconds, covering 158 languages, with sub-millisecond queries and a claimed 99% fewer tokens than dumping raw file contents into context. It ships as a single static binary, so any MCP-compatible agent can point at a repo and get structural code intelligence -- call graphs, symbol references, AST-level lookups -- without re-reading files every turn. The novel part is doing this cheaply enough in tokens that it's worth running on every session, not just for large refactors."
+          },
+          {
+            "title": "heygen-com/hyperframes",
+            "url": "https://github.com/heygen-com/hyperframes",
+            "source": "github.com",
+            "stars": "35.3k",
+            "lang": "TypeScript",
+            "body": "Hyperframes renders video from plain HTML: write markup and CSS with GSAP-driven animation, and it uses ffmpeg under the hood to produce the final file. It's built explicitly for agents -- an LLM that already writes HTML and CSS fluently can target video output without touching a timeline editor or an unfamiliar animation API. Instead of teaching agents a new video-specific tool, this maps video generation onto a format they're already good at."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Two builders published exact before/after numbers instead of vibes.",
+        "items": [
+          {
+            "title": "Migrating a production AI agent to GPT-5.6: 2.2x faster, 27% cheaper",
+            "url": "https://ploy.ai/blog/migrating-a-production-ai-agent-to-gpt-5-6",
+            "source": "Hacker News",
+            "author": "brryant",
+            "body": "The Ploy team documented swapping a production agent over to GPT-5.6 the day it shipped, and published the actual before/after: 2.2x faster responses and 27% lower cost per run. That kind of number only comes from real load, not a synthetic benchmark, which is what makes it useful -- it shows the migration was a model-string swap plus a re-run of the existing eval suite, not a rewrite. If you're running an agent in production against GPT-5.5 or earlier, the playbook here is straightforward: freeze your evals first, swap the model, measure latency and cost against the same traffic, then decide if prompts need retuning for the new model's quirks before rolling it out fully."
+          },
+          {
+            "title": "Show HN: I RL-trained an agent that trains models with RL (for ~$1.3k)",
+            "url": "https://github.com/Danau5tin/ai-trains-ai",
+            "source": "Hacker News",
+            "author": "Danau5tin",
+            "body": "Danau5tin built an agent whose job is to run RL training loops on other models, then trained that meta-agent with RL itself -- for about $1,300 total. The repo lays out the actual loop: the outer agent proposes a training config and reward shaping, launches a run, reads back the results, and adjusts for the next attempt, with the whole chain scored end to end so the outer agent gets better at the job of training models over time. It's a small, cheap, reproducible example of an agent operating one level up from the usual agent-calls-an-API pattern, and the code is public if you want to see exactly which knobs it turns."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow with whatever ships next."
+  },
+  {
     "id": "2026-07-14",
     "date": "July 14, 2026",
     "title": "AI Pulse",
