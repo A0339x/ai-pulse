@@ -3,6 +3,111 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-16",
+    "date": "July 16, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Sonnet 5 goes live, GPT-5.6 takes over Office, and a wired-up Billy Bass gets an agent brain",
+    "intro": "Today's shipping news is model-and-integration news more than feature news -- two new defaults (Sonnet 5, GPT-5.6) just landed in places you already use, no migration required. The GitHub climbing list is all about giving agents cheaper context and better memory: knowledge graphs, token-saving proxies, HTML-to-video renders. And today's build of the day is a genuinely great use of an agent framework on a talking wall-mounted fish.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two frontier labs push new defaults live today, plus a platform update with real new features.",
+        "items": [
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Claude Sonnet 5 is now Anthropic's default mid-tier model, live in the API, the Claude apps, and everywhere Sonnet was already plugged in -- this issue was written by it, for what that's worth. Existing integrations pick up the new model automatically: no code changes needed if you're pointed at the Sonnet alias, and no new pricing tier to opt into. If you've got evals or regression suites against Sonnet outputs, today's the day to re-run them, since behavior on edge cases can shift even when the model string doesn't change."
+          },
+          {
+            "title": "GPT-5.6 is now the preferred model in Microsoft 365 Copilot",
+            "url": "https://openai.com/index/gpt-5-6-preferred-model-microsoft-365-copilot",
+            "source": "OpenAI",
+            "body": "Microsoft flipped the default: GPT-5.6 is now the model Microsoft 365 Copilot reaches for across Word, Excel, PowerPoint, Chat, and Cowork, replacing whatever was serving those surfaces before. That's a same-day quality and behavior change for anyone using Copilot in Office today, with zero migration work on your end -- same prompts, same UI, newer model underneath. Worth stress-testing your existing Copilot workflows (long-document summarization, formula generation, slide drafts) against the swap this week, since output style on edge cases can move even when the interface stays identical."
+          },
+          {
+            "title": "GPT-Red: Unlocking Self-Improvement for Robustness",
+            "url": "https://openai.com/index/unlocking-self-improvement-gpt-red",
+            "source": "OpenAI",
+            "body": "GPT-Red is an automated red-teaming system built on self-play: one model instance attacks, another defends, and the loop trains both to get better at finding and patching prompt-injection holes without a human writing the exploits first. The findings feed straight back into alignment training, so robustness gains compound run over run instead of waiting on the next external audit cycle. OpenAI is describing the pipeline publicly for the first time today -- the practical effect for developers is fewer prompt-injection classes slipping through before a model ships, not a paper to file away."
+          },
+          {
+            "title": "AutoGPT Platform v0.6.67",
+            "url": "https://github.com/Significant-Gravitas/AutoGPT/releases/tag/autogpt-platform-beta-v0.6.67",
+            "source": "GitHub",
+            "body": "AutoGPT's new platform release adds first-class org and workspace support -- new schema, auth, APIs, migration path, and frontend -- so teams can now share a single deployment with real multi-tenant boundaries instead of everyone running solo instances. It also splits the adapter base into separate socket and webhook paths, decoupling from shared-core, and ships a copilot composer with a skills/scheduled-tasks menu built directly into the UI. If you're running AutoGPT for a team rather than solo, this is the release that makes that setup officially supported instead of a workaround."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's stars go to repos that change what a coding agent can actually do, not another SDK wrapper.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "88.3k",
+            "lang": "Python",
+            "body": "Point graphify at a folder and it builds a queryable knowledge graph out of everything in it -- app code, SQL schemas, R and shell scripts, docs, papers, even images and video. That graph becomes context your coding agent (Claude Code, Codex, OpenCode, Cursor, Gemini CLI) can query directly, so instead of grepping a repo for how a table maps to a service, the agent traverses a graph that already has the relationship encoded. It's the GraphRAG idea applied specifically to the app-code-plus-schema-plus-infra problem, which is exactly the context coding agents keep missing today."
+          },
+          {
+            "title": "heygen-com/hyperframes",
+            "url": "https://github.com/heygen-com/hyperframes",
+            "source": "github.com",
+            "stars": "35.6k",
+            "lang": "TypeScript",
+            "body": "Hyperframes renders video from HTML instead of timeline software: write markup and GSAP animation, point ffmpeg at it, get an MP4 out. The pitch is squarely aimed at agents -- an LLM already writes HTML reliably, so instead of teaching a model to drive a timeline-based video API or After Effects, you give it a rendering target it's already fluent in. That turns \"generate a video\" into \"generate a webpage,\" a task a coding agent is far more likely to get right on the first pass."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "71.4k",
+            "lang": "Rust",
+            "body": "rtk sits in front of your coding agent as a CLI proxy and claims 60-90% lower token consumption on common dev commands, shipped as a single dependency-free Rust binary. It intercepts repetitive command output -- build logs, test runs, diffs -- before it reaches the model and compresses or dedupes it, so the agent gets the signal without re-reading boilerplate every turn. Worth trying if your Claude Code or Codex sessions burn context fast on noisy commands like test suites or linters."
+          },
+          {
+            "title": "DeusData/codebase-memory-mcp",
+            "url": "https://github.com/DeusData/codebase-memory-mcp",
+            "source": "github.com",
+            "stars": "32.1k",
+            "lang": "C",
+            "body": "This MCP server indexes an entire codebase into a persistent knowledge graph in milliseconds, covers 158 languages, and claims sub-millisecond queries with 99% fewer tokens spent per lookup than having the agent re-read files directly. It ships as a single static binary with zero dependencies, so it's a drop-in MCP addition rather than a new stack to stand up. For agents working in large, unfamiliar repos, that's the difference between re-discovering the codebase every session and querying a graph that already knows where things are."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Three builds this week that show their receipts -- tools, costs, and what broke along the way.",
+        "items": [
+          {
+            "title": "Show HN: BillAI Bass, an AI-Powered Big Mouth Billy Bass Using Strands Agents",
+            "url": "https://github.com/morganwilliscloud/billai-bass",
+            "source": "Hacker News",
+            "author": "mtw14",
+            "body": "Someone wired a real Big Mouth Billy Bass -- the singing wall-mounted fish toy -- up to an agent built on AWS's Strands Agents framework, so it listens, responds, and flaps along in real time instead of playing a fixed loop. Speech input runs through Strands' agent orchestration to generate a response, and the output audio drives the fish's motor and mouth servo in sync. It's a clean template for \"give a physical object an agent brain\": mic in, agent framework in the middle, actuator control out. The repo has the wiring diagram, the Strands setup, and the control code, so a weekend tinkerer with a spare Billy Bass and an API key could reproduce the whole thing."
+          },
+          {
+            "title": "Show HN: I RL-trained an agent that trains models with RL (for ~$1.3k)",
+            "url": "https://github.com/Danau5tin/ai-trains-ai",
+            "source": "Hacker News",
+            "author": "Danau5tin",
+            "body": "Danau5tin RL-trained an agent whose job is to RL-train other models -- a meta-training loop where the outer agent picks hyperparameters, reward shaping, and training decisions for an inner RL run. The headline is the price tag: about $1.3k end to end, cheap enough to run on a personal budget instead of a lab's compute cluster. The repo documents the actual training setup and what the outer agent learned to adjust, so if you've got an RL problem and a few hundred dollars of spare compute, this is a concrete recipe for automating the part of RL that's usually hand-tuned by a human."
+          },
+          {
+            "title": "LLM Networking with MikroTik",
+            "url": "https://blog.greg.technology/2026/07/14/llm-networking-with-mikrotik.html",
+            "source": "Hacker News",
+            "author": "gregsadetsky",
+            "body": "Greg wired an LLM directly into a MikroTik router's config layer, so you describe what you want the network to do in plain language and the model generates and applies the actual RouterOS configuration. The write-up walks through the real commands the model produced, where it got router-specific syntax wrong, and how feeding it MikroTik's own config reference in the prompt fixed most of the failures. It's a genuine look at applying an LLM to infrastructure-as-code for a device class -- small business and home routers -- that's never had a decent natural-language interface, detailed enough to point you at the same approach for other RouterOS boxes."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- go build something before the next model update makes this one obsolete."
+  },
+  {
     "id": "2026-07-15",
     "date": "July 15, 2026",
     "title": "AI Pulse",
