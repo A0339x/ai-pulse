@@ -3,6 +3,111 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-17",
+    "date": "July 17, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Claude Sonnet 5 lands, GitHub's climbing charts go token-obsessed, and two builders document real experiments on real budgets",
+    "intro": "Anthropic ships Claude Sonnet 5 and a science-focused workbench, OpenAI rolls out automated red-teaming, and NVIDIA's new embedding model tops the retrieval leaderboard -- a genuinely busy shipping day. On GitHub, the climbing charts skew toward token efficiency, code intelligence, and design tooling rather than more agent wrappers. And two build logs prove you can run real experiments -- a diffusion model, a meta-RL agent -- on consumer hardware and a four-figure budget.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Anthropic pushes a new model out the door while the rest of the field ships narrower, sharper tools.",
+        "items": [
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Anthropic released Claude Sonnet 5, the newest entry in its mid-tier model line and the model now running Claude Code by default. It sits between the flagship Opus and lightweight Haiku tiers: fast enough for interactive agent loops, capable enough for serious coding and reasoning work. It's live now in the API, in Claude.ai, and across Anthropic's developer tools -- no waitlist, no separate signup. If you were on an earlier Sonnet version for cost reasons, this is the one to benchmark against your current setup today, since pricing and speed characteristics carry over from the previous generation while the underlying model changes."
+          },
+          {
+            "title": "Claude Science AI Workbench",
+            "url": "https://www.anthropic.com/news/claude-science-ai-workbench",
+            "source": "Anthropic",
+            "body": "Anthropic launched a Science AI Workbench, a Claude environment built for research work: literature search, data analysis, and hypothesis testing in one interface instead of stitching together separate RAG and notebook tools. It's aimed at researchers who want Claude wired directly into their data and paper trail rather than pasting context in by hand. Access rolls out through Anthropic's existing research and enterprise channels. For builders in bio, chem, or physics-adjacent fields, it's worth a look as a starting point instead of building your own literature-RAG pipeline from scratch."
+          },
+          {
+            "title": "GPT-Red: Unlocking Self-Improvement for Robustness",
+            "url": "https://openai.com/index/unlocking-self-improvement-gpt-red",
+            "source": "OpenAI",
+            "body": "OpenAI shipped GPT-Red, an automated red-teaming system that uses self-play to find and patch its own weaknesses. Instead of relying purely on human red-teamers, GPT-Red pits models against each other to surface jailbreaks and prompt-injection paths, then feeds those failures back into training. OpenAI says it's already improved robustness against prompt injection specifically -- the failure mode that breaks most agentic tool-use setups. If you're building anything that hands an LLM real tool access, this is the kind of infrastructure worth watching, since prompt-injection resistance is still the biggest blocker to trusting agents with real actions."
+          },
+          {
+            "title": "NVIDIA Nemotron 3 Embed Ranks #1 Overall on RTEB, Advancing Agentic Retrieval",
+            "url": "https://huggingface.co/blog/nvidia/nemotron-3-embed-wins-rteb",
+            "source": "Hugging Face",
+            "body": "NVIDIA's Nemotron 3 Embed now ranks #1 overall on RTEB (the Retrieval Embedding Benchmark), just published on Hugging Face. It's built specifically for agentic retrieval -- the multi-hop, tool-driven search agents do when deciding what to fetch next, not just single-shot document similarity. That's a meaningfully different target than most embedding models, which are tuned for static search. If your RAG or agent stack leans on embeddings for retrieval quality, this is a straightforward drop-in to benchmark against whatever you're running now, especially if your agents are doing multi-step lookups rather than one search per query."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's stars go to tools that touch tokens, memory, and design -- not another agent wrapper.",
+        "items": [
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "90.2k",
+            "lang": "JavaScript",
+            "body": "Caveman is a Claude Code skill built on a genuinely funny premise: strip your prompts and agent instructions down to terse, caveman-style language and you cut token usage by roughly 65% with no real loss in output quality. It's a blunt-instrument version of prompt compression, and it works because a lot of agent scaffolding is padded with words the model doesn't need to do the task. For anyone running high-volume agent loops where token cost adds up fast, it's a cheap experiment: drop it in, watch your bill drop, and see where the compression actually breaks down."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "89.8k",
+            "lang": "Python",
+            "body": "Graphify turns any folder -- code, SQL schemas, R scripts, docs, papers, images, video -- into a queryable knowledge graph, then hands your coding agent a graph to reason over instead of a pile of files. It works across Claude Code, Codex, OpenCode, Cursor, and Gemini CLI, so it's not locked to one vendor. The pitch is that GraphRAG belongs at the repo level, not just the document level: app code, database schema, and infra config all end up as nodes in the same graph, which means an agent can trace a bug from a UI component down to the migration that caused it."
+          },
+          {
+            "title": "DeusData/codebase-memory-mcp",
+            "url": "https://github.com/DeusData/codebase-memory-mcp",
+            "source": "github.com",
+            "stars": "32.3k",
+            "lang": "C",
+            "body": "This is an MCP server that indexes an entire codebase into a persistent, AST-based knowledge graph in milliseconds -- 158 languages supported, sub-millisecond query latency, single static binary, zero dependencies. Instead of your agent re-reading files every session to rebuild context, it queries a graph that already understands the code's structure. That's a real fix for one of the most wasteful parts of agentic coding: burning tokens re-deriving what a function calls or where a type is used. Point it at a repo once and any MCP-compatible agent gets persistent, fast code intelligence going forward."
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "79.1k",
+            "lang": "TypeScript",
+            "body": "Open Design is an open-source alternative to Claude's design tooling: a local-first desktop app that turns your coding agent -- Claude Code, Codex, Cursor, Gemini, OpenCode, or 20-plus other CLIs via bring-your-own-key -- into a design engine. Point it at a brief and it produces actual files: prototypes, landing pages, dashboards, slide decks, images, video, exported as HTML, PDF, PPTX, or MP4. The idea is that design work shouldn't be locked behind one vendor's proprietary tool when your coding agent can already generate and iterate on real assets. Worth trying if you've been paying for a hosted design-agent product."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Two shoestring builds show the actual steps, not just the demo reel.",
+        "items": [
+          {
+            "title": "$100 AI Music Video: Claude Fable 5 vs. GPT-5.6 Sol",
+            "url": "https://www.tryai.dev/blog/ai-music-video-arena-claude-vs-gpt-5.6",
+            "source": "Hacker News",
+            "author": "hershyb_",
+            "body": "tryai.dev ran a real head-to-head: build the same music video twice on a $100 budget, once directing the pipeline with Claude Fable 5 and once with GPT-5.6 Sol, then compare what each model actually produced. The post walks through the full chain -- scripting, shot planning, generation, and stitching -- and where each model's pipeline needed manual intervention versus where it held up on its own. It's the kind of writeup you can actually replicate: same budget, same brief, swap the orchestrating model, see where the failure modes differ. If you're weighing which model to put in charge of a generative-video pipeline, this is a more useful data point than either lab's own demo reel."
+          },
+          {
+            "title": "How to Train a Gen AI Kick Drum Model on Your Old Linux Desktop with 6GB VRAM",
+            "url": "https://www.zhinit.dev/blog/training-a-kick-drum-diffusion-model",
+            "source": "Hacker News",
+            "author": "zhinit",
+            "body": "A step-by-step walkthrough of training a generative audio diffusion model to produce kick drum sounds, run entirely on an old Linux desktop with just 6GB of VRAM -- no cloud GPU rental. The post covers dataset prep, the tricks needed to fit training inside that memory budget, and what broke along the way before landing on a setup that actually converges. It's a genuinely replicable weekend project: the hardware bar is whatever you already have, and the writeup is specific enough about batch sizes, model size tradeoffs, and training time that you could rerun it on your own machine rather than just read about it."
+          },
+          {
+            "title": "Show HN: I RL-trained an agent that trains models with RL (for ~$1.3k)",
+            "url": "https://github.com/Danau5tin/ai-trains-ai",
+            "source": "Hacker News",
+            "author": "Danau5tin",
+            "body": "Danau5tin RL-trained an agent whose job is to train other models using RL, and documented the whole build for about $1.3k in total compute. The repo covers the reward design for the outer training loop, the infrastructure used to run nested training jobs, and the failure modes hit along the way -- reward hacking, unstable inner loops, runs that needed to be killed and restarted. It's a rare writeup of meta-RL that comes with a real budget number attached, which makes it a usable reference point if you've been curious what it costs to experiment with training-agents-that-train rather than just reading the paper."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan for July 17 -- see you tomorrow."
+  },
+  {
     "id": "2026-07-16",
     "date": "July 16, 2026",
     "title": "AI Pulse",
