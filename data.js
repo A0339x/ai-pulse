@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-18",
+    "date": "July 18, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Claude Sonnet 5 lands, agents get memory and voices, and the show-and-tell shelf stays empty",
+    "intro": "Anthropic dropped a new flagship model today while OpenAI and Google mostly filled their blogs with trust-and-marketing posts instead of new capability. The real momentum is on GitHub, where agent infrastructure -- knowledge graphs, code memory, voice, programmatic video -- is climbing faster than another chat wrapper. Nothing in today's Show HN crop documented an actual build, so that section comes up empty.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new Claude model and a red-teaming system that trains itself, plus two quieter infra upgrades for builders.",
+        "items": [
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Anthropic released Claude Sonnet 5 today, the new mid-tier model in its Claude 5 lineup alongside Opus 4.8 and Haiku 4.5. It's live now in the API and available as a model option in Claude Code, slotted in as the workhorse tier for agentic coding and long-running tasks -- cheaper and faster than Opus, more capable than Haiku for anything that needs sustained reasoning. If Anthropic's usual rollout pattern holds, expect it to become the default Sonnet model across the API and consumer apps over the next few days rather than staying opt-in."
+          },
+          {
+            "title": "GPT-Red: Unlocking Self-Improvement for Robustness",
+            "url": "https://openai.com/index/unlocking-self-improvement-gpt-red",
+            "source": "OpenAI",
+            "body": "OpenAI shipped GPT-Red today, an automated red-teaming system built on self-play: one model probes for weaknesses like prompt injection and jailbreaks, another patches them, on a continuous loop. The point is that safety testing that used to need armies of human red-teamers now scales with compute instead of headcount. OpenAI says findings from GPT-Red feed directly into alignment training, so robustness gains show up in the next model checkpoint instead of sitting in a one-off audit report. Worth watching if you're shipping agents that touch untrusted input and want a sense of how fast the attack surface is being covered."
+          },
+          {
+            "title": "crewAI 1.15.4",
+            "url": "https://github.com/crewAIInc/crewAI/releases/tag/1.15.4",
+            "source": "GitHub / crewAI",
+            "body": "CrewAI's 1.15.4 release promotes its Skills Repository out of experimental status, so the reusable skill packages you write for one crew can now be published, versioned, and pulled into any other CrewAI project instead of copy-pasted between repos. The release also adds Flows documentation inside CrewAI Studio, closing a gap for anyone building multi-step agent pipelines visually rather than in code. If you'd been holding off on standardizing skills across a team's CrewAI projects because the API might still shift underneath you, this is the signal that it's stable enough to build on now."
+          },
+          {
+            "title": "Fine-tune video and image models at scale with NVIDIA NeMo Automodel and Diffusers",
+            "url": "https://huggingface.co/blog/nvidia/scale-diffusers-finetuning-nemo-automodel",
+            "source": "Hugging Face",
+            "body": "Hugging Face and NVIDIA shipped an integration between NeMo Automodel and the Diffusers library, letting you fine-tune video and image diffusion models across multi-GPU clusters using the same Diffusers training scripts you already know, instead of rewriting them for NeMo's distributed stack. NeMo Automodel handles sharding, checkpointing, and multi-node orchestration underneath. That's the piece that's been missing for teams who wanted to fine-tune a diffusion model at real scale without becoming distributed-systems engineers first -- write the training loop like you normally would, point it at more GPUs, and the orchestration is handled for you."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's stars go to agent infrastructure -- graphs, memory, voice, video -- not more chat wrappers.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "90.6k",
+            "lang": "Python",
+            "body": "Graphify turns a folder of code, SQL schemas, scripts, docs, papers, images, or videos into a single queryable knowledge graph, then plugs into Claude Code, Codex, Cursor, Gemini CLI, and most other coding agents as a skill. Instead of an agent grepping through your repo cold every session, it queries a graph that already links your app code to your database schema to your infrastructure config, so it understands how a change in one layer ripples into the others. Useful for anyone running agents against a codebase large enough that plain context-window search has stopped being reliable."
+          },
+          {
+            "title": "DeusData/codebase-memory-mcp",
+            "url": "https://github.com/DeusData/codebase-memory-mcp",
+            "source": "github.com",
+            "stars": "32.6k",
+            "lang": "C",
+            "body": "This is an MCP server that indexes a codebase into a persistent knowledge graph in milliseconds, covering 158 languages with sub-millisecond query times, shipped as a single static binary with zero dependencies. The pitch is token efficiency: instead of an agent re-reading files every session, it queries the graph directly, which the author claims cuts repeat-lookup token usage by 99%. For anyone running agents against large monorepos where re-reading context is the actual bottleneck, this is a much leaner alternative to spinning up a vector-database-backed memory server just to answer 'where is this defined.'"
+          },
+          {
+            "title": "jamiepine/voicebox",
+            "url": "https://github.com/jamiepine/voicebox",
+            "source": "github.com",
+            "stars": "42.4k",
+            "lang": "TypeScript",
+            "body": "Voicebox is an open-source voice studio for cloning, dictating, and generating speech locally, built on Qwen3-TTS with both CUDA and MLX backends so it runs on NVIDIA GPUs and Apple Silicon alike. It packages voice cloning, dictation, and voice creation into one open tool instead of three separate SaaS subscriptions, which matters if you're building anything that needs a voice layer without routing audio through a third-party API. Given how much of the current voice-AI stack is closed and cloud-only, an open, locally-runnable studio built on a real open-weight TTS model is a meaningfully different offer."
+          },
+          {
+            "title": "heygen-com/hyperframes",
+            "url": "https://github.com/heygen-com/hyperframes",
+            "source": "github.com",
+            "stars": "36.0k",
+            "lang": "TypeScript",
+            "body": "Hyperframes renders video from HTML: write markup and CSS with GSAP-driven animation, and it compiles that straight to video via ffmpeg. That flips the usual generative-video workflow -- instead of prompting a diffusion model and hoping the output matches your brief, an agent writes deterministic, editable markup, and the render is exactly what the code says. Built by HeyGen, it's aimed at agents doing the authoring, not humans dragging clips on a timeline, which makes it a genuinely different building block for programmatic video than the usual text-to-video tools."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Today's Show HN crop was all launches, no documented workflow -- nothing cleared the bar.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-07-17",
     "date": "July 17, 2026",
     "title": "AI Pulse",
