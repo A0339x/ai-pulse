@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-19",
+    "date": "July 19, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Sonnet 5 lands, HF and NVIDIA team up on fine-tuning, GitHub keeps optimizing for agent context",
+    "intro": "Anthropic's headline drop today is Claude Sonnet 5, the new mid-tier model now live across the API, Claude apps, and Claude Code. Everything else in the shipping lane is smaller but real: a self-play red-teaming system from OpenAI and a scaled fine-tuning path for diffusion models. On GitHub, the trend line is context efficiency and agent output range -- knowledge graphs, token-slashing proxies, memory, and agents that render video instead of just describing it.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new flagship Claude model headlines a day of smaller, genuinely useful feature drops.",
+        "items": [
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Anthropic shipped Claude Sonnet 5, the newest entry in the Claude lineup, now available as the default mid-tier model across the API, the Claude apps, and Claude Code. It slots in alongside Opus 4.8 and Haiku 4.5 as the current model family. If you're building on the API, swap your model string to claude-sonnet-5 to pick it up -- existing prompts and tool-use setups should carry over without changes, since it's a drop-in successor rather than a new interface."
+          },
+          {
+            "title": "GPT-Red: Unlocking Self-Improvement for Robustness",
+            "url": "https://openai.com/index/unlocking-self-improvement-gpt-red",
+            "source": "OpenAI",
+            "body": "OpenAI shipped GPT-Red, an automated red-teaming system that uses self-play to probe its own models for weaknesses like prompt injection and jailbreaks, then feeds what it finds back into training. Instead of relying only on periodic human red-team audits, GPT-Red runs attacker and defender model instances against each other in a loop, so new failure modes get surfaced and patched continuously. It's the same self-play mechanics that drive capability gains, pointed inward at safety -- a system that gets better at attacking itself so the shipped model gets harder to attack."
+          },
+          {
+            "title": "Fine-tune video and image models at scale with NVIDIA NeMo Automodel and Diffusers",
+            "url": "https://huggingface.co/blog/nvidia/scale-diffusers-finetuning-nemo-automodel",
+            "source": "Hugging Face",
+            "body": "Hugging Face and NVIDIA shipped an integration between NeMo Automodel and Diffusers, so you can fine-tune image and video diffusion models across multiple GPUs and nodes while writing ordinary Diffusers-style training code. NeMo Automodel handles the distributed training and parallelism underneath, meaning you don't hand-roll sharding logic to scale past a single GPU. If you've been fine-tuning diffusion models locally and hitting a wall on model or dataset size, this is a direct path to bigger runs without switching training frameworks."
+          },
+          {
+            "title": "Claude Science AI Workbench",
+            "url": "https://www.anthropic.com/news/claude-science-ai-workbench",
+            "source": "Anthropic",
+            "body": "Anthropic launched a dedicated Science AI Workbench, a Claude workspace built specifically for research work rather than general chat. It's aimed at researchers who want to run Claude directly against scientific data, literature, and lab workflows without stitching together their own tooling. For builders in academic or industry research settings, it's a narrower, purpose-built surface than the general Claude app -- worth a look if your current setup is pasting papers and datasets into a generic chat window."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's GitHub momentum is all about giving agents more context, memory, and output range without burning tokens.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "91.3k",
+            "lang": "Python",
+            "body": "Turns any folder -- code, SQL schemas, R scripts, docs, papers, even images and video -- into a queryable knowledge graph your coding agent can traverse instead of grepping blind. It ships as a skill for Claude Code, Codex, Cursor, Gemini CLI, and others, and indexes app code, database schema, and infrastructure into one graph, so an agent can answer things like \"what calls this table\" across a whole stack, not just source files. Useful for large or polyglot repos where standard RAG-over-docs setups miss the connections between code and data."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "71.8k",
+            "lang": "Rust",
+            "body": "A single static-binary CLI proxy that sits between your coding agent and common dev commands and strips 60-90% of the tokens those commands would otherwise burn, compressing verbose output from test runs, builds, and git operations before it hits the model's context window. No config, no dependencies. For anyone running long agentic coding sessions where context fills up with raw tool output rather than actual reasoning, this buys real runway before you hit compaction."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "57.5k",
+            "lang": "Python",
+            "body": "An open-source memory system for AI agents built on ChromaDB, pitched as the best-benchmarked option in the space -- the repo leads with actual comparison numbers instead of just claiming to solve agent memory. It plugs in over MCP, so any MCP-capable agent gets persistent, retrievable memory without a custom integration layer. Worth a look if you're currently rolling your own memory setup with a vector store and glue code and want a maintained, measured alternative."
+          },
+          {
+            "title": "heygen-com/hyperframes",
+            "url": "https://github.com/heygen-com/hyperframes",
+            "source": "github.com",
+            "stars": "36.2k",
+            "lang": "TypeScript",
+            "body": "A framework that lets an agent write plain HTML/CSS/GSAP animation and render it straight to video via ffmpeg -- no editor, no timeline, no export settings to fight. Since agents already write HTML well, hyperframes turns that into a video pipeline: write markup and animation, hit render, get an MP4. It's built for agent-generated explainer videos, motion graphics, or social clips, and it fits naturally into what agents are already good at instead of asking them to operate an unfamiliar tool."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's queue actually walked through a real build end to end -- just launches and hot takes.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-07-18",
     "date": "July 18, 2026",
     "title": "AI Pulse",
