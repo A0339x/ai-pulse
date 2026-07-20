@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-20",
+    "date": "July 20, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Two Anthropic model updates, an automated red-teamer from OpenAI, and GitHub's climbers skip the wrapper skills for real infra",
+    "intro": "Anthropic pushed a new Sonnet and brought Fable 5 back from a pull today, while OpenAI shipped a red-teaming system that attacks its own models to get better. On GitHub, the repos gaining ground are actual infrastructure -- knowledge graphs, token-reduction proxies, memory layers -- not another agent skill pack. Nothing in today's build-log queue documented enough of a real workflow to make the cut.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two model moves from Anthropic bookend a red-teaming system from OpenAI and a new audio model out of ByteDance.",
+        "items": [
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Anthropic released Claude Sonnet 5, the new mid-tier entry in the Claude line, and it's already live as the default model across Claude.ai, the API, and Claude Code. If you were building on the previous Sonnet, this is a straight swap -- same API shape, same pricing tier, sharper model underneath. For builders running agents or coding workflows on Sonnet, today's the day to point your harness at the new model ID and see where it actually holds up better on your tasks, rather than trusting a benchmark chart."
+          },
+          {
+            "title": "Redeploying Fable 5",
+            "url": "https://www.anthropic.com/news/redeploying-fable-5",
+            "source": "Anthropic",
+            "body": "Anthropic brought Fable 5 back online today after pulling it down for changes, redeployed across the same surfaces it shipped on before. If you had a workflow built on Fable 5 that broke when it went dark, it's safe to point traffic back at it now. Worth spot-checking outputs against what you had cached before the pull -- a redeploy is a good moment to confirm you're still getting the behavior you built around, not just that the endpoint responds again."
+          },
+          {
+            "title": "Seedaudio 1.0",
+            "url": "https://seed.bytedance.com/en/seedaudio1_0",
+            "source": "ByteDance Seed",
+            "body": "ByteDance's Seed team shipped Seedaudio 1.0, a new audio generation model out of the same lab behind its other Seed releases. It's a first version, so treat it as an early entrant rather than a proven production pick, but it's another sign labs outside the usual US frontier three are shipping serious audio models on their own schedule. If you're building voice or audio pipelines, it's worth a quick head-to-head against whatever you're running today, if only to track where the frontier average is moving."
+          },
+          {
+            "title": "GPT-Red: Unlocking Self-Improvement for Robustness",
+            "url": "https://openai.com/index/unlocking-self-improvement-gpt-red",
+            "source": "OpenAI",
+            "body": "OpenAI shipped GPT-Red, an automated red-teaming system that uses self-play to probe its own models for weaknesses -- alignment failures, prompt injection, jailbreaks -- and feeds the results back into training. Instead of relying purely on human red teams to find holes, the system generates adversarial prompts against itself and iterates on what breaks through. For anyone building agents that consume untrusted input, this is the kind of infra that should quietly improve prompt injection defenses over time, though the real test is how it holds up against attacks nobody's tried yet."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's fast climbers are code-intelligence and memory infrastructure, not more agent skill wrappers.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "92.0k",
+            "lang": "Python",
+            "body": "Graphify turns any folder -- code, SQL schemas, R scripts, docs, papers, images, video -- into a queryable knowledge graph that plugs into Claude Code, Codex, Cursor, Gemini CLI and others. Instead of grepping a repo, your agent traverses relationships across app code, database schema, and infra as one connected graph. Point it at a monorepo and it indexes the whole system, not just source files, so an agent asking 'what services touch this table' gets a real answer instead of a text match. It treats the codebase itself as structured data rather than another pile of documents to embed."
+          },
+          {
+            "title": "rtk-ai/rtk",
+            "url": "https://github.com/rtk-ai/rtk",
+            "source": "github.com",
+            "stars": "72.0k",
+            "lang": "Rust",
+            "body": "rtk is a CLI proxy, single Rust binary with zero dependencies, that sits between your shell and your coding agent and cuts token consumption 60-90% on common dev commands. No SDK to install, no config beyond pointing your agent at the proxy instead of the raw shell. For anyone burning through context on repeated build, test, and lint output, this is a low-effort way to keep agent sessions cheaper and longer without changing how you actually work day to day."
+          },
+          {
+            "title": "DeusData/codebase-memory-mcp",
+            "url": "https://github.com/DeusData/codebase-memory-mcp",
+            "source": "github.com",
+            "stars": "33.1k",
+            "lang": "C",
+            "body": "An MCP server that indexes a codebase into a persistent knowledge graph in milliseconds, covering 158 languages with sub-millisecond queries. Ships as a single static binary with zero dependencies and claims 99% fewer tokens versus feeding an agent raw file contents on every call. It's scoped tighter than a full knowledge-graph tool: pure code intelligence over MCP, so any MCP-compatible agent gets structural understanding of a repo without re-reading it every session."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "57.5k",
+            "lang": "Python",
+            "body": "MemPalace bills itself as the best-benchmarked open-source AI memory system, and it's free. Built on ChromaDB, it gives agents persistent memory across sessions via MCP, so a coding agent or assistant can recall past decisions and context instead of starting cold every conversation. Worth a look if you've been rolling your own memory layer out of a vector store and prompt stuffing -- this is the same idea packaged and benchmarked."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's queue documented a real end-to-end build.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-07-19",
     "date": "July 19, 2026",
     "title": "AI Pulse",
