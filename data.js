@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-21",
+    "date": "July 21, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Sonnet 5 goes GA, Nvidia squeezes a world model onto the edge, and GitHub can't stop turning codebases into graphs.",
+    "intro": "Today's biggest news is a straight model release: Claude Sonnet 5 is live with no waitlist. Everything else is about speed and reach -- Hermes Agent cut its startup lag ~80%, OpenAI built a red team that trains itself, and this week's hottest repos are all about giving agents better eyes into your codebase, your design tools, and your hardware. Nothing in today's build threads reads like a documented weekend project, so that section's empty rather than padded.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new flagship model and three tools built for speed and adversarial robustness.",
+        "items": [
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Anthropic pushed Claude Sonnet 5 to general availability, the new mid-tier model in the Claude 5 lineup alongside Opus 4.8 and Haiku 4.5. It's live now in the API, in Claude Code, and in every third-party integration built on the Anthropic SDK, at the same pricing tier as Sonnet 4.5 -- no waitlist, no separate access request. Anthropic is positioning it as the default for coding and longer-horizon agent work, the model most builders will hit first rather than reach for Opus. If you've pinned API calls to a \"sonnet-latest\"-style alias, check whether that's already resolving to the new model or needs a manual bump."
+          },
+          {
+            "title": "Hermes Agent v0.19.0 -- The Quicksilver Release",
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.7.20",
+            "source": "NousResearch",
+            "body": "Hermes Agent's new release is built around one number: first-turn time-to-first-token is down roughly 80% on every platform. Reasoning streams live by default now instead of appearing after the model finishes thinking, so you watch the agent's chain of thought as it happens instead of staring at a spinner. The desktop app got about 20 PRs of pure speed work on top of that. The release itself is enormous -- north of 2,000 commits, 1,000+ merged PRs, 300+ contributors -- but the headline for daily use is simple: the agent feels instant on the first message, which is where most tools lose people."
+          },
+          {
+            "title": "GPT-Red: Unlocking Self-Improvement for Robustness",
+            "url": "https://openai.com/index/unlocking-self-improvement-gpt-red",
+            "source": "OpenAI",
+            "body": "OpenAI shipped GPT-Red, an automated red-teaming system that trains itself through self-play instead of relying on humans to hand-write attacks. It generates adversarial prompts, tests them against a target model, learns which ones land, and iterates -- specifically targeting prompt injection and jailbreak robustness. The pitch is that a self-improving attacker surfaces failure modes faster than a static test suite, and OpenAI is already running it inside its own pre-release safety pipeline. For anyone building an agent that takes untrusted input, this is worth watching less as a research paper and more as a preview of what attackers' tooling looks like next."
+          },
+          {
+            "title": "Introducing Cosmos 3 Edge",
+            "url": "https://huggingface.co/blog/nvidia/cosmos3edge",
+            "source": "NVIDIA",
+            "body": "Nvidia shipped Cosmos 3 Edge, an edge-deployable cut of its Cosmos world-foundation-model line for physical AI -- robots, drones, AVs -- where you can't round-trip to a datacenter GPU for every frame. It trades some of full Cosmos 3's scale for a footprint that fits on embedded Jetson-class hardware, so teams building perception and simulation for physical robots get a model they can run on the machine itself instead of over a network call. It's live on Hugging Face now as a standard weights-and-config drop, no separate SDK required to pull it into an existing robotics stack."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's stars are all about giving agents structure -- over code, design, video, and hardware.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "92.8k",
+            "lang": "Python",
+            "body": "Graphify turns an entire codebase -- docs, SQL schemas, configs, PDFs included -- into a queryable knowledge graph, using local deterministic AST parsing instead of a vector store. Every edge comes with an explanation of why it's there, so \"what calls this function\" or \"what depends on this config\" gets a traceable answer instead of a similarity-score guess. It ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI, so any of those agents can query the graph mid-session instead of grepping blind. For anyone whose agent keeps hallucinating imports or missing cross-file dependencies, this is a structural fix, not a bigger context window."
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "80.2k",
+            "lang": "TypeScript",
+            "body": "Open Design is a local-first desktop app that turns your coding agent -- Claude Code, Codex, Cursor, Gemini, OpenCode, Qwen, or 20+ others via BYOK -- into a design engine instead of just a code generator. Ask it for a landing page, a dashboard, a slide deck, or a product video, and it outputs real files: HTML, PDF, PPTX, MP4. No proprietary format lock-in, no cloud rendering step -- the agent you already pay for does the design work directly. It's an open alternative to closed \"Claude Design\"-style tools, aimed at builders who want output they can hand straight to a client."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "40.7k",
+            "lang": "Python",
+            "body": "OpenMontage turns a coding assistant into a full agentic video production studio: 12 pipelines, 52 tools, 500+ agent skills covering scripting, shot selection, editing, and export. Instead of one model generating a single clip, it chains agents through a production process -- more like a crew than a generator -- so you get an assembled sequence rather than a raw clip you still have to edit yourself. It plugs into Claude, Copilot, Cursor, and other agent CLIs as the orchestration layer. Worth a look if you've hit the ceiling of single-shot video generation and want something closer to an actual editing pipeline."
+          },
+          {
+            "title": "AlexsJones/llmfit",
+            "url": "https://github.com/AlexsJones/llmfit",
+            "source": "github.com",
+            "stars": "30.0k",
+            "lang": "Rust",
+            "body": "llmfit answers one question builders ask constantly: which model actually runs on this machine. Point it at your hardware and it checks against hundreds of models and providers -- GGUF, MLX, Unsloth-quantized, whatever -- and tells you what fits given your VRAM, RAM, and quant options, instead of you guessing and OOMing three times. It's a single command, not a dashboard or a hosted service. For anyone running local models across a mix of laptops, workstations, and secondhand GPUs, this replaces a spreadsheet of quant-size math with one lookup."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's source list documented an actual build end-to-end, so we're skipping this one.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- see you tomorrow."
+  },
+  {
     "id": "2026-07-20",
     "date": "July 20, 2026",
     "title": "AI Pulse",
