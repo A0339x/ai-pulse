@@ -3,6 +3,91 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-22",
+    "date": "July 22, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Three new Gemini models drop at once, Claude Design gets an open-source rival, and someone wires Claude Code straight into a video model",
+    "intro": "Google spent the week shipping Gemini variants -- a faster Flash, a cheaper Flash-Lite, and a security-specialist Cyber model, all live today. On GitHub, the interesting repos aren't chatbots, they're infrastructure: a codebase-to-knowledge-graph tool, a local design engine for agents, and a benchmarked memory layer. And one small Show HN is worth your weekend -- a full AI movie pipeline built around Claude Code as the orchestrator.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Google ships three Gemini variants at once, OpenAI packages a small-business tier, and Vids gets agent-generated avatars.",
+        "items": [
+          {
+            "title": "Introducing Gemini 3.6 Flash, 3.5 Flash-Lite, and 3.5 Flash Cyber",
+            "url": "https://deepmind.google/blog/introducing-gemini-36-flash-35-flash-lite-and-35-flash-cyber/",
+            "source": "DeepMind",
+            "body": "Google shipped three new models in one drop: Gemini 3.6 Flash, a faster general-purpose Flash tier; 3.5 Flash-Lite, a stripped-down option for high-volume, low-latency calls; and 3.5 Flash Cyber, a lightweight model built specifically to find and patch software vulnerabilities. Cyber is the interesting one -- point it at a codebase and get vulnerability triage without routing through a general-purpose model. Flash-Lite targets the price-sensitive end of the API, useful if you're running high-throughput pipelines where 3.6 Flash's extra capability goes to waste. All three are live in the Gemini API today, no waitlist."
+          },
+          {
+            "title": "Introducing the ChatGPT for Small Business program",
+            "url": "https://openai.com/index/introducing-chatgpt-small-business-program",
+            "source": "OpenAI",
+            "body": "OpenAI launched a dedicated small business program built around the existing ChatGPT Work tier, pairing it with guided onboarding instead of just a subscription. The pitch: a small team without an in-house AI person gets structured workflows for automating ops, marketing, and support tasks, rather than a blank chat box and a prayer. It's less a new model and more a new on-ramp -- prebuilt paths for the kind of work a small business would otherwise pay a contractor to do. If you run or advise a small shop, this is the tier to point them at instead of a vanilla ChatGPT Plus seat."
+          },
+          {
+            "title": "Create, edit and star in videos with two Google Vids updates",
+            "url": "https://blog.google/products-and-platforms/products/workspace/gemini-omni-personal-avatars/",
+            "source": "Google AI",
+            "body": "Google Vids picked up Gemini Omni-powered editing and personal avatars you can generate once and reuse across videos. The avatar feature means you build a likeness a single time instead of filming yourself for every explainer, pitch, or training clip you make afterward. Omni folds Google's multimodal model directly into the Vids editing surface, so generation and editing happen in the same tool instead of round-tripping through separate apps. For anyone making explainer videos or async pitch decks, this closes a real gap: you no longer need a bolted-on avatar tool feeding a separate editor."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's fast-movers are all infrastructure -- knowledge graphs, design engines, and memory layers, not more chat wrappers.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "93.6k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- docs, SQL schemas, configs, PDFs included -- into a queryable knowledge graph, no vector store required. It parses everything with deterministic AST analysis and explains every edge it draws, so instead of fuzzy semantic search you get a graph you can actually query and trust. It ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI, meaning your agent can ask what calls a given function and what it touches, and get a real answer instead of a similarity-ranked guess. For anyone tired of RAG inventing relationships that don't exist in the code, this is a structurally different approach."
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "80.6k",
+            "lang": "TypeScript",
+            "body": "Open Design is an open-source alternative to Claude's Design surface: a local-first desktop app that turns your coding agent into a design engine. Point it at Claude Code, Codex, Cursor, Gemini, OpenCode, Qwen, or any of 20+ CLIs via bring-your-own-key, and it outputs real files -- prototypes, landing pages, dashboards, slides, images, video -- exportable as HTML, PDF, PPTX, or MP4. The bet is that you shouldn't need a proprietary hosted tool to get agent-driven design work; this gives you the same workflow locally with whatever model you already pay for."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "41.1k",
+            "lang": "Python",
+            "body": "OpenMontage turns your coding assistant into a full video production studio: 12 pipelines, 52 tools, and 500+ agent skills covering storyboarding through final cut. It's billed as the first open-source agentic video production system, meaning the pipelines are structured enough for an agent to drive the whole process rather than just generate one clip on request. If you've been stitching together separate tools for generation, editing, and assembly, this collapses that into a single agent-operable system."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "57.6k",
+            "lang": "Python",
+            "body": "MemPalace bills itself as the best-benchmarked open-source memory system for AI agents, and it's free. It gives agents a persistent memory layer built on ChromaDB with MCP support, so context survives across sessions instead of resetting every time you open a new chat. Agent memory has mostly been half-working hacks with a demo gif attached -- this one leads with actual benchmark numbers, which is presumably why it's climbing. Worth a look if your current setup forgets everything the moment you close the terminal."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One small Show HN documents a full pipeline you could actually clone this weekend.",
+        "items": [
+          {
+            "title": "A Pipeline for Making 10-minute AI Movies with Claude Code and Seedance",
+            "url": "https://github.com/dawndrain/movie-gen",
+            "source": "Hacker News",
+            "author": "dawndrain",
+            "body": "dawndrain open-sourced a pipeline for producing 10-minute AI movies using Claude Code as the orchestrator and Seedance to generate video. Claude Code drives the whole process -- breaking a script into scenes, building the shot list, and calling out to Seedance for each clip -- instead of a human manually prompting a video model shot by shot one at a time. That's the part worth stealing: using a coding agent as the orchestration layer for a generation pipeline, not just as an autocomplete tool bolted onto an editor. The repo is the entire pipeline, so you can clone it and swap in your own script or your own video model if Seedance isn't what you're running. It's a quiet Show HN at 21 points, but it's exactly the kind of repeatable, inspectable build you could attempt yourself this weekend."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow with whatever ships next."
+  },
+  {
     "id": "2026-07-21",
     "date": "July 21, 2026",
     "title": "AI Pulse",
