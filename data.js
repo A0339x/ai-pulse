@@ -3,6 +3,97 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-23",
+    "date": "July 23, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Two flagship models land on the same day, and agents get an always-on mode",
+    "intro": "Model day: Gemini's small-model lineup gets a refresh and Anthropic ships Claude Sonnet 5. OpenAI packages voice/chat agents into a sellable platform instead of a reference architecture. On GitHub, the interesting repos are all about giving agents better memory and understanding -- of codebases, of past sessions, of what's actually on your hardware.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two model launches, one new enterprise agent platform, and an agent runtime upgrade.",
+        "items": [
+          {
+            "title": "Introducing Gemini 3.6 Flash, 3.5 Flash-Lite, and 3.5 Flash Cyber",
+            "url": "https://deepmind.google/blog/introducing-gemini-36-flash-35-flash-lite-and-35-flash-cyber/",
+            "source": "DeepMind",
+            "body": "Google rounds out the Gemini 3 family with three new small models. 3.6 Flash is the new default fast-tier model, 3.5 Flash-Lite trims cost and latency further for high-volume workloads, and 3.5 Flash Cyber is a dedicated variant tuned for security research and cyber-defense tasks -- the first Gemini release built specifically around that use case. All three slot into the existing Gemini API and Vertex AI endpoints today, so anything already calling Flash can upgrade without a migration. For builders, the Cyber variant is the one worth testing if you're doing vuln triage, log analysis, or red-team tooling."
+          },
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Anthropic shipped Claude Sonnet 5, the new mid-tier model in the Claude 5 lineup alongside Opus 4.8 and Haiku 4.5. It's live in the API, claude.ai, and Claude Code today as the default model for coding and agent workloads. The pitch is Opus-class reasoning at Sonnet latency and price, which matters most if you're running high-volume agent loops where every extra second of thinking time compounds. If you're already on Sonnet 4.x, swapping the model string is the whole migration."
+          },
+          {
+            "title": "Introducing OpenAI Presence",
+            "url": "https://openai.com/index/introducing-openai-presence",
+            "source": "OpenAI",
+            "body": "OpenAI launched Presence, an enterprise platform for deploying voice and chat agents that handle customer and internal workflows. It packages the pieces teams were previously assembling by hand -- telephony, escalation to humans, conversation logging, compliance controls -- into one deployable product rather than a reference architecture. NTT DATA is cited as an early user, already running Codex and ChatGPT Enterprise internally. If you've been duct-taping Realtime API calls into a call-center stack, Presence is now a shipped alternative to building that glue yourself."
+          },
+          {
+            "title": "AutoGPT Platform v0.6.69",
+            "url": "https://github.com/Significant-Gravitas/AutoGPT/releases/tag/autogpt-platform-beta-v0.6.69",
+            "source": "AutoGPT",
+            "body": "The new release adds Agent-Building Mode, a compaction-proof guide that survives long context windows and automatically switches engines mid-build, plus proactive posting so agents can push messages into Slack and Telegram instead of only responding when pinged. There's also a redesigned app sidebar with an org switcher and a live agent activity feed, useful once you're running more than one agent at a time. Together they push AutoGPT closer to an always-on agent runtime rather than a request/response tool -- worth a look if your agents currently only act when you talk to them first."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's trending repos are all about giving agents better memory -- of code, of sessions, of hardware.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "94.3k",
+            "lang": "Python",
+            "body": "Turns a codebase -- code, docs, SQL schemas, configs, PDFs -- into a queryable knowledge graph using local, deterministic AST parsing instead of embeddings. Every edge in the graph comes with an explanation of why it exists, so \"why does this function call that one\" gets a real answer instead of a similarity score. Ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. For anyone tired of RAG pipelines returning semantically-similar-but-wrong context, this is a bet that deterministic graph traversal beats vector search for code understanding."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "57.6k",
+            "lang": "Python",
+            "body": "An open-source memory layer for AI agents that claims to be the best-benchmarked system in its class, and backs it up with published numbers instead of just a demo GIF. Runs on ChromaDB, exposes an MCP server, and is built to survive long-running agent sessions where context gets compacted or dropped. Worth a look if you're building anything that needs to remember facts across sessions rather than just within one context window -- the usual DIY approach of stuffing a vector DB behind a wrapper is what this is trying to replace."
+          },
+          {
+            "title": "AlexsJones/llmfit",
+            "url": "https://github.com/AlexsJones/llmfit",
+            "source": "github.com",
+            "stars": "30.5k",
+            "lang": "Rust",
+            "body": "One command tells you which of the hundreds of open models and quantizations will actually run on the hardware in front of you -- checks VRAM, RAM, and format against GGUF, MLX, and Unsloth builds before you waste twenty minutes downloading a model that OOMs on load. Written in Rust, so it's fast and ships as a single binary. Small idea, genuinely useful: local model selection has been trial-and-error for most people, and this replaces the guessing with a lookup."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "41.5k",
+            "lang": "Python",
+            "body": "An open-source, agentic video production system that gives your coding assistant 12 production pipelines, 100+ tools, and 700+ skill and production-knowledge files, turning it into something closer to a video studio than a chatbot. It handles the full pipeline -- not just generating a clip, but the editorial and production decisions around it. Billed as the first open-source system of its kind. If you've been chaining video-gen calls by hand and stitching the outputs yourself, this is what that setup looks like once someone builds it properly and open-sources it."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One repo actually shows its work end to end.",
+        "items": [
+          {
+            "title": "A Pipeline for Making 10-minute AI Movies with Claude Code and Seedance",
+            "url": "https://github.com/dawndrain/movie-gen",
+            "source": "Hacker News",
+            "author": "dawndrain",
+            "body": "dawndrain open-sourced a pipeline for producing 10-minute AI-generated movies by chaining Claude Code, used to handle script breakdown, shot planning, and orchestration, with Seedance for the actual video generation. The repo is the documentation: it's the prompts, configs, and glue code that take a movie concept through scene breakdown, shot-by-shot generation, and assembly into a single finished cut, rather than a one-off \"I generated a cool clip\" post. That's the difference between this and most AI-video show-offs -- you can clone the repo and see exactly how the pieces connect, not just the output."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-07-22",
     "date": "July 22, 2026",
     "title": "AI Pulse",
