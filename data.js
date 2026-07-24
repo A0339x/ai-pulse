@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-24",
+    "date": "July 24, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic ships Sonnet 5, Google drops three Gemini Flash models, and GitHub is still obsessed with saving tokens",
+    "intro": "Today's shipping news is mostly model refreshes -- a new default-tier Claude, a trio of new Gemini Flash variants, and a couple of new enterprise/consumer surfaces from OpenAI. GitHub's climbing list is more interesting than usual: real infra for code intelligence and agent memory, not just another SDK wrapper. Nothing in the HN pile today actually documented a build end-to-end, so we skipped that section.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Model refresh day: new defaults from Anthropic and Google, plus two new product surfaces from OpenAI.",
+        "items": [
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Anthropic pushed out Claude Sonnet 5, the new mid-tier model in the Claude lineup and the default sitting between Haiku and Opus. It's live now in the API, the Claude apps, and Claude Code -- if you were building against Sonnet 4.x, you can swap the model string and get the upgrade without touching anything else. Anthropic is positioning it as the model most people should reach for by default: faster and cheaper than Opus, sharper reasoning than Haiku. If you're on an older Sonnet in a coding agent or automation pipeline, this is a same-day drop-in swap worth testing today."
+          },
+          {
+            "title": "Introducing Gemini 3.6 Flash, 3.5 Flash-Lite, and 3.5 Flash Cyber",
+            "url": "https://deepmind.google/blog/introducing-gemini-36-flash-35-flash-lite-and-35-flash-cyber/",
+            "source": "Google DeepMind",
+            "body": "Google shipped three new models in one drop. Gemini 3.6 Flash is the new fast-tier default, 3.5 Flash-Lite trims it further for high-volume, low-latency jobs, and 3.5 Flash Cyber is the interesting one -- a lightweight model tuned specifically to find and patch vulnerabilities in code. All three are live today through the Gemini API. If you're running high-throughput agent pipelines where Flash-tier cost matters, this is a straight upgrade path. If you're doing automated code security scanning, Cyber is worth a look since it's purpose-built for that job rather than a general model repurposed for it."
+          },
+          {
+            "title": "Introducing OpenAI Presence",
+            "url": "https://openai.com/index/introducing-openai-presence",
+            "source": "OpenAI",
+            "body": "OpenAI launched Presence, an enterprise platform for deploying voice and chat agents that companies can put in front of customers and employees today. It's pitched as \"proven\" -- meaning it ships with the guardrails, monitoring, and reliability tooling enterprises have been bolting on themselves to get customer-facing agents past legal and security review. If you've been building a support or internal-ops bot on raw API calls, Presence is now a packaged alternative that handles the deployment and trust layer for you instead of you assembling it from scratch."
+          },
+          {
+            "title": "Launching Health in ChatGPT",
+            "url": "https://openai.com/index/health-in-chatgpt",
+            "source": "OpenAI",
+            "body": "Health in ChatGPT is live for eligible U.S. users now, letting you securely connect medical records and Apple Health data directly into ChatGPT for personalized insights. This is the first time ChatGPT can reason over your actual longitudinal health data rather than whatever you type in manually -- lab results, medication history, vitals, all in context at once. It's opt-in and scoped to U.S. users for now, but it's a real new data connector, not a repackaged prompt template, and it signals where the assistant model is headed for personal health use."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Code intelligence and agent memory are the real story this week, buried under a pile of prompt-engineering meme repos.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "94.9k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- docs, SQL schemas, configs, PDFs and all -- into a queryable knowledge graph, exposed as a /graphify skill inside Claude Code, Cursor, Codex, or Gemini CLI. The pitch is no vector store: local, deterministic AST parsing, with every edge in the graph explained rather than approximated by embedding similarity. That matters if you've been burned by RAG retrieval missing an obvious reference because it wasn't semantically close enough. For anyone maintaining a large, messy repo, this is a genuinely different approach to code search than \"chunk it and embed it.\""
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "57.7k",
+            "lang": "Python",
+            "body": "MemPalace bills itself as the best-benchmarked open-source AI memory system, and it's free. It's built on ChromaDB and ships as an MCP server, so any agent that speaks MCP can read and write to it without custom integration work. Memory is the piece most agent frameworks still bolt on as an afterthought, and this repo's whole premise is treating retention and recall as the core product rather than a side feature. Worth a look if you're building anything long-running -- an assistant, a coding agent, a research bot -- that needs to remember things across sessions instead of starting cold every time."
+          },
+          {
+            "title": "Panniantong/Agent-Reach",
+            "url": "https://github.com/Panniantong/Agent-Reach",
+            "source": "github.com",
+            "stars": "60.5k",
+            "lang": "Python",
+            "body": "Agent-Reach gives your agent eyes on the rest of the internet -- Twitter, Reddit, YouTube, GitHub, Bilibili, and XiaoHongShu, all through one CLI with zero API fees. Most \"web-connected agent\" projects are thin wrappers around one platform's official API; this one is trying to be a single ingestion layer across a half-dozen platforms that don't normally play well together, several of which don't have friendly public APIs at all. If you're building anything that needs social listening, trend tracking, or cross-platform research, this collapses what would otherwise be six separate scraping projects into one."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "92.6k",
+            "lang": "JavaScript",
+            "body": "Caveman is a Claude Code skill that rewrites your prompts and context into blunt, stripped-down \"caveman speak\" before they hit the model, and claims a 65% cut in token usage doing it. It's funny, but the underlying idea is real: a lot of prompt and context text carries grammatical overhead that costs tokens without adding information the model actually needs. It's a bet that terse, ungrammatical input degrades output quality less than you'd expect while saving real money on long agent sessions. Worth trying on a token-heavy workflow just to see where it actually breaks down."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's pile documented an actual build end-to-end -- just launches and benchmark takes.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-07-23",
     "date": "July 23, 2026",
     "title": "AI Pulse",
