@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-25",
+    "date": "July 25, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic and Google refresh their model lineups while GitHub goes deep on code intelligence",
+    "intro": "Two model families got refreshed today: Anthropic shipped Opus 5 and Sonnet 5 together, and Google followed with three new Gemini Flash variants. On GitHub, the momentum is all about giving agents better memory and understanding of your own codebase -- knowledge graphs instead of vector stores, hardware-aware model picking, and MCP servers built for speed. Nothing in today's build write-ups cleared the bar, so that section's empty -- a quiet day for documented workflows.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Anthropic and Google both refreshed their model lineups today, and OpenAI packaged up an enterprise agent platform.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Opus 5 is live, replacing Opus 4.1 as the flagship of the Claude line across the API, Claude apps, and Claude Code. It shipped the same day as Sonnet 5, so the whole family gets refreshed at once instead of staggered releases. If you're running the hardest agentic or coding workloads on Opus today, swap the model string over -- that's the one to reach for now. No word yet on pricing changes beyond the model swap itself, so check your usage before assuming costs stayed flat."
+          },
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Sonnet 5 lands alongside Opus 5 as Anthropic's new mid-tier model -- the one most builders will actually run day to day. It's the cheaper, faster option meant to handle the bulk of coding and agent work that doesn't need Opus-level horsepower. If your app or agent defaults to a Sonnet model string, update it to pick up the new version. Given how much production traffic runs on the mid-tier, this is the more consequential release of the two for most people's bills and latency."
+          },
+          {
+            "title": "Introducing Gemini 3.6 Flash, 3.5 Flash-Lite, and 3.5 Flash Cyber",
+            "url": "https://deepmind.google/blog/introducing-gemini-36-flash-35-flash-lite-and-35-flash-cyber/",
+            "source": "DeepMind",
+            "body": "Google dropped three new Gemini models at once: 3.6 Flash, a 3.5 Flash-Lite for high-volume simple tasks, and 3.5 Flash Cyber -- the first Gemini variant explicitly tuned for security workflows. Flash-Lite pushes the cost and latency floor down further for classification, extraction, and other bulk jobs where Flash proper is overkill. Flash Cyber is aimed at defenders (and red teams) doing log analysis, vuln triage, and incident response at scale. All three are available now through the Gemini API and AI Studio, no waitlist."
+          },
+          {
+            "title": "Introducing OpenAI Presence",
+            "url": "https://openai.com/index/introducing-openai-presence",
+            "source": "OpenAI",
+            "body": "Presence is OpenAI's new packaged layer for deploying voice and chat agents in production, aimed at teams that don't want to hand-build the orchestration, monitoring, and handoff logic themselves. It's positioned for both customer-facing and internal workflows -- support, ops, that kind of thing -- with the reliability tooling baked in rather than left as an exercise for the integrator. Available now for enterprise customers. Worth a look if you've been assembling your own agent-ops stack on top of the raw API and are tired of maintaining it."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's stars cluster around giving agents better, faster memory of your own code -- graphs and MCP servers instead of vector stores.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "95.5k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- docs, SQL schemas, configs, PDFs included -- into a queryable knowledge graph using local, deterministic AST parsing instead of embeddings and a vector store. Every edge in the graph comes with an explanation, so asking why two pieces of code are connected gets you a real answer instead of a similarity score. It ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. For anyone frustrated by RAG's fuzzy retrieval on large repos, this is a structurally different approach: precise, fully local, and fast enough to run on every query."
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "81.4k",
+            "lang": "TypeScript",
+            "body": "Open Design is a local-first desktop app that turns whatever coding agent you already use -- Claude Code, Codex, Cursor, Gemini, OpenCode -- into a design engine. Feed it a prompt and it produces real files: prototypes, landing pages, dashboards, slides, images, and video, exportable as HTML, PDF, PPTX, or MP4. It's BYOK, so you bring your own model keys instead of being locked to one provider, and it plugs into 20+ CLIs. Good fit for builders who want actual design output without leaving a terminal-based workflow for a separate design tool."
+          },
+          {
+            "title": "AlexsJones/llmfit",
+            "url": "https://github.com/AlexsJones/llmfit",
+            "source": "github.com",
+            "stars": "30.6k",
+            "lang": "Rust",
+            "body": "llmfit answers one question fast: which of the hundreds of local models and quantizations actually run on the hardware in front of you. Point it at your machine and it checks GGUF, MLX, and Unsloth builds against your specs and tells you what fits, in one command. No more guessing at quant sizes or discovering an OOM crash five minutes into a load. It's a small utility, but it kills a genuinely annoying daily task for anyone running local models across a laptop, a workstation, and whatever GPU box they've got spare."
+          },
+          {
+            "title": "DeusData/codebase-memory-mcp",
+            "url": "https://github.com/DeusData/codebase-memory-mcp",
+            "source": "github.com",
+            "stars": "35.2k",
+            "lang": "C",
+            "body": "A code intelligence MCP server that indexes a repo into a persistent knowledge graph in milliseconds, covering 158 languages with sub-millisecond query times. It claims 99% fewer tokens spent on code search compared to having an agent re-read raw files every session, and it ships as a single static binary with zero dependencies -- no Python environment, no daemon to babysit. If your agent's context is getting eaten by repeated file reads across a long session, this is built specifically to fix that."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's queue documented a real end-to-end workflow, so this section sits empty.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-07-24",
     "date": "July 24, 2026",
     "title": "AI Pulse",
