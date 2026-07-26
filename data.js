@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-26",
+    "date": "July 26, 2026",
+    "title": "AI Pulse",
+    "subtitle": "ChatGPT reads your medical chart, diffusion models get 4-bit, and an LLM runs on an $8 chip",
+    "intro": "Nothing new shipped on the model-frontier side today -- Anthropic and Google's headline releases are still yesterday's news. Instead the action is in the plumbing: OpenAI plugs health records into ChatGPT, Hugging Face gets 4-bit diffusion inference into Diffusers proper, and Vercel extends its WAF to blob storage. GitHub's climbers are all about efficiency over intelligence -- fewer tokens, better hardware fit, agents that ship a finished video instead of just a chat reply.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Today's releases are about plumbing and access, not new model horsepower.",
+        "items": [
+          {
+            "title": "Launching Health in ChatGPT",
+            "url": "https://openai.com/index/health-in-chatgpt",
+            "source": "OpenAI",
+            "body": "Eligible U.S. users can now securely connect their medical records and Apple Health data straight into ChatGPT, rather than pasting in lab PDFs or typing symptoms from memory. Once connected, ChatGPT can reference your actual history -- medications, past visits, vitals trends -- when you ask it to explain a result or flag something worth a follow-up. It's opt-in and U.S.-only for now, gated behind account verification given the data involved. This is the first time a general-purpose chatbot has an official, structured pipe into personal health records rather than relying on manual copy-paste, which changes what kind of health questions are worth asking it."
+          },
+          {
+            "title": "Bringing Nunchaku 4-bit Diffusion Inference to Diffusers",
+            "url": "https://huggingface.co/blog/nunchaku-diffusers",
+            "source": "Hugging Face",
+            "body": "Nunchaku's 4-bit quantization kernels for diffusion models are now integrated directly into Hugging Face's Diffusers library. Previously, running a 4-bit-quantized image or video diffusion model meant stitching together Nunchaku's own inference code by hand. Now you load a quantized checkpoint through the standard Diffusers pipeline API and get the same memory and speed gains -- reportedly enough to run large models like Flux on consumer GPUs that couldn't fit them at full precision -- without leaving your existing pipeline code. If you've been holding off on quantized diffusion because the tooling was separate from your normal workflow, that gap just closed."
+          },
+          {
+            "title": "Vercel WAF for Blob is now in beta",
+            "url": "https://vercel.com/changelog/vercel-waf-for-blob-is-now-in-beta",
+            "source": "Vercel",
+            "body": "Vercel's WAF -- the deny, challenge, and rate-limit rules that already guard deployments -- now covers Vercel Blob storage too. Every blob already routes through Vercel's CDN, so this is a flag you flip on the store, not a new proxy to wire up: no code changes, no new blob URLs, no changes to @vercel/blob. Rules evaluate at the edge on IP, country, path, and more. Deny returns a 403 before any bytes transfer, so you're not paying for the request you just blocked. If scrapers or hotlinkers have been hammering your public blob assets, you can shut that down today without touching application code."
+          },
+          {
+            "title": "3 Google updates from Galaxy Unpacked 2026",
+            "url": "https://blog.google/products-and-platforms/platforms/android/galaxy-unpacked-2026/",
+            "source": "Google AI",
+            "body": "Gemini is now running on two new smart glasses lines shown at Galaxy Unpacked -- Gentle Monster and Warby Parker frames -- with visual prompts that go past simple object recognition. Point them at a building and ask for the history behind it, or point them at a restaurant and have Gemini pull up a table booking. That's the new part: turning a glance into an action (a reservation made, a fact retrieved) instead of just a label or description. Both frames are real consumer hardware, not a concept demo, which matters if you've been waiting for AI glasses to do more than identify what's in front of you."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's stars are about squeezing more out of what already exists, not smarter models.",
+        "items": [
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "42.4k",
+            "lang": "Python",
+            "body": "OpenMontage bills itself as the first open-source, agentic video production system -- 12 production pipelines, over 100 tools, and 700-plus agent skill and production-knowledge files that turn a coding assistant like Claude or Cursor into a full video studio. Instead of one model generating a clip, it chains together the actual steps a production goes through: scripting, shot planning, editing, rendering. It's aimed at builders who want agents to hand back a finished video file, not just a prompt-to-clip demo. The scope here is the interesting part -- most AI video tools do one step well; this tries to own the whole pipeline."
+          },
+          {
+            "title": "AlexsJones/llmfit",
+            "url": "https://github.com/AlexsJones/llmfit",
+            "source": "github.com",
+            "stars": "30.6k",
+            "lang": "Rust",
+            "body": "llmfit answers a question every local-model builder has asked and answered wrong at least once: will this model actually run on my hardware? Point it at your machine and it checks against hundreds of models and providers -- GGUF, MLX, Unsloth-quantized, whatever -- and tells you what fits given your VRAM, RAM, and quantization options, in one command. No more downloading a 40GB checkpoint to find out it doesn't fit. It's a small, sharp tool solving a real everyday annoyance rather than another agent framework, which is probably why it's climbing this fast."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "57.8k",
+            "lang": "Python",
+            "body": "MemPalace pitches itself as the best-benchmarked open-source memory system for AI agents, and backs it with published numbers against the existing memory frameworks rather than just a claim. It runs over MCP with ChromaDB underneath, free and self-hostable, so it's a real option if you want persistent agent memory without sending your conversation history to a hosted product. For anyone who's tried three memory libraries and trusted none of their benchmarks, having actual comparative numbers attached to the repo is the differentiator."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "93.1k",
+            "lang": "JavaScript",
+            "body": "Caveman is a Claude Code skill built on a genuinely dumb-sounding but real idea: strip your prompts and Claude's own output down to terse, caveman-style phrasing and you cut token usage by roughly 65%. Less filler, less hedging, less restating what you just asked -- fewer tokens in, fewer tokens out, same task completed. It's a blunt instrument, but at agent scale where every tool call and every turn adds up, a 65% cut in token spend is real money and real latency saved. The gimmick is the pitch, but the savings are the reason it's sitting at six figures of stars."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Two builds worth studying this week: cutting a frontier model's cost by two-thirds, and cramming an LLM onto an $8 chip.",
+        "items": [
+          {
+            "title": "Show HN: Echo -- Fable-level results at 1/3 the cost using open-weight models",
+            "url": "https://news.ycombinator.com/item?id=49026810",
+            "source": "Hacker News",
+            "author": "adam_rida",
+            "body": "Echo is a build benchmarking open-weight models against Anthropic's Fable 5 and claiming comparable output quality at a third of the API cost. The pitch driving 469 points and 222 comments is the cost curve: if open-weight models with the right routing and prompting can match a frontier proprietary model on real tasks, that's a direct challenge to defaulting to the most expensive API for everything. Worth digging into the comment thread for pushback on which tasks the comparison actually holds for, since 'Fable-level' claims tend to be workload-specific rather than universal."
+          },
+          {
+            "title": "Running a 28.9M parameter LLM on an $8 microcontroller",
+            "url": "https://github.com/slvDev/esp32-ai",
+            "source": "Hacker News",
+            "author": "boveyking",
+            "body": "esp32-ai runs a genuine 28.9M parameter transformer entirely on an ESP32 microcontroller -- a chip that costs about $8 and has none of the RAM or compute headroom a GPU gives you. That means aggressive quantization and hand-tuned inference code just to fit the weights and run a forward pass on-device, with no cloud call and no dependency on a server being up. It's a small model doing a small job, but the point isn't scale -- it's proof that a real LLM can live entirely inside hardware cheap enough to throw into any embedded project without an internet connection in sight."
+          }
+        ]
+      }
+    ],
+    "closing": "Nothing here is a frontier model. All of it is something you can use by tonight."
+  },
+  {
     "id": "2026-07-25",
     "date": "July 25, 2026",
     "title": "AI Pulse",
