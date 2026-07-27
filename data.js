@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-27",
+    "date": "July 27, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic's new flagship lands, Gemini gets a security-flavored variant, and GitHub agents keep eating new job descriptions",
+    "intro": "Anthropic dropped Claude Opus 5 today, retaking the top of its own lineup, while Google rounded out the Gemini 3 Flash family and OpenAI shipped two very different products: a health data connector and an enterprise voice-agent platform. On GitHub, the theme is agents expanding into new territory -- code graphs, design, video production, memory -- rather than another wrapper around an existing API.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new Claude flagship, a fuller Gemini Flash lineup, and two very different OpenAI product launches.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic pushed Claude Opus 5 into general availability today, taking over as the top of the Claude lineup from the Opus 4.x line. It's live now in the API, Claude apps, and Claude Code, slotting in above Sonnet 5 and Haiku 4.5 as the reasoning-heavy option for the hardest coding and agentic tasks. Anthropic didn't publish benchmark deltas alongside the launch post, so the real test is running your own eval suite against it before swapping it into production agents that currently call Opus 4.x."
+          },
+          {
+            "title": "Introducing Gemini 3.6 Flash, 3.5 Flash-Lite, and 3.5 Flash Cyber",
+            "url": "https://deepmind.google/blog/introducing-gemini-3-6-flash-3-5-flash-lite-and-3-5-flash-cyber/",
+            "source": "Google DeepMind",
+            "body": "Google added three new models to the Gemini 3 line today: 3.6 Flash as the updated fast default, 3.5 Flash-Lite for cheaper high-volume calls, and 3.5 Flash Cyber, a new variant aimed at security and cyber-defense workloads. All three are live now through the Gemini API and Vertex AI alongside the existing 3.x models, so you get a straight swap-in depending on whether you're optimizing for cost, latency, or a security-specific use case rather than waiting on a full Gemini 4 cycle."
+          },
+          {
+            "title": "Launching Health in ChatGPT",
+            "url": "https://openai.com/index/health-in-chatgpt",
+            "source": "OpenAI",
+            "body": "OpenAI turned on Health in ChatGPT for eligible US users, letting you connect medical records and Apple Health directly into a chat thread. Once connected, ChatGPT can reason over your actual history instead of general medical knowledge when you ask about symptoms, medications, or trends -- reading lab results, cross-referencing reported conditions, and picking up changes in step counts or heart rate over time. It's opt-in and framed as a personalized-insights layer rather than a diagnostic tool, but it's the first time a general-purpose chatbot has had a direct pipe into a US user's real health data instead of whatever you paste in by hand."
+          },
+          {
+            "title": "Introducing OpenAI Presence",
+            "url": "https://openai.com/index/introducing-openai-presence",
+            "source": "OpenAI",
+            "body": "OpenAI launched Presence, an enterprise platform for deploying voice and chat agents across customer support and internal workflows. It packages the pieces companies were already duct-taping together around the Realtime API -- telephony, chat widgets, auth, monitoring -- into one deployable stack, positioned as the production-grade option once you've outgrown a demo. It's aimed at enterprises replacing call-center and helpdesk workflows rather than solo builders, but it's a signal of where OpenAI thinks the near-term money is: agents answering phones and tickets, not just chat."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's momentum is agents colonizing new jobs -- code graphs, design, video editing, memory -- instead of new SDK wrappers.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "96.9k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase, plus its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph using local, deterministic AST parsing -- no vector store, no embeddings, no chance of a similarity-search hallucination. It ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI, and every edge in the graph comes with an explanation of why it exists. For anyone tired of RAG-over-code giving vague or wrong answers, this is a bet that deterministic parsing beats retrieval for codebase Q&A -- and at 96.9k stars, a lot of people are trying it."
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "81.9k",
+            "lang": "TypeScript",
+            "body": "Open Design is an open-source alternative to Claude's design tooling: a local-first desktop app that turns any coding agent -- Claude Code, Codex, Cursor, Gemini, OpenCode, Qwen, and 20+ others via bring-your-own-key -- into a design engine. Point it at a brief and it produces real output files: prototypes, landing pages, dashboards, slide decks, images, video, exported as HTML, PDF, PPTX, or MP4. The pitch is that your coding agent already understands your product and your code, so this just gives it a design surface to work on instead of forcing a Figma-to-code handoff."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "42.6k",
+            "lang": "Python",
+            "body": "OpenMontage turns a coding agent into a video production studio: 12 production pipelines, 100+ tools, and 700+ agent skill and production-knowledge files covering things like shot sequencing, captioning, and edit pacing. It bills itself as the first open-source agentic video production system, meaning the agent doesn't just generate a clip -- it runs an actual production pipeline end to end. If graphify is agents understanding code and open-design is agents producing visual assets, this is the same land grab applied to video editing."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "57.8k",
+            "lang": "Python",
+            "body": "MemPalace bills itself as the best-benchmarked open-source memory system for AI agents, built on ChromaDB and shipped as an MCP server. Persistent agent memory has mostly been a grab-bag of half-working vector store hacks; MemPalace's pitch is that it's actually been benchmarked against alternatives rather than just claimed to work, and it's free. Worth a look if your agent setup currently loses all context between sessions and you've been putting off building your own memory layer."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's source list documented a full tool-by-tool build -- section's empty today.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-07-26",
     "date": "July 26, 2026",
     "title": "AI Pulse",
