@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-28",
+    "date": "July 28, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Opus 5 lands, Gemini's Flash tier triples, and code agents get eyes on the whole internet",
+    "intro": "Anthropic and Google both refreshed their model lineups today while Vercel quietly closed a real compliance gap for teams shipping AI in production. On GitHub, the novel ideas are all about giving agents new senses -- a codebase turned into a knowledge graph, an agent that can read half the internet through one CLI, video rendered from plain HTML. And the build of the day is a $500 fine-tune that beat models a thousand times its size.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two labs dropped new models today, and one infra fix quietly solves a real compliance headache.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic pushed out Claude Opus 5 as the new top of the Claude 5 line, sitting above Sonnet 5 for the hardest reasoning, coding, and agentic work. It's live now in the API, on claude.ai, and in Claude Code, so anything routed to Opus picks up the new weights the moment you bump the model string -- no waitlist, no staged rollout. If you've been holding the priciest, highest-stakes workloads back waiting for a frontier bump, this is the one to run against your own eval suite today instead of assuming last quarter's benchmarks still hold."
+          },
+          {
+            "title": "Introducing Gemini 3.6 Flash, 3.5 Flash-Lite, and 3.5 Flash Cyber",
+            "url": "https://deepmind.google/blog/introducing-gemini-3-6-flash-3-5-flash-lite-and-3-5-flash-cyber/",
+            "source": "Google DeepMind",
+            "body": "Google widened the Gemini 3 family with three new small models. Flash-Lite is the cheapest, fastest tier, built for high-volume classification and extraction jobs where full reasoning is overkill. 3.6 Flash is the general-purpose upgrade in the middle. The interesting one is Flash Cyber -- a variant specifically positioned for security workloads like log triage, vulnerability analysis, and alert summarization, the kind of narrow, high-volume task that needs domain tuning more than raw model size. All three are available through the Gemini API today, so it's worth re-checking whether a task you're paying frontier prices for actually needs one."
+          },
+          {
+            "title": "Regional inference now available on AI Gateway",
+            "url": "https://vercel.com/changelog/regional-inference-now-available-on-ai-gateway",
+            "source": "Vercel",
+            "body": "AI Gateway can now pin a request to run in the US or EU instead of wherever a provider feels like routing it. Set inferenceRegion on the request and every supported provider handles it the same way: inference runs there, and anything the provider stores stays there too. If no provider can serve the region you asked for, the request fails outright instead of silently routing elsewhere, and every response reports which region actually served it so you can verify rather than trust. For teams that have been blocked from shipping AI features by data residency requirements, this closes that gap without switching gateways."
+          },
+          {
+            "title": "Bringing Nunchaku 4-bit Diffusion Inference to Diffusers",
+            "url": "https://huggingface.co/blog/nunchaku-diffusers",
+            "source": "Hugging Face",
+            "body": "Nunchaku's 4-bit quantization for diffusion models is now wired directly into Hugging Face's Diffusers library, so running FLUX and similar image models at 4-bit precision no longer means bolting on a separate inference engine. You get the same pipeline API you already use, just pointed at quantized weights, with the lower VRAM footprint and faster generation Nunchaku's scheme was built for. If you've been priced out of running FLUX-class models locally, this update is what makes it fit on a smaller card starting today."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Today's fast-movers are all about giving agents new senses -- over code, over the web, over video.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "97.5k",
+            "lang": "Python",
+            "body": "Graphify turns a whole codebase -- docs, SQL schemas, configs, PDFs included -- into a queryable knowledge graph, shipped as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. The pitch is no vector store: local, deterministic AST parsing, with every edge in the graph annotated with why it's there. That matters for agents doing code search or refactors, where an embedding match can point at the wrong function while a graph edge tells you exactly which caller or schema reference justified the connection. Worth a look if your agent keeps hallucinating relationships a vector search couldn't actually verify."
+          },
+          {
+            "title": "Panniantong/Agent-Reach",
+            "url": "https://github.com/Panniantong/Agent-Reach",
+            "source": "github.com",
+            "stars": "61.4k",
+            "lang": "Python",
+            "body": "Agent-Reach gives an agent read access across the platforms that normally each need their own API key and rate-limit dance: Twitter, Reddit, YouTube, GitHub, Bilibili, XiaoHongShu, through one CLI and zero API fees. That's the novel part -- aggregation built for agent consumption instead of human browsing, so a research or trend-scanning agent doesn't need five separate integrations to cover the platforms people actually post on. Useful for anyone building monitoring or competitive-research agents who don't want to pay for a stack of API subscriptions just to read public posts."
+          },
+          {
+            "title": "heygen-com/hyperframes",
+            "url": "https://github.com/heygen-com/hyperframes",
+            "source": "github.com",
+            "stars": "38.3k",
+            "lang": "TypeScript",
+            "body": "Hyperframes flips video generation around: instead of a diffusion model hallucinating pixels, you write HTML and CSS and it renders that to video using FFmpeg and GSAP. That makes it deterministic and editable in a way generative video isn't -- an agent can iterate on markup until a scene is right instead of re-rolling a prompt and hoping. It's built explicitly for agents to drive, so a coding agent that already writes HTML can produce explainer videos, animated demos, or social clips without ever opening a video editor."
+          },
+          {
+            "title": "AlexsJones/llmfit",
+            "url": "https://github.com/AlexsJones/llmfit",
+            "source": "github.com",
+            "stars": "30.9k",
+            "lang": "Rust",
+            "body": "llmfit answers one question: what can actually run on the hardware in front of you. Point it at your machine and it checks GGUF, MLX, and Unsloth-format models against your VRAM, RAM, and compute, and tells you what fits instead of you finding out three minutes into a download that a 70B model was never going to load. Small in scope but solves a real annoyance for anyone running local models across a fleet of laptops and GPUs, especially now that the local model zoo spans this many formats and quantization schemes."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One builder proved a $500 fine-tune can beat a frontier model when the task is narrow enough.",
+        "items": [
+          {
+            "title": "A $500 RL fine-tune of a 9B open model beat frontier models on catalog review",
+            "url": "https://fermisense.com/when-machines-take-the-wheel/",
+            "source": "Hacker News",
+            "author": "ilreb",
+            "body": "A solo builder spent $500 on an RL fine-tune of a 9B open model and beat frontier models at catalog review -- the unglamorous, expensive-at-scale job of checking product listings for accuracy, policy violations, and quality issues. The writeup lays out why a narrow, cheap fine-tune can beat a frontier model on a narrow task: you shape the reward signal around the exact judgment calls the catalog needs, rather than hoping a general model's instincts happen to match your rubric. It's a concrete data point for anyone defaulting to the biggest available model for a task that's actually well-scoped enough to specialize for a fraction of the inference cost."
+          },
+          {
+            "title": "FeyNoBg -- Automatic background removal model and training library",
+            "url": "https://usefeyn.com/blog/feynobg/",
+            "source": "Hacker News",
+            "author": "snyy",
+            "body": "FeyNoBg pairs an automatic background removal model with the training library used to build it, and the writeup walks through both: the architecture choices and the data pipeline behind the model, so you can retrain on your own image distribution instead of relying on a black-box API. That's the difference from the usual background-removal SaaS wrapper -- you get the training code, not just an endpoint, so edge cases specific to your product photos or use case are fixable by fine-tuning instead of filing a support ticket and waiting."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-07-27",
     "date": "July 27, 2026",
     "title": "AI Pulse",
