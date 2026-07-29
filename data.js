@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-29",
+    "date": "July 29, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Two new Claude models drop, Vercel lets you fork a live sandbox, and GitHub's agent-skill gold rush gets a caveman accent",
+    "intro": "Anthropic shipped two new frontier models on the same day, Google gave its managed agents hooks and triggers, and Vercel quietly added a sandbox primitive that makes agent-per-tenant setups a lot cheaper to run. On GitHub, the climbers split between serious agent infrastructure and repos that are jokes wrapped around real techniques.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Anthropic and Google both pushed new agent-facing releases live today, no waitlist required.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic put Claude Opus 5 live today, the new top-of-line model in the Claude 5 family. It's available now in the API, the Claude apps, and Claude Code, replacing Opus 4.8 as Anthropic's frontier model. Same API surface, same tool-use and computer-use support -- it slots into whatever was already calling Opus, just with a stronger model underneath. Anyone with prompts or evals pinned to an Opus alias is now pointed at the new weights by default."
+          },
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Sonnet 5 shipped alongside Opus 5 and takes over as Anthropic's default mid-tier model. It now backs Claude Code and the standard Claude app tier out of the box, replacing Sonnet 4.5. Pricing tier, context window, and tool-calling behavior stay the same -- it's a drop-in upgrade at the same price point rather than a new tier. `claude-sonnet-5` is live as a model ID in the API today."
+          },
+          {
+            "title": "Gemini API Managed Agents: 3.6 Flash, hooks, and more",
+            "url": "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/",
+            "source": "Google AI",
+            "body": "Managed Agents in the Gemini API now run on Gemini 3.6 Flash and ship with hooks and triggers: code you attach that fires before or after an agent step, or that kicks an agent off automatically on an external event, instead of you hand-rolling a polling loop. Managed Agents already handled tool orchestration and state; hooks close the gap for production agents that need to react to webhooks, scheduled triggers, or intermediate results mid-run. It's live in the Gemini API today for anyone already building on that stack."
+          },
+          {
+            "title": "Vercel Sandbox supports forking",
+            "url": "https://vercel.com/changelog/vercel-sandbox-supports-forking",
+            "source": "Vercel",
+            "body": "Vercel Sandbox added `Sandbox.fork()`, which branches a new sandbox off another one's latest snapshot -- same runtime, config, and env vars, in about the time it takes to create a sandbox from scratch. If the source is still running, the fork uses its last saved state rather than live memory unless you snapshot first, and any param you pass overrides what's inherited. That makes it cheap to branch an agent from a shared base, spin up a fresh template copy per tenant, or run several variations of one setup side by side instead of rebuilding each from zero."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's fastest-growing repos split evenly between serious agent infrastructure and jokes that turned out to work.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "98.1k",
+            "lang": "Python",
+            "body": "Graphify turns a whole codebase -- docs, SQL schemas, configs, PDFs included -- into a queryable knowledge graph using local deterministic AST parsing instead of embeddings. Every edge in the graph is explained, so a question like \"what calls this function\" gets a traceable answer instead of a nearest-neighbor guess. It ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. No vector store, no embedding bill, no stale index drift -- just parse-time ground truth, which matters if RAG has ever hallucinated a codebase relationship that doesn't exist."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "94.2k",
+            "lang": "JavaScript",
+            "body": "Caveman is a Claude Code skill that rewrites prompts and context into stripped-down, article-free \"caveman speak\" before sending them to the model, claiming a 65% token cut with no meaningful quality loss on coding tasks. The premise is a joke -- the repo tagline is literally \"why use many token when few token do trick\" -- but it's wrapped around a real technique: most of a prompt's grammatical scaffolding is dead weight for a model that already infers intent from keywords. Worth trying if your Claude Code token bill has been creeping up."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "43.7k",
+            "lang": "Python",
+            "body": "OpenMontage turns a coding agent into a full video production studio: 12 pipelines, 100+ tools, and 700+ skill and production-knowledge files covering storyboarding through color grade. It bills itself as the first open-source agentic video production system, and the scope backs it up -- this isn't a wrapper around one text-to-video API, it's scaffolding for an agent to plan a shoot, generate or edit footage, and assemble a final cut across many tool calls. Works with Claude, Copilot, and Cursor, and it's the most complete attempt so far at an agent that owns video end-to-end."
+          },
+          {
+            "title": "stablyai/orca",
+            "url": "https://github.com/stablyai/orca",
+            "source": "github.com",
+            "stars": "32.4k",
+            "lang": "TypeScript",
+            "body": "Orca is an ADE built for running a fleet of coding agents in parallel, each on your own subscription rather than a shared API key. It gives you a UI -- desktop, mobile, or VPS -- for spinning up multiple agent sessions against the same or different repos, tracking what each one's doing, and pulling results together, instead of juggling terminal tabs. It works with any CLI agent, Codex and Claude Code included, which makes it an orchestration layer rather than a new agent of its own. Built for the point where one agent at a time has become the bottleneck."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's Show HN crop documented a full build well enough to include.",
+        "items": []
+      }
+    ],
+    "closing": "Back tomorrow with whatever ships next."
+  },
+  {
     "id": "2026-07-28",
     "date": "July 28, 2026",
     "title": "AI Pulse",
