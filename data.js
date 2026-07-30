@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-30",
+    "date": "July 30, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic and OpenAI both drop new flagships, and a joke repo about talking like a caveman saves real tokens",
+    "intro": "Anthropic and OpenAI both shipped new model generations within a day of each other -- Claude Opus 5 and Sonnet 5 on one side, GPT-5.6 on the other. The more useful read might be OpenAI's benchmark post: two API settings you can flip today tripled their ARC-AGI-3 score. On GitHub, the agent-tooling stack keeps thickening -- codebase knowledge graphs, memory layers, and a genuinely funny token-compression trick all cracked six figures in stars.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two labs, two new model families, one very practical benchmark trick.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic's next flagship model is live in the API and Claude apps today, succeeding the Opus 4.x line as the top of the lineup. It's built for the hardest end of the workload -- long-horizon agent runs, deep coding tasks, multi-step reasoning -- where the older Opus models were the go-to when accuracy mattered more than cost. If you've been routing your toughest agent tasks to Opus 4.5, this is the drop-in upgrade to test first, especially anything that was previously running into reasoning ceilings."
+          },
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Alongside Opus 5, Anthropic shipped Sonnet 5 -- the mid-tier model that most production agents and coding tools actually run on day to day, given its better cost and latency tradeoff versus Opus. This is the one worth re-benchmarking against your current default model first, since it's the workhorse tier for anything running at volume: coding agents, chat products, and background automations where Opus-level cost doesn't pencil out."
+          },
+          {
+            "title": "How GPT-5.6 fuses frontier intelligence with frontier efficiency",
+            "url": "https://openai.com/index/gpt-5-6-frontier-intelligence-efficiency",
+            "source": "OpenAI",
+            "body": "GPT-5.6 is out, and OpenAI's pitch is efficiency, not just capability -- more useful intelligence per dollar across the model itself, inference, and agentic workflows specifically. That last part matters most for builders: agent loops that make dozens of sequential calls are where token costs compound fastest, and this release is explicitly tuned for that pattern rather than just topping single-prompt leaderboards. Worth a rerun of your cost-per-task numbers if you're running multi-step agents in production."
+          },
+          {
+            "title": "How enabling two settings tripled our scores on the ARC-AGI-3 benchmark",
+            "url": "https://openai.com/index/how-two-settings-tripled-our-arc-agi-3-scores",
+            "source": "OpenAI",
+            "body": "OpenAI found that two existing API settings -- retaining reasoning across turns instead of discarding it, and enabling context compaction -- roughly tripled GPT-5.6's score on ARC-AGI-3 while also cutting token spend. Neither setting is new; the finding is that most agent builders aren't turning them on. If you're running any kind of multi-turn agent loop against the API, this is a same-day change worth testing: flip both flags and rerun your own eval suite before assuming you need a bigger model."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Codebase memory, agent memory, and a token-compression bit that's actually useful.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "98.8k",
+            "lang": "Python",
+            "body": "Turns a codebase -- including docs, SQL schemas, configs, and PDFs -- into a queryable knowledge graph, shipped as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. The pitch is deterministic AST parsing instead of embeddings: no vector store, so every edge in the graph traces back to an explainable relationship rather than a similarity score. That matters for large repos where RAG-style retrieval quietly returns plausible-but-wrong context. Good pick if your agent keeps hallucinating relationships between files that a proper parser would just know."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "94.5k",
+            "lang": "JavaScript",
+            "body": "A Claude Code skill that cuts token usage by roughly 65% by having the agent communicate internally in terse, pidgin-style phrasing instead of full sentences -- the joke framing ('why use many token when few token do trick') is doing real work. It's a blunt instrument, but it points at a genuine cost lever nobody's optimizing: most of an agent's token spend is in its own scratch reasoning and tool-call chatter, not the final answer. Worth trying on long-running agent loops where verbosity is quietly eating your budget."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "57.9k",
+            "lang": "Python",
+            "body": "An open-source memory system for AI agents built on ChromaDB and MCP, pitched as the best-benchmarked option in the category and free to run. Memory layers have been a crowded, mediocre space -- lots of thin wrappers around a vector database -- so the differentiator here is the benchmark work backing the claim rather than a new storage idea. If you're building an agent that needs to persist facts and preferences across sessions beyond what fits in context, this is worth putting up against whatever memory layer you're currently using."
+          },
+          {
+            "title": "Panniantong/Agent-Reach",
+            "url": "https://github.com/Panniantong/Agent-Reach",
+            "source": "github.com",
+            "stars": "62.7k",
+            "lang": "Python",
+            "body": "A single CLI that gives an agent read and search access across Twitter, Reddit, YouTube, GitHub, Bilibili, and XiaoHongShu with zero API fees. The useful idea is consolidation: instead of stitching together five separate scraper libraries and API keys to let an agent check what's trending or being discussed, it's one tool with one interface. Handy for research agents, trend-monitoring bots, or anything that needs a live read on what people are actually saying right now rather than what's in a training set."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's feed documented a full build workflow worth reproducing.",
+        "items": []
+      }
+    ],
+    "closing": "Test the two ARC-AGI settings on your own agent loop today -- it's the cheapest win in this issue."
+  },
+  {
     "id": "2026-07-29",
     "date": "July 29, 2026",
     "title": "AI Pulse",
