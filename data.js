@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-07-31",
+    "date": "July 31, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic refreshes the whole Claude lineup while GitHub keeps building tools to manage the agents you already have",
+    "intro": "Anthropic dropped two new flagship-tier models on the same day, and OpenAI and Google both spent the week tuning the economics and plumbing of running agents at scale rather than chasing new benchmarks. On GitHub, the momentum is shifting from writing code to understanding and managing what agents already produce -- knowledge graphs, design engines, and fleet managers all cracked six figures in stars this week.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Anthropic refreshes its whole model lineup while OpenAI and Google tune the economics of running agents at scale.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic's new flagship model is live today, replacing Opus 4.8 at the top of the lineup. It's available now in the API, Claude.ai, Claude Code, and the enterprise console -- no waitlist. The jump shows up where Opus has always led Sonnet: harder multi-step reasoning, longer effective working context, and better results on the kind of messy, multi-file coding and agentic tasks that fall apart under smaller models. If you've been routing your hardest problems to Opus 4.8 or GPT-5.6, this is the model to re-run those evals against today, not next quarter."
+          },
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "The workhorse tier gets its version bump alongside Opus 5. Sonnet 5 is built for the day-to-day agent and coding load where latency and cost matter as much as raw capability -- same API endpoints, same pricing tier as its predecessor, but with noticeably better tool-use reliability and instruction-following across long, multi-turn agent loops. It's already the default model behind most Claude Code sessions. If you're running production agents on the previous Sonnet, this is a drop-in swap worth benchmarking before you flip the default in your own stack."
+          },
+          {
+            "title": "Advancing the price-performance frontier with GPT-5.6",
+            "url": "https://openai.com/index/advancing-the-price-performance-frontier-with-gpt-5-6",
+            "source": "OpenAI",
+            "body": "OpenAI cut GPT-5.6 pricing on its Luna and Terra tiers today -- the model is unchanged, but the cost of running it at scale just dropped. That matters most for agentic workflows, where token spend from tool calls and multi-step reasoning chains adds up fast and often dwarfs the cost of the original prompt. Paired with the reasoning-retention and compaction settings OpenAI detailed earlier this week, which tripled its ARC-AGI-3 score, the practical effect is more usable intelligence per dollar for anyone running GPT-5.6 agents in production right now, without touching a single line of integration code."
+          },
+          {
+            "title": "Gemini API Managed Agents: 3.6 Flash, hooks, and more",
+            "url": "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/",
+            "source": "Google AI",
+            "body": "Managed Agents on the Gemini API now run on 3.6 Flash and add hooks and triggers -- a way to wire an agent's execution directly to external events like webhooks, schedules, or state changes. Previously Managed Agents handled the run loop but left event-driven kickoff to you; now you register a trigger and it fires the agent automatically, no custom orchestration layer required. Combined with 3.6 Flash's lower latency, it closes a real gap between Google's managed offering and the always-on, event-driven agents teams have mostly had to hand-roll with cron jobs and glue code until today."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's stars go to tools that make agents smarter about the codebase and each other, not just faster typists.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "99.5k",
+            "lang": "Python",
+            "body": "Point it at a codebase -- source, docs, SQL schemas, configs, even PDFs -- and it builds a queryable knowledge graph using local, deterministic AST parsing. No vector store, no embedding drift: every edge in the graph traces back to an actual parse, so when an agent asks 'what calls this function' or 'where does this config get read,' the answer is verifiable instead of a similarity-search guess. Ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. For anyone tired of RAG confidently inventing relationships that don't exist in the code, this swaps embeddings for ground truth."
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "82.9k",
+            "lang": "TypeScript",
+            "body": "An open-source alternative to Claude's Design surface: a local-first desktop app that turns whatever coding agent you already run -- Claude Code, Codex, Cursor, Gemini, OpenCode, Qwen, and 15-plus others via BYOK -- into a design engine. Prompt it and you get real files back: prototypes, landing pages, dashboards, slides, images, and video, exported as HTML, PDF, PPTX, or MP4 instead of trapped in a proprietary canvas. The bet is that your agent already writes solid HTML and CSS; this just gives it a design-focused harness and an export pipeline, so the output leaves the app the same way it arrived -- as files."
+          },
+          {
+            "title": "stablyai/orca",
+            "url": "https://github.com/stablyai/orca",
+            "source": "github.com",
+            "stars": "34.3k",
+            "lang": "TypeScript",
+            "body": "An ADE -- agent development environment -- built for running a fleet of coding agents in parallel instead of pairing with one at a time. Bring your own subscription (Claude Code, Codex, whatever you already pay for) and Orca handles spinning up, monitoring, and merging work across many concurrent sessions from desktop, mobile, or a VPS. It targets the workflow problem that shows up once you move past single-agent pairing: tracking which agent is doing what, catching conflicts before they compound, and reviewing diffs from five sessions at once instead of babysitting one terminal window all day."
+          },
+          {
+            "title": "AlexsJones/llmfit",
+            "url": "https://github.com/AlexsJones/llmfit",
+            "source": "github.com",
+            "stars": "31.0k",
+            "lang": "Rust",
+            "body": "One command that tells you which of the hundreds of open models and quantizations -- GGUF, MLX, Unsloth-tuned, whatever -- will actually run on the hardware in front of you, VRAM and RAM included. Instead of guessing whether a 30B model fits on your M-series Mac or trial-and-erroring through OOM crashes, llmfit checks your specs against a model's real memory footprint before you download a single gigabyte. It's also useful embedded inside an agent harness: an agent picking a local model to shell out to can query llmfit first instead of hardcoding a model name that might not fit the box it's on."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's queue actually walked through a build end to end, so we're skipping the section rather than padding it out.",
+        "items": []
+      }
+    ],
+    "closing": "Back tomorrow with whatever ships next."
+  },
+  {
     "id": "2026-07-30",
     "date": "July 30, 2026",
     "title": "AI Pulse",
