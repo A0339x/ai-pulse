@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-08-01",
+    "date": "August 1, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic drops two flagship models on the same day, Google wires hooks into managed agents, and builders start taming parallel Claude Code fleets",
+    "intro": "Anthropic leads today with a rare double release: Opus 5 and Sonnet 5, both out at once. Google and OpenAI both moved on the agent-infrastructure side of things -- managed agents get triggers, GPT-5.6 gets cheaper. On the builder side, the real story is coordination: as more people run agents in parallel, the tooling for keeping them from stepping on each other is catching up fast.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two new Claude models land together, and the agent platforms keep getting more programmable.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Opus 5 is out now, replacing Opus 4.x as Anthropic's top-end model. It's live today in the API, Claude apps, and Claude Code -- no waitlist. If you're running Opus 4.5 in production, this is a straight swap: same interfaces, more headroom on the hardest reasoning and agentic tasks you were already throwing at it. Worth re-running your eval suite before you flip the default model id in anything customer-facing, since output style and latency both shift with a generation bump."
+          },
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Sonnet 5 ships alongside Opus 5 as the new mid-tier default -- the model most people actually build on day to day. It's positioned to replace Sonnet 4.5 at the same price point, aimed at the bulk of coding, agent, and RAG workloads where Opus is overkill. If you've got pipelines pinned to a Sonnet model id, this is your cue to test against 5 before the older snapshot gets deprecated out from under you."
+          },
+          {
+            "title": "Advancing the price-performance frontier with GPT-5.6",
+            "url": "https://openai.com/index/advancing-the-price-performance-frontier-with-gpt-5-6",
+            "source": "OpenAI",
+            "body": "OpenAI cut pricing on GPT-5.6's Luna and Terra tiers today, targeting enterprises running high-volume workflows where token cost is the actual bottleneck, not capability. The pitch is more efficient serving under the hood rather than a new model -- same GPT-5.6 weights, lower cost per call. If you've been holding off moving a high-volume pipeline onto 5.6 because the math didn't pencil out, it's worth re-checking today's rate card against your usage."
+          },
+          {
+            "title": "Gemini API Managed Agents: 3.6 Flash, hooks, and more",
+            "url": "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/",
+            "source": "Google AI",
+            "body": "Google's Managed Agents on the Gemini API now run on Gemini 3.6 Flash and add hooks and triggers -- event-driven callbacks you can attach to agent lifecycle steps instead of polling or hand-rolling orchestration. That's new: previously Managed Agents ran a fixed loop with no way to inject logic mid-execution. Combine hooks with Flash's lower latency and you get a managed agent runtime that can react to external events (a webhook, a state change) without you standing up your own event loop."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "The repos gaining ground this week skip the SDK-wrapper pattern for genuinely new infrastructure: knowledge graphs, memory, video pipelines, and multi-agent fleets.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "99.9k",
+            "lang": "Python",
+            "body": "Turns a codebase -- docs, SQL schemas, configs, PDFs included -- into a queryable knowledge graph, using deterministic AST parsing instead of embeddings. No vector store means no similarity-search fuzziness: every edge in the graph is explained, so when your agent asks \"what calls this function\" it gets a precise answer, not a nearest-neighbor guess. Ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. For anyone whose agent keeps hallucinating codebase structure on large repos, this is a different bet than RAG entirely."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "57.9k",
+            "lang": "Python",
+            "body": "An open-source memory layer for AI agents that leads with actual benchmarks instead of vibes -- it claims to be the best-scored open memory system on the standard recall/retention suites, and publishes the numbers. Runs on ChromaDB, speaks MCP, so any MCP-compatible agent (Claude Code, Cursor, custom harnesses) can read and write to it directly. If you've been rolling your own memory store because the existing options felt unverified, this is worth benchmarking against before you build more on top of it."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "44.4k",
+            "lang": "Python",
+            "body": "Turns your coding agent into a full video production studio: 12 production pipelines, over 100 tools, and 700+ agent skill and production-knowledge files covering everything from shot planning to editing. Billed as the first open-source agentic video production system, meaning the agent runs the whole pipeline end to end rather than you gluing together a script generator, a TTS call, and ffmpeg by hand. Useful if you're trying to get Claude Code or Cursor to produce finished video instead of just editing code that happens to touch video."
+          },
+          {
+            "title": "stablyai/orca",
+            "url": "https://github.com/stablyai/orca",
+            "source": "github.com",
+            "stars": "34.9k",
+            "lang": "TypeScript",
+            "body": "An ADE (agent development environment) built around running a fleet of coding agents in parallel rather than one at a time -- desktop, mobile, and VPS clients, and it works with your existing subscription rather than requiring separate API billing per agent. As more people run 5-10 Claude Code or Codex instances simultaneously on different branches or tasks, the missing piece has been a place to actually watch and manage all of them at once. Orca is a bet on that being the next real UI surface, not the single-agent chat window."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Two posts that actually show their work on running AI coding agents at scale, not just the demo reel.",
+        "items": [
+          {
+            "title": "Show HN: A local merge queue for parallel Claude Code agents",
+            "url": "https://github.com/funador/claude-code-merge-queue",
+            "source": "Hacker News",
+            "author": "funador",
+            "body": "Once you're running more than one Claude Code agent against the same repo, you hit the obvious problem: two agents finish work on overlapping files and now you've got a merge conflict nobody asked for. This project is a local merge queue purpose-built for that setup -- agents work in isolated worktrees or branches, and the queue serializes merges back to the trunk one at a time, running checks before each merge lands instead of after. It's a small, focused fix for a problem that only shows up once you actually try to parallelize agentic coding rather than just talking about it, which makes it a good template to fork and adapt to your own branch/merge conventions this weekend."
+          },
+          {
+            "title": "Show HN: How to build and self-host a code review agent",
+            "url": "https://www.trytilde.ai/blog/how-to-build-code-review-agent",
+            "source": "Hacker News",
+            "author": "solsol94",
+            "body": "A walkthrough of standing up your own code review agent instead of paying for a hosted one: hooking into your CI or PR webhook, pulling the diff, running it through an LLM with a review-focused prompt, and posting comments back to the PR. The self-host framing is the useful part -- most review-bot writeups assume you're calling someone else's hosted service, this one covers the plumbing (auth, rate limits, where state lives between runs) you actually need to run it on your own infra. If you've wanted a review bot but didn't want another SaaS line item, this is a plausible weekend build."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-07-31",
     "date": "July 31, 2026",
     "title": "AI Pulse",
