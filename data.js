@@ -3,6 +3,97 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-08-03",
+    "date": "August 3, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic rounds out the Claude 5 lineup, a knowledge-graph alternative to RAG climbs fast, and someone posts the DIY code review bot",
+    "intro": "Anthropic filled out its model lineup today with Opus 5 and Sonnet 5, while OpenAI and Google both shipped smaller but genuinely useful upgrades -- cheaper GPT-5.6 pricing and a two-setting fix that triples an agent benchmark score. On GitHub, the theme is efficiency: codebases as queryable graphs instead of vector stores, and prompts compressed down to the token.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two new Claude models land, plus real usability wins from OpenAI and Google.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic filled out the Claude 5 family today, shipping Opus 5 as the new flagship alongside Sonnet 5 as the mid-tier model for everyday coding and agent work. Opus 5 replaces Opus 4.8 at the top of the lineup and is live now in the API, Claude apps, and for existing Claude Code users -- no separate opt-in needed. If you were pinned to Opus 4.8 for its reasoning quality, you can point at Opus 5 today and drop Sonnet 5 into the cheaper agent loops where Opus was previously overkill."
+          },
+          {
+            "title": "Advancing the price-performance frontier with GPT-5.6",
+            "url": "https://openai.com/index/advancing-the-price-performance-frontier-with-gpt-5-6",
+            "source": "OpenAI",
+            "body": "OpenAI cut GPT-5.6 pricing for its Luna and Terra tiers today, betting that a more efficient model lets enterprises run bigger workflows without the bill scaling linearly. The pitch is straightforward: same model, lower per-token cost, aimed at teams running GPT-5.6 across high-volume pipelines rather than one-off chat sessions. If you've been rationing GPT-5.6 calls in an agent loop or batch job because of cost, this is the day to re-run the math -- the ceiling on what's affordable just moved."
+          },
+          {
+            "title": "Gemini API Managed Agents: 3.6 Flash, hooks, and more",
+            "url": "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/",
+            "source": "Google AI",
+            "body": "Google's Managed Agents platform on the Gemini API now runs on Gemini 3.6 Flash and adds hooks and triggers -- code that fires at specific points in an agent's execution (before a tool call, after a step completes, on error) instead of you polling for state. That's the piece managed-agent platforms have been missing: a way to inject custom logic mid-run without babysitting the loop yourself. Combined with the Flash upgrade, it's a meaningfully cheaper and more controllable way to run hosted agents than wiring your own orchestration on top of the raw API."
+          },
+          {
+            "title": "How enabling two settings tripled our scores on the ARC-AGI-3 benchmark",
+            "url": "https://openai.com/index/how-two-settings-tripled-our-arc-agi-3-scores",
+            "source": "OpenAI",
+            "body": "OpenAI found that flipping two existing GPT-5.6 API settings -- retaining reasoning across turns and enabling context compaction -- roughly tripled its ARC-AGI-3 score while also cutting token spend. Neither setting is new; what's new is the finding that most people leave them off by default and are quietly leaving performance on the table. Worth checking your own agent configs today: if you're running multi-step reasoning tasks on GPT-5.6 without reasoning retention and compaction turned on, you're likely underpaying for worse results, not better ones."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "The pattern this week: skip the vector store, skip the token bloat, skip the single-agent bottleneck.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "101.5k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- including its docs, SQL schemas, configs, and PDFs -- into a queryable knowledge graph using local, deterministic AST parsing instead of embeddings. No vector store means no similarity-search guesswork: every edge in the graph is explained, so when the tool says file A depends on config B, it can show you why. It ships as a skill for Claude Code, Cursor, Codex, and Gemini CLI, which makes it a direct alternative to RAG-based code search for anyone whose agent keeps hallucinating relationships that a deterministic parser would just get right the first time."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "95.4k",
+            "lang": "JavaScript",
+            "body": "Caveman is a Claude Code skill that strips prompts and context down to bare, grammar-free tokens -- the way a caveman would talk -- and claims a 65% cut in token usage without losing meaning. It's a genuinely different lever than model swapping or context trimming: instead of sending less context, it sends the same context compressed into fewer tokens. For anyone running long agent loops where cost scales with every back-and-forth, this is a cheap experiment to run against your existing prompts before you reach for a smaller model."
+          },
+          {
+            "title": "heygen-com/hyperframes",
+            "url": "https://github.com/heygen-com/hyperframes",
+            "source": "github.com",
+            "stars": "39.3k",
+            "lang": "TypeScript",
+            "body": "Hyperframes renders video from HTML instead of a traditional timeline editor -- write markup and CSS animation, get an MP4 out via ffmpeg. The idea is that coding agents are already good at writing HTML and CSS, and bad at driving video editing software, so instead of teaching an agent a new tool, you let it keep writing what it's already fluent in and put the rendering pipeline behind that. Useful if you're building agent workflows that need to output motion graphics, explainer clips, or animated UI previews without touching After Effects."
+          },
+          {
+            "title": "stablyai/orca",
+            "url": "https://github.com/stablyai/orca",
+            "source": "github.com",
+            "stars": "36.3k",
+            "lang": "TypeScript",
+            "body": "Orca is an ADE (agent development environment) built for running a fleet of coding agents in parallel rather than one at a time -- Claude Code, Codex, or whatever else you're subscribed to, each working a different task or branch, monitored from desktop, mobile, or a VPS. It's less about the individual agent and more about the orchestration layer most people are still doing by hand with tmux panes and browser tabs. Worth a look if you've hit the point where you're running three or four agent sessions simultaneously and losing track of which one needs your attention."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One post actually shows the build, not just the result.",
+        "items": [
+          {
+            "title": "How to build and self-host a code review agent",
+            "url": "https://www.trytilde.ai/blog/how-to-build-code-review-agent",
+            "source": "Hacker News",
+            "author": "solsol94",
+            "body": "Tilde's writeup walks through standing up your own PR review bot instead of paying for a hosted one: a GitHub webhook catches new pull requests, the diff gets pulled and chunked to stay inside context limits, an LLM reviews it against a focused prompt, and the output posts back as inline comments. The useful part is the failure-mode coverage -- how to keep the bot from spamming nitpicks on every push, how to rate-limit it so it doesn't fire on draft PRs, and how to keep diffs from blowing past context windows on large changesets. It's a self-hostable weekend build for anyone currently paying per-seat for a review bot and wondering what's actually inside it."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-08-01",
     "date": "August 1, 2026",
     "title": "AI Pulse",
