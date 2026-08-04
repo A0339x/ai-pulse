@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-08-04",
+    "date": "August 4, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic ships a whole new model generation, OpenAI kills the walkie-talkie turn-taking problem, and GitHub's agent tooling gets weirder and more useful.",
+    "intro": "Anthropic dropped Opus 5 and Sonnet 5 on the same day, OpenAI shipped a voice architecture built for actual interruption instead of turn-taking, and Google quietly made its Managed Agents platform look more like real automation infra. On GitHub, the interesting repos this week aren't more agent wrappers -- they're knowledge graphs, design engines, and fleet management for the agents you're already running.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new Claude generation lands alongside a real fix for voice AI's turn-taking problem.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic's flagship model gets its next full-number bump. Opus 5 replaces the Opus 4.x line as Anthropic's most capable model for hard reasoning, long-horizon agentic work, and coding tasks that need to hold context across many steps. It's live today in the API, the Claude apps, and Claude Code, alongside the smaller Sonnet 5 released the same day. If you're running agent pipelines or long coding sessions on Opus, this is a straight swap worth benchmarking against your current setup -- especially anywhere you were hitting reasoning ceilings or losing the thread on long tasks."
+          },
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Anthropic's mid-tier model also jumps to 5 today, landing as the faster, cheaper option next to Opus 5 in the new lineup. Sonnet has been the default workhorse behind Claude Code and most high-volume API use, so this is the release most builders will actually feel day to day. It's live now via the API and already the default model in Claude Code -- existing integrations pointed at the Sonnet model ID should pick it up without any code changes."
+          },
+          {
+            "title": "How we built a realtime system for responsive voice AI in six months",
+            "url": "https://openai.com/index/continuous-voice-interaction-with-gpt-live",
+            "source": "OpenAI",
+            "body": "OpenAI shipped GPT-Live, a turnless speech model built for continuous conversation instead of the listen-then-respond loop every voice assistant has used until now. Dropping the turn-taking assumption is what lets it get interrupted mid-sentence, react to a laugh, or handle a new question without waiting for you to finish talking -- the thing that's made every voice AI feel like a walkie-talkie. It's live now for developers building on the OpenAI API, aimed at anyone building voice products meant to be talked over and interrupted, not just queried."
+          },
+          {
+            "title": "Gemini API Managed Agents: 3.6 Flash, hooks, and more",
+            "url": "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/",
+            "source": "Google AI",
+            "body": "Google added Gemini 3.6 Flash to Managed Agents in the Gemini API, plus hooks and triggers that let an agent fire off a webhook, schedule, or state change instead of only responding to chat turns. That pushes Managed Agents closer to a real background-automation platform rather than a hosted chat loop with extra steps. Flash 3.6 is the cheap, fast model in the mix, meant for high-volume agent calls where latency and cost matter more than raw capability. Available now for anyone building on the Gemini API."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's risers skip the chat-wrapper playbook for knowledge graphs, design tooling, and multi-agent fleets.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "102.2k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- docs, SQL schemas, configs, PDFs included -- into a queryable knowledge graph using local deterministic AST parsing instead of a vector store. Every edge in the graph is explained, so instead of fuzzy semantic search you get exact, traceable relationships between code and the systems around it. It ships as a skill for Claude Code, Cursor, Codex, and Gemini CLI, so any of those agents can query the graph directly while working in your repo. Worth a look if you're tired of RAG surfacing file relationships that don't actually exist."
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "83.6k",
+            "lang": "TypeScript",
+            "body": "Open Design is a local-first desktop app that turns your coding agent into a design engine -- prototypes, landing pages, dashboards, slides, images, and video, exported as real files (HTML, PDF, PPTX, MP4) instead of previews. It runs BYOK across Claude Code, Codex, Cursor, Gemini, OpenCode, Qwen, and 20+ other CLIs, positioning itself as the open alternative to Anthropic's own Claude Design. The bet is that design work shouldn't live in a separate tool from the agent already writing your code -- one context, output you can ship instead of a Figma link to hand off."
+          },
+          {
+            "title": "AlexsJones/llmfit",
+            "url": "https://github.com/AlexsJones/llmfit",
+            "source": "github.com",
+            "stars": "31.1k",
+            "lang": "Rust",
+            "body": "llmfit answers one question fast: which of the hundreds of local models out there will actually run on the hardware in front of you. One command checks your GPU, CPU, and RAM against GGUF, MLX, and Unsloth-quantized models and tells you what fits, instead of guessing and OOM-ing halfway through a multi-gigabyte download. As local model formats and quant levels keep multiplying, this is the tool to run before you pick a model, not after."
+          },
+          {
+            "title": "stablyai/orca",
+            "url": "https://github.com/stablyai/orca",
+            "source": "github.com",
+            "stars": "37.1k",
+            "lang": "TypeScript",
+            "body": "Orca is an ADE (agent development environment) built for running a fleet of coding agents in parallel instead of babysitting one Claude Code or Codex terminal at a time. It runs whatever agent you already have a subscription to, and works from desktop, mobile, or a VPS, so you can kick off a batch of agents on different tasks and check in from your phone. As agentic coding shifts from one session to several running at once, this is the interface layer built for that -- worth a look if you're already juggling more than one agent."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's queue documented a real end-to-end build.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-08-03",
     "date": "August 3, 2026",
     "title": "AI Pulse",
