@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-08-05",
+    "date": "August 5, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic drops two Claude models at once, OpenAI kills the voice-AI turn-taking wait, and codebases become queryable graphs",
+    "intro": "Anthropic shipped both Opus 5 and Sonnet 5 today, a rare same-day dual launch, while OpenAI rolled out a voice architecture that doesn't wait for you to finish your sentence. On GitHub, the interesting momentum isn't more agent wrappers -- it's tools giving agents real structural understanding of your code, your design files, and your hardware. Nothing in today's build write-ups actually showed its work, so the Built With AI slot sits empty until something does.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two new Claude models land same-day, OpenAI ships real-time voice, and a 2.6B model built to run fully on-device.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic pushed out Opus 5, the new top of the Claude lineup, in the same release window as Sonnet 5. It's live now in the API and across Claude.ai, Claude Code, and the desktop/mobile apps -- same endpoints, point existing integrations at the new model string. Opus 5 replaces Opus 4.x as the model to reach for on long-horizon agentic work: multi-step coding tasks, deep research, and anything that needs to hold a lot of context and keep making correct calls across many turns without hand-holding. If you're already building on Claude, this is a drop-in upgrade worth benchmarking against your current model choice today."
+          },
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Sonnet 5 shipped alongside Opus 5 as the faster, cheaper tier. It's the model most teams will actually run in production -- lower latency and cost than Opus 5, aimed at the coding-agent and high-volume-API use cases where Sonnet has been the default since Sonnet 4. Available now via the API and in Claude Code, no migration needed beyond swapping the model string. Worth re-running your eval suite: a new Sonnet generation has historically been the bigger practical upgrade for most builders than the Opus-tier release, since it's the one you can afford to call on every request."
+          },
+          {
+            "title": "How we built a realtime system for responsive voice AI in six months",
+            "url": "https://openai.com/index/continuous-voice-interaction-with-gpt-live",
+            "source": "OpenAI",
+            "body": "OpenAI shipped GPT-Live, a voice architecture that drops turn-taking entirely -- no more waiting for you to stop talking before it responds. It uses a \"turnless\" speech model paired with a low-latency pipeline, so it can listen and generate at the same time and get interrupted like a real conversation. That's a real departure from the request-response voice APIs most builders have used, where the model waits for a detected pause before it starts thinking. If you're building voice products, this is the first time continuous, interruptible conversation has shipped as a first-party API instead of something you had to hand-roll with VAD hacks."
+          },
+          {
+            "title": "Deploy local agents everywhere with LFM2.5-2.6B",
+            "url": "https://huggingface.co/blog/LiquidAI/lfm2-5-2-6b",
+            "source": "Hugging Face",
+            "body": "Liquid AI released LFM2.5-2.6B, a 2.6-billion-parameter model built specifically to run local agents on-device -- phones, laptops, edge hardware, no API calls. It's small enough for memory-constrained environments while still handling tool use and multi-step agent loops, the part small models usually fall down on. Weights are on Hugging Face now. For builders who want agent behavior without sending every request to a cloud provider -- privacy-sensitive apps, offline tools, cost-constrained products -- this is a real option to benchmark, not just a toy-sized model for chat."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "The novel ideas this week: codebases as knowledge graphs, coding agents as design tools, and matching models to the hardware you actually own.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "102.8k",
+            "lang": "Python",
+            "body": "Graphify turns a whole codebase -- code, docs, SQL schemas, configs, PDFs -- into a queryable knowledge graph, using local deterministic AST parsing instead of a vector store. Every edge in the graph is explained, so when your agent asks \"what calls this function\" or \"what depends on this schema,\" it gets a traceable answer instead of a similarity-search guess. It ships as a skill for Claude Code, Cursor, Codex, and Gemini CLI. This is a real alternative to RAG-over-code: no embeddings to keep in sync, no drift between the vector store and the actual repo, and answers you can audit. Worth a look if your agent keeps hallucinating about your own codebase's structure."
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "83.8k",
+            "lang": "TypeScript",
+            "body": "Open Design turns your coding agent into a design engine -- prototypes, landing pages, dashboards, slides, images, and video, exported as real HTML/PDF/PPTX/MP4 files instead of locked into a proprietary format. It's a local-first desktop app that works BYOK with Claude Code, Codex, Cursor, Gemini, OpenCode, Qwen, and 20-plus other CLIs. The pitch: instead of a separate design tool your agent can't touch, the agent generates the actual deliverable directly. For builders who've been stitching together a coding agent plus Figma plus a separate export pipeline, this collapses that into one loop."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "45.2k",
+            "lang": "Python",
+            "body": "OpenMontage claims to be the first open-source agentic video production system -- 12 production pipelines, 100-plus tools, and 700-plus agent skill and production-knowledge files, meant to turn a coding assistant into a full video studio. It works with Claude, Copilot, Cursor, and other agent CLIs. Video has been one of the last domains where \"just point an agent at it\" didn't really work, because there's no equivalent of a linter or test suite to check the output. This is a serious attempt at building that scaffolding out as skills and pipelines instead of relying on a single prompt."
+          },
+          {
+            "title": "AlexsJones/llmfit",
+            "url": "https://github.com/AlexsJones/llmfit",
+            "source": "github.com",
+            "stars": "31.1k",
+            "lang": "Rust",
+            "body": "llmfit answers a question builders keep guessing at: what model actually runs on the hardware in front of you. Point it at your machine and it checks against hundreds of models and providers -- GGUF, MLX, Unsloth-quantized, whatever -- and tells you what fits, instead of you downloading a 20GB checkpoint to find out it doesn't. It's a small utility, but a real gap: local model choice has exploded (see LFM2.5 above) and there hasn't been a fast way to match model to hardware before committing to the download."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Today's Show HN batch had plenty of interesting titles but nobody actually documented how they built the thing.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-08-04",
     "date": "August 4, 2026",
     "title": "AI Pulse",
