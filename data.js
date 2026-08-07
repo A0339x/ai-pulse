@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-08-07",
+    "date": "August 7, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic drops two new flagships, GitHub gets obsessed with token efficiency and agent fleets, and the build-diary well runs dry",
+    "intro": "Anthropic ships Opus 5 and Sonnet 5 in the same week OpenAI loosens the free tier on GPT-5.6 Luna -- frontier competition keeps compounding. On GitHub, the story is efficiency and orchestration: a deterministic code-knowledge-graph tool, a skill that cuts token spend by talking like a caveman, and an ADE built for running fleets of agents instead of one session at a time. Today's source list was thin on documented build write-ups worth your weekend, so that section comes up empty -- check back tomorrow.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two labs push new flagship models out the door while the agent-harness tools quietly add the features you'll actually use daily.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic ships Opus 5, its new top-of-line model succeeding the Opus 4 series, landing alongside a refreshed Sonnet 5. It's live now through the API, the Claude apps, and Claude Code -- built for the hardest agentic and coding workloads, with a higher ceiling on multi-step tool use and longer autonomous runs before it needs a human to check in. If you're already building on the API or running Claude Code as your daily driver, this is a drop-in swap: same endpoints, same tool-use format, just more headroom on the tasks that used to make the model choke or ask too many clarifying questions."
+          },
+          {
+            "title": "Improving GPT-5.6 Sol in ChatGPT -- and expanding access to GPT-5.6 Luna for free users",
+            "url": "https://openai.com/index/improving-gpt-5-6-sol-in-chatgpt",
+            "source": "OpenAI",
+            "body": "OpenAI tightens up GPT-5.6 Sol for better accuracy and consistency inside ChatGPT, but the bigger change is on the pricing side: free-tier users now get GPT-5.6 Luna with unlimited everyday chats, no message cap. That's a real tier change, not a marketing line -- capability that used to require a subscription is now sitting in front of anyone with an account. If you've been routing non-paying collaborators or clients around ChatGPT's limits, that workaround just got less necessary."
+          },
+          {
+            "title": "All-Hands-AI/OpenHands v1.10.0",
+            "url": "https://github.com/OpenHands/OpenHands/releases/tag/v1.10.0",
+            "source": "GitHub / All-Hands-AI",
+            "body": "OpenHands' latest release swaps Canvas's default model to GLM 5.2, adds activity log export so you can audit exactly what an agent did across a session, and ships a featured-automations dashboard for browsing prebuilt agent workflows. It also adds skill filtering, letting you scope which skills an agent can reach for a given run instead of exposing the full set. None of this is flashy, but if OpenHands is your daily agent harness, the export and filtering are the kind of thing you'll lean on constantly once you have them."
+          },
+          {
+            "title": "WeatherNext: AI model achieves breakthrough in forecasting cyclones",
+            "url": "https://deepmind.google/blog/weathernext-ai-model-achieves-breakthrough-in-forecasting-cyclones/",
+            "source": "DeepMind",
+            "body": "DeepMind's WeatherNext line picks up a real accuracy gain on cyclone track and intensity forecasting, an area where physics-based simulation has stubbornly stayed ahead of ML. This closes that gap further. It's not just a research result -- WeatherNext output already feeds Google Search and Maps weather surfaces, so improvements here propagate into consumer products fast. Worth watching as a live example of a learned model beating purpose-built simulation on a genuinely hard physical prediction task, not a benchmark toy."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Code intelligence and agent-fleet orchestration are eating this week's star growth.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "103.8k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- code, docs, SQL schemas, configs, PDFs -- into a queryable knowledge graph using local, deterministic AST parsing instead of embeddings. No vector store, no similarity-search fuzziness: every edge in the graph is explained, so asking \"what calls this function\" or \"what depends on this schema\" gets a traceable answer instead of a semantic guess. It ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. For anyone tired of RAG-over-code returning confidently wrong answers, this is a different bet entirely: structure over vectors, precision over recall."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "96.6k",
+            "lang": "JavaScript",
+            "body": "Caveman is a Claude Code skill that rewrites an agent's internal reasoning and tool chatter into terse, caveman-style phrasing -- \"why use many token when few token do trick\" -- and claims a 65% cut in token usage with no meaningful quality drop. It's a blunt instrument aimed at a real cost: verbose intermediate reasoning eats a huge share of agentic token spend, and most of it doesn't need full grammar to do its job. Worth trying on any long-running agent session where you're bleeding tokens on scaffolding instead of output."
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "84.3k",
+            "lang": "TypeScript",
+            "body": "Open Design is an open-source alternative to Claude's design tooling: a local-first desktop app that turns a coding agent into a design engine producing real files -- prototypes, landing pages, dashboards, slides, images, video -- exported as HTML, PDF, PPTX, or MP4. It's BYOK across 20-plus CLIs including Claude Code, Codex, Cursor, Gemini, and OpenCode, so you're not locked to one vendor's design surface. For builders who want design output that's actually editable source rather than a locked mockup, this fills a gap none of the big labs have an open equivalent for yet."
+          },
+          {
+            "title": "stablyai/orca",
+            "url": "https://github.com/stablyai/orca",
+            "source": "github.com",
+            "stars": "39.3k",
+            "lang": "TypeScript",
+            "body": "Orca is an ADE -- agent development environment -- built for running a fleet of coding agents in parallel instead of one at a time. Point it at any coding agent using your own subscription and it coordinates concurrent sessions from desktop, mobile, or a VPS. The interesting shift is workflow, not model: once agentic coding is cheap enough to run many sessions at once, the bottleneck moves to orchestrating and reviewing them. Orca is a bet that this coordination layer is the next thing worth building tooling around."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's source list documented a real build end-to-end, so this section sits out today.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-08-05",
     "date": "August 5, 2026",
     "title": "AI Pulse",
