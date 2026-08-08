@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-08-08",
+    "date": "August 8, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic drops two new flagships on the same day, GitHub keeps building agent infrastructure instead of another wrapper",
+    "intro": "Anthropic shipped Opus 5 and Sonnet 5 together today, resetting the top of its model lineup in one move, while OpenAI quietly widened free-tier access to its own frontier chat model. On GitHub, the repos gaining ground this week aren't chatbots -- they're infrastructure: a deterministic knowledge graph instead of RAG, a cockpit for running fleets of agents, and a full video pipeline running inside a coding assistant.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two new Claude models land at once, and a couple of quiet access changes actually matter.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic's new flagship is live. Opus 5 takes the top slot from the Opus 4.x line as the most capable model in the lineup, aimed at the hardest agentic and coding work -- long-running tasks, large codebases, multi-step tool use. It's available now through the API, Claude.ai, and Claude Code, plus the usual cloud partners. If you've been routing your gnarliest tasks to Opus, point them here today; everything else in the lineup effectively shifts down a tier underneath it."
+          },
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "The workhorse tier gets refreshed alongside Opus. Sonnet 5 launched the same day as the faster, cheaper model built for high-volume agentic workloads -- the one you actually run inside production loops and CI pipelines rather than reach for occasionally. Same-day availability across the API and Claude apps means you can swap it in against whatever you're currently defaulting to without waiting on a staged rollout."
+          },
+          {
+            "title": "Improving GPT-5.6 Sol in ChatGPT -- and expanding access to GPT-5.6 Luna for free users",
+            "url": "https://openai.com/index/improving-gpt-5-6-sol-in-chatgpt",
+            "source": "OpenAI",
+            "body": "OpenAI tuned Sol, the main ChatGPT model, for better accuracy and consistency -- not a new model number, just a quality pass on the one most people are already using. The bigger change: free-tier users now get expanded access to GPT-5.6 Luna, including unlimited everyday chats. That's an actual pricing-tier shift, not a marketing line -- if you've been hitting free-tier caps on lighter tasks, that ceiling just moved."
+          },
+          {
+            "title": "Baseten on Hugging Face Inference Providers",
+            "url": "https://huggingface.co/blog/baseten",
+            "source": "Hugging Face",
+            "body": "Baseten joins the Inference Providers roster, so its hosted models are now callable through Hugging Face's unified router with your existing HF token. One client, one auth flow -- no separate Baseten account or billing setup just to try their infra. If you're already standardized on the huggingface_hub inference client, it's one more backend you can swap in without touching application code."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's fast-movers skip the chatbot wrapper and build actual infrastructure.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "104.2k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- docs, SQL schemas, configs, PDFs included -- into a queryable knowledge graph using local deterministic AST parsing instead of embeddings. No vector store, no similarity-search fuzziness: every edge in the graph traces back to source and is explained. It ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI, so your agent can answer 'what calls this function' or 'what config touches this table' with a real graph traversal instead of a hopeful semantic match. A deterministic alternative for anyone burned by RAG hallucinating code relationships."
+          },
+          {
+            "title": "stablyai/orca",
+            "url": "https://github.com/stablyai/orca",
+            "source": "github.com",
+            "stars": "39.9k",
+            "lang": "TypeScript",
+            "body": "Orca is an ADE built for running a fleet of coding agents in parallel, not just one at a time. Bring your own subscription -- Claude Code, Codex, whatever -- and Orca gives you a desktop, mobile, or VPS surface to spin up, monitor, and manage multiple agents working different tasks at once. It's a bet that the bottleneck has shifted from 'can the agent do the task' to 'can you supervise five of them simultaneously,' and it's building the cockpit for that."
+          },
+          {
+            "title": "AlexsJones/llmfit",
+            "url": "https://github.com/AlexsJones/llmfit",
+            "source": "github.com",
+            "stars": "31.2k",
+            "lang": "Rust",
+            "body": "llmfit answers the question builders ask constantly: what can my hardware actually run? Point it at your machine and it checks against hundreds of models and formats -- GGUF, MLX, unsloth quantizations -- to tell you what fits, instead of you guessing at VRAM math or trial-and-erroring downloads. One command replaces the usual spreadsheet-and-forum-post research phase of picking a local model."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "46.0k",
+            "lang": "Python",
+            "body": "OpenMontage turns a coding assistant into a video production studio -- 12 production pipelines, over 100 tools, and 700+ skill and production-knowledge files that teach the agent things like shot composition and pacing, not just ffmpeg syntax. It bills itself as the first open-source agentic video system, meaning the agent runs the whole pipeline from script to cut rather than being one generation step you glue into your own tooling. Worth watching whether it holds up under real editorial use, not just demo reels."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's queue actually walked through a build -- back tomorrow with something worth replicating.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-08-07",
     "date": "August 7, 2026",
     "title": "AI Pulse",
