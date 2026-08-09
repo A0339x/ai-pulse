@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-08-09",
+    "date": "August 9, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic ships two new frontier models, DeepMind cracks cyclone forecasting, and code intelligence goes agent-native",
+    "intro": "Anthropic dropped Opus 5 and Sonnet 5 on the same day, moving its whole model line up a generation. OpenAI matched with a free-tier upgrade to Luna, and DeepMind quietly beat physics-based models at forecasting cyclones. On GitHub, the momentum is in agent-native infrastructure -- code graphs, memory layers, video pipelines -- not another chat wrapper.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Anthropic refreshes its whole model lineup, OpenAI widens free access, and DeepMind beats the incumbents at weather.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic's new flagship model is live, replacing the Opus 4.x line as the top of the stack. It's the model to reach for on the deepest reasoning, longest tool-use chains, and highest-stakes coding work -- multi-file refactors, hard debugging, long-horizon agent runs. If you were running Opus 4.5 or 4.6 in production, this is a straight upgrade path: same API surface, sharper outputs. Anthropic shipped it alongside a new Sonnet 5, so the whole family moved up a generation today, not just the top tier."
+          },
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Anthropic's workhorse model got bumped to Sonnet 5, launching the same day as Opus 5. This is the one most agent frameworks and coding tools actually run day to day -- the price-to-capability sweet spot -- so the upgrade matters more for daily-driver use than the flagship does. Expect better instruction-following and tool-call reliability at the same latency and price tier as Sonnet 4.x. If you've got Claude wired into a CI pipeline, IDE plugin, or agent loop, swapping the model string is the whole migration."
+          },
+          {
+            "title": "Improving GPT-5.6 Sol in ChatGPT -- and expanding access to GPT-5.6 Luna for free users",
+            "url": "https://openai.com/index/improving-gpt-5-6-sol-in-chatgpt",
+            "source": "OpenAI",
+            "body": "OpenAI tightened up GPT-5.6 Sol's accuracy and consistency inside ChatGPT, and more importantly, opened GPT-5.6 Luna to free-tier users with unlimited everyday chats. That's a real pricing-tier shift -- free users get a capable everyday model with no cap, not a throttled demo. Sol stays the paid, harder-reasoning option; Luna becomes the always-on default for quick questions and daily use. If you've been recommending ChatGPT to non-technical friends and hedging on the free tier's limits, that hedge is mostly gone now."
+          },
+          {
+            "title": "WeatherNext: AI model achieves breakthrough in forecasting cyclones",
+            "url": "https://deepmind.google/blog/weathernext-ai-model-achieves-breakthrough-in-forecasting-cyclones/",
+            "source": "DeepMind",
+            "body": "DeepMind's WeatherNext now forecasts cyclone formation and tracks with meaningfully better lead time and accuracy than the physics-based numerical models national weather services currently run. This isn't a chatbot demo -- it's a domain model beating the incumbent simulations at their own job, on a problem where extra hours of warning save lives. Worth watching if you build anything downstream of weather data: insurance risk, logistics routing, disaster-response tooling. Expect these forecasts to start showing up in weather APIs as the rollout continues."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Code intelligence, agent memory, and video production all get agent-native rewrites this week.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "104.5k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- docs, SQL schemas, configs, PDFs included -- into a queryable knowledge graph using local deterministic AST parsing instead of embeddings and a vector store. Every edge in the graph is explained, so asking \"what calls this function\" or \"what depends on this schema\" gets a traceable answer instead of a similarity-search guess. It ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. For anyone tired of RAG-over-code giving confidently wrong answers, this is a bet that deterministic parsing beats vector search for code specifically."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "58.3k",
+            "lang": "Python",
+            "body": "MemPalace bills itself as the best-benchmarked open-source memory system for AI agents, built on ChromaDB, and it's free. Agent memory is usually the weak link in anything that runs longer than one session -- context gets lost, retrieval is fuzzy, most memory layers are unbenchmarked black boxes. MemPalace publishes its numbers and hands you an MCP server to drop into an existing agent stack. Worth a look if you're building anything that needs to remember user preferences or past decisions across sessions instead of starting fresh every conversation."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "46.2k",
+            "lang": "Python",
+            "body": "OpenMontage claims to be the first open-source agentic video production system -- 12 production pipelines, over 100 tools, 700-plus agent skill and production-knowledge files that turn a coding assistant into a video studio. Instead of one prompt-to-video model, it chains an agent through the actual stages of production: scripting, shot planning, editing, rendering. It's a sign that \"agent does X\" is moving past text and code into full creative pipelines with many discrete steps, a harder and more interesting problem than a single generation call."
+          },
+          {
+            "title": "AlexsJones/llmfit",
+            "url": "https://github.com/AlexsJones/llmfit",
+            "source": "github.com",
+            "stars": "31.3k",
+            "lang": "Rust",
+            "body": "llmfit answers one annoying question with one command: what models will actually run on the hardware in front of you. It checks your GPU/CPU/RAM against GGUF, MLX, and Unsloth-quantized listings across hundreds of models and providers and tells you what fits, instead of you guessing and OOM-ing halfway through a download. It's a small utility, but the kind of missing piece that makes running local models less trial-and-error, now that the local model catalog is big enough that manually checking VRAM requirements doesn't scale."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's queue documented a full build end-to-end, so we're sitting this one out.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-08-08",
     "date": "August 8, 2026",
     "title": "AI Pulse",
