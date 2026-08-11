@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-08-11",
+    "date": "August 11, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic drops Opus 5, Meta open-sources an agentic model, and knowledge graphs are eating GitHub",
+    "intro": "Anthropic and OpenAI both pushed new frontier models out today, and Meta answered with an open-weight model built to run locally instead of in a datacenter. On GitHub, the trending list is dominated by tools that give agents a persistent, structured memory of your codebase instead of a vector store. Start with Shipping -- Opus 5 and Sonnet 5 landed together and reset what's available at the top end.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two labs shipped new frontier models today, and Meta open-sourced one built to run on your own hardware.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Opus 5 is live, now the top model in Anthropic's lineup, shipping alongside Sonnet 5 as the faster, cheaper option underneath it. The split mirrors the existing generation: Opus for the hardest reasoning and coding work, Sonnet for everyday agent loops where speed and cost matter more than raw capability. Both are available in the API and in Claude.ai today. If you're running long agentic sessions -- multi-step coding tasks, deep research loops -- point them at Opus 5 first, and drop to Sonnet 5 once you know the task doesn't need the extra headroom."
+          },
+          {
+            "title": "Expanding Daybreak as the Cyber Defense Window Narrows",
+            "url": "https://openai.com/index/expanding-daybreak-as-the-cyber-defense-window-narrows",
+            "source": "OpenAI",
+            "body": "GPT-5.6-Cyber is OpenAI's first model built specifically for offensive security work -- vulnerability research, exploit validation, penetration testing. It ships through a new program called Daybreak Red, and access is gated: you get vetted as an approved partner, not just signed up. OpenAI frames it as a response to a shrinking gap between when a vulnerability becomes exploitable and when defenders can patch it. For teams already doing authorized red-team work, it's a frontier model built for the job instead of jailbroken into it -- and a sign the labs are now shipping specialized models for security work, not just general chat."
+          },
+          {
+            "title": "Meta is back with Muse Glimmer: local, agentic, multimodal, and open source",
+            "url": "https://huggingface.co/blog/muse-glimmer",
+            "source": "Hugging Face",
+            "body": "Muse Glimmer is Meta's new open-weight model built to run entirely on-device: 30B parameters, agentic, multimodal, tuned for always-on local workflows instead of datacenter inference. It landed hard on Hacker News within hours of release. Weights are on Hugging Face today. If you've been waiting for a local model that can actually run agent loops -- tool calls, multi-step tasks -- without a round trip to an API, this is the one to try first. It's also Meta's clearest shot yet at the closed-model labs, positioning open weights as the alternative for agentic workflows rather than just chat."
+          },
+          {
+            "title": "Build Low-Latency Multilingual Voice Agents: Open Weights & Full Deployment Control with NVIDIA Magpie TTS",
+            "url": "https://huggingface.co/blog/nvidia/magpie-tts-multilingual-voice-agents",
+            "source": "Hugging Face",
+            "body": "Magpie TTS is NVIDIA's new open-weights text-to-speech model built for low-latency, multilingual voice agents, and it ships with full deployment control -- run it wherever you want, no vendor API in the loop. The Hugging Face writeup walks through wiring it into a complete voice agent pipeline end to end. For anyone building voice interfaces who's been stuck choosing between fast-but-closed APIs and open-but-slow models, this targets that gap directly, and multilingual support out of the box means you're not retraining for every new market."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Codebase knowledge graphs and agent fleet managers are eating the GitHub trending page this week.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "105.1k",
+            "lang": "Python",
+            "body": "Graphify turns an entire codebase -- docs, SQL schemas, configs, PDFs, all of it -- into a queryable knowledge graph, using local deterministic AST parsing instead of a vector store. That's the novel part: no embeddings, no similarity search, just a graph where every edge is explained and traceable back to source. It ships as a skill for Claude Code, Cursor, Codex, and Gemini CLI. For anyone who's fought hallucinated citations from RAG-based code search, a deterministic graph you can actually audit is the pitch, and 105k stars says a lot of people want exactly that."
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "85.0k",
+            "lang": "TypeScript",
+            "body": "Open Design turns your coding agent into a design tool: prototypes, landing pages, dashboards, slides, images, and video, exported as real files (HTML, PDF, PPTX, MP4) instead of locked into a proprietary canvas. It's an open-source answer to Claude's built-in design surface, running local-first as a desktop app and working with 20+ CLIs -- Claude Code, Codex, Cursor, Gemini, OpenCode -- via bring-your-own-key. The idea worth stealing: instead of a new app with an AI feature bolted on, the agent is the design engine, and everything it produces is a normal file you can hand off to anyone."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "58.3k",
+            "lang": "Python",
+            "body": "MemPalace is a persistent memory system for AI agents, built on ChromaDB and exposed over MCP, so an assistant can recall facts and context across sessions instead of starting cold every time. It leads with benchmarks rather than claims -- billed as the best-benchmarked open-source memory system out there, and free. Memory is still the piece most agent stacks bolt on badly, usually as an afterthought RAG layer, and that's exactly the gap this is climbing on."
+          },
+          {
+            "title": "stablyai/orca",
+            "url": "https://github.com/stablyai/orca",
+            "source": "github.com",
+            "stars": "42.2k",
+            "lang": "TypeScript",
+            "body": "Orca is an ADE -- agent development environment -- for running a fleet of coding agents in parallel instead of babysitting one at a time. Point it at any coding agent using your own subscription, and manage the whole fleet from desktop, mobile, or a VPS. As agentic coding shifts from one Claude Code session in a terminal tab to five running at once, this is shaping up as the control plane for that -- worth a look if you're already juggling multiple agent sessions and losing track of which one needs attention."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's source list documented a full build end to end -- check back tomorrow.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-08-09",
     "date": "August 9, 2026",
     "title": "AI Pulse",
