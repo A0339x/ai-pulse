@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-08-12",
+    "date": "August 12, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Claude 5's flagship models land, OpenAI walls off frontier cyber tools, and code-as-graph beats vector RAG on GitHub",
+    "intro": "Anthropic dropped both ends of its new Claude 5 lineup today, Opus 5 and Sonnet 5, while OpenAI pushed further into gated cybersecurity models through Daybreak. On GitHub, the momentum is structural: knowledge graphs and agent-driven design-as-files are pulling ahead of vector stores and hosted design apps. Nothing in today's Built With AI queue cleared the bar for a real, reproducible workflow writeup, so that section sits empty rather than padded.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Anthropic refreshes its whole model lineup while OpenAI narrows cyber-model access to vetted partners.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic shipped Opus 5, the new top of the Claude 5 lineup, live today as the successor to the Opus 4.x line. It's positioned as the most capable model in the family for the hardest reasoning, coding, and agentic tasks -- the one you reach for when Sonnet isn't enough. The release lands the same day as a cluster of safety posts, including updated biosecurity safeguards, which tracks with Anthropic's pattern of pairing frontier capability jumps with hardening work rather than shipping capability alone. If you're building on the API, this is the new ceiling."
+          },
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Sonnet 5 is now live, the mid-tier model in the new Claude 5 family built for day-to-day work -- coding, agents, long tool-use loops -- where Opus is overkill and a smaller model isn't enough. It's the model already running under a lot of coding agents as of today. Paired with Opus 5's launch, this completes Anthropic's refresh of the core lineup and pushes the previous Claude 4.x generation into legacy status for anyone building on the API. Expect it to become the default pick for cost-sensitive agentic workloads."
+          },
+          {
+            "title": "Expanding Daybreak as the Cyber Defense Window Narrows",
+            "url": "https://openai.com/index/expanding-daybreak-as-the-cyber-defense-window-narrows",
+            "source": "OpenAI",
+            "body": "OpenAI released GPT-5.6-Cyber, a cybersecurity-specific model available through Daybreak Red for authorized vulnerability research, exploit validation, and security testing. It's gated to approved partners rather than open API access -- a companion post opens the same frontier cyber models to vetted partners delivering governed security services, and Daybreak capabilities are now generally available on AWS via Bedrock. Together it's OpenAI formalizing a walled tier of access for offensive-security-capable models: more powerful than the general-purpose lineup, but locked behind partner approval rather than a self-serve API key."
+          },
+          {
+            "title": "Build Low-Latency Multilingual Voice Agents: Open Weights & Full Deployment Control with NVIDIA Magpie TTS",
+            "url": "https://huggingface.co/blog/nvidia/magpie-tts-multilingual-voice-agents",
+            "source": "Hugging Face",
+            "body": "NVIDIA open-sourced Magpie TTS, a multilingual text-to-speech model built for low-latency voice agents you can self-host end to end -- weights, inference, and deployment all under your control instead of routing through a hosted API. The pitch is voice agents that respond fast enough for real conversation, without per-token API costs or audio leaving your infrastructure. For anyone building voice interfaces on open models, this closes a gap where TTS has lagged behind open LLMs and speech recognition on both quality and latency."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Structure is beating embeddings this week: knowledge graphs, file-native design, and multi-agent fleets over single-agent chat.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "105.5k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- docs, SQL schemas, configs, PDFs included -- into a queryable knowledge graph instead of a vector index. It ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI, using local deterministic AST parsing so every edge in the graph is explained rather than approximated by embedding similarity. The bet: for code, structural relationships -- this function calls that one, this config feeds that schema -- are more reliable than nearest-neighbor search, and you get them without standing up a vector store at all."
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "85.2k",
+            "lang": "TypeScript",
+            "body": "Open Design is a local-first desktop app that turns your coding agent into a design engine -- prototypes, landing pages, dashboards, slides, images, and video, exported as real files (HTML, PDF, PPTX, MP4) instead of locked-in previews. It works BYOK across 20+ CLIs including Claude Code, Codex, Cursor, Gemini, and OpenCode. Pitched as an open alternative to hosted design products, it's for builders who want agent-driven design work to live in their own files and version control rather than inside someone else's app."
+          },
+          {
+            "title": "AlexsJones/llmfit",
+            "url": "https://github.com/AlexsJones/llmfit",
+            "source": "github.com",
+            "stars": "31.4k",
+            "lang": "Rust",
+            "body": "llmfit answers one question fast: what local models will actually run on the machine in front of you. Point it at your hardware and it checks against hundreds of models and providers across GGUF, MLX, and Unsloth formats to tell you what fits in your VRAM and RAM before you waste twenty minutes downloading something that OOMs on load. It's a small, sharp tool solving a real, recurring annoyance for anyone running local LLMs across a mix of hardware."
+          },
+          {
+            "title": "stablyai/orca",
+            "url": "https://github.com/stablyai/orca",
+            "source": "github.com",
+            "stars": "43.3k",
+            "lang": "TypeScript",
+            "body": "Orca is an ADE -- agent development environment -- for running a fleet of coding agents in parallel instead of one at a time, using your own subscriptions rather than metered API keys. It's available on desktop, mobile, and VPS, so you can kick off multiple agents against different parts of a codebase and check progress from your phone. It's a bet that the coding workflow is shifting from one agent per developer to many agents supervised by one developer, and that shift needs its own interface, not a chat window."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's queue documented a full, reproducible build -- skipping rather than padding.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-08-11",
     "date": "August 11, 2026",
     "title": "AI Pulse",
