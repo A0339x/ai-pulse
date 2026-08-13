@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-08-13",
+    "date": "August 13, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Two new Claude models drop together, agent tooling gets a knowledge graph, and a 14MB model that runs on your wrist",
+    "intro": "Anthropic shipped Opus 5 and Sonnet 5 side by side today, resetting the frontier and handing everyone's tooling a new tokenizer to catch up to. On GitHub, the interesting agent repos this week aren't more coding-agent wrappers -- they're infrastructure: a deterministic code knowledge graph, a hardware-fit checker for local models, and a fleet manager for running agents in parallel. On HN, the standout builds go small (a 14MB agentic model for wearables) and sideways (agents doing materials science instead of code).",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two new Claude models, a maturing OpenHands release, and OpenAI starts testing ads in ChatGPT.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic pushed out Opus 5, the new top of the Claude line, replacing Opus 4.x as the model to reach for on the hardest reasoning, coding, and long-horizon agentic tasks. It's live now in the API, the Claude apps, and through major cloud partners like Bedrock, Vertex, and Azure. Alongside Sonnet 5, it also picks up the new Claude 5 tokenizer, which changes how context and pricing get counted versus Opus 4.x. If you've got pipelines built on the old model, don't assume parity -- re-run your evals before you swap the model string and move on."
+          },
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Sonnet 5 lands as Anthropic's new default workhorse -- the tier most production agents and coding tools actually run on given the price-to-capability tradeoff. It ships with the new Claude 5 tokenizer, already wired into today's AutoGPT platform release, so token counts and context budgets shift versus Sonnet 4.x. Available now through the API and Claude apps. If you're running Claude Code, Cursor, or any agent harness against Sonnet, this is the upgrade to point at first, since it's the tier most third-party tool integrations default to."
+          },
+          {
+            "title": "All-Hands-AI/OpenHands v1.13.0",
+            "url": "https://github.com/OpenHands/OpenHands/releases/tag/v1.13.0",
+            "source": "OpenHands (GitHub)",
+            "body": "OpenHands' latest release adds a client-side conversation archive so you can save and revisit past agent sessions without a server round-trip, plus inline markdown artifact previews so generated files render directly in chat instead of opening a separate viewer. The bigger change is a \"ready-for-dev\" issue readiness gate -- type-specific criteria that check whether a GitHub issue has enough detail before an agent starts working it, meant to stop agents from burning cycles on underspecified tickets. If you're pointing OpenHands at a real backlog, that gate is the one worth testing first."
+          },
+          {
+            "title": "Testing ads in ChatGPT",
+            "url": "https://openai.com/index/testing-ads-in-chatgpt",
+            "source": "OpenAI",
+            "body": "OpenAI started testing ads inside ChatGPT's free tier. Ads are clearly labeled and kept separate from the model's actual answer -- OpenAI says the ad placement doesn't influence what ChatGPT tells you, and users get controls to manage or limit personalization. It's a test, not a full rollout, but it's the clearest signal yet of how OpenAI plans to subsidize free access at its current scale. Worth watching if you build on top of the free tier or care whether answer quality holds up once ad inventory shares the same surface."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's momentum is infrastructure, not more chat wrappers.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "105.9k",
+            "lang": "Python",
+            "body": "Graphify turns a whole codebase -- docs, SQL schemas, configs, PDFs included -- into a queryable knowledge graph, exposed as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. The pitch is no vector store: local, deterministic AST parsing, with every edge in the graph explained rather than guessed at via embedding similarity. That matters for agents doing code search and refactors, where a wrong \"similar chunk\" retrieval quietly wrecks a change -- a deterministic graph gives you an audit trail for why the agent thinks two pieces of code are related, instead of a similarity score you have to trust."
+          },
+          {
+            "title": "AlexsJones/llmfit",
+            "url": "https://github.com/AlexsJones/llmfit",
+            "source": "github.com",
+            "stars": "31.4k",
+            "lang": "Rust",
+            "body": "llmfit answers one annoying question -- which of the hundreds of open models and quantizations will actually run on the machine in front of you -- with a single command. It checks your hardware against a database of models and providers, GGUF, MLX, and Unsloth builds included, and tells you what fits before you spend twenty minutes downloading a 40GB checkpoint that OOMs on load. Useful if you're chasing local inference across a fleet of different laptops or edge boxes and are tired of trial-and-error picking model sizes."
+          },
+          {
+            "title": "stablyai/orca",
+            "url": "https://github.com/stablyai/orca",
+            "source": "github.com",
+            "stars": "44.5k",
+            "lang": "TypeScript",
+            "body": "Orca is an ADE -- agent development environment -- built for running a fleet of coding agents in parallel instead of babysitting one at a time. You bring your own subscription, Claude or Codex or otherwise, and Orca orchestrates multiple agent sessions across desktop, mobile, and VPS, so you can kick off several agents against different tickets and check progress from your phone. It's a bet that the coding workflow of 2026 looks less like chatting with one assistant and more like managing a small team of them."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "47.9k",
+            "lang": "Python",
+            "body": "OpenMontage turns your AI coding assistant into a video production studio -- 12 production pipelines and 100+ tools covering shot assembly, color, captions, and audio sync, backed by 700+ skill and production-knowledge files that teach the agent how a real edit actually gets made. It's billed as the first open-source agentic video production system, meaning the agent follows a full pipeline with intermediate review steps instead of calling an FFmpeg wrapper once and hoping. Worth a look if you've been hand-rolling your own video-agent scripts on top of ffmpeg and gsap."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Two builds worth reading end to end: a wrist-sized agentic model and agents doing materials science.",
+        "items": [
+          {
+            "title": "Show HN: Needle2: 14MB agentic LLM for phones, wearables, smart home and robots",
+            "url": "https://cactuscompute.com/needle",
+            "source": "Hacker News",
+            "author": "HenryNdubuaku",
+            "body": "HenryNdubuaku's team built Needle2, an agentic LLM small enough -- 14MB -- to run entirely on phones, wearables, smart home hubs, and robots, no cloud round-trip needed. Getting a model that can plan, call tools, and hold multi-step state down to that footprint takes aggressive distillation and quantization choices most local-model projects skip, since they're usually targeting a laptop, not a smartwatch. At 527 points and 180 comments, the HN thread is doing the real work of picking the project apart -- how much reasoning capability survives the squeeze, and where a model that small actually breaks on real agentic tasks versus a clean benchmark."
+          },
+          {
+            "title": "Launch HN: Discovered Materials (YC P26) – AI agents to discover new materials",
+            "url": "https://discoveredmaterials.com/research/",
+            "source": "Hacker News",
+            "author": "advaith08",
+            "body": "Discovered Materials (YC P26) runs AI agents as the front end of a materials-discovery pipeline -- agents that search the literature, propose candidate compounds, and hand off to simulation to check them before anything touches a lab bench. The Launch HN thread is the useful part: commenters are pushing on how much of the \"discovery\" is agent-driven search over existing data versus genuinely novel proposal, and where simulation still bottlenecks the loop regardless of how fast the agent layer moves. If you're curious what agentic search looks like applied outside of code, this is a concrete example instead of a demo."
+          }
+        ]
+      }
+    ],
+    "closing": "New tokenizer, new models -- re-run your evals before you trust the numbers."
+  },
+  {
     "id": "2026-08-12",
     "date": "August 12, 2026",
     "title": "AI Pulse",
