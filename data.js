@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-08-14",
+    "date": "August 14, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Three labs ship new models on the same day, and agent tooling keeps climbing past coding",
+    "intro": "Anthropic, OpenAI, and Google all pushed out new models today -- a rare same-day collision. The more interesting move might be OpenAI's new speed tier, which trades nothing for raw throughput. On GitHub, the agent-tooling wave keeps expanding past coding into knowledge graphs, video production, and trading.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Three labs, three model updates, one very crowded Thursday.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic's new top-tier model is live today in the Claude apps and via the API. Opus 5 replaces Opus 4.5 as the flagship option for the hardest reasoning and longest-horizon agent work -- the model to reach for in Claude Code or on the API when a task needs the most capability, not the most speed. Same interfaces, same tiered pricing structure, just a stronger model underneath. It lands the same week as Sonnet 5, Anthropic's faster mid-tier sibling, giving builders a fresh pair of options across the speed-versus-capability tradeoff without touching existing integration code."
+          },
+          {
+            "title": "Redeploying Fable 5",
+            "url": "https://www.anthropic.com/news/redeploying-fable-5",
+            "source": "Anthropic",
+            "body": "Fable 5 is back online. Anthropic pulled it earlier this cycle over biosecurity concerns and has now redeployed it after tightening the safeguards that screen for dangerous biological content, detailed in a companion post on the specific fixes. If you had access before the pause, it's live again today with the same capabilities plus a new filtering layer sitting in front of it. Worth knowing if you build anything touching life-sciences or chem/bio research: expect more refusals on borderline queries than before the pause, since the new safeguard is tuned conservative."
+          },
+          {
+            "title": "Previewing Ultrafast mode: GPT-5.6 Sol at up to 14X the speed",
+            "url": "https://openai.com/index/previewing-ultrafast",
+            "source": "OpenAI",
+            "body": "OpenAI is previewing a new API service tier called Ultrafast that runs GPT-5.6 Sol up to 14x faster than standard serving, hitting up to 750 output tokens per second. It's powered by Cerebras hardware rather than OpenAI's usual GPU stack -- same GPT-5.6 Sol weights, radically different serving speed, plugged in as a new tier rather than a new model. For anything latency-sensitive -- voice agents, live coding assistants, real-time agent loops -- this is the first time you can get frontier-class OpenAI output at speeds that used to be Cerebras/Groq territory reserved for much smaller models."
+          },
+          {
+            "title": "Introducing Gemini 3.7 Flash",
+            "url": "https://deepmind.google/blog/introducing-gemini-3-7-flash/",
+            "source": "DeepMind",
+            "body": "Google DeepMind shipped Gemini 3.7 Flash today, the fast, cheap sibling in the 3.7 family. It slots in as the default choice when you don't need Gemini 3.7 Pro's full reasoning depth but still want the newer generation's improvements over 3.0 Flash -- lower latency, lower cost per token, same API surface. Worth swapping in for high-volume classification, extraction, or agent-loop steps where 3.0 Flash was previously your go-to, since it's a drop-in model-string change with no other integration work required."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent tooling keeps spreading past coding -- into knowledge graphs, video, and trading.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "106.2k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- plus its docs, SQL schemas, configs, and PDFs -- into a queryable knowledge graph, shipped as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. The pitch against the current wave of RAG-for-code tools: no vector store, no embeddings, no fuzzy retrieval. It's local, deterministic AST parsing, so every edge in the graph traces back to an explainable reason instead of a similarity score. For agents doing large-scale refactors or cross-file reasoning, that determinism matters -- you get the same answer every time you ask, and you can audit why."
+          },
+          {
+            "title": "stablyai/orca",
+            "url": "https://github.com/stablyai/orca",
+            "source": "github.com",
+            "stars": "45.3k",
+            "lang": "TypeScript",
+            "body": "Orca is an ADE (agent development environment) built around running a fleet of coding agents in parallel rather than one at a time. It sits on top of whatever agent you already pay for -- Claude Code, Codex, and others -- and gives you a control surface to fan work out across many agent instances at once, from desktop, mobile, or a VPS. The novel part isn't the agent itself, it's the orchestration layer: treating 'how many agents are running and what is each one doing' as the primary UI, instead of one chat window per task."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "48.1k",
+            "lang": "Python",
+            "body": "OpenMontage turns a coding assistant into a video production studio: 12 production pipelines, 100+ tools, and 700+ agent skill files covering scripting, editing, and rendering. It's positioned as the first open-source agentic video production system, meaning the workflow -- storyboard, shot list, edit, render -- is broken into discrete skills an agent can execute end to end rather than one prompt-to-video call. Useful if you want programmatic control over a video pipeline instead of trusting a single model's black-box generation."
+          },
+          {
+            "title": "HKUDS/Vibe-Trading",
+            "url": "https://github.com/HKUDS/Vibe-Trading",
+            "source": "github.com",
+            "stars": "30.8k",
+            "lang": "Python",
+            "body": "Vibe-Trading packages an LLM-driven trading agent with backtesting and MCP tooling built in, aimed at people who want to describe a strategy in natural language and have an agent implement, test, and run it. It's part of a broader trend of agent frameworks moving out of coding and into domains with real money on the line -- worth a look purely as a template for wiring an LLM agent to a backtesting loop and live execution, even before you'd trust it with your own capital."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's feed cleared the bar -- launches and news, not documented builds.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-08-13",
     "date": "August 13, 2026",
     "title": "AI Pulse",
