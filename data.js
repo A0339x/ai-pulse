@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-08-15",
+    "date": "August 15, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Three flagship models drop on the same day, plus a speed tier that hits 750 tokens/sec",
+    "intro": "Today is a model-release pileup: Anthropic, Google DeepMind, and OpenAI all pushed something out within 48 hours of each other. On GitHub, the fastest-climbing repos aren't wrapper tools -- they're infrastructure plays around agent harnesses, code knowledge graphs, and persistent memory. Nothing in the build-diary queue today was worth your weekend, so that section's short.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Three labs shipped new models on the same day, and one shipped raw speed.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic pushed out Claude Opus 5 today, the new top of the Claude line and the replacement for Opus 4.5 as the model to reach for on hard, long-horizon work. It's live now in the API, the Claude app, and Claude Code, so you can swap the model string and get the upgrade without touching your integration. Anthropic is pitching it at complex agentic tasks -- multi-step coding, research, and tool-use chains where earlier models lost the thread partway through. If you're running Opus 4.5 in production, this is the first model worth benchmarking against it before you migrate."
+          },
+          {
+            "title": "Previewing Ultrafast mode: GPT-5.6 Sol at up to 14X the speed",
+            "url": "https://openai.com/index/previewing-ultrafast",
+            "source": "OpenAI",
+            "body": "OpenAI opened a preview of Ultrafast, a new API service tier that runs GPT-5.6 Sol on Cerebras hardware instead of the standard inference stack. Output tops out around 750 tokens per second -- up to 14x faster than the normal GPT-5.6 Sol tier -- with no change to the model weights or how you call it, just a different service tier flag on the same Responses API. That speed changes what's usable in a UI: voice agents, live coding assistants, and anything with a human staring at a spinner all get meaningfully better. It's a preview, so expect capacity limits and pricing that won't match the standard tier."
+          },
+          {
+            "title": "Introducing Gemini 3.7 Flash",
+            "url": "https://deepmind.google/blog/introducing-gemini-3-7-flash/",
+            "source": "DeepMind",
+            "body": "DeepMind shipped Gemini 3.7 Flash today, the fast, cheap tier of the Gemini 3.7 family. Flash trades some raw capability for lower latency and lower cost per token, which is the tier most builders actually put into production for high-volume features -- classification, extraction, chat at scale -- rather than the flagship Pro model. It's available now through the Gemini API, AI Studio, and Vertex AI. If you're still on Gemini 2.5 Flash or an earlier 3.x build, this is the one to re-run against your eval set before your next pricing or latency review."
+          },
+          {
+            "title": "Bring your spreadsheet data to life with Sheets canvas",
+            "url": "https://blog.google/products-and-platforms/products/workspace/sheets-canvas-for-google-sheets-spreadsheets/",
+            "source": "Google AI",
+            "body": "Google added Sheets canvas, a new AI-generated view inside Google Sheets that turns a raw range of data into an interactive layout -- charts, summaries, visual groupings -- without you building a pivot table or chart by hand. Point it at a range and it composes a canvas from it, which you can keep editing afterward. It targets the gap between a spreadsheet and a dashboard: useful when you need to hand a stakeholder something readable instead of a grid of cells, without exporting to a separate BI tool first."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent harnesses, code graphs, and memory layers are eating the wrapper-repo space.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "106.7k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own coding agent harness, built around the idea that everything -- model routing, tool execution, context management -- should be a swappable plugin rather than baked into the core. It's the same territory as Claude Code and Codex CLI, but fully open, with the plugin ecosystem treated as the actual product. For builders already writing Claude Code or Cursor extensions, the dsh-plugin interface is worth a look as a second target -- write the plugin once, run it on either harness. It's climbing fast, which says something about the appetite for an open, hackable alternative to the closed agent CLIs."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "106.5k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- plus its docs, SQL schemas, configs, and PDFs -- into a queryable knowledge graph, using deterministic AST parsing instead of embeddings. No vector store, no similarity-search guesswork: every edge in the graph is explained, so when the agent says function A calls function B, you can see exactly why. It ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. If you've hit the wall where RAG-over-code gives plausible-but-wrong answers, this is a genuinely different architecture, not just a better embedding model bolted onto the same approach."
+          },
+          {
+            "title": "nexu-io/open-design",
+            "url": "https://github.com/nexu-io/open-design",
+            "source": "github.com",
+            "stars": "86.7k",
+            "lang": "TypeScript",
+            "body": "An open-source alternative to closed AI design tools: a local-first desktop app that turns your coding agent into a design engine. Point Claude Code, Codex, Cursor, or 20+ other CLIs at it via BYOK and it produces real files -- prototypes, landing pages, dashboards, slide decks, images, video -- exportable as HTML, PDF, PPTX, or MP4. The pitch is that design output shouldn't be locked to one vendor's agent; whatever coding agent you already pay for can drive it. Worth a look if you want AI-generated design assets without buying into a separate closed design-tool subscription."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "58.4k",
+            "lang": "Python",
+            "body": "An open-source memory layer for AI agents, built on ChromaDB and exposed over MCP, with published benchmarks backing the claim instead of just asserting it. It's the piece that turns a stateless agent into one that remembers past sessions, decisions, and corrections -- the same problem Claude Code's memory files or ChatGPT's memory solve, but open and self-hosted. For anyone building a long-running agent that needs to persist context across sessions without shipping user data to a vendor, this is a drop-in MCP server rather than a from-scratch RAG pipeline you have to maintain yourself."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's queue documented an actual build end-to-end -- just launches and takes.",
+        "items": []
+      }
+    ],
+    "closing": "See you tomorrow."
+  },
+  {
     "id": "2026-08-14",
     "date": "August 14, 2026",
     "title": "AI Pulse",
