@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-08-16",
+    "date": "August 16, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic drops a new flagship, OpenAI goes ultrafast, and GitHub's climbing charts are all about running agents in fleets",
+    "intro": "Anthropic pushed out Claude Opus 5 today as its new top-of-lineup model, and OpenAI previewed an API tier that runs GPT-5.6 at Cerebras speeds. On GitHub, the pattern this week is orchestration and memory -- tools for running many agents at once and giving them persistent understanding of your codebase, rather than just smarter single agents. Nothing in today's build-diary pile cleared the bar for a real documented workflow, so it's a shipping-and-tooling day.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "New flagship models and a real speed upgrade landed today.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic shipped Claude Opus 5 today, the new flagship sitting above Sonnet 5 and Haiku 4.5 in the Claude 5 lineup. It replaces Opus 4.8 as the model to reach for on the hardest coding, agentic, and reasoning workloads. If you've been running Sonnet 5 for everything because Opus 4.8 wasn't worth the latency and cost premium, Opus 5 is the one to re-benchmark against -- Anthropic is positioning it as the default pick when output quality matters more than speed. Available now through the API and in Claude apps, no waitlist."
+          },
+          {
+            "title": "Previewing Ultrafast mode: GPT-5.6 Sol at up to 14X the speed",
+            "url": "https://openai.com/index/previewing-ultrafast",
+            "source": "OpenAI",
+            "body": "OpenAI is previewing Ultrafast, a new API service tier that runs GPT-5.6 Sol up to 14x faster than the standard endpoint, hitting up to 750 output tokens per second. It's powered by Cerebras hardware rather than GPUs, so this is a genuinely different backend, not a pricing tweak on the same infra. That speed matters for anything latency-bound -- voice agents, live coding assistants, real-time chat UIs where token-by-token streaming is the actual bottleneck. Ultrafast is a separate opt-in tier from the standard GPT-5.6 Sol endpoint, so you choose it per request rather than getting it by default."
+          },
+          {
+            "title": "Introducing Gemini 3.7 Flash",
+            "url": "https://deepmind.google/blog/introducing-gemini-3-7-flash/",
+            "source": "DeepMind",
+            "body": "DeepMind shipped Gemini 3.7 Flash, the fast, cheap tier of the Gemini 3.7 family. Flash models exist for high-volume, low-latency work -- classification, extraction, chat routing -- where you don't need Pro-tier reasoning but still want the current architecture's improvements over last generation. If you're running Gemini 3.7 Pro on tasks that don't actually require it, Flash is the drop-in swap to cut cost and latency without rewriting your API calls. Available now through the Gemini API and AI Studio."
+          },
+          {
+            "title": "Putting sign language AI into users' hands",
+            "url": "https://deepmind.google/blog/putting-sign-language-ai-into-users-hands/",
+            "source": "DeepMind",
+            "body": "DeepMind's new SL2T (sign-language-to-text) model translates sign language into text in real time, and it's now shipping inside actual product features rather than staying a research demo. That's notable because sign language input has had essentially no usable API or model layer while speech-to-text matured for a decade. Worth a look if you're building accessibility tooling, video calling, or captioning products -- SL2T is the first model of its kind to go from lab result to a real, shipped feature for Deaf and hard-of-hearing users."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's stars are about giving agents structure, memory, and scale -- not just smarter chat.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "106.9k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- code, docs, SQL schemas, configs, even PDFs -- into a queryable knowledge graph you point Claude Code, Cursor, Codex, or Gemini CLI at. The pitch is no vector store: it does local, deterministic AST parsing and explains every edge in the graph, so retrieval is a real dependency trace instead of a fuzzy similarity search. It ships as a drop-in /graphify skill. If you've hit the wall where RAG-over-embeddings hands your agent plausible-but-wrong context on a large repo, this is a different bet entirely: structure over similarity."
+          },
+          {
+            "title": "stablyai/orca",
+            "url": "https://github.com/stablyai/orca",
+            "source": "github.com",
+            "stars": "46.3k",
+            "lang": "TypeScript",
+            "body": "Orca is an agent development environment built for running a fleet of coding agents in parallel instead of babysitting one at a time. It wraps whatever agent you already pay for -- Claude Code, Codex, others -- and gives you a desktop, mobile, or VPS surface to manage them as a fleet on your existing subscription rather than a new API bill. The bet: the bottleneck in agentic coding is now orchestration and review, not model quality, so the tooling should manage many concurrent agents instead of optimizing a single chat window."
+          },
+          {
+            "title": "DeusData/codebase-memory-mcp",
+            "url": "https://github.com/DeusData/codebase-memory-mcp",
+            "source": "github.com",
+            "stars": "39.1k",
+            "lang": "C",
+            "body": "This MCP server indexes a codebase into a persistent knowledge graph in milliseconds across 158 languages, claiming sub-millisecond queries and 99% fewer tokens spent than re-reading files every session. It ships as a single static binary with zero dependencies -- no vector DB, no external service to run. The point is giving any MCP-compatible agent (Claude Code, Codex, Aider) fast, persistent code understanding across sessions instead of re-parsing the repo from scratch every time a new context window opens."
+          },
+          {
+            "title": "heygen-com/hyperframes",
+            "url": "https://github.com/heygen-com/hyperframes",
+            "source": "github.com",
+            "stars": "41.2k",
+            "lang": "TypeScript",
+            "body": "Hyperframes renders video from HTML instead of a timeline editor -- write markup and GSAP animations, and it outputs a rendered file through ffmpeg. It's built explicitly for agents: an LLM can generate reliable HTML/CSS/animation code far more consistently than it can drive a traditional NLE's UI, so this gives agents a video output format they're actually good at producing. Useful if you're building anything that needs agent-generated video -- ads, explainers, motion graphics -- without wiring a coding agent up to a real video editor."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing today documented a real end-to-end build worth trying this weekend.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-08-15",
     "date": "August 15, 2026",
     "title": "AI Pulse",
