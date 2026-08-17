@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-08-17",
+    "date": "August 17, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Opus 5 lands, GPT-5.6 gets a nitro button, and Anthropic's watermark starts a fight",
+    "intro": "Three labs dropped new models today: Anthropic's Opus 5, OpenAI's Ultrafast tier for GPT-5.6 Sol, and Google's Gemini 3.7 Flash, all converging on the same fight over speed and cost per call. Anthropic also shipped a watermarking feature for Claude's text output that's already drawing fire on Hacker News. GitHub's trending list this week is all agent infrastructure -- memory, code graphs, and fleet management for anyone running more than one agent at a time.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Three labs, three new models, and one controversial feature that shipped alongside them.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic pushed out Opus 5, the new top of the Claude 5 line, alongside a refreshed Sonnet 5 the same day. It's the first Opus-tier update since 4.8, positioned as Anthropic's most capable model for the hardest reasoning, coding, and long-horizon agent work -- the tasks where Sonnet 5 isn't enough. The release landed in the same batch as hardened biosecurity safeguards and a redeployment of Fable 5, which had been pulled while those safeguards were being fixed. If you've been reaching for Opus 4.8 on your toughest agent runs, this is the upgrade to test first."
+          },
+          {
+            "title": "Claude text watermark",
+            "url": "https://www.anthropic.com/news/claude-text-watermark",
+            "source": "Anthropic",
+            "body": "Anthropic shipped a watermarking scheme for Claude's text output, embedding a detectable signal directly in the model's word choices so AI-generated writing can be identified after the fact, on by default for standard output. The backlash was immediate: Daring Fireball called it \"adulteration\" of the writing itself, and the HN thread pulled 326 comments arguing Anthropic is trading off prose quality to make detection easier. If you're piping Claude output into anything where phrasing matters -- copy, docs, fiction -- it's worth diffing outputs before and after to see what actually changed."
+          },
+          {
+            "title": "Previewing Ultrafast mode: GPT-5.6 Sol at up to 14X the speed",
+            "url": "https://openai.com/index/previewing-ultrafast",
+            "source": "OpenAI",
+            "body": "OpenAI is previewing Ultrafast, a new API service tier that runs GPT-5.6 Sol up to 14x faster than standard serving, hitting up to 750 output tokens per second. It's powered by Cerebras hardware, not OpenAI's usual GPU stack. For latency-sensitive work -- voice agents, live coding assistants, real-time UIs -- this closes the gap that's made smaller, dumber models the default pick when speed mattered more than quality. It's a preview with limited capacity, but it's a real signal OpenAI will mix in third-party silicon to hit speed targets its own infrastructure can't match yet."
+          },
+          {
+            "title": "Introducing Gemini 3.7 Flash",
+            "url": "https://deepmind.google/blog/introducing-gemini-3-7-flash/",
+            "source": "DeepMind",
+            "body": "Google rounded out the Gemini 3.7 family with a Flash tier built for the high-volume, latency-sensitive side of agent work -- the classification, extraction, and tool-calling calls you don't want to pay Pro prices for. It slots in as the default choice for agent loops making dozens of model calls per task where only a few actually need reasoning depth. Landing the same week as OpenAI's Ultrafast preview, it's another sign the frontier labs are now racing on speed and cost per call as hard as they're racing on raw capability."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent infrastructure dominates GitHub this week -- memory, code graphs, and tools for managing more than one agent at once.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "145.0k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness, built around the idea that everything -- models, tools, memory, UI -- is a plugin. It's the framework DeepSeek reportedly runs internally, now public, which matters more than another community wrapper: it's a reference for how a frontier lab actually structures agent execution at scale, not a hobbyist abstraction over an API. If you've been stitching together your own agent loop by hand, this is worth reading as a real production architecture rather than a starter template."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "107.3k",
+            "lang": "Python",
+            "body": "Turns a codebase -- plus its docs, SQL schemas, configs, and PDFs -- into a queryable knowledge graph using deterministic AST parsing instead of embeddings. No vector store, no fuzzy retrieval: every edge in the graph traces back to source and is explained. Ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. If you've fought with RAG over a codebase giving you confidently wrong answers, this is the opposite bet: exact structure over semantic similarity."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "48.5k",
+            "lang": "Python",
+            "body": "Turns a coding agent into a video production studio: 12 production pipelines, 100+ tools, and 700+ skill and production-knowledge files, all agentic. Billed as the first open-source agentic video production system, meaning the agent plans shots and sequences multi-step production work rather than making a single API call to an editing service. Worth a look if you're doing AI video work and are tired of single-shot generation tools that can't handle a real edit."
+          },
+          {
+            "title": "stablyai/orca",
+            "url": "https://github.com/stablyai/orca",
+            "source": "github.com",
+            "stars": "47.0k",
+            "lang": "TypeScript",
+            "body": "An ADE (agent development environment) for running a fleet of coding agents in parallel on your own model subscription, across desktop, mobile, and VPS. It's solving a real problem: once you're running more than two or three agents at once, tracking what each one is doing in a plain terminal stops working. Orca is a management layer on top of your existing agents, not another agent competing with them."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's crop of build posts documented a real end-to-end workflow -- opinions and product launches, not builds.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-08-16",
     "date": "August 16, 2026",
     "title": "AI Pulse",
