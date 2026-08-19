@@ -3,6 +3,111 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-08-19",
+    "date": "August 19, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Claude Opus 5 and Sonnet 5 land together, agents start rendering their own video, and someone drivers a printer nobody else would",
+    "intro": "Anthropic shipped two flagship-tier models on the same day, DeepMind matched with a faster Gemini, and OpenHands quietly fixed one of the most annoying agent failure modes. On GitHub the pattern is agents doing more than chat -- rendering video, mapping codebases without a vector store, running in fleets instead of one thread at a time. And today's best builds show what happens once you point a model at a genuinely specific, hard problem instead of asking it for advice.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two new Claude models land the same day, plus a faster Gemini and a meatier OpenHands release.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic shipped Claude Opus 5, the new top of the Claude 5 lineup, replacing Opus 4.8 as the flagship for hard reasoning, long-horizon agent work, and coding. It landed alongside Sonnet 5, so you get top-tier and mid-tier options released together instead of staggered months apart. If you're running long agentic loops or complex refactors across a large codebase, Opus 5 is the one to point them at -- Sonnet 5 stays the pick for higher-volume, lower-latency work. Both are live now in the API and the Claude apps, no waitlist."
+          },
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Sonnet 5 launched today as Anthropic's new default workhorse, sitting below Opus 5 in the Claude 5 family. It's built for the bulk of day-to-day coding and agent tasks where you don't need Opus-tier reasoning but still want current-generation quality -- IDE autocomplete, PR review bots, high-volume API calls. Pricing and latency put it in straightforward swap-in territory for anyone currently running Sonnet 4.x in production. Available now via the API and in Claude Code, same endpoints, new model string."
+          },
+          {
+            "title": "Introducing Gemini 3.7 Flash",
+            "url": "https://deepmind.google/blog/introducing-gemini-3-7-flash/",
+            "source": "DeepMind",
+            "body": "DeepMind released Gemini 3.7 Flash, the latest fast-and-cheap tier in the Gemini 3 line. It targets high-throughput jobs -- classification, extraction, chat -- where you're trading reasoning depth for speed and cost. If you're already on 3.5 or 3.6 Flash, this is a drop-in upgrade with no new API surface to learn. Worth benchmarking against Sonnet 5 if you're picking a default model for a new high-volume pipeline today, since both are now competing directly on the cheap-and-fast end of the market."
+          },
+          {
+            "title": "OpenHands v1.14.0",
+            "url": "https://github.com/OpenHands/OpenHands/releases/tag/v1.14.0",
+            "source": "OpenHands",
+            "body": "OpenHands 1.14 ships three things worth knowing about: structured error outcomes in its canvas view, so a failed agent run tells you what actually broke instead of a raw stack trace; LLM pre-flight validation that stops you from saving a broken model config before it wastes a run; and a new Git Sync page for managing automations across repos. It reads as a maintenance release, but the pre-flight validation alone kills the classic 'agent silently fails because the endpoint was wrong' debugging loop that eats an afternoon."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Plugin ecosystems, code graphs, and agents that render their own video are pulling stars this week.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "164.7k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness treats everything -- models, tools, memory, even the orchestration loop -- as a swappable plugin instead of hardcoded framework internals. That's the pitch pulling it past 160k stars: instead of forking the framework to change behavior, you write a plugin against one API. It's TypeScript, so it slots into existing JS tooling without friction, and the plugin surface is the whole surface area, which makes it easier to reason about than frameworks with a dozen half-documented extension points. Worth a look if you're tired of fighting a framework's assumptions about how your agent should work."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "108.1k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- docs, SQL schemas, configs, PDFs included -- into a queryable knowledge graph using local deterministic AST parsing instead of a vector store. Every edge in the graph is explained, so asking 'what calls this function' gets a real answer instead of an embedding-similarity guess. It ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. For anyone whose agent keeps hallucinating imports or missing cross-file dependencies, it's a more grounded alternative to RAG-over-code, and it runs entirely offline."
+          },
+          {
+            "title": "stablyai/orca",
+            "url": "https://github.com/stablyai/orca",
+            "source": "github.com",
+            "stars": "48.7k",
+            "lang": "TypeScript",
+            "body": "Orca is an ADE -- agent development environment -- built for running a fleet of coding agents in parallel instead of one chat thread at a time. It works against your own subscription rather than metering API calls, and it runs on desktop, mobile, and VPS, so you can kick off a batch of agents from your phone and check results later. The real idea is treating many concurrent agents against different tasks as the default unit of work, not a single conversation. Useful once you're past toy projects and running agents against a real backlog."
+          },
+          {
+            "title": "heygen-com/hyperframes",
+            "url": "https://github.com/heygen-com/hyperframes",
+            "source": "github.com",
+            "stars": "41.6k",
+            "lang": "TypeScript",
+            "body": "Hyperframes lets an agent write HTML and get back rendered video -- it wires ffmpeg and GSAP under an HTML/CSS/JS authoring surface, so any coding agent that can write a webpage can now produce animated video without touching a video editor's API. That's a genuinely different route to motion graphics: instead of prompting a diffusion video model, you're writing declarative markup an agent already knows how to write, and the framework handles frame-accurate rendering. Good fit for agent-generated explainer videos or social clips without a video-gen model anywhere in the loop."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Three builds that show their work -- a shrunk model, a local code reviewer, and a driver nobody else would write.",
+        "items": [
+          {
+            "title": "I shrank DeepSeek V4 Flash to 57GB and it wrote a compiler on my Mac",
+            "url": "https://huggingface.co/steadfastgaze/DeepSeek-V4-Flash-0731-Coder-56.8GB-MoEspressoV2",
+            "source": "Hacker News",
+            "author": "hacklas",
+            "body": "hacklas quantized DeepSeek V4 Flash down to a 56.8GB build small enough to run locally on a Mac, then used it as a stress test to write a working compiler. The interesting part isn't the compiler itself -- it's the proof that a heavily compressed open-weight model still holds enough coherence for a genuinely hard, long-context coding task and not just chat-tier autocomplete. The quantized weights are up on Hugging Face, so the whole thing is reproducible: pull the model, point it at your own hard problem, see where it breaks instead of taking the compiler claim on faith."
+          },
+          {
+            "title": "I canceled my AI code reviewer and wrote a free local one",
+            "url": "https://github.com/mukundzha/avouch",
+            "source": "Hacker News",
+            "author": "mukundzha6",
+            "body": "Tired of paying for a hosted AI code review bot, mukundzha6 built Avouch, a local alternative that runs review passes without sending diffs to a third-party service or racking up a subscription bill. It's a direct swap-in for the SaaS reviewers most teams default to for PR review -- same job, running on your own machine against your own model of choice. Because it's open source, the actual review prompts and pipeline are inspectable instead of hidden behind an API, which is the real payoff if you've ever wondered exactly what your paid reviewer is asking the model to check."
+          },
+          {
+            "title": "Claude writing a macOS driver for my obscure HP printer built only for Windows",
+            "url": "https://twitter.com/kuberwastaken/status/2089377982536388964",
+            "source": "Hacker News",
+            "author": "porridgeraisin",
+            "body": "kuberwastaken had an HP printer with drivers for Windows only, nothing for macOS anywhere. Instead of giving up or buying a new printer, they had Claude reverse-engineer the print protocol and write a working macOS driver from scratch. It's the kind of long-tail hardware problem no vendor will ever fix and no Stack Overflow thread covers -- exactly the gap agentic coding is good at closing, because the model can iterate against the actual device's behavior instead of relying on documentation that was never written in the first place."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the pulse for today -- see you tomorrow."
+  },
+  {
     "id": "2026-08-17",
     "date": "August 17, 2026",
     "title": "AI Pulse",
