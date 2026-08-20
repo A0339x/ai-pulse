@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-08-20",
+    "date": "August 20, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Two new flagship Claudes ship, agent fleets take over GitHub, and an AI autofix bites back.",
+    "intro": "Two flagship Claudes and a Gemini refresh headline a heavy shipping day, while GitHub's climbing repos lean hard into agent fleets and codebase intelligence over yet another chatbot wrapper. On the build side, a security writeup on an AI-generated CI/CD fix is the one worth reading closely before you trust your own agent's autofix suggestions.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two new flagship Claudes land alongside a Gemini refresh and OpenAI's privacy push.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic shipped Opus 5 today, the new top of the Claude line and the replacement for Opus 4.8. It's the model to reach for when you need the deepest reasoning Anthropic offers -- long-horizon agentic tasks, hard math and code, anything where you'd rather wait a beat and get it right than get a fast wrong answer. Opus 5 lands the same day as a refreshed Sonnet 5, so the API now runs an entirely new generation across both the flagship and workhorse tiers. If you've been running agents on Opus 4.x, this is the upgrade to test against your evals before switching production traffic over."
+          },
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Sonnet 5 also went out today, the mid-tier Claude that does most of the actual work in most people's pipelines -- coding agents, high-volume API calls, anything where Opus-level reasoning is overkill for the cost. Paired with Opus 5's launch, the entire current Claude lineup just turned over in one day. If your agent harness pins a model version, this is worth a rerun of your eval suite: Sonnet updates have historically shifted tool-calling behavior even when the headline benchmarks look similar."
+          },
+          {
+            "title": "Introducing Gemini 3.7 Flash",
+            "url": "https://deepmind.google/blog/introducing-gemini-3-7-flash/",
+            "source": "DeepMind",
+            "body": "DeepMind pushed out Gemini 3.7 Flash, the next point release in Google's fast-and-cheap model tier. Flash models are built for latency- and cost-sensitive work -- high-volume classification, chat frontends, agent sub-steps that don't need frontier reasoning -- and 3.7 slots in as the new default for anyone building on that tier. If you're running Gemini Flash in production, swap in 3.7 and check your cost and latency numbers; that's the whole value proposition of the Flash line."
+          },
+          {
+            "title": "Offering Zero Data Retention for frontier models",
+            "url": "https://openai.com/index/offering-zero-data-retention-for-frontier-models",
+            "source": "OpenAI",
+            "body": "OpenAI reaffirmed Zero Data Retention for eligible API customers and previewed something new: Private Safety Processing, a way to run OpenAI's abuse and safety monitoring on your requests without OpenAI retaining or reading the underlying data. That's the piece enterprises have been asking for -- safety monitoring and data privacy have mostly been framed as a tradeoff, and this is OpenAI's attempt to decouple them. If your org has been blocked from using frontier OpenAI models over data retention policy, this is the update to take back to your compliance team."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "AST-parsing and agent-fleet tools are pulling ahead of yet another chat wrapper this week.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "108.5k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- docs, SQL schemas, configs, PDFs and all -- into a queryable knowledge graph, and it does it with local, deterministic AST parsing instead of a vector store. That's the interesting part: no embeddings, no similarity-search fuzziness, every edge in the graph is explained and traceable back to actual code structure. It ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI, so an agent can ask precise structural questions about a repo -- what calls this function, what schema backs this table -- instead of hoping a RAG retrieval happened to surface the right chunk."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "49.1k",
+            "lang": "Python",
+            "body": "OpenMontage bills itself as the first open-source agentic video production system, and the scope backs that up: 12 production pipelines, 100+ tools, and 700+ agent skill and production-knowledge files that turn a coding assistant into a full video studio. Instead of one model generating a clip, an agent orchestrates the actual production process -- storyboarding, editing, rendering -- the way a small studio would divide the work. Worth a look if you've been stitching together separate text-to-video, editing, and rendering tools by hand."
+          },
+          {
+            "title": "stablyai/orca",
+            "url": "https://github.com/stablyai/orca",
+            "source": "github.com",
+            "stars": "49.6k",
+            "lang": "TypeScript",
+            "body": "Orca is an ADE -- agent development environment -- for running a fleet of coding agents in parallel instead of babysitting one at a time. It works with your existing subscriptions (Claude Code, Codex, whatever you're already paying for) rather than requiring its own API keys, and it's available on desktop, mobile, and VPS, so you can kick off a batch of agents from your phone and check in later. The novel bit is treating parallel agents as the default unit of work, not a power-user hack on top of a single-agent tool."
+          },
+          {
+            "title": "esengine/DeepSeek-Reasonix",
+            "url": "https://github.com/esengine/DeepSeek-Reasonix",
+            "source": "github.com",
+            "stars": "34.9k",
+            "lang": "Go",
+            "body": "Reasonix is a DeepSeek-native coding agent built around a specific technical bet: prefix-cache stability. Most coding agents burn cache on every turn because their context shifts shape between calls, which quietly inflates cost on long sessions. Reasonix is engineered to keep the prompt prefix stable so the cache actually holds -- the pitch is 'leave it running' rather than the usual open-close-reopen agent loop. If your coding agent sessions run for hours and your token bill shows it, this is a narrower, sharper answer than most general-purpose agent CLIs."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One build story, one cautionary tale about what AI-written fixes can do in production.",
+        "items": [
+          {
+            "title": "I canceled my AI code reviewer and wrote a free local one",
+            "url": "https://github.com/mukundzha/avouch",
+            "source": "Hacker News",
+            "author": "mukundzha6",
+            "body": "The author was paying for a hosted AI code review tool, got annoyed at the recurring bill and the fact that their diffs were leaving the machine, and built a local replacement instead: Avouch, open source on GitHub. The framing is the useful part -- it's not 'AI code review is bad,' it's 'here's what I actually needed and it didn't require a subscription or sending code to a third party.' The repo is small enough to read in one sitting, so you can see exactly how it structures the review prompt, what context it feeds the model, and where it draws the line between automated comments and a human still needing to look. If you're already paying for a hosted reviewer, it's worth comparing what you're using against what a weekend build gets you."
+          },
+          {
+            "title": "AI-Generated GitHub Copilot \"Autofix\" Allowed Compromise of Snowflake's Jira",
+            "url": "https://www.wiz.io/blog/red-agent-snowflake-copilot-cicd-bug",
+            "source": "Hacker News",
+            "author": "galnagli",
+            "body": "Wiz's red team traced a real compromise back to a fix that Copilot's Autofix feature generated and a human merged without enough scrutiny -- the AI-suggested patch opened a path into CI/CD that eventually led to Snowflake's internal Jira being reachable. It's the flip side of every 'I shipped a feature with AI in a weekend' post: a full writeup of what an AI-generated change actually did once it hit a real pipeline, not just what it looked like in the diff. If your team has Autofix or similar AI-suggested-fix tools wired into CI, this is the concrete case for why those PRs still need the same review bar as anything else -- arguably higher, since the failure mode is 'looked reasonable, wasn't.'"
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-08-19",
     "date": "August 19, 2026",
     "title": "AI Pulse",
