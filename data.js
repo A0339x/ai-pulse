@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-08-21",
+    "date": "August 21, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Two new Claude models, a paused model comes back, and agent plugins hit 178k stars",
+    "intro": "Anthropic drops Opus 5 and Sonnet 5 the same day it quietly redeploys Fable 5 with tightened biosafety filters -- a loaded morning even by their standards. On GitHub, agent tooling keeps eating new categories: plugin architectures, code knowledge graphs, and agents that can watch the whole internet for you. And if you've ever wanted Claude's output without the throat-clearing, someone built exactly that.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two new Claude models land, a paused model comes back with fixes, and inference speed gets a real bump.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic shipped Opus 5, the new top of the Claude line, alongside Sonnet 5 as the faster, cheaper sibling. Opus 5 replaces Opus 4.x as the flagship model available today through the API, Claude apps, and Claude Code -- same interfaces, no migration work beyond swapping the model string. Anthropic is positioning it for the hardest reasoning and coding tasks, with Sonnet 5 handling everything that doesn't need the extra horsepower. If you're already on Claude Code or the API, both models are live now, not gated behind a waitlist."
+          },
+          {
+            "title": "Redeploying Fable 5",
+            "url": "https://www.anthropic.com/news/redeploying-fable-5",
+            "source": "Anthropic",
+            "body": "Fable 5 is back. Anthropic pulled it back for extra review after flagging biosecurity risk in its outputs, and is now redeploying it with tightened safeguards specifically around biological weapons uplift -- filtering and classifier changes rather than a full retrain. It's a rare case of a lab shipping a model, yanking it, and re-shipping it with the fix documented instead of quietly patching in the background. If you had access before the pause, it's back in rotation now under the same account, no separate signup required."
+          },
+          {
+            "title": "Replit expands access to software creation with GPT-5.6 Luna",
+            "url": "https://openai.com/index/replit",
+            "source": "OpenAI",
+            "body": "Replit turned on Free Mode today, powered by GPT-5.6 Luna, so you can build and ship an app without watching a token meter. Previously every generation ate into a paid budget; Free Mode removes that friction for anyone starting a new project, and Luna is tuned for the kind of incremental, back-and-forth edits app-building actually looks like versus one-shot code generation. It's aimed squarely at the on-ramp -- no credit card, no plan selection, just open a prompt and start building. Existing paid tiers still exist for heavier, sustained use."
+          },
+          {
+            "title": "Up to 3.2x Faster Inference with LFM2.5-DSpark",
+            "url": "https://huggingface.co/blog/LiquidAI/lfm25-dspark",
+            "source": "Hugging Face",
+            "body": "Liquid AI's LFM2.5-DSpark claims up to 3.2x faster inference than the base LFM2.5 line, using sparse activation to skip computation on parts of the network that don't matter for a given token. Weights are on Hugging Face now, in the same size classes as the rest of the LFM2.5 family, so it's a drop-in swap if you're already running Liquid's models on-device or at the edge. The pitch is squarely latency-sensitive deployment -- mobile, embedded, anywhere a 3x speedup changes what's feasible to run locally instead of round-tripping to a server."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent infrastructure keeps eating adjacent categories -- plugins, code intelligence, web access, even video.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "178.6k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness treats everything -- tools, memory, planning, even the chat loop itself -- as a hot-swappable plugin under a system it calls Cordis. Instead of a monolithic agent framework with fixed hooks, you compose an agent out of dsh-plugins and rewrite any piece without touching the rest. It's shot to the top of GitHub's trending list in days, presumably because it's the closest thing yet to a plugin standard for agent internals rather than just agent tools. Worth a look if you've hit the ceiling of what LangChain- or AutoGPT-style frameworks let you customize."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "108.9k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- plus its docs, SQL schemas, configs, and PDFs -- into a queryable knowledge graph, shipped as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. The novel part: it's all local, deterministic AST parsing, no vector store, no embeddings, and every edge in the graph comes with an explanation of why it's there. That trades semantic fuzziness for precision -- exact call graphs and schema relationships instead of nearest-neighbor guesses. Useful if you've been burned by RAG-over-codebase setups that hallucinate connections that aren't really there."
+          },
+          {
+            "title": "Panniantong/Agent-Reach",
+            "url": "https://github.com/Panniantong/Agent-Reach",
+            "source": "github.com",
+            "stars": "73.7k",
+            "lang": "Python",
+            "body": "Agent-Reach gives your agent one CLI to read and search Twitter, Reddit, YouTube, GitHub, Bilibili, and XiaoHongShu, with zero API fees -- it scrapes rather than calling official APIs, sidestepping the usual per-platform key juggling and rate limits. That's the novel bit: a single interface instead of five SDKs and five auth flows for an agent that needs to look things up across the actual internet, not just a search API. Fits naturally into research or trend-monitoring agents that need broader web coverage than one search tool provides."
+          },
+          {
+            "title": "heygen-com/hyperframes",
+            "url": "https://github.com/heygen-com/hyperframes",
+            "source": "github.com",
+            "stars": "41.9k",
+            "lang": "TypeScript",
+            "body": "Hyperframes lets you write plain HTML and CSS with GSAP animations and get back a rendered video file, via ffmpeg under the hood. The point isn't a new animation library for humans -- it's a video framework designed for agents to generate: an LLM is far better at writing HTML/CSS than wrangling a traditional video-editing API, so Hyperframes meets it where it's strong. From HeyGen, which tracks with their AI-video focus. If you're building anything that needs an agent to produce short animated clips or motion graphics on demand, this collapses that into a familiar web stack."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One post rethinks the coding workflow itself, one just wants Claude to stop clearing its throat.",
+        "items": [
+          {
+            "title": "Show HN: Huzzah -- a novel approach to coding with AI",
+            "url": "https://www.danielvaughn.dev/posts/huzzah/",
+            "source": "Hacker News",
+            "author": "danielvaughn",
+            "body": "Daniel Vaughn's write-up lays out a coding workflow built around treating the AI as a junior pair who needs explicit scaffolding rather than open-ended prompts -- structured specs and constraints handed over before any code gets written, with the human reviewing at defined checkpoints instead of babysitting every diff. It hit 325 points and 171 comments largely because commenters pushed back hard on whether the extra process overhead is worth it versus just prompting directly, which makes the comment thread worth reading alongside the post. If you're frustrated with AI coding sessions that drift or need constant correction, this is a concrete alternative structure to try."
+          },
+          {
+            "title": "Vomit: Clean up Claude 5's token output with a separate LLM",
+            "url": "https://github.com/zachahn/vomit",
+            "source": "Hacker News",
+            "author": "zachahn",
+            "body": "Vomit takes Claude 5's raw output -- including the meta-commentary, hedging, and filler it tends to wrap around the actual answer -- and runs it through a second, smaller LLM pass whose only job is stripping that out and returning the clean result. It's a two-model pipeline: Claude 5 for generation, then a cheap cleanup model as a dedicated post-processing step, rather than trying to prompt the noise away at the source. 263 points and 255 comments on HN, with a lot of the debate centered on whether this is a real fix or a band-aid for prompting that should just be tightened instead. The repo is small enough to read and adapt in an afternoon."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-08-20",
     "date": "August 20, 2026",
     "title": "AI Pulse",
