@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-08-23",
+    "date": "August 23, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic ships Opus 5, Replit goes free, and agents get their own video renderer",
+    "intro": "Anthropic completes the Claude 5 lineup with Opus 5 while OpenAI removes the token meter from Replit entirely. On GitHub, the interesting momentum isn't more coding-agent wrappers -- it's infrastructure for running many agents at once and giving them new outputs to produce, like rendered video. Pay closest attention to the two workflow write-ups below if you're deciding which agent CLI to make your daily driver.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new flagship model, a free on-ramp for builders, and a real speed win for edge models.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic ships Opus 5, the new top-end model in the Claude 5 lineup that already includes Sonnet 5 and Fable 5. It's positioned as the deepest single-pass reasoning and long-horizon-agent option, not the cheapest one -- the model to reach for on the toughest coding or research task, not the everyday one. Available today through the API, the Claude apps, and Claude Code. If you've been running Opus 4.8 for your hardest problems, this is the direct upgrade path: same tier, new ceiling."
+          },
+          {
+            "title": "Replit expands access to software creation with GPT-5.6 Luna",
+            "url": "https://openai.com/index/replit",
+            "source": "OpenAI",
+            "body": "Replit launches Free Mode, letting anyone build and ship software without watching a token meter, powered by OpenAI's new GPT-5.6 Luna model. Previously, turning an idea into a working app on Replit meant budgeting for API costs before you'd validated anything; Free Mode removes that friction for a slice of usage, aimed squarely at hobbyists and first-timers who'd otherwise bounce off the pricing page. If you already pay for Replit or bring your own key, nothing changes -- this is a new on-ramp, not a replacement tier."
+          },
+          {
+            "title": "Up to 3.2x Faster Inference with LFM2.5-DSpark",
+            "url": "https://huggingface.co/blog/LiquidAI/lfm25-dspark",
+            "source": "Hugging Face",
+            "body": "Liquid AI's LFM2.5-DSpark lands with up to 3.2x faster inference than the prior LFM2.5 build, weights live on Hugging Face today. The speedup comes from a sparser decode path rather than plain quantization, so it should hold accuracy better than a straight compression pass would. For anyone running LFM2.5 on edge or on-device deployments, this is a direct swap-in worth benchmarking today if latency -- not quality -- has been your actual bottleneck."
+          },
+          {
+            "title": "OpenHands v1.15.0",
+            "url": "https://github.com/OpenHands/OpenHands/releases/tag/v1.15.0",
+            "source": "All-Hands-AI / OpenHands",
+            "body": "OpenHands 1.15.0 adds a getting-started checklist in the sidebar, a Files view that finally shows the workspace path, and a new automations catalog that installs whole script bundles instead of one-off snippets. Individually small, but together they close the gap between cloning the repo and actually working in it -- the automations catalog in particular means you can pull in a maintained bundle (a lint-and-test pipeline, say) instead of hand-rolling one every time. Update today if OpenHands is your daily agent harness."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's stars go to infrastructure for running agents at scale, not another chat wrapper.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "186.6k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness treats every capability -- tool use, memory, sub-agents, even UI chrome -- as a hot-swappable plugin under a \"cordis\" plugin runtime. Instead of forking the harness to add a custom tool or model backend, you drop in a plugin and it composes with everything already installed. That's the pitch pulling in stars this fast: a harness built to be extended rather than customized-by-fork, which starts to matter once you're running more than one agent stack in production."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "109.7k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- docs, SQL schemas, configs, PDFs included -- into a queryable knowledge graph using deterministic local AST parsing, no vector store or embeddings involved. Ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. The pitch against RAG: every edge in the graph is explained, so you can see why two nodes are connected, and results are reproducible instead of similarity-search fuzzy. Worth a look if you've been fighting stale or hallucinated context from vector-store RAG on a large repo."
+          },
+          {
+            "title": "stablyai/orca",
+            "url": "https://github.com/stablyai/orca",
+            "source": "github.com",
+            "stars": "51.5k",
+            "lang": "TypeScript",
+            "body": "Orca is an agent development environment built around running a fleet of coding agents in parallel rather than one at a time. Bring your own subscription -- Claude Code, Codex, whatever -- and Orca handles orchestration across desktop, mobile, and VPS, so you can kick off several agents against different branches or tasks and check in from your phone. The bet: once agents are reliable enough to run unsupervised, the bottleneck shifts from writing better prompts to managing several agents at once."
+          },
+          {
+            "title": "heygen-com/hyperframes",
+            "url": "https://github.com/heygen-com/hyperframes",
+            "source": "github.com",
+            "stars": "42.2k",
+            "lang": "TypeScript",
+            "body": "Hyperframes renders video from HTML -- write markup and CSS animations (GSAP under the hood) and it outputs an actual video file via ffmpeg, no screen recording or manual edit pass required. It's explicitly built for agents: an LLM can generate the HTML/CSS for a scene the same way it generates a webpage, and hyperframes turns that straight into a render. That makes programmatic video generation -- explainers, motion graphics, ad variants -- a text-generation problem instead of a timeline-editing one."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Two real workflow logs: what tools they used, what broke, and what they changed because of it.",
+        "items": [
+          {
+            "title": "A week of using Codex more than Claude",
+            "url": "https://allaboutcoding.ghinda.com/a-week-of-using-codex-more-than-claude/",
+            "source": "Hacker News",
+            "author": "speckx",
+            "body": "A developer logs a full work week using OpenAI's Codex CLI as the daily driver instead of Claude Code, switching mid-project rather than running a controlled side-by-side. The write-up tracks where Codex held up -- multi-file refactors, longer background tasks -- and where it fell short, including moments that needed a manual course-correct Claude Code's session handling would've caught automatically. The value isn't a verdict, it's the log format: specific tasks, specific failures, specific workarounds, day by day, so you can weigh it against your own stack instead of trusting a benchmark's score. If you've been on one agent CLI exclusively, it's a solid checklist of what to watch for before switching."
+          },
+          {
+            "title": "Show HN: Huzzah -- a novel approach to coding with AI",
+            "url": "https://www.danielvaughn.dev/posts/huzzah/",
+            "source": "Hacker News",
+            "author": "danielvaughn",
+            "body": "A solo developer documents a coding approach he calls Huzzah, built after getting frustrated with the standard describe-the-feature-then-review-the-diff loop most agent tools default to. The post walks through the actual mechanics -- how he structures the back-and-forth with the model, where he deliberately keeps a human in the loop versus letting the agent run unsupervised, and which parts of a typical feature build he stopped delegating after they kept going wrong. It reads as a workflow post-mortem more than a pitch: what he tried first, what broke, and the specific adjustment that fixed it."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-08-21",
     "date": "August 21, 2026",
     "title": "AI Pulse",
