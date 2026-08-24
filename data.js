@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-08-24",
+    "date": "August 24, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Two new Claude models drop together, agent infrastructure keeps eating GitHub, and nothing on Built With AI clears the bar today",
+    "intro": "Anthropic's the story on the shipping side -- Opus 5 and Sonnet 5 landed the same day, a full lineup refresh rather than a single flagship drop. GitHub's momentum is all agent plumbing: harnesses, codebase graphs, memory layers, none of it wrapper-around-an-SDK stuff. Skip Built With AI today -- the HN queue was roadmaps and news, not workflows worth replicating.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Anthropic refreshes its whole model line in one day, and the efficiency race keeps moving elsewhere.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic pushed out Claude Opus 5, the new top of the Claude 5 lineup, replacing Opus 4.x as the model to reach for on the hardest reasoning, coding, and long-horizon agent work. It's live now in the API, Claude Console, and the consumer apps -- no waitlist. If you're running Opus 4.1 or 4.5 in production, this is a straight swap: same endpoints, new model string. Expect it to show up fast as the default for agentic coding harnesses and research assistants that already lean on Claude for multi-step tool use."
+          },
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Sonnet 5 landed alongside Opus 5, taking over as Anthropic's price-to-performance pick -- the model most people actually build on day to day. It's positioned as the new default for Claude Code and third-party agent frameworks that need fast, cheap tool-calling without dropping down to Haiku. If your app currently points at Sonnet 4.x, swapping the model string is the whole migration; nothing else about the API changed. Worth benchmarking against your existing prompts before flipping production traffic -- reasoning style shifts between model generations even when the interface doesn't."
+          },
+          {
+            "title": "Replit expands access to software creation with GPT-5.6 Luna",
+            "url": "https://openai.com/index/replit",
+            "source": "OpenAI",
+            "body": "Replit's new Free Mode runs on GPT-5.6 Luna and strips out the token-cost anxiety that's kept casual builders from touching AI coding tools -- you can prompt your way to a working app without watching a usage meter. It's aimed at non-developers: describe what you want, Luna handles scaffolding, hosting, and iteration inside Replit's existing environment. For technical readers this matters less as a tool upgrade and more as a signal -- OpenAI is pushing Luna into consumer-grade, cost-free tiers instead of gating capability behind metered API access."
+          },
+          {
+            "title": "Up to 3.2x Faster Inference with LFM2.5-DSpark",
+            "url": "https://huggingface.co/blog/LiquidAI/lfm25-dspark",
+            "source": "Hugging Face",
+            "body": "Liquid AI shipped LFM2.5-DSpark, a speed-tuned variant of their LFM2.5 line -- up to 3.2x faster inference than the base model on the benchmarks in the release. Weights are on Hugging Face now, aimed at teams running models on-device or at the edge where latency budgets are tight. If you've been eyeing Liquid's architecture for local deployment but found LFM2.5 too slow for real-time use, DSpark is the version to try -- same model family, notably less waiting."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent infrastructure keeps eating GitHub -- plugin harnesses, codebase graphs, and memory layers all climbing fast this week.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "190.5k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness treats everything -- tools, memory, planners, even the UI -- as a plugin, built on their dsh/Cordis plugin system instead of a fixed agent loop. The pitch: instead of forking a framework to change how your agent thinks, you swap plugins. It's climbing hard because it's coming straight from the lab that trained the models, and because 'everything is a plugin' is a genuinely different bet than the LangChain-style fixed-pipeline agents most of the ecosystem still ships. Worth a look if you're tired of rewriting agent scaffolding every time you change providers."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "110.0k",
+            "lang": "Python",
+            "body": "Graphify turns a whole codebase -- docs, SQL schemas, configs, PDFs included -- into a queryable knowledge graph using local, deterministic AST parsing instead of embeddings and a vector store. Every edge comes with an explanation of why it exists, which makes it auditable in a way vector search isn't. Ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. The novel bit is skipping RAG entirely for code understanding: deterministic parsing means the same query returns the same graph every time, no embedding drift, no re-indexing surprises."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "58.6k",
+            "lang": "Python",
+            "body": "MemPalace bills itself as the best-benchmarked open-source memory system for AI agents, built on ChromaDB and exposed over MCP so any agent framework can plug into it. Persistent memory is the piece most agent stacks still bolt on badly -- either everything gets crammed into context or nothing survives between sessions. MemPalace's angle is treating memory as its own benchmarked subsystem rather than an afterthought, with published numbers behind the retrieval-quality claims instead of just 'it remembers things.' Free and self-hostable -- worth trying if your agents currently forget everything on restart."
+          },
+          {
+            "title": "heygen-com/hyperframes",
+            "url": "https://github.com/heygen-com/hyperframes",
+            "source": "github.com",
+            "stars": "42.4k",
+            "lang": "TypeScript",
+            "body": "HyperFrames renders video from HTML -- write markup and GSAP animations, point it at the renderer, get an MP4 out via ffmpeg. That's a deliberately agent-friendly design: LLMs are good at writing HTML and CSS, bad at operating traditional video-editing timelines, so HyperFrames meets them where they're strong. From HeyGen, it's a genuinely different approach to programmatic video than the usual 'control After Effects via script' route -- no proprietary project format, no editor UI to reverse-engineer, just markup in and rendered frames out."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's queue documented a real end-to-end build -- roadmaps, news, and launches, not workflows.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-08-23",
     "date": "August 23, 2026",
     "title": "AI Pulse",
