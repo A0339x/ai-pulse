@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-08-25",
+    "date": "August 25, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic re-tops its lineup with two new Claude models, and GitHub's agent scene branches into video and knowledge graphs",
+    "intro": "Anthropic dropped Opus 5 and Sonnet 5 on the same day, a full flagship refresh rather than a single model bump. OpenAI kept pushing GPT-5.6 into more surfaces -- Kiro and a free tier on Replit. On GitHub, the interesting repos this week aren't more SDK wrappers, they're agents doing genuinely different jobs: building knowledge graphs, rendering video, running production pipelines.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Anthropic re-tops its whole lineup while OpenAI keeps pushing GPT-5.6 into every surface it can reach.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic replaced the top of its lineup today with Opus 5, the new flagship in the Claude 5 family. It's live now in the API, Claude.ai, and Claude Code, sitting above Sonnet 5 as the model to reach for on the hardest reasoning and agentic work -- long-horizon coding tasks, deep research loops, anything where you'd trade latency for correctness. Anthropic shipped it alongside Sonnet 5, so this is a full-lineup refresh, not a single model drop. If you've been running agents on Opus 4.1, this is the upgrade path -- worth re-testing your harness against it before assuming prompts port over unchanged."
+          },
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Sonnet 5 lands as the new mid-tier workhorse, the model most Claude Code and API users will actually run day to day. It ships the same day as Opus 5, positioned as the fast, cheap option for everyday coding and agent loops where you don't need Opus-tier reasoning. If Sonnet 4.5 was your daily driver, Sonnet 5 is the direct swap -- worth benchmarking your existing prompts and tool-use flows against it this week, since refreshes this size tend to shift behavior on edge cases even when the headline capability jump looks incremental."
+          },
+          {
+            "title": "Advancing price-performance for developers with GPT-5.6 in Kiro",
+            "url": "https://openai.com/index/gpt-5-6-in-kiro",
+            "source": "OpenAI",
+            "body": "GPT-5.6 is now the model behind Kiro, OpenAI's agentic dev environment, with the pitch built specifically around price-performance rather than raw capability. It runs the full loop -- planning, building, reviewing, and testing code -- inside Kiro's existing interface, so nothing changes about how you use the tool except which model is doing the work. For teams already on Kiro, it's a straight upgrade with no migration. For anyone comparing agentic coding environments on cost per completed task, Kiro just got cheaper to justify."
+          },
+          {
+            "title": "Replit expands access to software creation with GPT-5.6 Luna",
+            "url": "https://openai.com/index/replit",
+            "source": "OpenAI",
+            "body": "Replit launched Free Mode today, letting anyone build software on the platform without watching a token meter, powered by a new variant called GPT-5.6 Luna. It's aimed at people who've been scared off agentic coding tools by unpredictable usage-based billing -- real app-building capability with the cost anxiety removed. The interesting part isn't the free tier itself, it's Luna: a GPT-5.6 variant apparently tuned enough on cost that Replit is willing to bet a pricing model on it. Worth a look if you've been Replit-curious but pricing kept you out."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "The repos gaining ground this week skip the SDK-wrapper pattern for harder, weirder problems.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "194k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's agent harness treats everything -- tools, memory, routing, even the core loop -- as a swappable plugin, built around a spec it calls 'cordis' (dsh-plugin). Instead of forking the harness to change agent behavior, you write a plugin and drop it in. That's the pitch that's pushed it past 190k stars: it's less a coding agent and more a chassis for building your own, which matters once you've hit the ceiling of what Claude Code or Cursor's extension points let you customize. Worth a look if you're building agent infrastructure rather than just using one."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "110k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- plus its docs, SQL schemas, configs, and PDFs -- into a queryable knowledge graph, no vector store involved. It's a deterministic local AST parser that explains every edge in the graph, so you can actually audit why it thinks two pieces of code are related instead of trusting a similarity score. Ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. If your agent keeps hallucinating relationships between files in a large repo, this is a more legible alternative to RAG-over-embeddings for codebase context."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "50.2k",
+            "lang": "Python",
+            "body": "OpenMontage bolts a full agentic video production system onto your existing coding assistant -- 12 production pipelines, over 100 tools, and 700-plus agent skill and production-knowledge files covering things like shot composition and pacing. Pitched as the first open-source system of its kind, it turns Claude, Cursor, or Copilot into a video studio, from raw or generated footage through to an edited cut. The novelty isn't any single tool, it's the depth of domain knowledge encoded as skills -- the most complete attempt yet at handing an agent a real creative production pipeline instead of a single ffmpeg call."
+          },
+          {
+            "title": "heygen-com/hyperframes",
+            "url": "https://github.com/heygen-com/hyperframes",
+            "source": "github.com",
+            "stars": "42.6k",
+            "lang": "TypeScript",
+            "body": "Hyperframes flips video generation on its head: instead of asking a model to output pixels, you write HTML and it renders to video, using ffmpeg and GSAP for animation. That's deliberately agent-friendly -- LLMs are far better at writing HTML/CSS/JS than they are at producing video directly, so this gives them a rendering target they're already good at. It's a framework, not a finished product, meant to be built on top of. If you're wiring an agent up to produce motion graphics or animated data viz, this is a much more controllable path than prompting a video model and hoping."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One weekend build stood out for actually showing its work.",
+        "items": [
+          {
+            "title": "I built a low-latency AI companion that plays Skyrim with me",
+            "url": "https://pantel.is/projects/ai-gaming-companion/",
+            "source": "Hacker News",
+            "author": "pantelisk",
+            "body": "pantelisk wired a real-time voice companion into Skyrim -- a co-op partner that watches game state, talks back, and reacts fast enough to feel like a person in the room instead of a laggy chatbot. The hard part isn't the LLM, it's the pipeline around it: shaving latency out of speech-to-text, keeping the model's context grounded in what's actually happening on screen through game hooks, and getting text-to-speech out the door fast enough to hold a conversation mid-combat. It's the kind of build that exposes exactly where 'real-time AI' claims fall apart -- most setups are fine until you need sub-second round trips -- and it's a solid blueprint for bolting a voice agent onto any game or app with a moddable state API."
+          },
+          {
+            "title": "Training AI to Paint with Code",
+            "url": "https://surya.website/rling-qwen-to-paint-with-code",
+            "source": "Hacker News",
+            "author": "Tiberium",
+            "body": "Tiberium's post walks through reinforcement-fine-tuning a Qwen model to write code that paints -- generating drawing programs and scoring the output against a visual reward signal instead of a text-based one. That reward design is the actual hard problem here, more than the RL algorithm itself: turning 'does this look right' into something trainable is where most of the work happens. It's a compact, reproducible project if you want hands-on experience with RL fine-tuning outside the usual coding-benchmark or math-proof reward setups -- a genuinely different domain to stress-test whether your RL pipeline generalizes."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-08-24",
     "date": "August 24, 2026",
     "title": "AI Pulse",
