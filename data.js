@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-08-26",
+    "date": "August 26, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic ships two new Claudes, OpenAI reveals its own chip, and agents get memory upgrades everywhere",
+    "intro": "Anthropic dropped both Opus 5 and Sonnet 5 on the same day, resetting its whole model line at once instead of the usual staggered rollout. OpenAI countered with real numbers on its custom inference chip and a new admin layer for team deployments. On GitHub, the theme is agents getting infrastructure they've been missing -- memory, office file access, and a real map of your codebase.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two new Claudes land at once, and OpenAI puts numbers behind its own silicon.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic's new flagship, and the top of the freshly launched Claude 5 lineup. Opus 5 replaces Opus 4.x as the model for tasks that need the most reasoning headroom -- long-horizon agentic work, hard coding problems, research synthesis -- rather than raw speed. It ships alongside Sonnet 5 today, resetting the entire model line in one move instead of the usual staggered rollout. If you're running agent harnesses or coding tools against Opus, this is the upgrade to test first; anything tuned around 4.x's quirks is worth re-benchmarking against 5 before you assume it still holds."
+          },
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "The mid-tier model gets bumped to 5 alongside Opus 5, and Sonnet is the one most people actually run in production -- it's the default in most coding tools and API integrations built around cost-per-token. A same-day Sonnet and Opus launch means the price-performance gap between the two tiers has moved, so if you picked Sonnet over Opus on 4.x for latency or cost reasons, that tradeoff is worth re-checking on 5 rather than assumed to carry over unchanged."
+          },
+          {
+            "title": "Jalapeño's first results show industry-leading speed and efficiency in AI inference",
+            "url": "https://openai.com/index/jalapeno-first-results",
+            "source": "OpenAI",
+            "body": "OpenAI's first custom inference chip now has public numbers behind it: faster throughput and lower power draw per token than Nvidia Blackwell on the workloads OpenAI tested. It's OpenAI following the path Google took with TPUs -- owning inference silicon instead of just buying GPUs -- on the bet that serving cost, not training cost, is the constraint that now decides who wins. Nothing changes for developers today since Jalapeño isn't rentable yet, but it's the clearest signal yet of where OpenAI thinks the next cost battle is."
+          },
+          {
+            "title": "Introducing the Admin plugin for ChatGPT Work and Codex",
+            "url": "https://openai.com/index/introducing-admin-plugin",
+            "source": "OpenAI",
+            "body": "A new plugin that turns ChatGPT Work and Codex admin tasks into plain-language requests -- usage analytics, member and permission management, seat limits, and workspace changes, all handled through the plugin instead of a separate settings dashboard. If you manage a team's ChatGPT Work or Codex deployment, this is the first time those controls are agent-accessible rather than click-through-a-page only, which starts to matter once you're managing more than a handful of seats."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agents are getting the infrastructure they've been missing: memory, office files, and a real map of the codebase.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "110.8k",
+            "lang": "Python",
+            "body": "Turns an entire codebase -- code, docs, SQL schemas, configs, PDFs -- into a queryable knowledge graph your agent can traverse instead of guessing from a vector search. It runs local deterministic AST parsing rather than embeddings, so every edge in the graph is explained and reproducible instead of a similarity score you have to trust blindly. Ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. If your agent keeps hallucinating cross-file relationships or losing track of how a config value actually flows through the system, this is a more grounded alternative to RAG-over-your-repo."
+          },
+          {
+            "title": "stablyai/orca",
+            "url": "https://github.com/stablyai/orca",
+            "source": "github.com",
+            "stars": "54.0k",
+            "lang": "TypeScript",
+            "body": "An ADE (agent development environment) built around running a fleet of coding agents in parallel instead of one agent in one terminal. It works with whatever coding agent and subscription you already have, and runs on desktop, mobile, or a VPS, so you can kick off several agents against different parts of a codebase and check in from your phone. The bet: once agents are fast enough to run many at once, the bottleneck shifts from writing code to supervising several agents simultaneously, and today's single-pane terminal setups weren't built for that."
+          },
+          {
+            "title": "iOfficeAI/OfficeCLI",
+            "url": "https://github.com/iOfficeAI/OfficeCLI",
+            "source": "github.com",
+            "stars": "29.3k",
+            "lang": "C#",
+            "body": "A command-line Office suite built specifically for agents to read, edit, and automate Word, Excel, and PowerPoint files -- single binary, no Office installation required. Office formats have been a persistent gap for coding agents: they can write code all day but choke on producing an actual .docx or .xlsx deliverable. OfficeCLI closes that gap directly, letting an agent generate and modify real office documents as a normal tool call instead of shelling out to a heavyweight desktop app or a fragile parsing library."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "58.7k",
+            "lang": "Python",
+            "body": "An open-source memory system for AI agents, built on ChromaDB and exposed over MCP so any agent framework can plug into it, with benchmarks to back up the claim that it's the best-tested option out there. Agent memory is still one of the least standardized parts of the current tooling stack -- most projects roll their own ad hoc retrieval layer -- so a benchmarked, drop-in memory server is useful even before you decide whether it's actually the best. Worth a look if you're building anything that needs to remember across sessions instead of starting fresh every conversation."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Two solo builds that push local, real-time AI into places it doesn't usually go: a live game and a car.",
+        "items": [
+          {
+            "title": "I built a low-latency AI companion that plays Skyrim with me",
+            "url": "https://pantel.is/projects/ai-gaming-companion/",
+            "source": "Hacker News",
+            "author": "pantelisk",
+            "body": "A voice-driven AI companion that plays Skyrim alongside the author in real time, wired into the game itself rather than sitting on top of it as a chat overlay. The core problem the write-up tackles is latency: chaining speech input, an LLM reasoning loop, and speech output fast enough to keep pace with a live game session, then hooking that pipeline into the game's state so the companion reacts to what's actually happening on screen instead of narrating blind. That's the part most 'AI plays a game' demos skip -- getting perception, reasoning, and voice output tight enough that it feels like a co-op partner instead of a laggy assistant bolted on afterward."
+          },
+          {
+            "title": "Show HN: I made a Raspberry with Qwen my local car AI",
+            "url": "https://github.com/ThinkOffApp/CarWatch",
+            "source": "Hacker News",
+            "author": "petruspennanen",
+            "body": "A car AI assistant running entirely on a Raspberry Pi with a local Qwen model -- no cloud calls, no dependency on connectivity you can't guarantee inside a moving car. The repo lays out the hardware setup and the software loop feeding sensor and voice input to the local model for real-time responses, with everything happening at the edge because that's the only option that works reliably on the road. It's a solid reference for what a fully local, small-hardware AI assistant looks like end to end -- not just which model to pick, but the wiring, the prompting, and the failure modes that show up when you're running inference on a Pi instead of a GPU box."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-08-25",
     "date": "August 25, 2026",
     "title": "AI Pulse",
