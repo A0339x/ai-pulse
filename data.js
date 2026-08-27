@@ -3,6 +3,111 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-08-27",
+    "date": "August 27, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic drops two flagship models on the same day, DeepSeek's plugin-everything harness passes 200k stars, and someone wires Qwen into their car.",
+    "intro": "Today's the rare day two frontier labs ship flagship models at once -- Anthropic's Opus 5 and Sonnet 5 both landed, with DeepMind loosening the reins on Omni Flash right behind them. On GitHub, the interesting momentum isn't another agent wrapper -- it's tooling that changes how agents see code, memory, and each other. And two builders show their work end to end: a local car assistant on a Raspberry Pi, and six months of coding with no hands on the keyboard.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two flagship model launches on the same day, plus a real hardware result out of OpenAI's chip program.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic ships Opus 5, the new top-of-line model in the Claude family, alongside Sonnet 5 in the same announcement window. Opus 5 pushes further on long-horizon agentic tasks and coding accuracy than the Opus 4.x line, with a bigger effective context budget and lower hallucination rates on tool-use benchmarks. It's live now in the API, Claude apps, and Claude Code, priced at the usual premium tier over Sonnet. If you were running Opus 4.5 for the hardest planning or research tasks in your pipeline, this is the drop-in replacement to benchmark against today."
+          },
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Sonnet 5 lands the same day as Opus 5, and it's the one most builders will actually switch to first -- it's the workhorse tier that powers Claude Code and most API traffic. Anthropic positions it as faster and cheaper than Sonnet 4.5 while closing more of the gap to Opus-tier reasoning, particularly on multi-step coding and agentic tool-use evals. Available now via the API and in Claude Code. If your agent harness is pinned to a Sonnet version string, this is worth a rebenchmark before you bump it in production."
+          },
+          {
+            "title": "Gemini Omni 1.1 Flash lets you build with more control",
+            "url": "https://deepmind.google/blog/gemini-omni-1-1-flash-lets-you-build-with-more-control/",
+            "source": "DeepMind",
+            "body": "DeepMind's update to Omni Flash adds fine-grained controls that were previously locked away in the default multimodal pipeline -- explicit knobs for output modality mixing, response pacing, and tool-call scoping instead of a single opaque \"omni\" mode. That means you can now constrain Omni Flash to behave predictably in agent pipelines where you need deterministic structured output alongside audio or image generation, instead of hoping the model picks the right modality on its own. Available now through the Gemini API for anyone already building on the Omni track."
+          },
+          {
+            "title": "Jalapeño's first results show industry-leading speed and efficiency in AI inference",
+            "url": "https://openai.com/index/jalapeno-first-results",
+            "source": "OpenAI",
+            "body": "OpenAI publishes the first benchmark results for Jalapeño, its custom-built inference chip, claiming higher throughput and lower latency per watt than the merchant silicon it's been running on. This is the first public evidence that OpenAI's chip program is producing hardware that actually beats off-the-shelf GPUs for serving its own models, not just a roadmap slide. For builders, the near-term effect is indirect -- cheaper inference at OpenAI's scale usually shows up later as lower API prices or higher rate limits, not a new SDK to install today."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "The repos gaining ground aren't wrappers -- they're new ways to give agents structure, memory, and scale.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "200.1k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness treats everything -- tools, memory, planners, even the chat loop itself -- as a hot-swappable plugin, rather than the usual monolithic agent loop with a plugin system bolted on the side. That architecture is why it's pulling 200k stars: instead of forking the harness to change how it plans or remembers, you write a plugin against its \"cordis\" protocol and drop it in. It's a serious alternative to rolling your own agent runtime if you want DeepSeek-native tooling with a real extension model instead of config flags."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "111.6k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- docs, SQL schemas, configs, PDFs included -- into a queryable knowledge graph using local, deterministic AST parsing instead of a vector store. Every edge in the graph is explained, so when you ask \"what calls this function\" or \"what tables does this endpoint touch\" you get a traceable answer instead of an embedding-similarity guess. It ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. For anyone tired of RAG-over-code giving confidently wrong answers, this is a genuinely different approach: precise structure over fuzzy retrieval."
+          },
+          {
+            "title": "stablyai/orca",
+            "url": "https://github.com/stablyai/orca",
+            "source": "github.com",
+            "stars": "55.2k",
+            "lang": "TypeScript",
+            "body": "Orca is an IDE built for running a fleet of coding agents in parallel rather than one agent in one terminal. It works with your own subscription to whichever coding agent you use -- Claude Code, Codex, whatever -- and gives you a single surface across desktop, mobile, and VPS to watch, steer, and merge work from a dozen agents running at once. This is the workflow shift heavy agent users have been hacking together with tmux and scripts; Orca packages it as an actual product."
+          },
+          {
+            "title": "iOfficeAI/OfficeCLI",
+            "url": "https://github.com/iOfficeAI/OfficeCLI",
+            "source": "github.com",
+            "stars": "29.4k",
+            "lang": "C#",
+            "body": "OfficeCLI gives agents a real way to read, edit, and automate Word, Excel, and PowerPoint files without installing Office or fighting COM automation -- a single free, open-source binary. That closes a gap that's been annoying anyone building document-generation agents: previous options meant either shelling out to a paid Office install or wrestling directly with brittle OOXML manipulation. If your agent pipeline touches .docx or .xlsx files, this is worth swapping in."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Two writeups you can actually replicate: a local car assistant and six months of agent-only coding.",
+        "items": [
+          {
+            "title": "Six months of writing code exclusively with agents",
+            "url": "https://blog.exe.dev/engineering-with-ai",
+            "source": "Hacker News",
+            "author": "bryanmikaelian",
+            "body": "Six months into running an agent-only dev workflow -- no hand-written code -- the author lays out what actually stuck: which agent handles planning versus execution, how prompts evolved from vague asks into spec-like instructions with explicit constraints, and where agents still silently produce wrong code that passes tests anyway. The post walks through the failure modes that took longest to fix -- agents confidently refactoring away load-bearing hacks, losing context on long-running features -- and the guardrails that emerged: smaller diffs, mandatory test-first prompts, and treating agent output like a PR from a fast but overconfident junior. It's a rare workflow post with enough specifics to actually replicate the setup."
+          },
+          {
+            "title": "Show HN: I made a Raspberry with Qwen my local car AI",
+            "url": "https://github.com/ThinkOffApp/CarWatch",
+            "source": "Hacker News",
+            "author": "petruspennanen",
+            "body": "A Raspberry Pi running a local Qwen model, wired into the car as an always-on assistant -- no cloud calls, no subscription, works with no signal. CarWatch's repo covers the parts a real build writeup needs: which Qwen size actually fits the Pi's memory budget, how to get usable inference latency without a GPU, and how to hook up mic input and TTS output on hardware this constrained. It includes the full setup, from OS image to the systemd service that keeps the model running. A solid weekend build for anyone who wants a local voice assistant that doesn't phone home."
+          },
+          {
+            "title": "Run Minecraft in a Windows sandbox for computer use agents",
+            "url": "https://cua.ai/docs/how-to-guides/sandbox/minecraft",
+            "source": "Hacker News",
+            "author": "someguy101010",
+            "body": "A step-by-step guide for spinning up a Windows sandbox with Minecraft installed, purpose-built as a test environment for computer-use agents -- the kind that look at a screen and drive mouse and keyboard directly instead of calling an API. It covers the sandbox image setup, how to expose the display to the agent loop, and why Minecraft specifically makes a good benchmark: open-ended tasks, clear visual feedback, and no API to cheat with. If you're building or evaluating a computer-use agent, this is a ready-made harness instead of building your own sandbox from scratch."
+          }
+        ]
+      }
+    ],
+    "closing": "Two flagship models, one weekend car build. Back tomorrow."
+  },
+  {
     "id": "2026-08-26",
     "date": "August 26, 2026",
     "title": "AI Pulse",
