@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-08-28",
+    "date": "August 28, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic drops two new Claudes at once, DeepSeek's plugin harness clears 200k stars, and agents get their own Office suite",
+    "intro": "Anthropic didn't ease into the week -- Opus 5 and Sonnet 5 landed on the same morning, plus a text watermarking feature. On GitHub, the agent-tooling wave keeps widening past coding into office docs and video production. Best use of your two minutes: the model picture at the top, then Graphify and OfficeCLI if you're building agent workflows.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Anthropic refreshes the whole Claude line in one morning; Google loosens the reins on Omni Flash.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Opus 5 is out, replacing Opus 4.5 as the top of the Claude lineup. It's the model to reach for when a task needs the most careful reasoning or the longest uninterrupted agentic run -- multi-step coding, research synthesis, anything where you'd rather pay more per token than babysit the output. It ships the same day as Sonnet 5, so Anthropic now has a full refreshed stack: Opus 5 for hard problems, Sonnet 5 for everyday throughput. If you're on the API, check whether your default model alias auto-upgrades or whether you need to pin the new version string."
+          },
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Sonnet 5 replaces Sonnet 4.5 as Anthropic's mid-tier workhorse -- the model most agent products and coding tools default to for cost and latency reasons. Landing alongside Opus 5 rather than months later suggests Anthropic is syncing its release cadence across the tiers instead of staggering them. If you've built prompts or evals against Sonnet 4.5, this is the moment to rerun them; mid-tier model swaps are usually where regressions hide, since these are the models under the most production traffic."
+          },
+          {
+            "title": "Claude text watermark",
+            "url": "https://www.anthropic.com/news/claude-text-watermark",
+            "source": "Anthropic",
+            "body": "Anthropic is now embedding a statistical watermark in Claude's generated text -- a pattern in token choices that's invisible to readers but detectable with the right tool. It's aimed at the provenance problem: schools, publishers, and platforms wanting a way to check whether a piece of text came from Claude without relying on unreliable AI-detector guessing. Expect a companion verification tool or API endpoint to check text against the watermark. Worth knowing if you're piping Claude output into anything meant to look human-authored -- paraphrasing or heavy editing will likely break the signal, generation as-is probably won't."
+          },
+          {
+            "title": "Gemini Omni 1.1 Flash lets you build with more control",
+            "url": "https://deepmind.google/blog/gemini-omni-1-1-flash-lets-you-build-with-more-control/",
+            "source": "DeepMind",
+            "body": "Google is opening up more knobs on Omni Flash, its fast multimodal model, aimed squarely at developers who found the previous version too much of a black box for production use. That means finer control over output behavior -- think structured formatting, tool-calling reliability, and latency/quality tradeoffs -- rather than a raw capability bump. If you tried Omni Flash before and bounced off its lack of steerability for real pipelines, this is the release to revisit."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent tooling keeps colonizing new territory: plugins, codebases, Office docs, and now full video pipelines.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "202k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness treats absolutely everything -- model providers, tools, memory, UI -- as a plugin (\"dsh-plugin\"). Instead of a fixed framework with extension points bolted on, the core is minimal and every piece of functionality, including ones DeepSeek ships itself, loads through the same plugin interface. That's a real architectural bet: it makes the harness easy to fork and re-skin for a different model or workflow without fighting the framework's assumptions. 202k stars in what looks like a short window makes this the biggest agent-tooling story on GitHub right now."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "112k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- docs, SQL schemas, configs, PDFs included -- into a queryable knowledge graph, ships as a `/graphify` skill for Claude Code, Cursor, Codex, and Gemini CLI. The novel part is what it skips: no vector store, no embeddings. It's local, deterministic AST parsing with every edge in the graph explained, so an agent asking \"what calls this function\" or \"which service owns this table\" gets a traceable answer instead of a similarity-search guess. For anyone tired of RAG hallucinating codebase relationships, this is a structural alternative worth trying on a real repo."
+          },
+          {
+            "title": "iOfficeAI/OfficeCLI",
+            "url": "https://github.com/iOfficeAI/OfficeCLI",
+            "source": "github.com",
+            "stars": "29.5k",
+            "lang": "C#",
+            "body": "OfficeCLI bills itself as the first Office suite built for agents rather than humans -- a single binary that reads, edits, and automates Word, Excel, and PowerPoint files with no Office installation required. That last part matters: today most agent workflows touching .docx/.xlsx/.pptx either shell out to a real Office install or fight brittle XML libraries. OfficeCLI is free, open source, and aimed at exactly the gap where an agent needs to generate a report or spreadsheet as a deliverable, not just read one."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "53.2k",
+            "lang": "Python",
+            "body": "OpenMontage calls itself the first open-source agentic video production system, and the scope backs it up: 12 production pipelines, 100+ tools, and 700+ agent-skill and production-knowledge files meant to turn a general coding assistant into a full video studio. Instead of one model generating a clip, it's structured like an actual production pipeline -- pre-production, editing, post -- with an agent driving each stage. If you've been stitching together separate tools for AI video generation, editing, and assembly by hand, this is a bet that the whole pipeline should live under one agent-controlled roof."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's crop cleared the bar -- mostly commentary and announcements, not documented builds.",
+        "items": []
+      }
+    ],
+    "closing": "New Claude twice in one morning is a lot to digest -- pin your versions and rerun your evals before you trust the defaults."
+  },
+  {
     "id": "2026-08-27",
     "date": "August 27, 2026",
     "title": "AI Pulse",
