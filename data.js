@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-08-30",
+    "date": "August 30, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic drops two new flagship Claudes, Google gives Omni more knobs, and GitHub goes all-in on agent infrastructure",
+    "intro": "Anthropic and DeepMind both refreshed their model lineups today -- Opus 5, Sonnet 5, and a more controllable Gemini Omni Flash. On GitHub the story is agent infrastructure: plugin-based harnesses, knowledge graphs instead of vector stores, and memory systems that actually publish benchmarks instead of just claiming them. If you only read one thing, make it Graphify -- deterministic code graphs are a genuinely different bet than RAG-everything.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two new Claude models and a sharper Gemini Omni, all live today.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic's new flagship model is live today, replacing Opus 4.8 at the top of the Claude lineup. It's available now through the API, the Claude apps, and Claude Code for anyone already on a paid plan -- no separate waitlist. Expect the usual flagship bump: stronger reasoning on long, multi-step tasks, better tool use, and improved accuracy on large codebases. If you're running agents against Claude today, swapping the model string to opus-5 is the whole migration -- worth benchmarking against your own eval set before defaulting production traffic to it."
+          },
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Alongside Opus 5, Anthropic refreshed the mid-tier Sonnet line. Sonnet 5 targets the spot Sonnet models always have -- most of the flagship's capability at a fraction of the latency and cost -- which makes it the default pick for anything running at volume: coding agents, chat products, batch pipelines. If your app is currently pinned to an older Sonnet checkpoint, this is the one to test first. It's typically the highest-leverage upgrade, since most production traffic runs on the mid-tier model, not the flagship."
+          },
+          {
+            "title": "Claude text watermark",
+            "url": "https://www.anthropic.com/news/claude-text-watermark",
+            "source": "Anthropic",
+            "body": "Anthropic shipped an invisible watermarking scheme for Claude-generated text, with a detector anyone can run to check whether a passage came from Claude. It's opt-in at the API level and doesn't touch output quality or latency. For builders, it's a new primitive: you can provenance-check text before it enters a pipeline, flag AI-authored content in a review queue, or build compliance tooling around it, without leaning on the unreliable statistical detectors that have circulated for years."
+          },
+          {
+            "title": "Gemini Omni 1.1 Flash lets you build with more control",
+            "url": "https://deepmind.google/blog/gemini-omni-1-1-flash-lets-you-build-with-more-control/",
+            "source": "DeepMind",
+            "body": "DeepMind's fast omni-modal model gets an update aimed at developers who found 1.0 too much of a black box. Omni 1.1 Flash adds finer control over how the model routes and blends inputs across text, image, audio, and video -- you can now pin behavior per modality instead of accepting whatever the model infers. It's live in the Gemini API today at the same Flash-tier pricing, so anything built on Omni 1.0 Flash can upgrade without a cost change, just a behavior change worth re-testing."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's stars are all agent infrastructure -- harnesses, memory, and code graphs.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "204.4k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness treats everything -- tools, memory, planners, even the loop that drives the agent -- as a swappable plugin ('cordis' is the plugin runtime, 'dsh' the CLI). Instead of forking the harness to change how your agent thinks, you write a dsh-plugin and drop it in. It's picked up 200k+ stars fast, likely because it's the first harness from a frontier lab genuinely designed to be gutted and rebuilt rather than just configured. Worth a look if you keep hitting the ceiling of what your current agent framework lets you customize."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "112.5k",
+            "lang": "Python",
+            "body": "Turns a codebase -- plus its docs, SQL schemas, configs, and PDFs -- into a queryable knowledge graph using local deterministic AST parsing instead of a vector store. Every edge in the graph is explained, so asking 'what calls this function' or 'what tables does this endpoint touch' gets a traceable answer, not a similarity-search guess. Ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. If your RAG-over-codebase setup keeps hallucinating relationships that don't exist, this is a structurally different approach worth trying."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "58.7k",
+            "lang": "Python",
+            "body": "An open-source memory layer for agents that's built its reputation on actually being benchmarked, not just claimed. Runs on ChromaDB, speaks MCP, and plugs into whatever agent you're already running. The pitch: most 'AI memory' projects ship without evidence they retrieve the right thing at the right time, and MemPalace publishes the numbers. If you're building anything that needs to remember across sessions -- a long-running assistant, a coding agent with project history -- it's worth benchmarking against whatever memory hack you've currently duct-taped together."
+          },
+          {
+            "title": "iOfficeAI/OfficeCLI",
+            "url": "https://github.com/iOfficeAI/OfficeCLI",
+            "source": "github.com",
+            "stars": "29.5k",
+            "lang": "C#",
+            "body": "A single binary that lets agents read, edit, and automate Word, Excel, and PowerPoint files -- no Office installation required. That's the actual unlock: today, giving an agent Office file access usually means shelling out to a real Office install or fighting a bloated SDK. OfficeCLI is purpose-built for the agent use case from the ground up -- CLI-first, scriptable, free. If you're building anything that touches business documents -- report generation, spreadsheet analysis, deck automation -- this closes a real gap in the current tooling."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One weekend-buildable project, one cautionary tale about what agents can actually touch.",
+        "items": [
+          {
+            "title": "AI Engineer Notebooks – free, framework-free RAG/agents/evals on Colab",
+            "url": "https://github.com/calmrocks/ai-engineer-notebooks",
+            "source": "Hacker News",
+            "author": "calmrocks",
+            "body": "A free set of Colab notebooks walking through RAG, agents, and evals without leaning on a framework like LangChain or LlamaIndex -- just raw API calls and the logic in between. That's the point: frameworks hide the plumbing that breaks in production, and these notebooks make you build the retrieval loop, the agent loop, and the eval harness yourself so you understand what's happening when something fails. Good weekend project if you've been using a framework long enough to forget what it abstracts away, or if you're new enough that you want the mental model before adopting one."
+          },
+          {
+            "title": "AI Agent Has Root",
+            "url": "https://infernalcode.com/posts/your-ai-agent-has-root/",
+            "source": "Hacker News",
+            "author": "lowcache",
+            "body": "A first-person account of what happens when you actually let a coding agent run with root access on your machine instead of sandboxing it -- what it touched that it shouldn't have, what broke, and where the author drew the line afterward. It's a useful counterweight to the current default of 'just let the agent run more autonomously': most agent setups quietly assume a level of trust that this post stress-tests directly, with the specific commands and permission boundaries that went wrong. Worth reading before you loosen the permissions on whatever agent you're pointing at a real filesystem."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-08-28",
     "date": "August 28, 2026",
     "title": "AI Pulse",
