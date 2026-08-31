@@ -3,6 +3,97 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-08-31",
+    "date": "August 31, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic drops two new Claudes, agent tooling swallows GitHub trending, and someone breaks Opus 5's autopilot",
+    "intro": "Anthropic leads today with a double model launch plus a watermarking system for catching AI-written text. GitHub's climbing list is almost entirely agent infrastructure now -- plugin harnesses, knowledge graphs, fleets of coding agents running in parallel. And a red-teamer published a step-by-step break of Claude Code's new autonomous mode, worth reading before you turn yours on unattended.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Anthropic ships a new flagship pair and a provenance tool; Google loosens the reins on Flash.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Opus 5 is live now in the API and in the Claude apps, taking over as Anthropic's top-of-line model. It's the one to reach for on the hardest reasoning, coding, and long-horizon agent work, where the cheaper models start dropping the thread. Existing prompts, tool schemas, and system messages carry over unchanged, so switching is just a model-string swap in your API calls. If you've been routing your hardest tasks to Opus 4.x, point them at claude-opus-5 today and compare."
+          },
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Sonnet 5 ships alongside Opus 5 as the new default workhorse -- the model Anthropic expects most builders to actually run in production. Same API surface as Sonnet 4.x, so it's a drop-in swap for existing agents and coding tools. The pitch is Opus-adjacent capability at Sonnet latency and cost, meaning fewer tasks now need to escalate to the pricier model. Worth re-running your eval suite against it before you migrate wholesale, but it's available to test right now."
+          },
+          {
+            "title": "Claude text watermark",
+            "url": "https://www.anthropic.com/news/claude-text-watermark",
+            "source": "Anthropic",
+            "body": "Anthropic launched a watermarking system that embeds an invisible signal in Claude's text output, checkable later to confirm whether a given passage came from Claude. It's a direct answer to the unreliable third-party AI-text detectors that schools, newsrooms, and platforms have been stuck with. The signal survives normal editing and reformatting, and Anthropic is exposing a checker so anyone can verify a suspect document without needing API access themselves. Available today as an opt-in setting for API and Claude app output."
+          },
+          {
+            "title": "Gemini Omni 1.1 Flash lets you build with more control",
+            "url": "https://deepmind.google/blog/gemini-omni-1-1-flash-lets-you-build-with-more-control/",
+            "source": "DeepMind",
+            "body": "Google pushed out Omni 1.1 Flash, adding developer-facing controls over how the model mixes and prioritizes its multimodal output instead of leaving those calls to Flash's defaults. That means you can now tune output behavior per request rather than accepting a one-size-fits-all response shape, which was the main complaint developers had about the original Omni Flash in production. It's live in the Gemini API today at the same Flash pricing tier, so anyone already on Omni Flash can point at the new version without a cost step-up."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent infrastructure dominates the trending list -- plugins, knowledge graphs, and fleets of parallel agents.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "206.3k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness, built around the idea that literally everything -- model routing, tools, memory, even the chat loop itself -- is a swappable plugin rather than baked-in behavior. That's a different bet than most coding agents, which hardcode their tool set and let you bolt extras on top. Here the core is minimal and every capability, including ones DeepSeek ships by default, goes through the same plugin interface. Worth a look if you're tired of forking an agent's source just to change how it calls a tool."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "113.0k",
+            "lang": "Python",
+            "body": "Turns a codebase -- plus its docs, SQL schemas, configs, and even PDFs -- into a queryable knowledge graph, ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. The novel part is what it skips: no vector store, no embeddings. It parses everything with deterministic AST analysis and labels every edge in the graph with why it exists, so an agent querying it gets an explainable answer instead of a fuzzy nearest-neighbor guess. Useful for large, messy repos where RAG-style retrieval keeps surfacing plausible-but-wrong context."
+          },
+          {
+            "title": "stablyai/orca",
+            "url": "https://github.com/stablyai/orca",
+            "source": "github.com",
+            "stars": "58.2k",
+            "lang": "TypeScript",
+            "body": "An ADE (agent development environment) for running a fleet of coding agents in parallel rather than one at a time. You bring your own subscriptions for whichever agents you run -- Claude Code, Codex, others -- and Orca handles orchestrating and monitoring them side by side, with clients on desktop, mobile, and VPS. It's aimed at builders who've hit the ceiling of babysitting one agent session in a terminal and want a real interface for managing several concurrent workstreams without losing track of which one did what."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "55.0k",
+            "lang": "Python",
+            "body": "An open-source agentic video production system -- 12 production pipelines, 100+ tools, and 700+ skill and production-knowledge files -- built to turn a general coding assistant into a full video studio rather than a script-writing bot. That's the interesting part: it's not a new video model, it's the missing scaffolding (shot planning, asset management, editing pipelines, knowledge of production conventions) that lets an agent you already use actually run a production end to end instead of just generating clips you assemble yourself."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One real red-team walkthrough worth your weekend if you run agents unattended.",
+        "items": [
+          {
+            "title": "Breaking Claude Code Opus 5 Auto Mode",
+            "url": "https://embracethered.com/blog/posts/2026/breaking-claude-code-opus-5-and-automode/",
+            "source": "Hacker News",
+            "author": "Recursing",
+            "body": "Embrace The Red's latest is a step-by-step break of Claude Code's fully autonomous auto mode -- the setting that skips per-command confirmation. The writeup documents the actual attack surface: an untrusted file dropped into the working directory containing text crafted to look like an instruction rather than data, which the agent reads and acts on mid-task instead of flagging as suspicious. It traces the full chain -- what Anthropic's existing guardrails already blocked, where the injected instruction slipped through, and which combination of a stricter tool-allowlist and a re-confirmation gate on filesystem-mutating commands actually closed it. If you run any coding agent in an unattended or auto-approve mode against a repo with untrusted content in it, this is a direct checklist for what to lock down before you do it again."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-08-30",
     "date": "August 30, 2026",
     "title": "AI Pulse",
