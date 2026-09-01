@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-09-01",
+    "date": "September 1, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Claude 5 lands, agents get memory, graphs, and fleets",
+    "intro": "Anthropic replaces its whole model lineup in one morning with Opus 5 and Sonnet 5, while DeepMind and Hugging Face round out the toolbox with a dedicated transcription model and a WebGPU kernel library for local inference. On GitHub, the agent tooling race keeps fragmenting into layers -- plugins, memory, knowledge graphs, fleet management -- instead of one framework to rule them all. Nothing in today's build pile actually shows its work end to end, so that section comes up empty.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Anthropic drops its next model generation while DeepMind and Hugging Face round out the toolbox.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic's flagship gets replaced. Opus 5 becomes the top model in the Claude 5 lineup, aimed at the hardest reasoning, coding, and long-horizon agent work. It ships alongside Sonnet 5 as the new default pairing: Opus for depth, Sonnet for speed and cost. Both are live now in the API and the Claude apps, so anything built against the Claude API can point at the new model IDs today without a migration step. Expect it to become the reference model for the hardest evals within days, and for Opus 4.x to start aging out of new deployments fast."
+          },
+          {
+            "title": "Claude Sonnet 5",
+            "url": "https://www.anthropic.com/news/claude-sonnet-5",
+            "source": "Anthropic",
+            "body": "Sonnet 5 replaces Sonnet 4.x as the default workhorse, the model most Claude Code and API traffic actually runs on day to day. It ships the same morning as Opus 5, built for the bulk of coding and agent tasks where latency and cost matter more than squeezing out extra reasoning depth. If you've got Sonnet pinned in a pipeline, the new model ID is a drop-in swap. Anthropic is positioning it as the default for most builders, reserving Opus 5 for the tasks that genuinely need the extra horsepower."
+          },
+          {
+            "title": "Intelligent transcription with Gemini 3.5 Transcribe",
+            "url": "https://deepmind.google/blog/intelligent-transcription-with-gemini-3-5-transcribe/",
+            "source": "DeepMind",
+            "body": "Google ships Gemini 3.5 Transcribe, a dedicated speech-to-text model instead of asking a general chat model to handle audio on the side. It's live now through the Gemini API, so meeting notes, podcast indexing, and voice-agent logging can hit a purpose-built endpoint rather than routing audio through a multimodal chat model and hoping the output stays clean. For anyone running transcription at volume, a dedicated model is usually both cheaper and more accurate than a general-purpose one doing double duty -- worth swapping in today if transcription is currently a side effect of a bigger call."
+          },
+          {
+            "title": "Introducing @huggingface/kernels: 200+ WebGPU Kernels for Local AI",
+            "url": "https://huggingface.co/blog/webgpu-kernels",
+            "source": "Hugging Face",
+            "body": "Hugging Face ships @huggingface/kernels, a library of 200+ WebGPU kernels for running models locally in-browser. Instead of hand-writing WebGPU shaders for the ops that actually bottleneck local inference, you pull a kernel from the library the same way you'd pull a model from the Hub. That's a real unlock for local-first AI on the web: quantization, attention, and other hot-path operations get GPU acceleration without a native app or a server round-trip. It's live today and drops straight into the existing browser-based local inference stack, no separate build step required."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Four repos pushing what an agent can actually do beyond chat.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "207.7k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness treats everything -- models, tools, memory, UI -- as a plugin. Instead of a monolithic framework with fixed defaults, you compose a harness from independent dsh-plugins that hook into a shared runtime called Cordis. That's a different bet than most agent frameworks, which bundle opinionated defaults and force a fork to change one piece. For builders running multiple agent stacks, it's a way to swap orchestration, tool-calling, and memory layers independently instead of rewriting glue code every time one piece changes. The star count suggests plenty of people wanted exactly that."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "113.3k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- docs, SQL schemas, configs, and PDFs included -- into a queryable knowledge graph, no vector store required. It parses everything with deterministic local AST analysis instead of embeddings, so every edge in the graph traces back to an explainable relationship rather than a similarity score. It ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. For anyone tired of RAG surfacing context that's semantically close but factually wrong, this is a bet that structured, explainable retrieval beats vector search for code-heavy repos."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "58.8k",
+            "lang": "Python",
+            "body": "MemPalace is a memory layer for agents that leads with benchmarks, claiming to be the best-tested open-source option rather than just the newest. It's built on ChromaDB and exposed over MCP, so any MCP-speaking agent can read and write persistent memory without custom integration code. The pitch: most memory systems ship without evidence they improve recall or cut hallucination, and MemPalace tries to close that gap with published numbers alongside the code. Worth a look if you're choosing a memory backend and want data over vibes."
+          },
+          {
+            "title": "stablyai/orca",
+            "url": "https://github.com/stablyai/orca",
+            "source": "github.com",
+            "stars": "59.0k",
+            "lang": "TypeScript",
+            "body": "Orca is an ADE built for running a fleet of coding agents in parallel, not one at a time. Point it at Claude Code, Codex, or any other CLI agent using your own subscription, and it manages the fleet from desktop, mobile, or a VPS. That targets a workflow a lot of builders have already backed into by hand -- several agent sessions on different branches or tasks at once, tailing logs across terminal tabs. Orca gives that setup a real interface instead of tmux panes and hope."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing today actually documents a full build -- so nothing made the cut.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-08-31",
     "date": "August 31, 2026",
     "title": "AI Pulse",
