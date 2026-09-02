@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-09-02",
+    "date": "September 2, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Opus 5 lands, OpenAI crosses a safety threshold it can't un-cross, and GitHub goes deep on agent infrastructure",
+    "intro": "Anthropic and OpenAI both dropped frontier-model news today, and one of them is a genuine first: OpenAI now has a model good enough at offensive security that it triggers a new safeguards tier. On GitHub, the interesting movement isn't another agent wrapper -- it's infrastructure that changes how agents touch code, video, and office docs. Nothing in today's build-log crop actually showed its work, so that section sits empty.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two model milestones and two quieter feature drops worth your attention.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic's new flagship lands today, taking the top slot from Opus 4.8. It's built for longer-horizon agentic work and coding tasks that previously needed babysitting through multiple steps -- fewer checkpoints, more autonomy per run before it goes off the rails. It's live now in the API, the Claude apps, and Claude Code at launch, so there's no waitlist to test it against. If Opus 4.8 was hitting a ceiling on your hardest multi-step agent tasks or largest codebases, Opus 5 is the one to retest against today, not next quarter."
+          },
+          {
+            "title": "Claude text watermark",
+            "url": "https://www.anthropic.com/news/claude-text-watermark",
+            "source": "Anthropic",
+            "body": "Anthropic is now embedding an invisible watermark in text Claude generates -- a statistical pattern in word choice that a separate detector can check for later, without needing the original prompt. It's Anthropic's answer to the SynthID-style watermarking Google already ships for Gemini output. The practical use case: schools, publishers, and platforms that want to verify whether text came from Claude specifically now have a first-party check, instead of relying on third-party AI-detectors that are notoriously unreliable. It's rolling out as a research preview, so expect gaps and false negatives while it matures."
+          },
+          {
+            "title": "Path to Astra: critical capabilities and frontier safeguards",
+            "url": "https://openai.com/index/path-to-astra",
+            "source": "OpenAI",
+            "body": "Astra is the first OpenAI model to cross the \"Critical\" cybersecurity capability threshold in OpenAI's Preparedness Framework -- meaning it's capable enough at offensive security work that OpenAI is shipping it with a new tier of safeguards rather than the standard release process. Whatever you think of the framework itself, the underlying claim is notable: a general-purpose model now meaningfully assists with real exploit development and vulnerability research. Expect tighter usage monitoring and access controls on Astra than on prior releases, and expect pressure on other labs to publish their own threshold crossings as frontier models keep climbing this curve."
+          },
+          {
+            "title": "Try Google Pics: Easy image creation and editing in Google Workspace",
+            "url": "https://blog.google/products-and-platforms/products/workspace/google-pics/",
+            "source": "Google AI",
+            "body": "Google Pics puts image generation and editing directly inside Workspace -- create or touch up an image without leaving Docs, Slides, or Gmail and without opening a separate design tool. It runs on Google's image models, so expect standard text-to-image and inpainting-style edits, but the real pitch is distribution: it's available by default wherever you're already writing, not a tab you have to remember exists. Worth a look if your team currently bounces out to Canva or Photoshop for something as simple as a header image or a quick diagram fix."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's momentum is all infrastructure -- plugins, knowledge graphs, video rendering, and office files -- not new wrappers.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "209.3k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness treats everything -- model providers, tools, memory, UI -- as a swappable plugin rather than baking in a fixed shape. That's the pitch behind a startling star count in a short window: instead of forking a monolithic framework to change one piece, you write a plugin against a stable interface. Worth a look if you've hit the point where LangChain- or AutoGPT-style frameworks fight you the moment you need non-standard behavior -- this is DeepSeek betting that composability beats convention for agent infrastructure, and doing it as the model lab itself rather than a third party."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "113.8k",
+            "lang": "Python",
+            "body": "Graphify skips the vector store entirely. Point it at a codebase -- plus its docs, SQL schemas, configs, and PDFs -- and it builds a queryable knowledge graph using local, deterministic AST parsing, with every edge explained instead of buried in opaque embeddings. It ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. The bet: for code specifically, structural parsing beats semantic search -- no embedding drift, no chunk-boundary weirdness, and you can inspect exactly why two nodes are connected. Good pick if RAG-over-codebase has been giving you confidently wrong answers."
+          },
+          {
+            "title": "heygen-com/hyperframes",
+            "url": "https://github.com/heygen-com/hyperframes",
+            "source": "github.com",
+            "stars": "43.7k",
+            "lang": "TypeScript",
+            "body": "Hyperframes renders video from HTML instead of a timeline editor. Write markup and CSS animation (GSAP under the hood), point the tool at it, and ffmpeg renders out an actual video file -- built specifically so coding agents can produce motion graphics without touching a traditional editor's UI, which agents handle badly. The insight is clean: agents already write HTML/CSS well, so let them make video the same way instead of forcing them into Premiere-style tools built for humans. Useful for explainer clips, ad creative, or animated diagrams generated straight from a prompt."
+          },
+          {
+            "title": "iOfficeAI/OfficeCLI",
+            "url": "https://github.com/iOfficeAI/OfficeCLI",
+            "source": "github.com",
+            "stars": "29.7k",
+            "lang": "C#",
+            "body": "OfficeCLI lets agents read, edit, and automate Word, Excel, and PowerPoint files with no Microsoft Office installed anywhere -- single binary, no COM automation, no license. That closes a real gap: most agent setups either shell out to Office through brittle scripting or give up and hand-generate raw XML. This is a purpose-built CLI instead, so you point Claude Code, Codex, or any agent at a .docx or .xlsx and let it make real edits through a proper interface. Handy if your agents' output has to land in an actual client Office file, not just markdown you convert later."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's crop actually showed its work.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-09-01",
     "date": "September 1, 2026",
     "title": "AI Pulse",
