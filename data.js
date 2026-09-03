@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-09-03",
+    "date": "September 3, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Opus 5 lands, Gemini gets a cybersecurity specialist, and OpenAI flags its next model as critically dangerous",
+    "intro": "Three labs shipped new models today, and one of them came with a warning label. Anthropic's Opus 5, Google's Gemini 3.8 Flash Cyber, and OpenAI's blunt disclosure about Astra's cybersecurity capability all point the same direction: frontier models are getting good enough at security work that the labs are building matching guardrails around them. On GitHub, agent tooling keeps specializing -- knowledge graphs, memory, video production, fleet management -- instead of another wrapper around a chat API.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Three labs pushed new models out the door today, plus one very blunt safety disclosure.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic shipped Opus 5, the new top-end model in the Claude line, replacing the Opus 4.x generation as the flagship for hard reasoning, long-horizon coding, and agentic work. It slots in above Sonnet 5 and Haiku 4.5 as the model you reach for when a task needs maximum capability, not speed or cost efficiency. If you've been running agent harnesses like Claude Code on Sonnet to save money, Opus 5 is now the ceiling to test against for the tasks that keep failing -- multi-step refactors, gnarly debugging, anything that needs the model to hold a lot of context without losing the plot."
+          },
+          {
+            "title": "Path to Astra: Critical Capabilities and Frontier Safeguards",
+            "url": "https://openai.com/index/path-to-astra",
+            "source": "OpenAI",
+            "body": "OpenAI confirmed that Astra, its next model, is the first to cross the \"Critical\" cybersecurity capability threshold defined in its Preparedness Framework -- meaning it's good enough at offensive security work that OpenAI is shipping it with a matching tier of safeguards instead of default access. Practically, expect gated access, heavier red-teaming, and likely restrictions around exploit development and vulnerability research once Astra ships. It's also a signal of where the frontier actually sits right now -- model capability in security tooling has outpaced the safety tier OpenAI figured it would need for a while yet."
+          },
+          {
+            "title": "Introducing Gemini 3.8 Flash and 3.8 Flash Cyber",
+            "url": "https://deepmind.google/blog/introducing-gemini-3-8-flash-and-38-flash-cyber/",
+            "source": "Google DeepMind",
+            "body": "DeepMind updated its fast, cheap Gemini tier to 3.8 Flash and released a new sibling, 3.8 Flash Cyber, tuned specifically for cybersecurity tasks like vulnerability triage and defensive analysis. Pairing a general fast model with a specialized cyber variant is new -- it means you can route security-adjacent agent work to a model built for it instead of prompting a generalist and hoping. If you're building anything that touches log analysis, CVE triage, or automated pentesting-adjacent tooling, Flash Cyber is worth benchmarking against whatever you're using today."
+          },
+          {
+            "title": "Introducing agentic video understanding with Gemini",
+            "url": "https://deepmind.google/blog/introducing-agentic-video-in-gemini/",
+            "source": "Google DeepMind",
+            "body": "Gemini can now reason over video agentically -- not just describe a clip, but take multi-step actions based on what it watches: find a specific moment, cross-reference it against other footage, follow instructions that span an entire video rather than a single frame. That's a step past the caption-a-clip video understanding most models ship today. For builders, it opens up agents that can actually work through raw video as a data source -- QA against a recorded demo, pull highlights out of hours of footage, or verify a UI flow happened correctly by watching a screen recording instead of reading logs."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Open-source agent tooling keeps specializing instead of just wrapping another chat API.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "114.2k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- code, docs, SQL schemas, configs, PDFs -- into a queryable knowledge graph, shipped as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. The pitch: no vector store, no embeddings, just local deterministic AST parsing where every edge in the graph is explained. That's a real bet against the RAG-everything default -- if you've fought a coding agent that confidently hallucinates a function signature because semantic search returned a near-miss, a deterministic graph of actual code relationships is a different failure mode, and probably a better one for codebase Q&A."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "58.8k",
+            "lang": "Python",
+            "body": "MemPalace bills itself as the best-benchmarked open-source AI memory system, and it's free. It gives agents a persistent memory layer on top of ChromaDB via MCP, so a coding agent or assistant can remember facts and decisions across sessions instead of starting cold every conversation. Memory is the thing every agent harness bolts on differently and none of them benchmark rigorously -- MemPalace actually publishing benchmarks is the more useful part, since it gives you a way to compare your memory setup against something other than vibes."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "55.9k",
+            "lang": "Python",
+            "body": "OpenMontage turns your AI coding assistant into a full video production studio -- 12 production pipelines, 100+ tools, 700+ agent skill and production-knowledge files, all open source. It's aimed at agentic video work: script to storyboard to cut, driven by an agent instead of a timeline editor. Pair it with Gemini's new agentic video understanding and you've got a rough end-to-end loop -- an agent that can both watch footage and produce it. Early, but it's the first system pushing video production fully into agent-skill territory instead of bolting a plugin onto an NLE."
+          },
+          {
+            "title": "stablyai/orca",
+            "url": "https://github.com/stablyai/orca",
+            "source": "github.com",
+            "stars": "60.7k",
+            "lang": "TypeScript",
+            "body": "Orca is an ADE -- agent development environment -- for running a fleet of parallel coding agents on your own subscription, any agent (Claude Code, Codex, etc.), available on desktop, mobile, and VPS. The idea is treating many agents working different tasks at once as a first-class workflow instead of a tmux hack: dispatch, monitor, and merge work from a fleet rather than babysitting one agent at a time. If you're already running multiple Claude Code sessions in separate terminals to parallelize work, Orca is what that setup looks like once someone builds proper tooling around it."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's crop actually documented a workflow end-to-end -- just launches and hot takes.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-09-02",
     "date": "September 2, 2026",
     "title": "AI Pulse",
