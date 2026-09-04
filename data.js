@@ -3,6 +3,97 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-09-04",
+    "date": "September 4, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Opus 5 and GPT-6 Astra both drop, agent tooling keeps piling up on GitHub, and someone gets an LLM to read 1993 Amiga assembly.",
+    "intro": "Anthropic and OpenAI both moved their frontier line forward today -- Claude Opus 5 lands as Anthropic's new flagship, while OpenAI's GPT-6 Astra becomes the first model to cross the 'Critical' cybersecurity threshold under its own safety framework. GitHub's agent-tooling stars keep climbing, with real infrastructure -- knowledge graphs, headless Office automation, fleet orchestration -- mixed in among the joke repos. And one build worth reading: an Amiga game ported to Godot with an LLM reading raw 68000 assembly.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two frontier model drops plus a couple of quietly useful feature launches.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic pushed its flagship line forward with Claude Opus 5, now the strongest model in the Claude family, ahead of Opus 4.x. It's live today across the API, Claude apps, and Claude Code, so any workflow already pointed at Opus gets a capability bump with no code changes needed. Anthropic hasn't repositioned Sonnet or Haiku -- Opus 5 sits at the top of the same three-tier lineup, aimed at the hardest reasoning, coding, and long-horizon agent tasks rather than everyday chat. If you route your toughest agent runs to Opus, that's the model doing the work as of today."
+          },
+          {
+            "title": "GPT-6 Astra",
+            "url": "https://openai.com/index/gpt-6-astra/",
+            "source": "OpenAI",
+            "body": "OpenAI shipped GPT-6 Astra, its most capable broadly deployed model yet -- and the first to cross the 'Critical' cybersecurity capability threshold under OpenAI's Preparedness Framework, which triggers a heavier set of frontier safeguards. Early enterprise use is already showing results: Legora used it to review 41 financial documents in minutes and catch all four planted errors, a roughly 40% jump over the prior model, while Playco used it to prototype three game builds from one base with half the manual fixes needed before. It's a real capability jump, not just a safety headline -- worth testing against whatever model is currently doing your heaviest lifting."
+          },
+          {
+            "title": "Healthcare organizations can now connect EHR and additional industry data to ChatGPT",
+            "url": "https://openai.com/index/chatgpt-connects-health-records-and-healthcare-sources",
+            "source": "OpenAI",
+            "body": "ChatGPT can now pull in electronic health records and other trusted healthcare data sources directly, instead of clinicians copy-pasting patient context in by hand. It's a new connector category alongside OpenAI's existing enterprise data connections, aimed at giving clinical users grounded access to patient history and medical research inside the same chat window they already use. Expect this to roll out through health-system IT rather than as a consumer toggle, since it needs real access controls and audit trails behind it -- but the connection itself is live today for organizations that set it up."
+          },
+          {
+            "title": "Try Google Pics: Easy image creation and editing in Google Workspace",
+            "url": "https://blog.google/products-and-platforms/products/workspace/google-pics/",
+            "source": "Google AI",
+            "body": "Google added a dedicated image generation and editing tool, Google Pics, directly inside Workspace. Instead of generating an image in a separate app and importing it, you can create and edit it in place while working in Docs, Slides, or wherever else Workspace shows up -- useful for slide headers, quick deck assets, and iterating on an image without leaving the document you're building. It's the same image-model family Google's been shipping elsewhere, just repackaged as a first-class Workspace surface instead of a separate destination you have to tab over to."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent tooling keeps piling up stars -- a handful of these actually move the needle.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "212k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness, built around a simple thesis: everything -- model backends, tools, memory, even the orchestration loop -- is a plugin. That's a different bet than the usual 'agent framework with a plugin system bolted on': here the core runtime stays minimal, and almost everything you'd expect built in ships as a swappable dsh-plugin instead. For builders already on DeepSeek models, it's a first-party alternative to wrapping their API in someone else's agent framework, and the plugin architecture makes it easier to swap in custom tool calling or memory backends without forking the core."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "115k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- plus its docs, SQL schemas, configs, and PDFs -- into a queryable knowledge graph, using local deterministic AST parsing instead of a vector store. That's the novel part: no embeddings, no similarity-search guesswork, every edge in the graph is explained and traceable back to source. It ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI, so your agent can ask 'what calls this function' or 'what tables does this endpoint touch' and get a grounded answer instead of a RAG-flavored guess."
+          },
+          {
+            "title": "stablyai/orca",
+            "url": "https://github.com/stablyai/orca",
+            "source": "github.com",
+            "stars": "61.5k",
+            "lang": "TypeScript",
+            "body": "Orca is an ADE -- agent development environment -- for running a fleet of coding agents in parallel, using your own existing subscriptions rather than metered API keys. It works across desktop, mobile, and VPS, so you can kick off a batch of agents from your phone and check results later. As more builders run several coding agents on different tasks at once, the bottleneck shifts from 'can the agent code' to 'can I actually supervise five of them simultaneously' -- Orca is built around that second problem."
+          },
+          {
+            "title": "iOfficeAI/OfficeCLI",
+            "url": "https://github.com/iOfficeAI/OfficeCLI",
+            "source": "github.com",
+            "stars": "29.8k",
+            "lang": "C#",
+            "body": "A command-line Office suite built specifically for agents to read, edit, and automate Word, Excel, and PowerPoint files -- no Office installation required, single binary. That matters because most existing automation routes through COM interop or a real Office install, neither of which works in a headless CI box or a sandboxed agent container. OfficeCLI gives coding agents a direct, scriptable way to generate a .docx report or edit a .xlsx model as one step in a larger pipeline, free and open source."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Only one build in today's queue actually shows its work, but it's a good one.",
+        "items": [
+          {
+            "title": "Porting my 1993 Amiga game to Godot, with an LLM reading the 68000 assembly",
+            "url": "https://babyloniantwins.com/blog/porting-a-1993-amiga-game-to-godot/",
+            "source": "Hacker News",
+            "author": "rabahs",
+            "body": "The workflow: feed an LLM the raw 68000 assembly disassembled from a 1993 Amiga game binary, and have it reconstruct what the game logic is actually doing well enough to reimplement in Godot. Reverse-engineering undocumented assembly by hand is slow -- tracing jump tables, guessing variable meaning from register usage, figuring out which routine is the collision check versus the sprite loader. Having the LLM read through the disassembly and propose what each routine does turns that into a review-and-verify loop instead of a cold-start reconstruction. The reconstructed logic gets rewritten as GDScript inside Godot, so 30-plus-year-old game code ends up running on a modern engine. It's a solid template for anyone sitting on old binaries with no surviving source -- the LLM doesn't run the code, it just accelerates reading it."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-09-03",
     "date": "September 3, 2026",
     "title": "AI Pulse",
