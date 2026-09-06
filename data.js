@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-09-06",
+    "date": "September 6, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic and OpenAI both drop flagship models in the same week, and agent skills spread into office docs and video editing",
+    "intro": "Two frontier labs shipped new top-tier models within days of each other, and one of them just crossed a safety line that changes how it gets deployed. On GitHub, the agent-skill pattern keeps colonizing new turf -- codebases, office files, video production. Nothing in today's build write-ups cleared the bar for a real step-by-step workflow, so that section's thin.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two flagship model launches land almost simultaneously, plus a way to prove text came from one of them.",
+        "items": [
+          {
+            "title": "GPT-6 Astra",
+            "url": "https://openai.com/index/gpt-6-astra",
+            "source": "OpenAI",
+            "body": "OpenAI's new flagship is live today, and it's the first model to hit the \"Critical\" cybersecurity capability threshold under the company's own Preparedness Framework -- meaning it ships with a heavier safeguard package than any prior release, detailed in a companion safety overview. Astra pushes hardest on computer use, coding, and science: OpenAI cites Legora reviewing 41 financial documents in minutes and catching every planted error, and Playco cutting manual fixes in half prototyping games. If you're building agents that touch real systems, this is the model to test today, not the one from last month."
+          },
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic's new top-tier model is out today, replacing Opus 4 as the most capable Claude available via the API, Claude apps, and Claude Code. It lands the same week as GPT-6 Astra, so expect head-to-head benchmarks within days. If you've got workloads running on Opus 4 for the hardest reasoning or agentic tasks, this is the upgrade path -- worth a direct swap-in test on your existing prompts before you touch anything else."
+          },
+          {
+            "title": "Introducing Gemini 3.8 Flash and 3.8 Flash Cyber",
+            "url": "https://deepmind.google/blog/introducing-gemini-3-8-flash-and-38-flash-cyber/",
+            "source": "Google DeepMind",
+            "body": "Google shipped a new Flash tier today, plus a specialized \"Flash Cyber\" variant tuned for security workloads -- the third cyber-focused model release this week across labs, alongside Anthropic's cybersecurity evals work and Google's own Fairwind defense program. Flash stays the cheap, fast, high-volume option; Cyber is the one to reach for if you're building vulnerability scanning, log triage, or defensive tooling and want a model that's been specifically shaped for that domain instead of a general chat model bent into shape."
+          },
+          {
+            "title": "Claude text watermark",
+            "url": "https://www.anthropic.com/news/claude-text-watermark",
+            "source": "Anthropic",
+            "body": "Anthropic now embeds a detectable watermark in text Claude generates, giving you a way to verify after the fact whether a piece of writing came out of Claude. If you're shipping a product where provenance matters -- content moderation, academic tools, publishing pipelines with AI-disclosure requirements -- you can now check for the watermark instead of relying on guesswork or third-party AI-detection tools that are frequently wrong. Worth checking whether it's opt-in or on by default for your API usage before you build detection into anything user-facing."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "The agent-skill pattern keeps spreading past coding into codebases-as-graphs, office files, fleets, and now video.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "115.2k",
+            "lang": "Python",
+            "body": "Turns a codebase -- docs, SQL schemas, configs, PDFs included -- into a queryable knowledge graph using local, deterministic AST parsing instead of embeddings. No vector store, no similarity-search guessing: every edge in the graph is explained and traceable back to source. Ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. If you've been fighting RAG hallucinations on codebase Q&A, this swaps the fuzzy-retrieval approach for something you can actually audit."
+          },
+          {
+            "title": "stablyai/orca",
+            "url": "https://github.com/stablyai/orca",
+            "source": "github.com",
+            "stars": "62.6k",
+            "lang": "TypeScript",
+            "body": "An ADE (agent IDE) built for running a fleet of parallel coding agents at once, using your own subscriptions rather than a metered API. Works from desktop, mobile, or a remote runtime, so you can kick off agents from your phone and check in later. The bet here is that managing one agent at a time is already obsolete -- the interesting problem now is orchestrating and monitoring several running concurrently on different tasks."
+          },
+          {
+            "title": "iOfficeAI/OfficeCLI",
+            "url": "https://github.com/iOfficeAI/OfficeCLI",
+            "source": "github.com",
+            "stars": "30.1k",
+            "lang": "C#",
+            "body": "A single binary that lets AI agents read, edit, and automate Word, Excel, and PowerPoint files with no Office installation required -- the first Office suite built specifically for agent use rather than humans clicking through a UI. Free and open source. Useful the moment you need a headless server or CI pipeline to generate a real .docx or .xlsx instead of faking it with templating libraries that don't round-trip cleanly."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "56.3k",
+            "lang": "Python",
+            "body": "An agentic video production system: 12 production pipelines, over 100 tools, and 700-plus agent skill and production-knowledge files that turn your existing coding assistant into a full video studio. It's the coding-agent-skill pattern -- the same one powering Claude Code plugins -- applied wholesale to a different vertical. If you're editing, scripting, or assembling video and already live inside an agent CLI, this is worth a look before reaching for a dedicated video tool."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's source list documented a real end-to-end build -- the top HN post is a discovery, not a workflow.",
+        "items": []
+      }
+    ],
+    "closing": "Test Astra and Opus 5 against your own prompts before trusting anyone else's benchmarks -- and check whether that new Claude watermark is on by default."
+  },
+  {
     "id": "2026-09-05",
     "date": "September 5, 2026",
     "title": "AI Pulse",
