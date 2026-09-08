@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-09-08",
+    "date": "September 8, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic ships Opus 5, DeepMind maps the genome, and agents get plugins, memory, and fleets of their own",
+    "intro": "Anthropic dropped a new flagship model and a watermarking feature on the same day, DeepMind published a precomputed atlas of the entire human genome, and GitHub's agent tooling keeps splitting into specialized lanes -- knowledge graphs, video production, fleet management. Nothing today qualifies as a documented weekend build, so BUILT WITH AI sits out this issue.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new Claude flagship, a way to prove text is Claude's, and a genome-scale prediction atlas.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic's new top-of-line model is live today, replacing the previous Opus as the model to reach for on hard reasoning, coding, and long-horizon agent work. It's available now through the API, Claude apps, and Claude Code with the same interface you're already using -- this is a drop-in swap, not a new SDK to learn. If you've been running agentic pipelines on the prior Opus and hitting its ceiling on multi-step planning or tool-heavy tasks, this is the upgrade to test first."
+          },
+          {
+            "title": "Claude text watermark",
+            "url": "https://www.anthropic.com/news/claude-text-watermark",
+            "source": "Anthropic",
+            "body": "Claude-generated text now carries a statistical watermark: a pattern in which synonyms and phrasings the model picks among equally good options, invisible to readers but detectable with Anthropic's checker. It rolls out today across chat and API output and doesn't change what the model actually writes. For builders shipping AI-generated content at scale, it's the first concrete way to verify text came from Claude without trusting a model's self-report or a third-party classifier."
+          },
+          {
+            "title": "AlphaGenome Atlas: A predictive map of every possible DNA letter change in the human genome",
+            "url": "https://deepmind.google/blog/alphagenome-atlas-a-predictive-map-of-every-possible-dna-letter-change-in-the-human-genome/",
+            "source": "DeepMind",
+            "body": "DeepMind turned AlphaGenome from a model you query per-variant into a precomputed, browsable atlas covering all 9 billion possible single-letter changes across the human genome. The expensive inference step -- predicting what each variant does -- is already done and indexed, so instead of running the model yourself you look up the answer. That's a real unlock for rare-disease diagnostics, GWAS follow-up work, and drug-target discovery, where researchers previously had to budget compute just to screen candidate variants before doing any actual analysis."
+          },
+          {
+            "title": "Try Google Pics: Easy image creation and editing in Google Workspace",
+            "url": "https://blog.google/products-and-platforms/products/workspace/google-pics/",
+            "source": "Google AI",
+            "body": "Google Workspace now has a native image tool -- Pics -- for generating and editing images directly inside Docs, Slides, and Sheets. No more round-tripping to a separate generator and pasting the result back in: you prompt, edit, and place the image without leaving the document. It's live today for Workspace users. The pitch is speed on the boring stuff -- slide graphics, quick illustrations, diagrams -- for anyone whose current workflow is tab-switching to an image tool mid-deck."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent tooling keeps fragmenting into sharper, more specialized lanes -- plugins, graphs, video, fleets.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "216.0k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness runs on one idea: everything is a plugin. Tools, memory, retrieval, even the orchestration loop itself are swappable pieces registered through a plugin system they call Cordis, instead of a monolithic framework you fork to change one behavior. It's TypeScript, it's by a wide margin the most-starred repo in this list, and it's worth a look if you're tired of maintaining a fork of some agent framework just to swap out a single component."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "115.9k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- docs, SQL schemas, configs, PDFs included -- into a queryable knowledge graph, no vector store involved. It parses everything with deterministic AST analysis and ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. Every edge in the graph comes with an explanation of why it exists, which makes it auditable in a way embedding-based RAG isn't. Useful if your agent keeps hallucinating relationships between files it's never actually traced."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "56.7k",
+            "lang": "Python",
+            "body": "OpenMontage bills itself as the first open-source agentic video production system, and the scope backs it up: 12 production pipelines, 100+ tools, and 700+ agent skill and production-knowledge files spanning storyboarding through editing. It turns whichever coding assistant you already run into a video studio rather than making you learn a new tool. If you've been hand-assembling ffmpeg scripts and prompt chains to automate video work, this is the packaged version of that idea."
+          },
+          {
+            "title": "stablyai/orca",
+            "url": "https://github.com/stablyai/orca",
+            "source": "github.com",
+            "stars": "64.1k",
+            "lang": "TypeScript",
+            "body": "Orca is an ADE -- agent development environment -- for running a fleet of coding agents in parallel on your own subscriptions, across desktop, mobile, and a remote runtime. Instead of babysitting one Claude Code or Codex session at a time, you spin up several and manage them from a single interface, mixing providers as needed. It's aimed at builders who've hit the ceiling of what one agent session can parallelize on a large task and want fleet management without stitching it together themselves."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's feed documented a full workflow end-to-end, so this section is empty.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-09-06",
     "date": "September 6, 2026",
     "title": "AI Pulse",
