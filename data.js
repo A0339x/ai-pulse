@@ -3,6 +3,97 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-09-09",
+    "date": "September 9, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Opus 5 lands, OpenAI cracks a Millennium Prize problem, and GitHub agent tooling gets both smarter and sillier",
+    "intro": "Big lab day: Anthropic ships a new flagship model while OpenAI publishes a formally verified solution to Navier-Stokes, one of math's six unsolved Millennium Prize problems. On GitHub, the interesting momentum isn't another agent wrapper -- it's tools that fix real workflow pain: structured code search without a vector store, and a fleet manager for people running too many agent sessions at once.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new flagship model, a genuine math result, and two solid toolkit upgrades.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic shipped Opus 5, the next model in the Opus line and now the flagship of the Claude family, sitting above Sonnet 5 for the hardest reasoning and longest-horizon agentic work. It's live now in the API, the Claude apps, and Claude Code. If you moved hard tasks to Sonnet 5 because Opus felt too slow or expensive before, this is the model to re-benchmark against -- Anthropic is positioning it specifically for the workloads where quality still beats speed: multi-step agent runs, deep code review, and research tasks that need to hold a lot of context correctly over many turns."
+          },
+          {
+            "title": "On the Navier-Stokes Millennium Prize Problem",
+            "url": "https://openai.com/index/navier-stokes-solution",
+            "source": "OpenAI",
+            "body": "OpenAI published an AI-generated solution to the Navier-Stokes existence and smoothness problem, one of the six unsolved Millennium Prize problems, with a full writeup and a formal proof checked in Lean, the proof assistant that verifies logic mechanically rather than taking the model's word for it. That distinction matters: this isn't a benchmark score or a plausible-sounding derivation, it's a result that survived automated adversarial checking. For builders, it's the clearest signal yet that current models paired with formal verification tooling can produce genuinely new mathematics, not just recombine what's already in the training data."
+          },
+          {
+            "title": "Introducing Gemini 3.8 Flash and 3.8 Flash Cyber",
+            "url": "https://deepmind.google/blog/introducing-gemini-3-8-flash-and-38-flash-cyber/",
+            "source": "DeepMind",
+            "body": "Google DeepMind released two small models: Gemini 3.8 Flash, the latest in its fast-and-cheap production tier, and Gemini 3.8 Flash Cyber, a variant tuned for security work, shipped alongside DeepMind's broader cyber-defense push this week. Flash is the tier most builders actually run in production for latency- and cost-sensitive apps, so this bump matters more day-to-day than a flagship release does. Worth testing Flash Cyber specifically on vuln triage, log analysis, or alert summarization against the general-purpose Flash to see if the specialization actually pays off for your use case."
+          },
+          {
+            "title": "Introducing ChatGPT Images 2.5",
+            "url": "https://openai.com/index/introducing-chatgpt-images-2-5",
+            "source": "OpenAI",
+            "body": "OpenAI bumped its image tool to Images 2.5, built to hold onto your actual intent when you feed it a sketch or a reference photo instead of drifting toward a generic-looking output. That's the recurring complaint with image models: they treat your reference as a vague suggestion. If 2.5 genuinely fixes that, it's a real upgrade for anyone doing product mockups or concept art directly in ChatGPT instead of round-tripping through a dedicated design tool. Available now inside ChatGPT for anyone generating images from ideas, sketches, or photos."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's GitHub momentum favors tools that fix real workflow pain, plus one joke that's secretly a good idea.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "116.3k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- code, docs, SQL schemas, configs, PDFs -- into a queryable knowledge graph instead of a vector store. It ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI, using local deterministic AST parsing and explaining every edge in the graph, so when an agent asks what calls a function or what tables a query touches, it gets a traceable answer instead of an embedding's nearest-neighbor guess. RAG over code has always been lossy because embeddings blur structure; a graph keeps it. Worth trying if your agents keep hallucinating call chains or missing cross-file dependencies in a large repo."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "104.5k",
+            "lang": "Go",
+            "body": "Caveman is a Claude Code skill that rewrites both your prompts and Claude's responses into terse, caveman-style phrasing -- 'why use many token when few token do trick' -- and claims a 65% cut in token usage doing it. It's a joke wrapper around a real technique: stripping filler words, articles, and hedge language from both sides of a conversation shrinks context fast, and models parse degraded grammar better than you'd expect. If you're burning budget on long agent sessions with lots of back-and-forth, it's worth a real test to see how much of that 65% holds up outside a cherry-picked benchmark."
+          },
+          {
+            "title": "stablyai/orca",
+            "url": "https://github.com/stablyai/orca",
+            "source": "github.com",
+            "stars": "64.9k",
+            "lang": "TypeScript",
+            "body": "Orca is an ADE -- agent development environment -- built for running a fleet of coding agents in parallel instead of babysitting one terminal at a time. It sits on top of the agents you already pay for (Claude Code, Codex, others) and adds a desktop, mobile, and remote runtime for launching, monitoring, and steering multiple sessions at once. The bet is that the bottleneck in agentic coding has shifted from the model to the human managing five terminals. If you're already running several Claude Code or Codex sessions side by side and losing track of them, this is built for exactly that."
+          },
+          {
+            "title": "iOfficeAI/OfficeCLI",
+            "url": "https://github.com/iOfficeAI/OfficeCLI",
+            "source": "github.com",
+            "stars": "30.4k",
+            "lang": "C#",
+            "body": "OfficeCLI gives agents direct read/write access to Word, Excel, and PowerPoint files -- single binary, no Office installation, no COM automation. Most agent-driven document work today either shells out to a real Office install or hand-edits the underlying XML and mangles formatting. A dedicated CLI built for agents to call means Claude Code, Codex, or any other coding agent can produce an actual .docx or .xlsx as a build artifact instead of a markdown approximation you have to convert by hand. Useful if your agent workflows need to hand off client-facing documents, not just chat output."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One post actually shows its work end to end -- tools, order, and what the agent had to get right.",
+        "items": [
+          {
+            "title": "How GPT-5.6 Sol helps run quantum computing experiments",
+            "url": "https://openai.com/index/codex-quantum-computing-experiments",
+            "source": "Hacker News",
+            "author": "theanonymousone",
+            "body": "An MIT researcher documents using GPT-5.6 Sol paired with Codex to run real quantum computing experiments with minimal hand-holding: Codex writes and iterates on the control code that drives the hardware, GPT-5.6 Sol handles the higher-level reasoning about what to run next, and the loop closes on calibrating qubits and interpreting noisy experimental results without a human re-deriving each step. The workflow is notable for the domain, not the model -- quantum hardware is unforgiving of bad control sequences, so letting an agent iterate autonomously means the setup had to catch its own mistakes before they hit real qubits. If you work anywhere near physical lab equipment, this is a concrete template for how far you can push agent autonomy before a human needs to step back in."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- see you tomorrow."
+  },
+  {
     "id": "2026-09-08",
     "date": "September 8, 2026",
     "title": "AI Pulse",
