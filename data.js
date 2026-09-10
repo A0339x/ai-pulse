@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-09-10",
+    "date": "September 10, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Two flagships drop same-day, and DeepMind maps 9 billion DNA variants",
+    "intro": "Two flagship models -- GPT-6 Astra and Claude Opus 5 -- landed on the same day, and DeepMind published a queryable map of every possible single-letter DNA change in the human genome. GitHub's agent-tooling scene keeps pushing into weirder verticals, from a full video production studio to an Office suite built for agents instead of humans. Nothing in today's Built With AI queue actually shows its work end-to-end, so that section sits empty today.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two labs shipped new flagship models on the same day, plus a genome-scale map you can query instead of compute.",
+        "items": [
+          {
+            "title": "GPT-6 Astra: The next generation in intelligence for work",
+            "url": "https://openai.com/index/gpt-6-astra-next-generation-work",
+            "source": "OpenAI",
+            "body": "GPT-6 Astra lands today as OpenAI's business-focused flagship, built for advanced reasoning, computer use, and sharper writing and design judgment. It's positioned to run agentic work end-to-end -- clicking through actual software interfaces via computer use rather than just calling APIs -- and to produce work-ready output like docs, decks, and design mockups without heavy prompt engineering. This is a step past GPT-5.6 Sol: Astra targets knowledge-work tasks that need both judgment and the ability to operate a screen, not just generate text. If your agents currently fall back to brittle browser automation for computer-use tasks, Astra is worth a direct comparison today."
+          },
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic pushed Claude Opus 5 live today, the next full version bump to its flagship model line. Opus 5 becomes the new top-tier option across the API and Claude.ai, taking over from the Opus 4 generation for the heaviest reasoning, coding, and agentic workloads. Anthropic didn't publish a detailed benchmark breakdown alongside the launch, so how much of a jump this is over Opus 4.5 will become clearer as third-party evals land over the next few days. If you're running production agents on Opus 4.5 today, this is the model to benchmark against before you migrate anything."
+          },
+          {
+            "title": "Introducing ChatGPT Images 2.5",
+            "url": "https://openai.com/index/introducing-chatgpt-images-2-5",
+            "source": "OpenAI",
+            "body": "ChatGPT Images 2.5 ships today, upgrading how ChatGPT turns sketches, rough ideas, and reference photos into finished images. The new version leans harder on personalization -- feed it a reference photo or a scribbled layout and it holds onto specifics like composition, subject likeness, and style cues more consistently than the prior Images tooling did. It's built for iterative design work: take a first pass, mark it up, feed it back in, and get a polished version that keeps your original intent instead of drifting. If you've been bouncing between ChatGPT and a separate image editor to nail a look, this closes more of that gap today."
+          },
+          {
+            "title": "AlphaGenome Atlas: A predictive map of every possible DNA letter change in the human genome",
+            "url": "https://deepmind.google/blog/alphagenome-atlas-a-predictive-map-of-every-possible-dna-letter-change-in-the-human-genome/",
+            "source": "DeepMind",
+            "body": "DeepMind released AlphaGenome Atlas today, a precomputed map of the predicted molecular effects of every possible single-letter DNA change across the human genome -- 9 billion variants scored and searchable. Instead of running AlphaGenome inference yourself for a variant of interest, you can now look it up directly. That turns a model that needed compute and ML know-how into something a wet-lab biologist can query like a database. It's aimed at researchers studying disease-linked mutations who need fast prioritization of which variants might actually matter before running expensive follow-up experiments."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent tooling keeps branching into new verticals -- video production, office documents, codebase graphs, and multi-agent fleets.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "116.6k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- code, docs, SQL schemas, configs, even PDFs -- into a queryable knowledge graph, and ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. The pitch: no vector store, no embeddings drift. It parses everything with deterministic AST analysis and explains every edge in the graph, so when an agent asks what calls this function or what config gates this feature, it gets a traceable answer instead of a fuzzy nearest-neighbor guess. For anyone whose agents keep hallucinating repo structure on large codebases, this is a more grounded alternative to RAG-over-code."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "57.0k",
+            "lang": "Python",
+            "body": "OpenMontage turns your coding agent into a full video production studio: 12 production pipelines, 100+ tools, and 700+ skill and production-knowledge files covering everything from storyboarding to editing. It's pitched as the first open-source agentic video system, meaning the workflow -- script to shots to cuts -- runs through the same agent loop you already use for code, not a separate app. Point Claude or Cursor at it and you get a production pipeline instead of a single video-generation call. Useful for anyone who wants agent-driven video work without stitching together a dozen point tools by hand."
+          },
+          {
+            "title": "iOfficeAI/OfficeCLI",
+            "url": "https://github.com/iOfficeAI/OfficeCLI",
+            "source": "github.com",
+            "stars": "30.4k",
+            "lang": "C#",
+            "body": "OfficeCLI gives coding agents direct read/write access to Word, Excel, and PowerPoint files -- no Microsoft Office installation required, single binary. It's built specifically for agent workflows: Claude Code, Codex, and similar tools can now generate and edit real .docx/.xlsx/.pptx files as part of a task instead of faking it with templated exports or asking you to open Office yourself. For anyone building agents that produce client-facing deliverables like reports, spreadsheets, or decks, this removes the biggest practical blocker to doing that headlessly on a server or in CI."
+          },
+          {
+            "title": "stablyai/orca",
+            "url": "https://github.com/stablyai/orca",
+            "source": "github.com",
+            "stars": "65.7k",
+            "lang": "TypeScript",
+            "body": "Orca is an ADE, an agent development environment, built for running a fleet of coding agents in parallel instead of babysitting one at a time. It wraps whatever agent you already pay for -- Claude Code, Codex, others -- and gives you a control surface across desktop, mobile, and a remote runtime, so you can kick off multiple agent runs and check on them from your phone without paying for a second subscription to do it. It's aimed at the workflow where you've outgrown one agent session and need visibility across several running at once."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's queue actually documented a workflow you could replicate, so this section is empty.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- see you tomorrow."
+  },
+  {
     "id": "2026-09-09",
     "date": "September 9, 2026",
     "title": "AI Pulse",
