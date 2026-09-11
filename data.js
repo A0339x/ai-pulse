@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-09-11",
+    "date": "September 11, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Opus 5 and GPT-6 Astra land days apart, OpenAI opens an Agents API, and a plugin-everything harness tops GitHub",
+    "intro": "Two flagship model launches landed almost back to back: Claude Opus 5 and GPT-6 Astra. OpenAI backed its release with real agent infrastructure, a managed Agents API built on the Codex harness, while on GitHub the fight has moved up a layer, into who controls the harness agents run on. Nothing in today's build-log sources actually shows its work, so that section stays empty rather than padded.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two new flagship models and a new way to run agents in the cloud.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic released Opus 5, the new top of the Claude line, live now in the API, claude.ai, and Claude Code. It's the model to reach for once you've hit the ceiling of Sonnet or Haiku on hard reasoning, coding, or long agentic runs. Existing API integrations don't need any rework, just swap the model string. If your agents have been timing out or losing the thread on multi-step tasks, this is the first thing worth trying before you touch prompts or scaffolding."
+          },
+          {
+            "title": "GPT-6 Astra: The next generation in intelligence for work",
+            "url": "https://openai.com/index/gpt-6-astra-next-generation-work",
+            "source": "OpenAI",
+            "body": "OpenAI's new flagship for business work ships today. GPT-6 Astra is built for tasks that used to need a human review pass -- advanced reasoning, computer use, and notably stronger writing and design judgment, meaning output that looks client-ready instead of draft-ready. It's rolling out first inside ChatGPT for Financial Services and other enterprise surfaces, with broader API access to follow. If you've been chaining older models with extra prompting to get presentation-quality output, Astra is aimed at collapsing that chain into one call."
+          },
+          {
+            "title": "Introducing the Agents API",
+            "url": "https://openai.com/index/introducing-the-agents-api",
+            "source": "OpenAI",
+            "body": "OpenAI opened the Agents API, a managed service for building and running cloud agents on the same harness that powers Codex. It handles orchestration, long-running sessions, and tool use for you, so you're not hand-rolling a state machine and a queue just to keep an agent alive across a multi-hour task. This is the more consequential release today if you build agent products: a real alternative to stitching your own agent loop on top of a plain chat API, with session persistence built in instead of bolted on."
+          },
+          {
+            "title": "Build more natural voice experiences with GPT-Live-1 in the API",
+            "url": "https://openai.com/index/introducing-gpt-live-1-in-the-api",
+            "source": "OpenAI",
+            "body": "GPT-Live-1 hits the API, a model built specifically for full-duplex voice conversation, meaning it can listen and speak at the same time instead of waiting for silence to respond. It follows instructions more reliably mid-conversation, supports custom voices, and plugs directly into telephony, so you can wire it into an actual phone line without a separate speech pipeline. If you've been duct-taping a speech-to-text model, a chat model, and a TTS model to fake a voice agent, this replaces that whole stack with one API."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "The harness layer itself is where this week's star growth is concentrated.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "220.3k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's harness just crossed 220k stars on a simple pitch: everything is a plugin. Instead of a fixed core with plugins bolted on, the entire agent loop -- context management, tool calls, even the CLI itself -- is composed from swappable plugins. That's a different architecture bet than most coding-agent harnesses, which treat plugins as an add-on layer rather than the whole structure. Worth a look if you've hit the customization ceiling on Claude Code's or Codex's plugin systems and want to rebuild the loop itself instead of working around it."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "116.9k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase, docs, SQL schemas, configs, and PDFs included, into a queryable knowledge graph, no vector store required. It parses everything with deterministic local AST analysis and explains every edge, so asking how two pieces of code connect gets you a traceable answer instead of a similarity score. Ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. If RAG has been giving your agent confidently wrong answers about your own repo, this is a structural alternative worth testing."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "59.0k",
+            "lang": "Python",
+            "body": "MemPalace calls itself the best-benchmarked open-source memory system for AI agents, built on ChromaDB and exposed over MCP. Rather than another ad hoc save-to-a-file memory hack, it's a dedicated system with actual benchmarks behind its retrieval quality claims, free to self-host. Useful if you're building agents that need to remember things across sessions and want evidence the retrieval actually works instead of a plausible-sounding default."
+          },
+          {
+            "title": "stablyai/orca",
+            "url": "https://github.com/stablyai/orca",
+            "source": "github.com",
+            "stars": "66.5k",
+            "lang": "TypeScript",
+            "body": "Orca is an ADE, an agent development environment, for running a fleet of coding agents in parallel using your own existing subscriptions to Claude Code, Codex, or whatever else you're already paying for. It runs on desktop, mobile, and a remote runtime, so you can kick off a batch of agents from your phone and check back later. The notable part is that it's subscription-native, no separate API billing layer, it just drives the CLIs you already have access to. Worth a look once you're running more than one or two agents at a time and tracking them by hand gets old."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's build-log sources actually documents a workflow, so this section sits empty.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-09-10",
     "date": "September 10, 2026",
     "title": "AI Pulse",
