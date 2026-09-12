@@ -3,6 +3,97 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-09-12",
+    "date": "September 12, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic drops a new flagship, OpenAI opens up full-duplex voice, and GitHub's agent-tooling race keeps compounding",
+    "intro": "Big lab day: Anthropic ships Opus 5 and OpenAI ships a real-time voice model in the API, both landing the same week DeepMind quietly mapped the molecular effect of every possible single-letter DNA change in the human genome. On GitHub, the interesting momentum isn't more agent wrappers -- it's plugin architectures, codebase knowledge graphs, and memory systems trying to make agents actually reliable over time.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new flagship model, a real-time voice API, a genome-scale map, and an agent that builds dashboards from plain English.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic's new top-of-line model is live today, replacing Opus as the most capable Claude for coding, long-horizon agent work, and reasoning-heavy tasks. It's available now through the API, Claude apps, and the usual cloud partners (Bedrock, Vertex, Foundry). If you've been running agent workloads on Sonnet because Opus felt too slow or too expensive for the gain, Opus 5 is the one worth re-benchmarking against -- especially for tasks that involve long tool-use chains where the previous generation tended to drift."
+          },
+          {
+            "title": "Build more natural voice experiences with GPT-Live-1 in the API",
+            "url": "https://openai.com/index/introducing-gpt-live-1-in-the-api",
+            "source": "OpenAI",
+            "body": "OpenAI opened up GPT-Live-1, a full-duplex voice model, to the API today. Full-duplex means it can listen and speak at the same time, so it handles interruptions and overlapping speech the way a phone call actually works instead of the stilted turn-taking of earlier voice APIs. It ships with stronger instruction-following, support for custom voices, and native telephony hooks -- so you can wire it straight into a phone number instead of bolting on a separate SIP layer. This is the difference between a voice bot and something that can run a real call."
+          },
+          {
+            "title": "Now everyone can put data to work",
+            "url": "https://openai.com/index/put-data-to-work",
+            "source": "OpenAI",
+            "body": "ChatGPT Work now ships a Data agent: connect your company's data sources and ask for insights or dashboards in plain English, no SQL or BI tool required. The agent builds interactive dashboards on the fly rather than just returning a text summary, which is the actual gap most \"chat with your data\" tools have failed to close. Worth trying if your team currently routes every ad-hoc data question through an analyst -- the pitch is that a non-technical person can get a real, interactive answer without waiting in that queue."
+          },
+          {
+            "title": "AlphaGenome Atlas: A predictive map of every possible DNA letter change in the human genome",
+            "url": "https://deepmind.google/blog/alphagenome-atlas-a-predictive-map-of-every-possible-dna-letter-change-in-the-human-genome/",
+            "source": "DeepMind",
+            "body": "DeepMind published a precomputed atlas predicting the molecular effect of 9 billion single-letter DNA variants across the human genome -- every possible point mutation, scored in advance. Instead of running AlphaGenome yourself to ask \"what does this variant do,\" you can now just look it up. That turns a model inference into a database query, which matters a lot for genomics researchers who need to screen thousands of variants at once rather than one at a time. It's a genuinely new artifact, not just a new model checkpoint."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "The best repos this week aren't new agents, they're the infrastructure underneath: plugins, knowledge graphs, and memory.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "221.3k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness, built on the premise that literally everything -- tools, memory backends, model routing, even the orchestration loop itself -- is a plugin. That's a step further than most agent frameworks, which let you plug in tools but hardcode the loop. The payoff is that you can swap out core agent behavior without forking the harness, which is why it's pulled in this many stars this fast. Worth a look if you're tired of maintaining a custom fork of someone else's agent loop just to change one piece of behavior."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "117.1k",
+            "lang": "Python",
+            "body": "Turns a codebase -- plus its docs, SQL schemas, configs, and PDFs -- into a queryable knowledge graph, using local deterministic AST parsing instead of a vector store. That's the novel part: no embeddings, no similarity search fuzziness, every edge in the graph is explained and traceable back to source. It ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI, so your agent can query what calls this function and what schema does it touch and get an exact answer instead of a semantic guess."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "57.8k",
+            "lang": "Python",
+            "body": "An open-source agentic video production system: 12 production pipelines, over 100 tools, and 700+ agent skill and production-knowledge files that turn your coding assistant into a full video studio. This is one of the first serious attempts to bring the agent-skill pattern that's taken over coding tools into video editing and production -- storyboarding, cutting, grading, all driven through the same agent interface you already use for code. Worth watching as a signal for which other creative domains get the skills treatment next."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "59.0k",
+            "lang": "Python",
+            "body": "A free, open-source AI memory system built on Chroma and MCP, positioned specifically on being the best-benchmarked option in a category full of unverified claims. Memory is the piece most agent stacks still fake with a growing context window or a naive vector dump, and this one is climbing because it treats memory as a component you evaluate, not a feature you just bolt on. Good pick if you're building anything that needs to remember across sessions and you've been burned by memory tools that work great in a demo and fall apart in production."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One workflow post actually worth reading end to end this week.",
+        "items": [
+          {
+            "title": "How to Build an AI Software Factory: Agents That Open, Review, and Merge PRs",
+            "url": "https://www.firecrawl.dev/blog/ai-software-factory",
+            "source": "Hacker News",
+            "author": "makaimc",
+            "body": "Firecrawl's writeup lays out a three-stage agent pipeline for shipping code without a human in the loop for every step: one agent drafts changes and opens the PR from a ticket or spec, a second agent reviews the diff on its own before a human ever sees it, and the PR only merges once that review agent and CI both sign off. The interesting part isn't any single agent -- it's the separation of drafting from reviewing, so the same model isn't grading its own work. If you're running a coding agent solo right now and manually reviewing everything it produces, this is the blueprint for adding a second agent as your first line of review instead of you."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow with whatever ships overnight."
+  },
+  {
     "id": "2026-09-11",
     "date": "September 11, 2026",
     "title": "AI Pulse",
