@@ -3,6 +3,97 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-09-14",
+    "date": "September 14, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Opus 5 lands, ChatGPT gets a data agent, and a genome atlas you can just query",
+    "intro": "Anthropic ships its next flagship model today while OpenAI pushes ChatGPT into two new verticals -- data analysis and financial services. On GitHub, agents are getting handed more infrastructure: a plugin-first harness, a deterministic knowledge graph instead of a vector store, shared memory across teams of agents. And one real workflow write-up on shipping PRs without a human reviewer for the easy cases.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new flagship model and two new ChatGPT verticals lead the day.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic released Opus 5, the next flagship in the Claude lineup, available now through the API, Claude apps, and Claude Code. It replaces Opus 4.x as the top-tier model for coding, agentic workflows, and long-horizon reasoning tasks. If you're running agents that lean on Opus for the hardest steps in a pipeline -- planning, multi-file refactors, tool orchestration -- point them at the new model id today. Anthropic paired the launch with a wave of alignment and safety posts, including updated enterprise safeguards and a new text-watermarking feature for Claude-generated text, so the capability bump comes with tighter guardrails attached."
+          },
+          {
+            "title": "Now everyone can put data to work",
+            "url": "https://openai.com/index/put-data-to-work",
+            "source": "OpenAI",
+            "body": "ChatGPT Work now ships a Data agent that connects directly to company data sources and lets you query them in plain language -- no SQL, no BI tool required. Ask it a question and it pulls the relevant tables, runs the analysis, and builds an interactive dashboard you can keep reshaping with follow-up prompts. It's aimed at the person who used to file a ticket with the data team for every ad hoc question. This is a real new capability inside ChatGPT Work today, not a chat wrapper -- it's a standing connection to your data plus a dashboarding layer built on GPT-6 Astra."
+          },
+          {
+            "title": "Introducing ChatGPT for Financial Services",
+            "url": "https://openai.com/index/introducing-chatgpt-financial-services",
+            "source": "OpenAI",
+            "body": "OpenAI launched a dedicated ChatGPT tier for financial services, bundling built-in financial data feeds with GPT-6 Astra for research, modeling, and client-ready output. Analysts get a model that already has market data wired in, rather than one they have to feed manually or connect via a separate plugin. The pitch is fewer steps between a research question and a document you can send a client -- pull data, build the model, draft the memo, inside one workspace with compliance-aware guardrails built for the industry. It's a vertical product with its own pricing and access, not a feature flag on standard ChatGPT Work."
+          },
+          {
+            "title": "AlphaGenome Atlas: A predictive map of every possible DNA letter change in the human genome",
+            "url": "https://deepmind.google/blog/alphagenome-atlas-a-predictive-map-of-every-possible-dna-letter-change-in-the-human-genome/",
+            "source": "DeepMind",
+            "body": "DeepMind published AlphaGenome Atlas, a precomputed map of the predicted molecular effect of every possible single-letter change across the human genome -- about 9 billion variants. Instead of running AlphaGenome yourself on a variant of interest, you can now look it up directly. That turns a model-inference task into a database query, which matters if you're doing variant interpretation for genomics or rare disease research and don't want to run inference at that scale yourself. It's a genuinely new resource: nobody had a queryable, exhaustive map of coding and noncoding variant effects at this resolution before today."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's repos hand agents more infrastructure: plugins, graphs, and shared memory.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "223.7k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness treats everything -- tools, memory, planners, connectors -- as a plugin, rather than baking a fixed set of capabilities into the core. That plugin-first design is what's pulling in stars: instead of forking the harness to add a tool or swap a memory backend, you write a plugin against a stable interface. It's TypeScript, so it slots into the same ecosystem as most coding-agent tooling right now. For builders assembling custom agent stacks, it's a harness designed to be extended rather than replaced, which is the opposite of most agent frameworks that assume you'll eventually outgrow them."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "116.7k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- docs, SQL schemas, configs, PDFs included -- into a queryable knowledge graph, using local deterministic AST parsing instead of embeddings. No vector store, no similarity search guessing at relevance -- every edge in the graph is explained, so when the agent says function A calls function B, you can see exactly why. It ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. RAG-over-code has been the default answer for codebase Q&A; this is a bet that deterministic graph traversal gives more trustworthy answers than nearest-neighbor retrieval."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "59.0k",
+            "lang": "Python",
+            "body": "OpenMontage turns your AI coding assistant into a video production studio -- 12 production pipelines, over 100 tools, and 700+ agent skill files covering everything from shot planning to editing. It's billed as the first open-source agentic video production system, meaning the agent doesn't just generate a clip, it runs the pipeline: script, storyboard, generation, editing, output. If you've been stitching together separate tools for each step of AI video, this collapses that into one agent-driven workflow you drive from your existing CLI. Clearly aimed at builders who already live in Claude Code or Cursor."
+          },
+          {
+            "title": "TencentCloud/TencentDB-Agent-Memory",
+            "url": "https://github.com/TencentCloud/TencentDB-Agent-Memory",
+            "source": "github.com",
+            "stars": "26.7k",
+            "lang": "TypeScript",
+            "body": "TencentDB Agent Memory is a shared memory layer for teams running multiple agents, not just a single agent's scratchpad. It turns conversations, docs, and code into four distinct memory types -- Chat Memory, Skill, LLM-Wiki, and Code-Graph -- that get governed and shared across agents and frameworks rather than siloed per bot. Most agent memory tools assume one agent, one memory store; this treats memory as a team asset that multiple agents contribute to and pull from. That matters once you're running more than one agent against the same codebase or knowledge base."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One real pipeline write-up today: agents shipping their own PRs.",
+        "items": [
+          {
+            "title": "How to Build an AI Software Factory: Agents That Open, Review, and Merge PRs",
+            "url": "https://www.firecrawl.dev/blog/ai-software-factory",
+            "source": "Hacker News",
+            "author": "makaimc",
+            "body": "Firecrawl published a build log for what they call an 'AI software factory': a pipeline of agents that open pull requests, review them, and merge them, with the goal of getting a human out of the loop for routine changes. The piece walks through the pipeline end to end -- how work gets assigned to an agent, how a separate review agent checks the diff before anything merges, and where the setup needed guardrails to keep agents from merging bad changes. It's a smaller thread on HN (31 points, 13 comments) but a rarer kind of post: an actual PR-automation pipeline you could stand up yourself, not a screenshot of an agent writing one function."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- see you tomorrow."
+  },
+  {
     "id": "2026-09-12",
     "date": "September 12, 2026",
     "title": "AI Pulse",
