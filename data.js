@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-09-15",
+    "date": "September 15, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic drops Opus 5, DeepSeek's harness rockets past 225k stars, and nothing on the builder boards clears the bar today",
+    "intro": "Anthropic pushes Opus 5 into the flagship slot and ships a watermark for generated text, while OpenAI keeps building out ChatGPT Work with a natural-language data agent. On GitHub, DeepSeek's own agent harness rockets past 225k stars with a wave of code-graph and token-saving tools climbing behind it. No build write-up in today's queue documents a real end-to-end workflow, so that section sits empty.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new Claude flagship, a watermark for AI text, and a data agent that skips the BI tool entirely.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic's new flagship model is live today, taking over the top spot from the Opus 4 line. It's available now through the API, Claude.ai, and Claude Code, positioned as the model to reach for on the hardest reasoning, coding, and long-horizon agent tasks -- the ones where Sonnet 5 hits its ceiling. If you've been running agent workflows on Sonnet and hitting quality walls on multi-step tasks, Opus 5 is worth a swap-in test today."
+          },
+          {
+            "title": "Claude text watermark",
+            "url": "https://www.anthropic.com/news/claude-text-watermark",
+            "source": "Anthropic",
+            "body": "Anthropic shipped a watermarking system for Claude's text output -- a statistical signal embedded in generated text that lets you verify later whether a passage came from the model, without changing how the text reads. It's a direct answer to the \"is this AI-written\" problem that's dogged every text generator: instead of guessing from style, you get a checkable signal baked in at generation time. It's rolling out now across Claude's text outputs, and it's the first mainstream lab watermark built for prose rather than images or video."
+          },
+          {
+            "title": "Now everyone can put data to work",
+            "url": "https://openai.com/index/put-data-to-work",
+            "source": "OpenAI",
+            "body": "ChatGPT Work now ships a Data agent that connects directly to your company's data sources and lets you query them in plain English -- no SQL, no separate BI tool. Ask it a question and it digs through connected data, surfaces the answer, and can spin up an interactive dashboard on the spot. It's OpenAI's push into the BI space: instead of exporting data into a separate analytics tool, the analysis happens inside the same chat interface your team already uses. Available today to ChatGPT Work customers who connect their data sources."
+          },
+          {
+            "title": "Async GRPO with LoRA across HF Jobs: a bucket, a proxy, and no NCCL",
+            "url": "https://huggingface.co/blog/asyncgrpo-lora-hfjobs",
+            "source": "Hugging Face",
+            "body": "Hugging Face published a way to run GRPO reinforcement fine-tuning with LoRA adapters across HF Jobs without needing NCCL or a tightly coupled GPU cluster. The trick: workers coordinate through an object storage bucket and a lightweight proxy instead of direct GPU-to-GPU communication, so training jobs run asynchronously across whatever compute HF Jobs happens to schedule. That loosens the biggest constraint on RL fine-tuning -- needing a stable, co-located multi-GPU setup -- and makes it possible to run GRPO training as loosely scheduled, replaceable jobs instead of a persistent cluster."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent harnesses and code-graph tooling dominate the stars this week.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "225k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own coding agent harness just crossed 225k stars, built around a plugin-first architecture -- the entire agent, from tool access to context handling, is composed out of plugins rather than hardcoded. That makes it a direct rival to Claude Code and Codex CLI's extension models, but with DeepSeek's own models as the default backend. For builders already deep in the DeepSeek ecosystem, it's the first harness built by the lab itself rather than the community, which usually means tighter integration with whatever DeepSeek ships next."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "117k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- docs, SQL schemas, configs, PDFs included -- into a queryable knowledge graph, skipping the vector store entirely. It runs local, deterministic AST parsing and builds a graph where every edge is explained, so instead of fuzzy semantic retrieval you get exact, traceable relationships between code and docs. It ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. For anyone tired of RAG hallucinating connections that don't exist, this is a bet that deterministic parsing beats embeddings for code-heavy repos."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "106k",
+            "lang": "Go",
+            "body": "Caveman is a proxy plus a skill that gets your coding agent to communicate in stripped-down, caveman-style text -- and cuts token usage by 65% doing it. Skip the pleasantries, articles, and verbose formatting that LLMs default to, and the same instructions cost a fraction of the tokens. It's a joke on the surface, but the underlying idea -- that a lot of token spend in agent loops is grammatical padding, not information -- is a real lever if you're running long agent sessions and watching the bill."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "59.3k",
+            "lang": "Python",
+            "body": "OpenMontage turns a coding assistant into a full video production studio: 12 production pipelines, over 100 tools, and 700+ skill and production-knowledge files, all open source. Instead of scripting FFmpeg calls by hand, you describe what you want -- a montage, a color grade, a cut sequence -- and the agent routes through the right pipeline. It's the most complete attempt yet at making video editing agentic rather than just AI-assisted, and it's built to plug into whatever coding agent you already use, not a standalone app."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's queue documents a real build end to end, so we're sitting this one out.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- see you tomorrow."
+  },
+  {
     "id": "2026-09-14",
     "date": "September 14, 2026",
     "title": "AI Pulse",
