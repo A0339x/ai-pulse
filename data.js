@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-09-16",
+    "date": "September 16, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Claude Opus 5 lands, ChatGPT branches into finance and dashboards, and GitHub goes all in on agent memory and token diets",
+    "intro": "Anthropic drops its new flagship model while OpenAI pushes ChatGPT into two new verticals -- finance and internal data work. On GitHub, the pattern of the week is agents that remember things and agents that say more with fewer tokens. Nothing in today's build-log crop actually shows its work end to end, so that section's thin.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new Claude flagship and two new ChatGPT verticals.",
+        "items": [
+          {
+            "title": "Claude Opus 5",
+            "url": "https://www.anthropic.com/news/claude-opus-5",
+            "source": "Anthropic",
+            "body": "Anthropic's new top-tier model is live, replacing the Opus 4 line as the flagship for coding and reasoning work. It's available now through the API, Claude apps, and the usual cloud partners (Bedrock, Vertex, Azure). If you've got an Opus-tier workload -- long agentic runs, big codebases, anything where you were previously reaching for the most capable model regardless of cost -- point it at Opus 5 and see where it breaks your existing prompts or eval harness. Anthropic hasn't published a separate model card breakdown yet beyond the launch post, so treat early claims about specific gains with your own benchmarks rather than the announcement."
+          },
+          {
+            "title": "Now everyone can put data to work",
+            "url": "https://openai.com/index/put-data-to-work",
+            "source": "OpenAI",
+            "body": "ChatGPT Work gets a Data agent: connect your company's data sources and ask questions in plain English to get interactive dashboards back, no analyst or BI tool required. It's aimed at the gap between 'I have a spreadsheet or warehouse' and 'I have an answer' -- the agent handles the querying and visualization steps itself rather than just writing SQL for you to run. Available now to ChatGPT Work customers. Worth a look if your team has been duct-taping code interpreter and file uploads together to get similar results."
+          },
+          {
+            "title": "Introducing ChatGPT for Financial Services",
+            "url": "https://openai.com/index/introducing-chatgpt-financial-services",
+            "source": "OpenAI",
+            "body": "A new vertical product bundles built-in financial data feeds with GPT-6 Astra for research, modeling, and client-ready output -- pitched at analysts and advisors who need sourced, defensible numbers rather than general web knowledge. This is OpenAI's clearest move yet into a regulated, data-heavy vertical, following the same enterprise-package playbook rather than shipping the capability into base ChatGPT. If you build fintech tooling, the interesting question is what data providers are actually wired in and whether the sourcing is auditable enough to put in front of a client."
+          },
+          {
+            "title": "Claude text watermark",
+            "url": "https://www.anthropic.com/news/claude-text-watermark",
+            "source": "Anthropic",
+            "body": "Claude-generated text can now carry an invisible watermark that lets you verify after the fact whether a piece of text came from Claude. It's a new detection primitive, not a visible tag -- the point is verifiability without changing how the output reads. If you're building anything downstream that needs to distinguish AI-authored text from human text (moderation, provenance tracking, academic integrity tooling), this is a new signal to check for rather than relying on statistical AI-detection guesswork."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent memory, codebase knowledge graphs, and a very literal war on tokens.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "118.3k",
+            "lang": "Python",
+            "body": "Turns a codebase -- plus its docs, SQL schemas, configs, and PDFs -- into a queryable knowledge graph, ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. The pitch is no vector store: it's local, deterministic AST parsing, and every edge in the graph comes with an explanation of why it exists. That's a real alternative to RAG-over-embeddings for code understanding, where semantic search often surfaces plausible-looking but wrong context. Worth trying if your agent keeps hallucinating relationships between files that a proper parse would get right."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "59.1k",
+            "lang": "Python",
+            "body": "An open-source AI memory system built around ChromaDB and MCP, positioned as the best-benchmarked option in a crowded field of agent-memory projects. Free, self-hostable, and designed to plug into anything speaking MCP rather than locking you into one agent framework. The memory space has gotten noisy -- lots of thin wrappers around a vector DB with a system prompt -- so the benchmarking claim is the thing to actually verify before adopting it, but it's a reasonable default if you want persistent memory without building your own retrieval layer."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "105.9k",
+            "lang": "Go",
+            "body": "A skill plus proxy that rewrites your coding agent's prompts and responses into terse, compressed 'caveman' phrasing to cut token usage by a claimed 65%. It's a genuinely different lever than context pruning or smaller models -- instead of sending less context, it sends the same intent in fewer words, betting that models parse compressed instructions fine even when they read like a caveman wrote them. Funny framing aside, if your agent bills scale with token count on long-running sessions, this is worth a real cost comparison against your current setup."
+          },
+          {
+            "title": "debpalash/VoiceStudio",
+            "url": "https://github.com/debpalash/VoiceStudio",
+            "source": "github.com",
+            "stars": "31.8k",
+            "lang": "Python",
+            "body": "A fully local, open-source alternative to ElevenLabs: voice cloning, voice design, video dubbing, dictation, transcription, and audiobook generation across 646 languages, running on your own GPU via CUDA. No API keys, no per-character billing, no sending voice data anywhere. The language count and the fully-local claim are the two things to stress-test -- if it holds up, it's a real option for anyone building voice features who's been priced out of or wary of cloud TTS providers."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing today actually documents a workflow you could copy.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-09-15",
     "date": "September 15, 2026",
     "title": "AI Pulse",
