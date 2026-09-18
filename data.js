@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-09-18",
+    "date": "September 18, 2026",
+    "title": "AI Pulse",
+    "subtitle": "OpenAI wires ads into ChatGPT, DeepSeek's harness tops 228k stars, and code search skips the vector store",
+    "intro": "Two product launches from OpenAI today -- a legal vertical and, more notably, ads inside ChatGPT itself. On GitHub, the story is infrastructure: a plugin-first agent harness from DeepSeek, and a codebase-to-knowledge-graph tool that skips embeddings entirely. Nothing in today's build write-ups cleared the bar for a real step-by-step workflow, so that section sits empty.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A legal vertical, ads in ChatGPT, and two agent-framework point releases with real teeth.",
+        "items": [
+          {
+            "title": "OpenHands v1.20.0",
+            "url": "https://github.com/OpenHands/OpenHands/releases/tag/v1.20.0",
+            "source": "OpenHands",
+            "body": "v1.20.0 ships three changes that matter if you're running agent profiles in production: profiles can now scope which secrets they're allowed to touch, Docker conversation runtime settings get forwarded properly, and automations can select from your saved agent profiles instead of redefining them each time. The secrets scoping is the one to notice -- previously a profile had blanket access to whatever secrets were configured, which is a real liability once you're running multiple agents with different trust levels. Worth the upgrade if you're using OpenHands for anything beyond a single local agent."
+          },
+          {
+            "title": "crewAI 1.15.22",
+            "url": "https://github.com/crewAIInc/crewAI/releases/tag/1.15.22",
+            "source": "crewAI",
+            "body": "New llm_overlay context variable lets you route different agent roles to different models within the same crew -- put your planner on a bigger model and your executor on something cheap, without forking config. This release also adds OpenRouter as a supported embedding provider, validates platform integrations during crew setup instead of failing at runtime, and starts recording reasons when a deployment fails to create. Small release, but the model-routing overlay is the kind of thing that saves real money once you're running crews at scale and don't want every agent hitting the same expensive model."
+          },
+          {
+            "title": "Introducing Astra for Law",
+            "url": "https://openai.com/index/astra-for-law",
+            "source": "OpenAI",
+            "body": "OpenAI's first vertical product built specifically for law firms: frontier models wired into firm-specific workflows, connected to a firm's own legal data sources, with confidentiality controls built for privileged client work. It's a packaged version of what firms like Cooley have been building ad hoc on top of ChatGPT, now shipped as a standing product instead of a custom integration. If you're building legal tech, this is direct competition; if you're at a firm evaluating AI vendors, it's now a real option next to the usual legal-AI startups."
+          },
+          {
+            "title": "Reimagining advertising with AI",
+            "url": "https://openai.com/index/reimagining-advertising-with-ai",
+            "source": "OpenAI",
+            "body": "OpenAI is putting ads inside ChatGPT for the first time via Sponsored Agents -- agents that businesses can pay to have recommended or surfaced during a relevant conversation, plus new tools for marketers and direct integrations with HubSpot and Shopify. This is the first concrete advertising mechanism inside the chat product itself, not just around it. Expect this to reshape how consumer-facing GPTs and agents get discovered, and expect scrutiny over sponsorship surfacing inside a conversation that's supposed to be giving a neutral answer."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent infrastructure dominates this week -- a plugin-first harness, a vector-store-free code graph, and a video production stack.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "228.9k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness, built on the premise that everything is a plugin -- the core runtime is thin, and every capability (tools, memory, orchestration) plugs in through a common interface called cordis. At nearly 230k stars it's already the most-starred repo in the space, which says less about polish and more about how badly the ecosystem wanted a harness that isn't locked to one lab's SDK. Worth a look if you're tired of rewriting the same agent scaffolding for every new model release."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "119.3k",
+            "lang": "Python",
+            "body": "Turns a whole codebase -- code, docs, SQL schemas, configs, PDFs -- into a queryable knowledge graph using local, deterministic AST parsing. No vector store, no embeddings, no fuzzy retrieval: every edge in the graph is explained, so when an agent asks what calls this function it gets a real answer instead of a similarity guess. Ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. It's a genuine alternative to RAG-over-codebase, and the right instinct: code structure is exact, so treat it exactly instead of embedding it."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "106.5k",
+            "lang": "Go",
+            "body": "A skill-plus-proxy pair that cuts your coding agent's token usage by roughly 65% by making it talk like a caveman -- stripped grammar, no filler, minimal tokens per turn, same intent. It's a joke on the surface, but the underlying move is legitimate: most agent verbosity is grammatical scaffolding the model doesn't need to reason well. Drop it in front of any Claude-compatible coding agent as a proxy and it rewrites prompts and responses down to the essentials. If your agent bills are getting out of hand, this is a cheap experiment."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "59.9k",
+            "lang": "Python",
+            "body": "The first open-source agentic video production system -- 12 production pipelines, 100+ tools, and 700+ skill and production-knowledge files that turn a coding agent (Claude, Copilot, Cursor) into a full video studio: scripting, shot planning, editing, grading. It's less AI-generates-a-video and more AI-runs-the-production-pipeline-a-human-editor-would, which is the more durable idea. If you've been bolting together ffmpeg scripts and one-off prompts for video work, this is the first real attempt at making that a reusable pipeline."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's queue documented a workflow you could actually replicate.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-09-16",
     "date": "September 16, 2026",
     "title": "AI Pulse",
