@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-09-20",
+    "date": "September 20, 2026",
+    "title": "AI Pulse",
+    "subtitle": "OpenAI leans into law and ads, DeepSeek's plugin harness rockets past 230k stars, and two HN posts show real LLM workflows",
+    "intro": "Today's shipping news is mostly OpenAI going vertical -- a legal product, an ads platform, and a formal misalignment-reporting channel with receipts. On GitHub, a plugin-everything agent harness from DeepSeek jumped to the top of the charts, and a deterministic code-to-knowledge-graph tool is worth your attention if RAG-over-codebase keeps letting you down.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "OpenAI pushes into law and advertising while Anthropic ships provenance tooling.",
+        "items": [
+          {
+            "title": "Introducing Astra for Law",
+            "url": "https://openai.com/index/astra-for-law",
+            "source": "OpenAI",
+            "body": "OpenAI launched a dedicated legal product today: frontier models wired into firm-specific workflows, with connectors to legal data sources and confidentiality controls built for privileged client work. It's OpenAI's first vertical package that ships access controls scoped specifically for legal practice, not generic enterprise permissions bolted on after the fact. That means a firm can now point the model at case files and client documents without building that data-governance layer itself. Paired with custom workflow templates for common practice tasks, this is meant to slot into how a law firm already works rather than asking lawyers to adapt to a generic chat interface."
+          },
+          {
+            "title": "Reimagining advertising with AI",
+            "url": "https://openai.com/index/reimagining-advertising-with-ai",
+            "source": "OpenAI",
+            "body": "OpenAI shipped its first advertising products today, including Sponsored Agents -- agent-mediated placements that live inside ChatGPT conversations instead of static banner units -- plus a set of tools for marketers and direct integrations with HubSpot and Shopify. That means brands and commerce platforms can now push campaigns straight into ChatGPT as a surface, not just optimize for it from outside. It's OpenAI's first real move into ad-supported product design, and it changes what building a marketing or commerce integration on top of ChatGPT looks like starting today."
+          },
+          {
+            "title": "Our framework for reporting model misalignment",
+            "url": "https://openai.com/index/model-misalignment-reporting-framework",
+            "source": "OpenAI",
+            "body": "OpenAI published a formal framework today for tracking, investigating, and disclosing when its own models misbehave, and shipped it alongside six actual case reports of unexpected or concerning model behavior. This is a recurring disclosure channel, not a one-off postmortem -- future incidents get logged and published against this same structure going forward. If you're building on OpenAI models, the six reports are worth reading now since they lay out the specific failure patterns OpenAI itself is flagging as concerning, rather than the sanitized version you'd normally get in a blog post."
+          },
+          {
+            "title": "Claude text watermark",
+            "url": "https://www.anthropic.com/news/claude-text-watermark",
+            "source": "Anthropic",
+            "body": "Anthropic shipped a text watermarking system for Claude today: an imperceptible signal embedded in generated text that lets anyone verify after the fact whether a passage came from Claude. It's opt-in provenance infrastructure -- publishers, educators, and platforms can now check Claude-authored text directly against the watermark instead of relying on guesswork from third-party AI-detector tools, which are notoriously unreliable. This is the kind of thing that matters more the moment someone actually needs it -- a dispute over authorship, a plagiarism check, a compliance audit -- rather than something you'll notice day to day."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "A plugin-everything agent harness tops the charts, plus a deterministic code graph and two fully local production tools.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "230.9k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness went from nothing to 230k stars this week, built around one idea: everything -- tools, memory, routing, even the harness's core behaviors -- is a plugin (\"dsh-plugin\"). That makes it less a fixed agent framework and more a plugin runtime for building agent frameworks, which explains the land rush around it. Instead of forking someone else's harness to swap one component, you write a plugin and drop it in. Worth a look if you've hit the ceiling of what a single opinionated agent framework lets you customize."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "119.8k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- docs, SQL schemas, configs, PDFs included -- into a queryable knowledge graph using local deterministic AST parsing instead of embeddings or a vector store. Every edge in the graph comes with an explanation, so you can see why the tool thinks two pieces of code are connected instead of just trusting a similarity score. It ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. If your RAG-over-codebase setup keeps hallucinating relationships between files, this is a deterministic alternative worth testing against it."
+          },
+          {
+            "title": "debpalash/VoiceStudio",
+            "url": "https://github.com/debpalash/VoiceStudio",
+            "source": "github.com",
+            "stars": "33.4k",
+            "lang": "Python",
+            "body": "VoiceStudio is a fully local, open-source stand-in for ElevenLabs: voice cloning, voice design, video dubbing, dictation, transcription, and audiobook creation, all running on your own GPU via CUDA. It covers 646 languages, an unusually wide range for a self-hosted voice stack. If you've been paying per-character for cloning or dubbing work, this is the first local option with feature parity across that whole workflow rather than just one piece of it (say, TTS alone)."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "60.3k",
+            "lang": "Python",
+            "body": "OpenMontage turns a coding agent into a full video production studio: 12 production pipelines, 100+ tools, and 700+ skill and production-knowledge files that teach the agent how to storyboard, edit, and produce video end-to-end. It's billed as the first open-source agentic video production system, and the skill-file approach means you point Claude Code, Cursor, or Copilot at it and get a working pipeline rather than a single one-shot generation call. Early and rough in places, but it's a real attempt at agentic video work beyond text-to-video demos."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Two HN posts document real, repeatable LLM workflows rather than one-off demos.",
+        "items": [
+          {
+            "title": "AI-generated posters don't have to be horrible",
+            "url": "https://john.hartnup.uk/2026/06/07/ai-event-posters.html",
+            "source": "Hacker News",
+            "author": "ereiamjh",
+            "body": "A practical breakdown of why AI-generated event posters usually look bad -- garbled text, generic composition, off typography -- and the iterative process the author used to avoid it: generate, diagnose specifically what's wrong, then either adjust the prompt or hand off to manual touch-up for the parts models still can't nail, like crisp readable type and deliberate layout. It's framed as a repeatable method rather than a single lucky result, which is likely why it's the top post on HN today at 1685 points and 876 comments -- a lot of people have hit the same wall trying to get a poster that doesn't scream 'made by AI.'"
+          },
+          {
+            "title": "How to Write with an LLM",
+            "url": "https://sockpuppet.org/blog/2026/09/17/how-to-write-with-an-llm/",
+            "source": "Hacker News",
+            "author": "joeriddles",
+            "body": "A working method for using an LLM as a writing partner instead of a writing replacement: when to draft a section yourself before involving the model, how to prompt for structural or line-level feedback instead of asking for a full rewrite, and where handing over too much flattens your own voice. It reads like a process refined over repeated use rather than a one-off experiment, which tracks with the engagement it's pulling -- 688 points and 396 comments. Worth a read if your current LLM writing loop is just 'generate, lightly edit, ship' and you want something tighter."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow with whatever ships next."
+  },
+  {
     "id": "2026-09-19",
     "date": "September 19, 2026",
     "title": "AI Pulse",
