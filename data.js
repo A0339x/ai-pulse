@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-09-21",
+    "date": "September 21, 2026",
+    "title": "AI Pulse",
+    "subtitle": "OpenAI plugs agents into law, data, and ads; GitHub gets weird with plugin harnesses and caveman-speak proxies.",
+    "intro": "OpenAI had the loudest day, shipping agent-native products across legal work, data analysis, and advertising -- all built on the same GPT-5.6/GPT-6 Astra reasoning layer. On GitHub, the novel ideas skew toward infrastructure: a fully plugin-native agent harness and a deterministic code-to-knowledge-graph tool, plus a genuinely funny token-compression hack that might actually save you money. Nothing in today's forum crop documented a real build worth attempting this weekend, so that section sits empty.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "OpenAI had the busiest day, wiring agents into legal work, data reporting, and ad tooling.",
+        "items": [
+          {
+            "title": "How V7 Gives AI Agents Institutional Memory",
+            "url": "https://openai.com/index/v7",
+            "source": "OpenAI",
+            "body": "V7 now runs on GPT-5.6 and turns a company's scattered internal files -- wikis, PDFs, Slack threads, whatever -- into context agents can actually use. Ask it something and it pulls source-linked answers straight from that pile instead of you copy-pasting documents into a chat window every time. The pitch is institutional memory: agents that know what your company knows, with citations back to where they got it. That's the piece most agent deployments still fake with retrieval hacks -- V7 packages it as infrastructure you plug your own docs into and get grounded, traceable answers out."
+          },
+          {
+            "title": "Introducing Astra for Law",
+            "url": "https://openai.com/index/astra-for-law",
+            "source": "OpenAI",
+            "body": "OpenAI for Law now ships as a dedicated product: frontier models wired into firm-specific workflows, connected to a firm's own legal data sources, with confidentiality controls built for client work. It's not just ChatGPT with a legal skin -- Astra for Law lets firms plug in their document management systems and precedent libraries so answers are grounded in the firm's actual matters, not generic case law. Paired with a Cooley IPO case study running the same week, this is OpenAI's clearest signal yet that it's building industry-specific stacks -- data connectors plus controls plus workflow -- rather than leaving vertical use cases to wrappers built on the API."
+          },
+          {
+            "title": "Hex Turns Complex Analysis into Visual Reports with GPT-6 Astra",
+            "url": "https://openai.com/index/hex-gpt-6-astra",
+            "source": "OpenAI",
+            "body": "Hex's data agents can now turn a raw analysis into an interactive visualization automatically, powered by GPT-6 Astra. Instead of an analyst writing a query, getting a table, and building a chart by hand, the agent produces a report employees actually want to share -- formatted, visual, ready to send up the chain. Same pattern as the other OpenAI launches this week: GPT-6 Astra isn't a new base model announcement, it's a stronger reasoning layer getting plugged into partner products so the output looks less like a chatbot transcript and more like a deliverable."
+          },
+          {
+            "title": "Reimagining Advertising with AI",
+            "url": "https://openai.com/index/reimagining-advertising-with-ai",
+            "source": "OpenAI",
+            "body": "OpenAI is rolling out Sponsored Agents plus new marketer tooling and direct integrations with HubSpot and Shopify. Practically: brands can now have an agent-driven presence inside ChatGPT's answers rather than a static ad slot, and marketers get tools to manage that presence without building custom integrations from scratch. The HubSpot and Shopify hooks mean a merchant's product catalog or a campaign team's data can feed straight into what ChatGPT surfaces. It's the first concrete shape of ChatGPT-as-ad-platform, landing the same week OpenAI pushed agent-native products across law and enterprise data -- agents are now the interface for commerce, not just search."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "The repos gaining ground this week are about agent infrastructure, not another chat wrapper.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "232.2k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own harness for running coding agents treats every capability -- tool use, memory, review, whatever -- as a swappable plugin instead of a hardcoded pipeline. That's the novel bit: most agent harnesses bake in a fixed loop and let you tweak prompts around the edges; this one lets you rip out or replace the loop's actual stages. For builders already deep in the Claude Code / Cursor plugin ecosystem, it's a look at what a fully plugin-native harness looks like when a frontier lab builds it instead of a hobbyist, and the star velocity says it's hitting a nerve about how locked-down existing harnesses feel."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "120.1k",
+            "lang": "Python",
+            "body": "Graphify turns an entire codebase -- source, docs, SQL schemas, config files, even PDFs -- into a queryable knowledge graph, using deterministic local AST parsing instead of embeddings or a vector store. Every edge in the graph comes with an explanation of why it's there, so you can audit what the tool thinks connects to what. It ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. The pitch against RAG-based code search is accuracy: AST parsing doesn't hallucinate relationships the way embedding similarity can, which matters once you're asking an agent to make changes across a large, unfamiliar codebase instead of just answering questions about it."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "107.1k",
+            "lang": "Go",
+            "body": "Caveman is a skill-plus-proxy combo that rewrites your prompts into blunt, caveman-style phrasing before they hit the model, and claims a 65% token cut doing it. It's funny on its face, but the underlying idea is real: a lot of prompt and system-message boilerplate is padding models don't need to perform well, and stripping it to bare instructions saves real money at scale. Whether the savings hold up on your workload versus prompt caching or a smaller model is worth checking yourself, but it's a cheap experiment to run against a repetitive agent pipeline."
+          },
+          {
+            "title": "debpalash/VoiceStudio",
+            "url": "https://github.com/debpalash/VoiceStudio",
+            "source": "github.com",
+            "stars": "33.8k",
+            "lang": "Python",
+            "body": "VoiceStudio is a fully local, open-source stand-in for ElevenLabs: voice cloning, voice design, video dubbing, dictation, transcription, and audiobook generation, running on your own GPU across 646 languages. Nothing here is a new technique, but bundling all of it into one local pipeline -- so you're not stitching together five API keys and paying per character -- is genuinely useful if you build anything voice-heavy and want to keep audio, and cost, off someone else's servers."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's forum crop documented an actual end-to-end build, so we're sitting this one out.",
+        "items": []
+      }
+    ],
+    "closing": "Back tomorrow with whatever ships next."
+  },
+  {
     "id": "2026-09-20",
     "date": "September 20, 2026",
     "title": "AI Pulse",
