@@ -3,6 +3,83 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-09-22",
+    "date": "September 22, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Claude gets a watermark, OpenAI goes to law school, and GitHub can't stop building agent memory",
+    "intro": "Light day for genuine new capability -- most of the lab blogs today are policy and case-study filler. The real signal is in two verticals going after professional workflows (law, video) and a GitHub trend that keeps repeating: agents need somewhere to remember things and somewhere to run. Nothing in the Built With AI queue had enough workflow detail to clear the bar today.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A quiet news day, but a few real capability changes snuck through.",
+        "items": [
+          {
+            "title": "Introducing Astra for Law",
+            "url": "https://openai.com/index/astra-for-law",
+            "source": "OpenAI",
+            "body": "OpenAI launched a dedicated legal vertical: frontier intelligence wired into custom firm workflows, connected legal data sources, and legal-grade controls for confidential client work. This isn't a general ChatGPT wrapper -- it's a packaged product aimed at law firms that need document review, research, and drafting tied to their own case files and matter data, with the access controls and audit trail that confidential client work requires. Firms get a way to plug frontier models into their existing systems instead of copy-pasting into a chat window, which changes what's actually usable in a regulated practice today versus what was theoretical yesterday."
+          },
+          {
+            "title": "Claude text watermark",
+            "url": "https://www.anthropic.com/news/claude-text-watermark",
+            "source": "Anthropic",
+            "body": "Anthropic shipped a watermarking scheme for text Claude generates, giving anyone a way to check whether a piece of writing came out of the model. Text watermarking is a harder problem than image watermarking because you can't hide bits in pixels -- it has to survive editing, paraphrasing, and copy-paste without changing how the output reads. If this holds up under adversarial testing, it's a real tool for platforms and editors trying to flag AI-generated text at scale, not just a research paper."
+          },
+          {
+            "title": "OpenHands v1.21.0",
+            "url": "https://github.com/OpenHands/OpenHands/releases/tag/v1.21.0",
+            "source": "OpenHands (GitHub)",
+            "body": "OpenHands' coding agent can now request Docker execution workspaces directly from Docker servers, instead of relying solely on locally provisioned sandboxes. That's a meaningful change for anyone running OpenHands at scale: agents get isolated, disposable containers on demand rather than a fixed pool you have to manage yourself. The release also fixes stale conversation history merges and Forgejo PR/issue querying, both real papercuts if you've been running self-hosted git forges with this agent."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's GitHub momentum is all about giving agents somewhere to remember and somewhere to run.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "120.4k",
+            "lang": "Python",
+            "body": "Turns a whole codebase -- docs, SQL schemas, configs, PDFs included -- into a queryable knowledge graph, using local deterministic AST parsing instead of a vector store. Every edge in the graph is explained, so when you ask why two pieces of code are connected you get a real answer instead of a cosine-similarity score. It ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI, which means any of those agents can query your repo's actual structure instead of guessing from embeddings. For anyone tired of RAG hallucinating relationships that don't exist, this is a genuinely different approach to codebase context."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "60.9k",
+            "lang": "Python",
+            "body": "An open-source agentic video production system that turns your existing AI coding assistant into a full production studio -- 12 production pipelines, 100+ tools, and more than 700 agent skill and production-knowledge files. Instead of one model trying to generate a finished video end to end, it breaks the job into the pipeline steps a real production house would use (storyboarding, shot generation, editing, grading) and lets your coding agent orchestrate each stage with the right tool. It's the first project to treat video production as an agentic workflow problem rather than a single generation call."
+          },
+          {
+            "title": "herdrdev/herdr",
+            "url": "https://github.com/herdrdev/herdr",
+            "source": "github.com",
+            "stars": "40.2k",
+            "lang": "Rust",
+            "body": "A runtime built specifically for coding agents to live on -- process isolation, scheduling, and coordination for running multiple agents on one machine, written in Rust for low overhead. As more people run several coding agents at once (one per repo, one per task), the gap between \"agent framework\" and \"thing that actually manages agent processes safely\" has been getting bigger. Herdr positions itself as that missing infra layer other agent tooling can sit on top of, rather than another wrapper around a model API."
+          },
+          {
+            "title": "debpalash/VoiceStudio",
+            "url": "https://github.com/debpalash/VoiceStudio",
+            "source": "github.com",
+            "stars": "34.2k",
+            "lang": "Python",
+            "body": "A fully local, open-source alternative to ElevenLabs: voice cloning, voice design, video dubbing, dictation, transcription, and audiobook creation across 646 languages, with CUDA acceleration. Everything runs on your own hardware, which matters for anyone who can't send voice data to a third-party API for privacy or cost reasons. The language count and dubbing support in particular put it ahead of most local TTS projects, which tend to cover a handful of major languages well and stop there."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's queue documented a real end-to-end workflow with enough detail to act on.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-09-21",
     "date": "September 21, 2026",
     "title": "AI Pulse",
