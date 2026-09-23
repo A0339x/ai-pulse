@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-09-23",
+    "date": "September 23, 2026",
+    "title": "AI Pulse",
+    "subtitle": "GPT-6 grows a family, Transformers swallows llama.cpp quants, and GitHub's climbing list runs from serious to absurd",
+    "intro": "OpenAI spent the day padding out the GPT-6 lineup and fixing the boring-but-expensive parts of running it at scale, while Hugging Face quietly erased the line between Transformers and llama.cpp. On GitHub, the climbing list is a genuine mixed bag: a deterministic alternative to RAG-style code search, a fully local voice studio, and a proxy that saves tokens by making your agent talk like a caveman. Nothing in today's Built With AI queue cleared the bar for an actual documented build -- just launches and hot takes.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "OpenAI expands GPT-6 and fixes its caching story, Hugging Face folds llama.cpp into Transformers, and OpenHands ships admin controls.",
+        "items": [
+          {
+            "title": "Introducing GPT-6 Sol and Luna",
+            "url": "https://openai.com/index/introducing-gpt-6-sol-and-luna",
+            "source": "OpenAI",
+            "body": "OpenAI adds two new models to the GPT-6 lineup: Sol and Luna. Both trade some of the flagship's raw capability for lower latency and cost -- Sol pitched for everyday drafting, coding, and research work, Luna tuned even lighter for high-volume, cost-sensitive jobs. Rather than one model to rule everything, OpenAI is now selling a ladder: full GPT-6 for frontier reasoning, Sol for the bulk of daily tasks, Luna for anything you'd otherwise route to a cheaper third-party model just to save money. If you've been overpaying by defaulting to the flagship for simple tasks, this is the tier built for that."
+          },
+          {
+            "title": "Better prompt caching for GPT-6",
+            "url": "https://openai.com/index/better-prompt-caching-for-gpt-6",
+            "source": "OpenAI",
+            "body": "GPT-6 gets a rework of prompt caching: higher cache hit rates, explicit cache breakpoints you can set in the prompt itself, and new diagnostics that show exactly what got cached and what didn't. Before, caching was mostly a black box -- send similar prompts and hope the system reuses the prefix. Now you mark breakpoints deliberately and see hit/miss rates per request, so you can tune prompt structure around them instead of guessing. For anything running the same system prompt or long context across thousands of calls -- agents, batch jobs, chat apps -- this is a direct latency and cost cut, live today."
+          },
+          {
+            "title": "Transformers now runs llama.cpp quants",
+            "url": "https://huggingface.co/blog/transformers-llama-cpp-quants",
+            "source": "Hugging Face",
+            "body": "Hugging Face's Transformers library can now load and run llama.cpp-style GGUF quantized models directly, no separate llama.cpp runtime required. Previously, using a quantized GGUF checkpoint meant leaving the Transformers ecosystem entirely -- different tooling, different serving stack, different fine-tuning path. Now those quants slot into the same pipelines, trainers, and generate() calls as full-precision models. That means you can quantize down for memory-constrained inference and still use Transformers' existing fine-tuning, evaluation, and serving code instead of maintaining two separate toolchains side by side."
+          },
+          {
+            "title": "OpenHands v1.22.0",
+            "url": "https://github.com/OpenHands/OpenHands/releases/tag/v1.22.0",
+            "source": "GitHub",
+            "body": "OpenHands' latest release lets you test remote MCP servers directly on cloud backends through the app server, instead of only against local instances. It also opens Git Sync -- previously limited -- to org admins on cloud backends, so teams can manage repo connections centrally rather than per-user. Smaller changes round out the release, including new Turkish UI strings. If you're running OpenHands as a hosted coding agent for a team, this release is about admin control and MCP testing, not new agent capabilities."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's stars split between genuinely new architecture and genuinely funny token-saving hacks.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "120.8k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- code, docs, SQL schemas, configs, PDFs -- into a queryable knowledge graph, shipping as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. The novel part: no vector store. It's deterministic AST parsing, so every edge in the graph is explained rather than guessed at via embedding similarity. For anyone tired of RAG search returning plausible-but-wrong context, this is a different bet -- structure over semantics. Point it at a repo and ask your agent questions that span code, schema, and docs in one query instead of three separate searches."
+          },
+          {
+            "title": "debpalash/VoiceStudio",
+            "url": "https://github.com/debpalash/VoiceStudio",
+            "source": "github.com",
+            "stars": "34.8k",
+            "lang": "Python",
+            "body": "VoiceStudio is a fully local, open-source stand-in for ElevenLabs: voice cloning, voice design, video dubbing, dictation, transcription, and audiobook generation, all running offline on your own GPU across 646 languages. No API keys, no per-character billing, no audio leaving your machine. It's CUDA-accelerated, so you'll want real hardware to get usable speed, but for anyone building voice features who's hit ElevenLabs' pricing or privacy limits, this is a genuine drop-in alternative rather than a thin wrapper around someone else's API."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "107.5k",
+            "lang": "Go",
+            "body": "Caveman is a proxy plus skill for coding agents that rewrites prompts and responses into blunt, stripped-down phrasing -- 'why use many token when few token do trick' -- and claims a 65% cut in token usage as a result. It's a joke wrapped around a real cost lever: verbose, hedge-y agent chatter is expensive at scale, and forcing terser input and output actually moves the token count. Worth trying on any high-volume agent loop where you're paying per token and the model's politeness is costing you real money."
+          },
+          {
+            "title": "alibaba/open-code-review",
+            "url": "https://github.com/alibaba/open-code-review",
+            "source": "github.com",
+            "stars": "40.1k",
+            "lang": "Go",
+            "body": "Alibaba open-sourced its internal code review tool: a hybrid pipeline that pairs deterministic static analysis with an LLM agent for the parts rules can't catch. It posts precise, line-level comments, ships a built-in multi-language ruleset (null pointer exceptions, thread-safety bugs, XSS, SQL injection), and works with both OpenAI and Anthropic APIs. The pitch: pure-LLM review tools miss the boring, deterministic bugs static analysis catches easily, while pure static analysis misses anything that needs actual reasoning. This runs both and merges the output, battle-tested at Alibaba's own PR volume."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's queue documented a real build end-to-end -- check back tomorrow.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-09-22",
     "date": "September 22, 2026",
     "title": "AI Pulse",
