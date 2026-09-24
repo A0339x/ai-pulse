@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-09-24",
+    "date": "September 24, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Anthropic watermarks Claude's text the same week a watermark-remover trends on GitHub, and agent platforms keep turning into marketplaces",
+    "intro": "Today's shipping news skews toward provenance and packaging: Anthropic starts marking Claude's text output as its own, and two agent platforms lean further into pre-built experts instead of blank canvases. GitHub's climbers this week are all about doing more with less -- less vector store, less token spend, less app-building from scratch. Nothing in today's Built With AI pile actually showed its work, so that section sits empty.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A provenance feature, a new safety benchmark, and two agent platforms getting more opinionated about packaging.",
+        "items": [
+          {
+            "title": "Claude text watermark",
+            "url": "https://www.anthropic.com/news/claude-text-watermark",
+            "source": "Anthropic",
+            "body": "Anthropic now embeds a watermark in text Claude generates, so anyone can check after the fact whether a piece of writing came from the model. It's aimed at the same problem C2PA and other provenance standards are chasing: proving what's AI-written without relying on detector tools that guess and often get it wrong. The signal rides invisibly in the model's token choices, so there's no visible tag and no extra step for users -- it's on by default. It won't survive heavy paraphrasing, but it gives platforms, schools, and newsrooms a first real signal to check against. Fittingly, a tool built specifically to strip this kind of watermark hit GitHub's trending page the same week (see Climbing)."
+          },
+          {
+            "title": "OpenHands v1.23.0",
+            "url": "https://github.com/OpenHands/OpenHands/releases/tag/v1.23.0",
+            "source": "All-Hands-AI/OpenHands",
+            "body": "OpenHands 1.23.0 ships a universal macOS DMG that bundles per-architecture runtimes, so Intel and Apple Silicon users install the same file instead of picking a build. The release also adds Light+ and Solarized Light themes to the desktop app and starts tagging Agent Canvas telemetry by deployment kind, letting the team -- and self-hosters -- separate OSS usage data from cloud usage. None of these are headline features alone, but together they clear the friction that actually slows teams running OpenHands as a daily coding-agent driver: installation, visual comfort, and observability."
+          },
+          {
+            "title": "AutoGPT Platform v0.8.1",
+            "url": "https://github.com/Significant-Gravitas/AutoGPT/releases/tag/autogpt-platform-beta-v0.8.1",
+            "source": "Significant-Gravitas/AutoGPT",
+            "body": "AutoGPT's platform update adds eight machine-built 'generalist expert' agents plus two named specialists -- Zara for go-to-market strategy, and Max, now folded into the senior sales package. The bigger structural change is a skills marketplace seeded from a private skills catalog: instead of building an agent's skill set from scratch, you pull from a library of pre-built routines. It's a shift from 'build your own agent' toward 'assemble one from parts,' which matters if you've been burned by the blank-canvas problem in agent frameworks. Worth a look if you want pre-packaged expert agents instead of prompting one into existence yourself."
+          },
+          {
+            "title": "Introducing MentalHealthBench",
+            "url": "https://openai.com/index/introducing-mentalhealthbench",
+            "source": "OpenAI",
+            "body": "OpenAI released MentalHealthBench, an expert-informed benchmark for scoring how models handle realistic mental health conversations -- crisis language, ambiguous distress signals, and the moments where a non-refusing answer can still be the wrong one. It's a gap existing safety evals don't cover well: harmlessness benchmarks mostly test whether a model refuses, not whether its actual answer helps someone in distress. If you're building anything mental-health-adjacent -- wellness apps, journaling tools, support chatbots -- this is now a public bar to test against and cite, and one your product and legal teams will likely start asking about soon."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's novel ideas are about skipping the vector store, the tokens, and the from-scratch app build.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "121k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- docs, SQL schemas, configs, and PDFs included -- into a queryable knowledge graph using local, deterministic AST parsing instead of a vector store. Every edge in the graph is explained, so asking 'what calls this function' or 'what config drives this table' gets you a traceable path instead of an embedding's best guess. It ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. The pitch is direct: RAG's fuzzy retrieval is the wrong tool for code, where relationships are exact and enumerable, not probabilistic. If you've fought hallucinated call graphs from a RAG-based coding assistant, this is worth trying instead."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "108k",
+            "lang": "Go",
+            "body": "Caveman is a proxy plus skill that rewrites your coding agent's internal chatter into terse, caveman-style phrasing -- 'fix bug' instead of a paragraph of scaffolding -- and claims a 65% cut in token usage with no drop in task success. It's a blunt instrument, but it points at something real: a lot of agent framework verbosity is boilerplate the model doesn't actually need to reason well. If your Claude Code or Cursor bills are creeping up from long-running agent sessions, this is a cheap experiment to run before reaching for a smaller model."
+          },
+          {
+            "title": "calesthio/OpenMontage",
+            "url": "https://github.com/calesthio/OpenMontage",
+            "source": "github.com",
+            "stars": "61.1k",
+            "lang": "Python",
+            "body": "OpenMontage turns a general coding agent into a full video production studio: 12 production pipelines, over 100 tools, and 700+ skill and production-knowledge files covering everything from shot planning to color work. It runs inside Claude, Cursor, or Copilot rather than as a standalone app, so the agent you already use for code becomes the one cutting your video. It's billed as the first open-source agentic video system at this scope, and the sheer file count suggests real production knowledge encoded as skills, not just API wrapper calls. Worth a look if you want a video pipeline living in your existing agent instead of a new app to learn."
+          },
+          {
+            "title": "guillaumemeyer/watermarks-remover",
+            "url": "https://github.com/guillaumemeyer/watermarks-remover",
+            "source": "github.com",
+            "stars": "22.7k",
+            "lang": "Python",
+            "body": "Watermarks-remover strips the invisible watermarks that AI tools embed in generated text, images, and video, so you can reclaim ownership signals over content you made yourself. It's privacy-first and runs locally, arriving the same week Anthropic started watermarking Claude's text output (see Shipping). The repo's framing is deliberate: as watermarking and C2PA provenance standards spread, tools for removing them spread just as fast. Useful if you're stripping metadata from your own AI-assisted work before publishing, and a preview of the adversarial dynamic every provenance standard will have to survive."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing today documented a real step-by-step build -- just incident reports and product launches.",
+        "items": []
+      }
+    ],
+    "closing": "Back tomorrow with whatever ships next."
+  },
+  {
     "id": "2026-09-23",
     "date": "September 23, 2026",
     "title": "AI Pulse",
