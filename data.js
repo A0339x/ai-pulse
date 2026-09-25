@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-09-25",
+    "date": "September 25, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Gemini gets a face, OpenAI scores hard conversations, and GitHub trades vector stores for graphs",
+    "intro": "DeepMind pushed two updates to Gemini's live stack today -- a real-time avatar and a new TTS model underneath it -- while OpenAI published a narrow benchmark for a place models keep getting wrong: mental health conversations. On GitHub, the more interesting climbers are trading fuzzy RAG guessing for deterministic answers. Nothing in today's build write-ups cleared the bar for a full workflow teardown, so this one leans on shipping and climbing.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Voice and vision moved forward at DeepMind, and the open source agent stack kept grinding on daily-driver polish.",
+        "items": [
+          {
+            "title": "OpenHands v1.24.0",
+            "url": "https://github.com/OpenHands/OpenHands/releases/tag/v1.24.0",
+            "source": "OpenHands (GitHub)",
+            "body": "The open source coding agent shipped a release focused on daily-driver ergonomics rather than headline features. You can now toggle all workspace folders at once from the Conversations header instead of clicking through each one, and OpenAI subscription caches are now scoped per backend so switching providers doesn't bleed cached auth state across them. The home screen copy also got reframed around actual engineering work instead of generic pitch language. Small changes, but they're the kind of friction removal that matters once you're running OpenHands as your default agent instead of just trying it out."
+          },
+          {
+            "title": "Gemini 3.8 Live with Live Avatar",
+            "url": "https://deepmind.google/blog/introducing-gemini-38-live-with-live-avatar/",
+            "source": "DeepMind",
+            "body": "Gemini's real-time voice mode now renders an animated avatar that speaks and reacts in sync with the conversation, instead of just streaming audio. It runs on the same low-latency live infrastructure Gemini already uses for screen-share and camera sessions, with a visual layer added on top. For builders, the live API now exposes an avatar-rendering option alongside plain audio, which matters for anything customer-facing -- support bots, tutoring apps, companions -- where a visible presence changes how people actually engage with the thing."
+          },
+          {
+            "title": "Gemini 3.8 Text-to-Speech",
+            "url": "https://deepmind.google/blog/say-hello-to-gemini-38-text-to-speech/",
+            "source": "DeepMind",
+            "body": "Shipping alongside the avatar update, Gemini 3.8 gets a new text-to-speech model available through the API. It's the voice layer under the same live stack, so anything built on Gemini's live avatar or plain voice mode now runs on this model instead of the older one. The practical upshot: if you're already on Gemini for the rest of your pipeline, that's one fewer third-party TTS integration to maintain, and one more place to check before you go shopping for a voice vendor."
+          },
+          {
+            "title": "Introducing MentalHealthBench",
+            "url": "https://openai.com/index/introducing-mentalhealthbench",
+            "source": "OpenAI",
+            "body": "OpenAI released a new benchmark, built with mental health experts, that scores how models handle realistic mental health conversations -- both helpfulness and safety in cases where the wrong response carries real weight. If you're building anything that touches emotional or crisis-adjacent conversations, this gives you a public eval to run your own model or system prompt against instead of guessing. It's narrower and higher-stakes than general safety benchmarks, and worth checking even outside mental health products, since support and companion chat surfaces drift into this territory more often than teams plan for."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "GitHub's agent tooling keeps splitting into narrower niches -- the useful ones swap fuzzy retrieval for something deterministic.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "235.8k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness shot to the top of the charts this week, built around one idea: everything -- models, tools, memory, even the CLI itself -- is a plugin loaded through its \"cordis\" plugin system. That's a different bet than most agent frameworks, which hardcode a tool-calling loop and bolt extensions onto it. Here the core loop itself is swappable, so you can run the harness against non-DeepSeek models or restructure how it plans without forking the project. Worth a look if you're tired of agent frameworks that only flex within their own assumptions."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "121.4k",
+            "lang": "Python",
+            "body": "Turns a codebase -- docs, SQL schemas, configs, PDFs included -- into a queryable knowledge graph using local, deterministic AST parsing instead of embeddings. No vector store, no similarity-search fuzziness: every edge in the graph is explained, so when an agent asks what calls a function or what config drives a table, it gets a traceable answer instead of a nearest-neighbor guess. Ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. If RAG has ever hallucinated a code relationship that doesn't exist, this is the deterministic alternative."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "107.8k",
+            "lang": "Go",
+            "body": "A proxy and skill combo that rewrites your prompts into terse, caveman-style phrasing before they hit the model, claiming a 65% cut in token usage. Funny premise, real technique underneath: most politely-phrased prompts carry tokens that don't change model behavior, and stripping them down works better than you'd expect for coding-agent tasks. It sits in front of Claude and other coding agents as a transparent proxy, so you don't have to change your workflow -- just your bill."
+          },
+          {
+            "title": "debpalash/VoiceStudio",
+            "url": "https://github.com/debpalash/VoiceStudio",
+            "source": "github.com",
+            "stars": "35.4k",
+            "lang": "Python",
+            "body": "A fully local, open source alternative to ElevenLabs: voice cloning, voice design, video dubbing, dictation, transcription, and audiobook generation across 646 languages, running on your own GPU via CUDA. No API keys, no per-character billing, no audio leaving your machine. For anyone who's hit ElevenLabs' pricing ceiling or needs offline/on-prem voice generation for compliance reasons, this is the first local stack with coverage broad enough to actually replace it rather than just approximate it."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's feed documented a full build -- tools, prompts, what broke -- closely enough to earn a spot.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-09-24",
     "date": "September 24, 2026",
     "title": "AI Pulse",
