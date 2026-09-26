@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-09-26",
+    "date": "September 26, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Gemini gets a face, Claude gets a watermark, and a caveman proxy cuts your token bill",
+    "intro": "Today's shipping news skews toward live features and trust infrastructure -- an avatar for Gemini's voice mode, private persistent memory for Google's confidential compute layer, a watermark for Claude text, and a new mental-health benchmark from OpenAI. On GitHub, agent tooling still dominates the leaderboard, but a deterministic knowledge-graph-over-code tool and a genuinely funny token-saving trick are worth your attention. Nothing in today's build write-ups documented a real end-to-end workflow, so that section sits out.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Four real feature launches today, no customer-case-study filler.",
+        "items": [
+          {
+            "title": "Introducing Gemini 3.8 Live with Live Avatar",
+            "url": "https://deepmind.google/blog/introducing-gemini-38-live-with-live-avatar/",
+            "source": "DeepMind",
+            "body": "Gemini's real-time Live mode now renders a responsive visual avatar alongside its voice, so a live conversation gets a face that reacts in sync with what it's saying instead of a waveform or a static icon. It ships inside Gemini 3.8 Live, the low-latency voice-and-vision mode built for back-and-forth conversation rather than single-shot prompts. Previously Live was audio (and sometimes screen or camera) only -- now the avatar layer adds a visual presence you can talk to face-to-face inside the Gemini app, closing the gap with dedicated video-avatar products that have been demoed elsewhere but not shipped at this scale."
+          },
+          {
+            "title": "Advancing Private AI Compute with secure, server-side memory",
+            "url": "https://deepmind.google/blog/advancing-private-ai-compute-with-secure-server-side-memory/",
+            "source": "DeepMind",
+            "body": "Private AI Compute -- Google's confidential-computing layer that runs personal Gemini features on cloud silicon without exposing your data to Google -- now supports persistent memory. Gemini can retain context about you across sessions (preferences, past conversations, ongoing projects) while the underlying data stays encrypted and inaccessible outside the secure enclave, instead of every session starting cold or memory living unprotected on a server. It's the infrastructure piece that lets \"the AI remembers you\" features scale past a single device without turning into a server-side privacy liability."
+          },
+          {
+            "title": "Claude text watermark",
+            "url": "https://www.anthropic.com/news/claude-text-watermark",
+            "source": "Anthropic",
+            "body": "Anthropic is now embedding an invisible statistical watermark in Claude's text output -- a signal baked into token selection that a detector can later check to flag whether a passage came from Claude. It doesn't change how the text reads to a human, but it gives platforms, publishers, and researchers a way to verify AI authorship after the fact, something Claude output couldn't offer before. It lands alongside a wave of biosecurity and safeguard announcements from Anthropic this week, positioning provenance-checking as part of the same trust stack as content filtering and model safeguards."
+          },
+          {
+            "title": "Introducing MentalHealthBench",
+            "url": "https://openai.com/index/introducing-mentalhealthbench",
+            "source": "OpenAI",
+            "body": "OpenAI released a new benchmark built with mental health experts to score how models handle realistic, high-stakes conversations -- crisis disclosures, ambiguous distress signals, boundary-testing -- for both helpfulness and safety. Most evals for this kind of conversation have been internal and ad hoc; MentalHealthBench gives labs a shared, expert-informed yardstick to compare models on a domain where getting it wrong has real consequences. If it gets adopted the way jailbreak and bias benchmarks did, expect model cards to start citing scores on it within a few release cycles."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent tooling still owns the leaderboard, but two entries do something actually new.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "236.7k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness just crossed 236k stars on a simple pitch: everything -- tools, memory, retrieval, orchestration -- is a plugin, hot-swappable through its \"cordis\" plugin system rather than baked into the core loop. That's a real architectural bet against the monolithic-agent-loop pattern most harnesses still ship with, and it's DeepSeek putting real weight behind an open, extensible agent runtime instead of just a model release. Worth a look if you're building your own agent stack and tired of forking someone else's hardcoded tool list."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "121.6k",
+            "lang": "Python",
+            "body": "Graphify turns a whole codebase -- docs, SQL schemas, configs, PDFs included -- into a queryable knowledge graph using local, deterministic AST parsing, no vector store and no embeddings. Every edge in the graph is explained, so instead of a fuzzy similarity match you get a traceable \"this function calls this table which is defined in this schema\" answer. It ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. For anyone burned by RAG-over-code giving confidently wrong answers, this is a genuinely different way to build codebase context."
+          },
+          {
+            "title": "alibaba/open-code-review",
+            "url": "https://github.com/alibaba/open-code-review",
+            "source": "github.com",
+            "stars": "41.5k",
+            "lang": "Go",
+            "body": "Alibaba open-sourced the code review tool it runs internally at scale: deterministic static-analysis pipelines (catching NPEs, thread-safety bugs, XSS, SQL injection) layered with an LLM agent for the judgment calls a linter can't make. It posts precise line-level comments instead of a wall of generic feedback, covers multiple languages, and works with either OpenAI or Anthropic models. The pitch is that pure-LLM review tools hallucinate and pure-static tools miss context -- this tries to get the reliability of one and the judgment of the other."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "107.9k",
+            "lang": "Go",
+            "body": "Caveman is a proxy plus a skill that rewrites your prompts into terse, caveman-style phrasing before they hit the model, claiming a 65% cut in token usage with no real drop in output quality. It's part joke, part legitimate observation: a lot of prompt and instruction text is grammatical padding a model doesn't need to get the job done. If you're paying per-token on a high-volume agent workflow, it's worth benchmarking against your own prompts even if you never ship the caveman voice to production."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing today documented a full workflow worth replicating -- skipping the section rather than stretch the bar.",
+        "items": []
+      }
+    ],
+    "closing": "Back tomorrow with whatever ships next."
+  },
+  {
     "id": "2026-09-25",
     "date": "September 25, 2026",
     "title": "AI Pulse",
