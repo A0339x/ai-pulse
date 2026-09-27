@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-09-27",
+    "date": "September 27, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Gemini gets a face and a voice, Claude gets a watermark, and GitHub goes deterministic (and caveman)",
+    "intro": "Google's Gemini 3.8 family drops with a live avatar and a new TTS voice, Anthropic quietly ships a watermark for Claude's text, and OpenAI releases a benchmark for a domain nobody had standardized yet. On GitHub, the interesting repos this week trade vector-store guessing for deterministic answers -- and one cuts your token bill by making your agent talk like a caveman. Nothing in the build-log pile today actually shows its work, so that section sits empty.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Google ships a face and a memory upgrade, Anthropic ships provenance, OpenAI ships an eval.",
+        "items": [
+          {
+            "title": "Claude text watermark",
+            "url": "https://www.anthropic.com/news/claude-text-watermark",
+            "source": "Anthropic",
+            "body": "Anthropic is rolling out an invisible watermark embedded directly in Claude's text output. It's a statistical signal baked into token selection that survives copy-paste and light editing, paired with a verification tool that tells you whether a given passage came from Claude. Until now there was no built-in way to prove AI authorship of plain text the way C2PA does for images -- you were stuck guessing or running it through a detector that guesses too. If you're building anything that needs provenance -- academic tools, content platforms, moderation pipelines -- there's now an official way to check, not just infer."
+          },
+          {
+            "title": "Introducing Gemini 3.8 Live with Live Avatar",
+            "url": "https://deepmind.google/blog/introducing-gemini-38-live-with-live-avatar/",
+            "source": "DeepMind",
+            "body": "Gemini Live now puts a face on the voice assistant. Live Avatar renders a real-time animated character that lip-syncs and reacts during your conversation, layered on top of the existing low-latency voice mode in Gemini 3.8. Previously Gemini Live was audio (plus screen/camera-share) only -- talking to a disembodied voice. Now the avatar tracks conversational tone and timing live, with no pre-rendered video involved. It's aimed at long voice sessions -- tutoring, interview practice, companion use cases -- feeling less like talking to a speaker and more like a video call. It's live now inside the Gemini app's Live mode."
+          },
+          {
+            "title": "Advancing Private AI Compute with secure, server-side memory",
+            "url": "https://deepmind.google/blog/advancing-private-ai-compute-with-secure-server-side-memory/",
+            "source": "DeepMind",
+            "body": "Private AI Compute -- Google's confidential-computing setup for running personal AI workloads on Google's servers without Google reading the data -- now supports persistent memory. Previously every query got processed statelessly inside the secure enclave and discarded; now your assistant can retain context across sessions while the memory itself stays encrypted and inaccessible to Google, verified through the same attestation model the compute layer already uses. The trick: memory that lives on someone else's hardware but stays provably private to you. For anyone building personal AI products, it's a working template for long-term memory without asking users to trust you with plaintext."
+          },
+          {
+            "title": "Introducing MentalHealthBench",
+            "url": "https://openai.com/index/introducing-mentalhealthbench",
+            "source": "OpenAI",
+            "body": "OpenAI released MentalHealthBench, a benchmark built with clinical input for scoring how models handle realistic mental health conversations -- crisis language, ambiguous distress signals, requests that shouldn't get a generic refusal but also shouldn't get bad advice. There wasn't a standardized way to test this before; teams building wellness bots or companion apps were mostly eyeballing it. The benchmark scores helpfulness and safety on the same conversations, so you can see where a model over-refuses versus where it actually mishandles risk. If you're shipping anything that talks to people about their mental state, this is now the eval to run before launch."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's stars go to tools that replace guessing with something deterministic -- plus one that just cuts your token bill.",
+        "items": [
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "121.8k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- code, docs, SQL schemas, configs, PDFs -- into a queryable knowledge graph, no vector store required. It runs local, deterministic AST parsing and explains every edge in the graph, so when you ask \"what calls this function\" or \"what tables does this endpoint touch,\" you get a traceable answer instead of an embedding's best guess. It ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. The pitch is accuracy over recall: RAG-style retrieval is probabilistic and codebases aren't, so a deterministic graph gets you exact answers for structural questions vector search tends to fuzz."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "108k",
+            "lang": "Go",
+            "body": "Caveman is a proxy plus a skill that make your coding agent talk like, well, a caveman -- and it cuts token usage by about 65%. The idea: most of what an agent writes back is padding (hedging, restating the plan, courtesy phrases), and forcing blunt caveman-speak strips the filler without losing the substance. It sits as a proxy in front of Claude or any compatible model, rewriting prompts and trimming responses on the way through. It's a joke wrapped around a real cost problem -- if you're burning budget on long agent sessions, it's a cheap way to find out how much of your spend is just tone."
+          },
+          {
+            "title": "debpalash/VoiceStudio",
+            "url": "https://github.com/debpalash/VoiceStudio",
+            "source": "github.com",
+            "stars": "39.1k",
+            "lang": "Python",
+            "body": "VoiceStudio is a fully local, open-source alternative to ElevenLabs -- voice cloning, voice design, video dubbing, dictation, transcription, and audiobook generation across 646 languages, running on your own GPU instead of someone's API. For builders priced out of per-character TTS billing, or who need to keep voice data off third-party servers, it closes most of the gap with commercial voice platforms without a subscription. It's CUDA-accelerated, so it wants a real GPU, but it's a serious option if your product needs voice and you don't want a vendor dependency baked into your cost structure."
+          },
+          {
+            "title": "img2threejs/img2threejs",
+            "url": "https://github.com/img2threejs/img2threejs",
+            "source": "github.com",
+            "stars": "17k",
+            "lang": "Python",
+            "body": "img2threejs takes a reference image and rebuilds the object in it as a code-only, procedural Three.js model -- not a mesh dump, actual generated code with quality gates and animation hooks. That matters for 3D web work built from concept art or product photos: instead of a bloated GLTF export, you get editable, lightweight procedural code you can tune and animate directly. It's built to be token-efficient, so an agent can iterate on geometry without re-uploading huge model files each pass. Useful for game prototyping, product visualization, or any pipeline where handing an agent a picture beats writing a modeling brief."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's pile actually shows its work.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-09-26",
     "date": "September 26, 2026",
     "title": "AI Pulse",
