@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-09-28",
+    "date": "September 28, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Gemini gets a face, DeepSeek's plugin harness explodes, and Claude starts watermarking its words",
+    "intro": "Google pushes the Gemini Live API further into video with a real-time avatar and ships a standalone TTS model, while Anthropic quietly adds watermarking to Claude's text output. On GitHub, DeepSeek's plugin-everything agent harness rocketed past 238k stars, and a cluster of deterministic, non-vector-store tooling -- knowledge graphs, local voice, code-only 3D -- suggests builders are tiring of fuzzy retrieval. Nothing in today's build write-ups documented a real end-to-end workflow, so that section sits empty.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Google doubles down on Live API multimodality, and Anthropic adds provenance to Claude's output.",
+        "items": [
+          {
+            "title": "Introducing Gemini 3.8 Live with Live Avatar",
+            "url": "https://deepmind.google/blog/introducing-gemini-38-live-with-live-avatar/",
+            "source": "Google DeepMind",
+            "body": "The Live API now renders a real-time animated avatar alongside voice, not just audio. Expressions and mouth movement sync to the model's speech output live, so voice agents built on the Live API can ship with a face instead of a waveform. It's aimed at tutoring apps, support widgets, or any interface where a talking head beats a chat bubble. You get it through the same Live API you're already using for streaming voice -- flip on the avatar and the video stream comes back alongside audio, no separate rendering pipeline or third-party avatar service required."
+          },
+          {
+            "title": "Gemini 3.8 text-to-speech says hello",
+            "url": "https://deepmind.google/blog/say-hello-to-gemini-38-text-to-speech/",
+            "source": "Google DeepMind",
+            "body": "A standalone TTS model in the Gemini 3.8 family, decoupled from the full multimodal Live pipeline. If you just need speech synthesis without spinning up a live session, this is the lighter route -- lower latency, no need to stream a conversation to get audio out. It carries the expanded voice and prosody control Gemini's been building toward, so you can steer tone and pacing at the API level instead of picking from a fixed voice list. Useful for narration, IVR, or notification-style audio where you want Gemini-quality speech without full session overhead."
+          },
+          {
+            "title": "Holo4: powering generalist computer-use agents",
+            "url": "https://huggingface.co/blog/Hcompany/holo4",
+            "source": "Hugging Face",
+            "body": "A new open model from H Company built specifically for computer-use agents -- the class that looks at a screen and clicks and types like a human. Holo4 targets the generalist end of that spectrum: not tuned to one app or OS, but trained to operate arbitrary GUIs from raw pixels. That's the hard part right now -- most existing computer-use models are strong on browsers and weak everywhere else. If you're building an agent that needs to run desktop software rather than just navigate web pages, this is worth a look over the narrower browser-only models most labs have shipped."
+          },
+          {
+            "title": "Claude text watermark",
+            "url": "https://www.anthropic.com/news/claude-text-watermark",
+            "source": "Anthropic",
+            "body": "Anthropic is rolling out watermarking for Claude's text output -- a statistical signal embedded in generated text that lets you verify a passage came from Claude without changing how the text reads. That's infrastructure for the provenance problem that's been building all year: as AI-written text floods the web, having a way to check whether a model wrote something stops being a nice-to-have. It's server-side, so nothing changes in how you call the API. Worth watching whether other labs match this and whether watermark-detection becomes a standard part of the content pipeline."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Deterministic tooling -- graphs, local voice, code-only 3D -- is having a moment over vector-store shortcuts.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "238.7k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness, built around an 'everything is a plugin' architecture -- the core loop, memory, tool-calling, even the CLI itself are all swappable plugins rather than baked-in behavior. That's a different bet than most coding agents, which ship a fixed loop and let you configure prompts around the edges. Here you can replace the scheduler, the context manager, or the tool-execution layer without forking the whole project. 238k-plus stars suggests a lot of builders want real control over an agent's internals instead of being stuck with whatever the vendor decided the loop should look like."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "122.1k",
+            "lang": "Python",
+            "body": "Turns a codebase -- docs, SQL schemas, configs, PDFs included -- into a queryable knowledge graph using local, deterministic AST parsing. No vector store, no embeddings, no fuzzy retrieval. Every edge in the graph comes with an explanation, so you can see exactly why the tool thinks function A calls table B. Ships as a /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI. The pitch: RAG-style semantic search over code is often wrong in hard-to-debug ways, while a deterministic graph gives precise, auditable answers about how a codebase actually fits together -- which matters when an agent is about to refactor something load-bearing."
+          },
+          {
+            "title": "debpalash/VoiceStudio",
+            "url": "https://github.com/debpalash/VoiceStudio",
+            "source": "github.com",
+            "stars": "43.2k",
+            "lang": "Python",
+            "body": "A fully local, open-source alternative to ElevenLabs -- voice cloning, voice design, video dubbing, dictation, transcription, and audiobook creation across 646 languages, running entirely on your own GPU. No API calls, no per-character billing, no sending audio to a third party. That's a meaningfully different deal than the hosted voice APIs most people default to: once it's set up, generation is free and private. Worth a look if you're building anything voice-heavy where cost or data sensitivity rules out a cloud TTS vendor, or you just want to dub a video library without a subscription."
+          },
+          {
+            "title": "img2threejs/img2threejs",
+            "url": "https://github.com/img2threejs/img2threejs",
+            "source": "github.com",
+            "stars": "17.1k",
+            "lang": "Python",
+            "body": "Feed it a reference image and it rebuilds the object as a procedural, code-only Three.js model -- not a mesh dump, actual generative code that constructs the geometry. It's quality-gated, checking its own output before calling the job done, and animation-ready out of the box. The token-efficient framing is the interesting part: instead of asking a model to output raw vertex data, it reasons about the object in code, which is cheaper to generate and easier to edit afterward. Useful for image-to-3D work where you want a real, hand-editable Three.js scene instead of an opaque generated mesh."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's feed documented a real end-to-end workflow, so we're sitting this one out.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-09-27",
     "date": "September 27, 2026",
     "title": "AI Pulse",
