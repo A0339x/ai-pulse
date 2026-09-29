@@ -3,6 +3,97 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-09-29",
+    "date": "September 29, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Google gives Gemini a face and a voice, DeepSeek's harness clears 200k stars, and someone crammed an LLM onto a $5 chip.",
+    "intro": "Today's shipping news leans toward infrastructure you can flip on immediately: a watermark for Claude text, a tabular foundation model on Hugging Face, and a live avatar for Gemini's voice mode. On GitHub, the plugin-everything philosophy behind DeepSeek's harness is pulling stars almost as fast as it lets you rebuild its own core. And the build of the day skips cloud GPUs entirely -- a language model running across a cluster of microcontrollers you could buy for lunch money.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Four things you can turn on today, from provenance tooling to a face for voice mode.",
+        "items": [
+          {
+            "title": "Claude text watermark",
+            "url": "https://www.anthropic.com/news/claude-text-watermark",
+            "source": "Anthropic",
+            "body": "Anthropic now embeds an invisible watermark in text Claude generates, so anyone can check a piece of writing against Claude and confirm it came from the model. The mark is designed to survive normal editing and light paraphrasing, giving publishers, teachers, and platforms a way to verify provenance without asking Anthropic to run a detector on their behalf. It's available as a setting through the API, not just the consumer app, so anything you're generating programmatically can carry it too. It won't stop someone determined to launder AI text through enough rewrites, but it closes the easy case of unattributed, unmarked output showing up downstream."
+          },
+          {
+            "title": "Introducing Gemini 3.8 Live with Live Avatar",
+            "url": "https://deepmind.google/blog/introducing-gemini-38-live-with-live-avatar/",
+            "source": "Google DeepMind",
+            "body": "Gemini Live now renders a real-time animated avatar that talks back during voice conversations, instead of a waveform or a text transcript. The avatar's lips and expression sync to Gemini 3.8's speech as it streams, turning voice mode into something closer to a video call with the model than a phone call. It sits on top of the same low-latency Live API developers already use for streaming audio, so existing Live integrations can add the visual layer without rearchitecting the pipeline. For anyone shipping tutoring apps, support bots, or companion products, that's a face to put in the UI instead of a chat bubble."
+          },
+          {
+            "title": "NVIDIA Kumo Tabular Sets a New Accuracy-Efficiency Frontier for Tabular Prediction",
+            "url": "https://huggingface.co/blog/nvidia/kumo-tabular",
+            "source": "Hugging Face",
+            "body": "NVIDIA and Kumo put a pretrained tabular foundation model on Hugging Face that predicts on structured data -- the spreadsheets and SQL tables most business logic still runs on -- without per-dataset training. Point it at a new table and it beats gradient-boosted baselines like XGBoost on accuracy while running on a fraction of the compute, because it transfers patterns learned across many tabular tasks instead of fitting from scratch each time. That matters for churn prediction, fraud scoring, or recommendation work where you're currently retraining a model per dataset. It's on the Hub now, so you can swap it into an existing pipeline today."
+          },
+          {
+            "title": "crewAI 1.15.23",
+            "url": "https://github.com/crewAIInc/crewAI/releases/tag/1.15.23",
+            "source": "GitHub / crewAI",
+            "body": "CrewAI's latest release adds native support for Gemini 3.8 Flash as an agent backend, so multi-agent crews can run on Google's fast model without a custom adapter. The bigger change is in `crewai eval`: it now evaluates the last traced run through AMP instead of just printing results, and tracing spans capture the declared output format alongside actual results, so it's easier to see where an agent's output drifted from spec. Platform integration setup also got a UX pass, with popular integrations surfaced first. If you're running crews in production, this is a meaningfully better feedback loop for catching agents that quietly return malformed output."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's stars go to repos that change the shape of the problem, not just wrap an API.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "239.8k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's agent harness treats everything -- tools, memory, the planner, even the UI -- as a swappable plugin, and it's pulled in nearly 240k stars doing it. The pitch is that most coding-agent harnesses hardcode too many decisions about which tools exist and how context gets managed, and locking all of that behind a plugin interface lets you rebuild the agent's behavior without forking the core. It ships with a plugin spec (dsh-plugin) and a marketplace-style ecosystem already forming around it. For builders tired of maintaining a fork of someone else's agent loop just to change one behavior, this is a harness designed to be gutted and rebuilt."
+          },
+          {
+            "title": "Graphify-Labs/graphify",
+            "url": "https://github.com/Graphify-Labs/graphify",
+            "source": "github.com",
+            "stars": "122.3k",
+            "lang": "Python",
+            "body": "Graphify turns a codebase -- plus its docs, SQL schemas, configs, and PDFs -- into a queryable knowledge graph using deterministic AST parsing, not embeddings. That's the novel part: no vector store, no similarity search guessing at relevance. Every edge in the graph is explained, so asking 'what calls this function' or 'what config touches this table' gets a traceable answer instead of a nearest-neighbor guess. It ships as a `/graphify` skill for Claude Code, Cursor, Codex, and Gemini CLI, so any of those agents can query the graph directly while working in your repo. For large, messy codebases where RAG keeps missing obvious references, this is a structural alternative worth trying."
+          },
+          {
+            "title": "earthtojake/text-to-cad",
+            "url": "https://github.com/earthtojake/text-to-cad",
+            "source": "github.com",
+            "stars": "16.5k",
+            "lang": "Python",
+            "body": "Text-to-cad is a library of agent skills that lets coding agents design and edit real CAD models -- not a generic mesh, but parametric, manufacturable geometry in STEP format a CAM pipeline can actually use. It spans CAD, CAE, and CAM, so an agent equipped with these skills can go from a text description to a part, check its mechanical properties, and prep it for machining. That's a different target than the usual image-to-3D demo: STEP files are what mechanical engineers and manufacturers actually work with. Worth a look if you're pushing agents past software into physical product design."
+          },
+          {
+            "title": "img2threejs/img2threejs",
+            "url": "https://github.com/img2threejs/img2threejs",
+            "source": "github.com",
+            "stars": "17.2k",
+            "lang": "Python",
+            "body": "Img2threejs takes a reference image and rebuilds the object in it as procedural, code-only Three.js -- no mesh dump, no point cloud, just a parametric scene graph an agent generated and quality-gated against the source image. Because the output is code rather than a heavy binary asset, it's animation-ready and cheap to iterate on: change a parameter instead of regenerating a mesh. It's built around Claude Code and tuned to keep token usage low while the agent iterates toward a visual match. For anyone doing image-to-3D for games, AR, or product visualization, it's a genuinely different approach than the diffusion-based mesh generators most tools use."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One build today, and it's the kind you can actually replicate on a workbench.",
+        "items": [
+          {
+            "title": "ESP32S3 cluster running 1.58-bit (BitNet) Language model",
+            "url": "https://github.com/Low-Zi-Hong/ESP32s3-LLM-Cluster",
+            "source": "Hacker News",
+            "author": "nkko",
+            "body": "Low-Zi-Hong wired together a cluster of ESP32-S3 microcontrollers -- the cheap Wi-Fi/Bluetooth chips found in smart plugs -- and got them running a 1.58-bit BitNet language model split across the boards. BitNet's ternary weights, where each one is -1, 0, or 1, are what make this possible at all: a normal fp16 or even 4-bit model doesn't fit in an ESP32's few hundred KB of RAM, but a ternary-weight model does once you shard it across chips and coordinate inference over the network. The repo has the firmware and cluster coordination code, so you can reproduce the setup with off-the-shelf ESP32-S3 dev boards instead of a GPU. It's a real answer to 'how small can you run an LLM' -- smaller than a Raspberry Pi, on parts that cost a few dollars each."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-09-28",
     "date": "September 28, 2026",
     "title": "AI Pulse",
