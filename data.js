@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-09-30",
+    "date": "September 30, 2026",
+    "title": "AI Pulse",
+    "subtitle": "OpenAI ships a cheap Astra-class model and standing agents, DeepMind watermarks proteins, coding agents grow a plugin habit",
+    "intro": "OpenAI had a two-day dump coming out of DevDay: a cheaper Astra-class model and a new standing-agent product called dots. DeepMind quietly tackled a real biosecurity gap by watermarking AI-designed proteins. On GitHub, the theme is agents getting more composable and more disciplined at once -- plugin-everything harnesses, a token-diet proxy, and gated autonomy that pauses before irreversible actions.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A cheaper flagship model, a new standing-agent product, and the first watermark built for proteins.",
+        "items": [
+          {
+            "title": "Introducing GPT-6.1 Sol",
+            "url": "https://openai.com/index/introducing-gpt-6-1-sol",
+            "source": "OpenAI",
+            "body": "OpenAI shipped a new mid-tier model that closes most of the gap to GPT-6 Astra while cutting API pricing to a fifth of Astra's standard input and output token rates. Sol targets coding, computer use, and professional work -- the same workloads you've been paying Astra prices for. If you've been holding Astra purely for capability, it's worth a swap test today: similar capability class, far cheaper per call, which matters most for high-volume agent loops and batch pipelines where token cost compounds fast."
+          },
+          {
+            "title": "Introducing dots",
+            "url": "https://openai.com/index/introducing-dots",
+            "source": "OpenAI",
+            "body": "OpenAI launched dots, a new class of assistant that keeps working on a project over time instead of waiting for you to re-prompt it each session. A dot runs a defined task -- research, monitoring, ongoing execution -- and checks in at decision points rather than after every step. It's a first-party answer to the standing-agent pattern builders have been hand-rolling with cron jobs and custom memory stores: a primitive for long-running, semi-autonomous work that stays interruptible instead of running fully unsupervised in the background."
+          },
+          {
+            "title": "Introducing SynthID Bio",
+            "url": "https://deepmind.google/blog/introducing-synthid-bio/",
+            "source": "DeepMind",
+            "body": "DeepMind shipped a proof of concept for watermarking AI-designed proteins without breaking the protein's biological function -- the first watermarking scheme built for a biological sequence rather than text, audio, or pixels. As AI protein design tools move from research demo to actual lab use, there's been no way to tell which sequences came from a model versus a human designer. SynthID Bio embeds a detectable signal directly into the amino acid sequence, so labs, regulators, and biosecurity screens can trace provenance without needing the original design record."
+          },
+          {
+            "title": "AutoPilot action gating modes",
+            "url": "https://github.com/Significant-Gravitas/AutoGPT/releases/tag/autogpt-platform-beta-v0.8.2",
+            "source": "AutoGPT",
+            "body": "AutoGPT's platform beta shipped three gating modes for AutoPilot -- Ask First, Auto, and Unsupervised -- so you set how much rope an autonomous run gets per workflow instead of it being all-or-nothing. Workflows launched from AutoPilot now pause automatically before irreversible actions, and this release widens what counts as irreversible so more real-world actions get caught. While a gated call sits waiting on your review, AutoPilot keeps running the rest of the workflow queue instead of blocking the whole chain, and read-only or workspace-only steps skip the prompt entirely."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent tooling is getting more composable, more token-frugal, and reaching into new domains.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "241k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own coding agent harness treats everything -- model routing, tool execution, memory, even prompt assembly -- as a swappable plugin instead of a hardcoded pipeline stage. That's a different bet than most harnesses, which bolt plugins onto a fixed core loop; here the core loop itself is composed from plugins. You can replace how the harness talks to a model, stores context, or executes a tool without forking it. Worth a look if you're building your own agent runtime and tired of hardcoding assumptions that don't survive contact with a new model or provider."
+          },
+          {
+            "title": "JuliusBrussee/caveman",
+            "url": "https://github.com/JuliusBrussee/caveman",
+            "source": "github.com",
+            "stars": "108.5k",
+            "lang": "Go",
+            "body": "Caveman is a skill plus proxy layer for coding agents that rewrites prompts and responses into terse, stripped-down phrasing to cut token usage -- 65% savings claimed on real coding-agent sessions. Blunt idea, but it works because most agent chatter is grammatical padding the model doesn't need to reason well. Drop it in front of Claude Code or a similar CLI agent as a proxy and it translates on the wire, so your actual prompts and the agent's actual plans don't change, just the token cost of saying them."
+          },
+          {
+            "title": "debpalash/VoiceStudio",
+            "url": "https://github.com/debpalash/VoiceStudio",
+            "source": "github.com",
+            "stars": "50k",
+            "lang": "Python",
+            "body": "VoiceStudio is a fully local, open-source stand-in for ElevenLabs: voice cloning, voice design, video dubbing, dictation, transcription, and audiobook generation across 646 languages, running on your own GPU instead of someone else's API. For builders stuck paying per-character for TTS or waiting on rate limits, this collapses clone, design, and dub into one CUDA-accelerated local tool with no per-call billing and no audio leaving your machine. The dubbing pipeline handles video end to end, not just raw audio synthesis."
+          },
+          {
+            "title": "earthtojake/text-to-cad",
+            "url": "https://github.com/earthtojake/text-to-cad",
+            "source": "github.com",
+            "stars": "16.5k",
+            "lang": "Python",
+            "body": "Text-to-cad gives coding agents the ability to generate actual parametric CAD models and STEP files from a text description, not just code or images. It hooks into agent tool-calling so an agent can iterate on a mechanical part the way it iterates on code -- describe the change, regenerate the geometry, check constraints, repeat. That's a real capability expansion: agents have had code and images for a while, and now a foothold in mechanical engineering and robotics workflows where the deliverable is a manufacturable part."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's pile documented an actual repeatable workflow -- just news and takes.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- catch you tomorrow."
+  },
+  {
     "id": "2026-09-29",
     "date": "September 29, 2026",
     "title": "AI Pulse",
