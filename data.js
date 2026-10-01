@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-10-01",
+    "date": "October 1, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Two frontier models drop inside 48 hours, and GitHub's agent-harness race tops 241k stars",
+    "intro": "Google and OpenAI both shipped new flagship-adjacent models this week, and OpenAI's DevDay wave is still settling into real product (a new proactive assistant, a cheaper coding model). On GitHub, the agent-harness arms race keeps climbing, but the more interesting movement is in memory, browser automation, and CAD. Nothing in today's build write-ups cleared the bar for a full workflow breakdown, so that section sits out.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two labs ship new flagships days apart, plus a cheaper model tier and a new kind of assistant.",
+        "items": [
+          {
+            "title": "Gemini 4 Argon: our next era of frontier intelligence",
+            "url": "https://deepmind.google/blog/gemini-4-argon-our-next-era-of-frontier-intelligence/",
+            "source": "DeepMind",
+            "body": "Google DeepMind's next flagship model is live today, replacing the prior Gemini line as the default frontier model across the Gemini app and API. The launch is framed as a full successor generation, not an incremental bump -- hence the \"next era\" framing rather than a version-number nudge. It ships day one across Google's consumer and developer surfaces, so anything calling the Gemini API now routes to Argon by default rather than the previous model. Expect a wave of head-to-head comparisons against GPT-6.1 and Claude over the next few days, but the immediate news is availability: a new top-tier model you can call today that you couldn't yesterday."
+          },
+          {
+            "title": "Introducing GPT-6.1 Sol",
+            "url": "https://openai.com/index/introducing-gpt-6-1-sol",
+            "source": "OpenAI",
+            "body": "OpenAI shipped a second new model this week: Sol, a smaller sibling to GPT-6 Astra that claims near-Astra intelligence for coding, computer use, and professional work -- at one-fifth of Astra's standard API input and output token prices. The pricing cut is the actual story here. If your agent workloads were cost-gated on Astra because of token spend, Sol is now the model to benchmark against first. It's live in the API today alongside Astra, not a future tier or waitlist product, so you can swap it into an existing pipeline this afternoon and compare cost and quality directly."
+          },
+          {
+            "title": "Introducing dots",
+            "url": "https://openai.com/index/introducing-dots",
+            "source": "OpenAI",
+            "body": "dots are OpenAI's new proactive assistants, rolled out alongside this week's DevDay wave: instead of waiting on a fresh prompt, a dot keeps working across a project in the background and surfaces progress for you to steer. OpenAI is leaning hard on control in the framing -- you see what moved and can redirect it, rather than coming back to a pile of autonomous actions you never asked for. It's a new interaction model layered on top of existing agent capability rather than a bigger model, and it's shipping now as part of this week's product rollout, not as a research preview."
+          },
+          {
+            "title": "Introducing Olmo-core 3: Open, scalable training infrastructure for large MoEs",
+            "url": "https://huggingface.co/blog/allenai/olmocore3",
+            "source": "Hugging Face",
+            "body": "Allen Institute for AI released Olmo-core 3, the open training infrastructure it uses to train its own large mixture-of-experts models, now public for anyone to use. If you've wanted to train a large MoE without building distributed-training plumbing from scratch, this is a ready-made stack instead of a research toy you have to wire up yourself. It's notable mainly for what it isn't: most frontier labs keep their MoE training infra closed, so a fully open version that's actually been used to train production-scale models is a genuinely new option for builders working at that scale."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent harnesses keep dominating GitHub, but the sharper signal this week is in memory, browser automation, and CAD.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "241.6k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness, built around one idea: everything -- model routing, tool calls, memory, UI -- is a plugin. At 241k+ stars it's the single biggest mover in agent tooling right now. Instead of shipping a fixed agent loop, the harness exposes the loop itself as swappable, so you can replace how it reasons, what tools it reaches for, or how it talks to you without forking the whole project. Worth a look if you're tired of hard-forking agent frameworks just to change one piece of behavior -- the plugin boundary here is drawn much deeper than most competing harnesses."
+          },
+          {
+            "title": "MemPalace/mempalace",
+            "url": "https://github.com/MemPalace/mempalace",
+            "source": "github.com",
+            "stars": "59.4k",
+            "lang": "Python",
+            "body": "An open-source memory layer for AI agents that leads with benchmarks instead of marketing copy. MemPalace stores agent memory in ChromaDB and exposes it over MCP, so any MCP-compatible agent can read and write long-term memory without you building a custom retrieval layer. The \"best-benchmarked\" claim matters because most memory projects in this space ship vibes, not numbers -- this one publishes comparisons. Good pick if you're adding persistent memory to an agent and don't want to hand-roll vector-store glue code and retrieval logic from scratch."
+          },
+          {
+            "title": "browser-use/browser-harness",
+            "url": "https://github.com/browser-use/browser-harness",
+            "source": "github.com",
+            "stars": "18.3k",
+            "lang": "Python",
+            "body": "A self-healing browser automation harness for LLMs -- when a selector breaks or a page layout shifts, it adapts instead of failing the task outright. That's the real novelty: most browser-automation agents are brittle against UI changes, and this one is built specifically to absorb them rather than crash. From the team behind browser-use, it's aimed at anyone running browser agents against real-world sites that mutate underneath them -- production web apps, not the controlled test fixtures most browser-agent demos are built on."
+          },
+          {
+            "title": "earthtojake/text-to-cad",
+            "url": "https://github.com/earthtojake/text-to-cad",
+            "source": "github.com",
+            "stars": "16.5k",
+            "lang": "Python",
+            "body": "Gives coding agents CAD superpowers: generate and edit real mechanical parts as STEP files from a natural-language description, inside the same agent loop you'd use for writing code. It's a narrow but genuinely new capability -- an agent that can iterate on a physical part design the way it iterates on a function, instead of bouncing you out to a separate CAD tool entirely. Aimed at robotics and mechanical engineering builders who want an agent in the loop for hardware, not just software."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's build posts documented a full workflow end-to-end, so this section sits out.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-09-30",
     "date": "September 30, 2026",
     "title": "AI Pulse",
