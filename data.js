@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-10-02",
+    "date": "October 2, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Two frontier models drop, watermarks arrive on biology, and someone builds a remover for them",
+    "intro": "OpenAI and DeepMind both shipped new frontier-tier models today, GPT-6.1 Sol and Gemini 4 Argon, while DeepMind separately pushed AI provenance into biology with SynthID Bio. GitHub's climbing list tells the counter-story: a watermark-stripping tool is trending the same week as a new agent-plugin runtime and a philosophy for writing less code. Pay closest attention to Sol's pricing -- Astra-tier intelligence at a fifth of the cost changes which agent workflows are actually affordable to run at scale.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two frontier model drops and a watermarking push that just reached into biology.",
+        "items": [
+          {
+            "title": "Introducing GPT-6.1 Sol",
+            "url": "https://openai.com/index/introducing-gpt-6-1-sol",
+            "source": "OpenAI",
+            "body": "GPT-6.1 Sol launched today at near-Astra intelligence for coding, computer use, and professional work -- at one-fifth of Astra's standard API input and output token price. That's the real story: an Astra-tier coding and agent model just became cheap enough to run as your default tier instead of the one you ration for cost. If you've been avoiding Astra calls in agentic coding loops because the per-token math didn't work, Sol is worth swapping in as the new baseline and seeing where the quality gap actually shows up."
+          },
+          {
+            "title": "Gemini 4 Argon: our next era of frontier intelligence",
+            "url": "https://deepmind.google/blog/gemini-4-argon-our-next-era-of-frontier-intelligence/",
+            "source": "DeepMind",
+            "body": "A new frontier model arrived today: Gemini 4 Argon, DeepMind's follow-on to the Gemini 3 line and the first release under what the company is branding its next era of frontier intelligence. Benchmark details and rollout specifics are still filtering out from the announcement itself, but the timing lands squarely in the same week as OpenAI's Sol price cut, which keeps the frontier price-per-intelligence race moving on cost, not just raw capability. Expect harder numbers once early-access builders start publishing their own benchmarks against it."
+          },
+          {
+            "title": "Introducing SynthID Bio",
+            "url": "https://deepmind.google/blog/introducing-synthid-bio/",
+            "source": "DeepMind",
+            "body": "A watermark that survives protein folding shipped today: SynthID Bio, DeepMind's proof of concept for embedding a detectable signal directly into AI-generated protein sequences without breaking the protein's biological function. Synthetic biology has had no provenance story until now -- once a sequence is synthesized, there's been no way to tell whether a generative model designed it. SynthID Bio extends the existing SynthID watermark family, already shipping in images, audio, video, and text, into biology for the first time. It's a research preview, not a deployed product, but it's the first credible attempt at AI-content provenance for lab-synthesized sequences."
+          },
+          {
+            "title": "Open-sourcing AstaBrief, the fast report-generation model in Asta",
+            "url": "https://huggingface.co/blog/allenai/astabrief",
+            "source": "Hugging Face / Allen AI",
+            "body": "A fast report-generation model went open-source today: AstaBrief, the model that powers the report-writing step inside Allen AI's Asta research assistant. It's purpose-built for turning a pile of papers or documents into a structured brief quickly, trading some generality for speed on that one task. Now that it's on Hugging Face, you can drop it into your own research-agent pipeline for the summarization step instead of routing it through a slower general-purpose model, or fine-tune it on your own document types."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent-plugin ecosystems go mainstream, and a watermark-stripper trends right as labs ship watermarks.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "242k",
+            "lang": "TypeScript",
+            "body": "Every piece of agent functionality here -- tools, memory, routing, UI -- is a plugin on a shared runtime called cordis, instead of being baked into the agent core. That's the bet: ship a thin kernel and let the plugin ecosystem (dsh-plugin) define what the agent actually does, rather than shipping one opinionated agent. It's picked up 242k stars almost overnight, which says plugin architecture is becoming the default shape for agent frameworks instead of monolithic SDKs. Worth a look if you're building, or tired of rebuilding, agent infrastructure from scratch."
+          },
+          {
+            "title": "DietrichGebert/ponytail",
+            "url": "https://github.com/DietrichGebert/ponytail",
+            "source": "github.com",
+            "stars": "151k",
+            "lang": "JavaScript",
+            "body": "One rule drives this entire skill set for Claude Code and Cursor: the best code is the code you never wrote. Instead of tuning your agent to produce more correct code, it tunes the agent to produce less code, pushing back on the reflex where coding agents default to extra abstractions, config knobs, and defensive code nobody asked for. It's an opinionated set of rules and skills you drop into your agent config, not a new tool to learn, and 151k stars in days says a lot of people are tired of reviewing AI-generated overengineering."
+          },
+          {
+            "title": "img2threejs/img2threejs",
+            "url": "https://github.com/img2threejs/img2threejs",
+            "source": "github.com",
+            "stars": "17.4k",
+            "lang": "Python",
+            "body": "A reference image goes in, a procedural, code-only Three.js scene comes out -- not a mesh dump, actual Three.js code that an agent writes, checks against the source image, and quality-gates before calling it done. The output is animation-ready and editable because it's code, not an opaque exported model file. The token-efficient framing is the real design constraint: it's built to do image-to-3D reconstruction without burning huge context budgets re-describing geometry at every iteration. Useful if you want agent-generated 3D assets you can actually edit afterward instead of a static export."
+          },
+          {
+            "title": "guillaumemeyer/watermarks-remover",
+            "url": "https://github.com/guillaumemeyer/watermarks-remover",
+            "source": "github.com",
+            "stars": "23.2k",
+            "lang": "Python",
+            "body": "AI provenance watermarks and C2PA metadata get stripped from content you own here, positioned by its author as a privacy tool rather than a laundering one. The timing is pointed: it starts trending the same week DeepMind ships SynthID Bio for proteins, proof that every lab push toward provenance-by-default seems to get an open-source answer within days. Whichever side of that argument you land on, it's a clean demonstration that watermark-and-detect is an arms race, not a solved problem, once the watermarking method itself is public."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's pile actually documents a workflow end-to-end.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-10-01",
     "date": "October 1, 2026",
     "title": "AI Pulse",
