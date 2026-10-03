@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-10-03",
+    "date": "October 3, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Gemini 4 Argon lands, DeepSeek's plugin harness tops the charts, and nobody documented a real build today",
+    "intro": "DeepMind dropped a full frontier-model generation today with Gemini 4 Argon, alongside a watermarking system built specifically for AI-generated proteins. On GitHub, the agent-tooling story keeps being about plugin composability and shared memory rather than another chatbot wrapper. Builder write-ups were thin today -- nothing in the stack met the bar for a real step-by-step build, so that section's empty.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new frontier model and two narrowly-built open-source tools, not another feature recap.",
+        "items": [
+          {
+            "title": "Gemini 4 Argon: our next era of frontier intelligence",
+            "url": "https://deepmind.google/blog/gemini-4-argon-our-next-era-of-frontier-intelligence/",
+            "source": "DeepMind",
+            "body": "DeepMind pushed out Gemini 4 Argon, the next generation of its frontier model line, live now across the Gemini API, AI Studio and the consumer app. It steps in as the new top-tier model ahead of whatever Gemini 3 variant was running yesterday. There's no deep technical writeup beyond the launch post yet, but a full frontier-model bump from a lab this size is worth running against your existing Gemini 3 prompts and evals today to see where the gaps actually close, rather than waiting for the benchmark posts to roll in."
+          },
+          {
+            "title": "Introducing SynthID Bio",
+            "url": "https://deepmind.google/blog/introducing-synthid-bio/",
+            "source": "DeepMind",
+            "body": "DeepMind rolled out SynthID Bio, a proof-of-concept for watermarking AI-generated protein sequences without breaking the protein's function. As AI models increasingly design new proteins for drug discovery and synthetic biology, you need a way to trace which sequences came from a model versus nature before one gets synthesized and used. SynthID Bio embeds a marker directly into the amino acid sequence that survives expression and folding, so the watermarked protein still does its job but stays traceable to its AI origin. It's the same SynthID approach DeepMind already uses on images, video and text, now extended into biology."
+          },
+          {
+            "title": "Open-sourcing AstaBrief, the fast report-generation model in Asta",
+            "url": "https://huggingface.co/blog/allenai/astabrief",
+            "source": "Hugging Face",
+            "body": "AllenAI open-sourced AstaBrief, the model that powers fast report-writing inside its Asta research assistant. It's built specifically for turning retrieved sources into structured written reports quickly, rather than a general chat model repurposed for the job. Weights and code are public on Hugging Face now, so you can drop it into your own research-agent pipeline wherever you need fast report synthesis without paying frontier-model latency or cost for a task that doesn't need full reasoning. If your agent currently calls GPT-6 or Claude just to format retrieved sources into a brief, this is a direct, cheaper swap-in."
+          },
+          {
+            "title": "AutoSynthData: Generating Training Data for Enterprise Agents",
+            "url": "https://huggingface.co/blog/ServiceNow-AI/autosynthdata",
+            "source": "Hugging Face",
+            "body": "ServiceNow AI open-sourced AutoSynthData, a pipeline for generating synthetic training data specifically for enterprise agents -- the kind that navigate ticketing systems, approval chains and internal tools rather than answer open web questions. Real enterprise interaction logs are scarce and sensitive, so AutoSynthData generates realistic synthetic trajectories instead, giving you a way to fine-tune or eval an agent against workflows that look like your company's without mining production data. It's live on Hugging Face now, and it's the kind of unglamorous infrastructure that actually unblocks enterprise agent projects stuck without training data."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent tooling is converging on plugin architectures and shared memory, not another SDK wrapper.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "242.8k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness, built around one idea: everything -- tools, memory, planning, even the core loop -- is a plugin you can swap out. Instead of forking the harness to change how it plans or stores context, you write a plugin and load it. That composability is why it's picked up 242k stars: teams building custom agents get a base layer that doesn't lock them into DeepSeek's specific choices for memory or tool-calling. Worth a look if you're currently maintaining a forked agent framework just to change one piece of its internals."
+          },
+          {
+            "title": "DietrichGebert/ponytail",
+            "url": "https://github.com/DietrichGebert/ponytail",
+            "source": "github.com",
+            "stars": "152.7k",
+            "lang": "JavaScript",
+            "body": "A skill/ruleset for coding agents built on one premise: most AI-written code is bloated, and the fix is making the agent act like a lazy senior engineer who refuses to write code that doesn't need to exist. Drop it into Claude Code or Cursor and it pushes the agent toward deletion, reuse and smaller diffs instead of new abstractions and defensive scaffolding. It's less a feature and more a prompt-engineering fix for a real failure mode -- agents padding every change with unnecessary code -- and 152k stars suggests a lot of people recognize the problem in their own diffs."
+          },
+          {
+            "title": "debpalash/VoiceStudio",
+            "url": "https://github.com/debpalash/VoiceStudio",
+            "source": "github.com",
+            "stars": "52.3k",
+            "lang": "Python",
+            "body": "A fully local, open-source stand-in for ElevenLabs: voice cloning, voice design, video dubbing, dictation and audiobook generation, running on your own GPU instead of someone else's API. It covers 646 languages, which is the actual headline here -- most local TTS projects top out at a dozen. If you've been paying per-character for voice cloning or dubbing, this is a real alternative to test, not a toy demo, since it bundles the full workflow end to end rather than just exposing a raw model checkpoint."
+          },
+          {
+            "title": "TencentCloud/TencentDB-Agent-Memory",
+            "url": "https://github.com/TencentCloud/TencentDB-Agent-Memory",
+            "source": "github.com",
+            "stars": "27.7k",
+            "lang": "TypeScript",
+            "body": "A shared memory layer for teams of agents, not just one agent's context window. It takes conversations, docs and code and turns them into four distinct memory types -- Chat Memory, Skill, LLM-Wiki and Code-Graph -- that multiple agents and frameworks can read from and write to under one governance layer. The pitch is for orgs running several agents across different tools that currently don't share what they've learned: this gives them a common memory substrate instead of each agent rebuilding its own context from scratch every session."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's feed documented an actual end-to-end build -- just launches and discussion threads.",
+        "items": []
+      }
+    ],
+    "closing": "Go poke at Gemini 4 Argon today -- real build writeups should be back tomorrow."
+  },
+  {
     "id": "2026-10-02",
     "date": "October 2, 2026",
     "title": "AI Pulse",
