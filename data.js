@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-10-07",
+    "date": "October 7, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Gemini 4 lands, open embeddings go multimodal, and a dev live-diaries a RAG build",
+    "intro": "Google answers GPT-6 with Gemini 4 Argon, and DeepMind backs it with a multimodal EmbeddingGemma 2 for anyone building local RAG. On GitHub the real momentum isn't another agent wrapper -- it's agents pushing into new domains like CAD and 3D, plus one skill pack arguing agents should write less code, not more. And if you want an actual build to follow along with this weekend, skip the AI-discovers-science headlines and read the RAG pipeline diary instead.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new frontier model, an embedding model gone multimodal, and edge-ready tools you can run today.",
+        "items": [
+          {
+            "title": "Gemini 4 Argon: our next era of frontier intelligence",
+            "url": "https://deepmind.google/blog/gemini-4-argon-our-next-era-of-frontier-intelligence/",
+            "source": "DeepMind",
+            "body": "Google's next flagship model line lands as Gemini 4 Argon, DeepMind's follow-up to Gemini 3 and its answer to OpenAI's GPT-6 family. It's pitched as a new tier of capability rather than an incremental bump, rolling out across Google's developer and consumer surfaces starting today. If you've been building on Gemini 3 Pro or Flash, this is the model to benchmark against before locking in next quarter's stack -- expect the usual staggered rollout, with API access first and consumer apps following. Worth testing against whatever you're currently running in production before you decide whether to migrate."
+          },
+          {
+            "title": "EmbeddingGemma 2: an open, lightweight multimodal embedding model",
+            "url": "https://deepmind.google/blog/embeddinggemma-2-an-open-lightweight-multimodal-embedding-model/",
+            "source": "DeepMind",
+            "body": "EmbeddingGemma gets a sequel, and the big change is multimodality: v2 embeds images alongside text in the same vector space instead of text only. It's still built for the edge -- small enough to run locally without a GPU cluster -- which makes it a realistic swap-in for RAG pipelines that need to search across screenshots, diagrams, and docs together instead of maintaining separate text and image indexes. Weights are open today, so you can self-host it right now instead of waiting on an API, and drop it into an existing pipeline as a direct upgrade."
+          },
+          {
+            "title": "Multimodal open d1 decision models for the edge",
+            "url": "https://huggingface.co/blog/LiquidAI/open-d1",
+            "source": "Hugging Face",
+            "body": "Liquid AI open-sources d1, a family of 'decision models' -- smaller than general chat models and tuned specifically for fast classification and routing calls rather than open-ended generation. They're multimodal (text and image in, a decision out) and small enough to run on-device, aimed at jobs like on-edge content moderation, triage, or routing logic where you don't want to round-trip to a frontier model every time. Weights are live on Hugging Face today, so you can drop one into a pipeline and test it head-to-head against whatever classifier you're currently running."
+          },
+          {
+            "title": "All-Hands-AI/OpenHands v1.25.0",
+            "url": "https://github.com/OpenHands/OpenHands/releases/tag/v1.25.0",
+            "source": "GitHub",
+            "body": "The open coding agent ships direct-prompt Model Router settings, letting you route specific prompts to specific models instead of locking a whole session to one provider, plus a bulk-add flow that turns a provider's full model list into LLM profiles in one step instead of configuring each one by hand. Smaller fixes clean up settings navigation. If you run OpenHands against multiple providers -- say Claude for planning and a cheaper model for grunt work -- this release makes that split configurable in the UI instead of hand-editing config files."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's stars go to agents branching into new domains, not new wrappers.",
+        "items": [
+          {
+            "title": "DietrichGebert/ponytail",
+            "url": "https://github.com/DietrichGebert/ponytail",
+            "source": "github.com",
+            "stars": "157.4k",
+            "lang": "JavaScript",
+            "body": "Ponytail is an agent-skills pack built around one idea: the best code is the code you never wrote. Instead of optimizing your Claude Code or Cursor agent for cleverness, it biases the agent toward the laziest viable fix -- reuse over invention, deletion over addition, boring over clever. It's a direct rebuttal to agents that love scaffolding new abstractions for a two-line change. If your agent keeps handing you code you then have to simplify yourself, this is a skill pack worth installing to shift that default before you even open the diff."
+          },
+          {
+            "title": "alibaba/open-code-review",
+            "url": "https://github.com/alibaba/open-code-review",
+            "source": "github.com",
+            "stars": "44.2k",
+            "lang": "Go",
+            "body": "Alibaba open-sources the code review tool it runs internally at scale: a hybrid pipeline pairing deterministic static-analysis rules (null pointer checks, thread-safety, XSS, SQL injection) with an LLM agent for everything a fixed ruleset can't catch. It leaves precise line-level comments instead of a generic summary, and works with both OpenAI and Anthropic models so you're not locked to one vendor. Worth a look if you've tried LLM-only review bots and found them too noisy -- the deterministic layer here filters before the model ever sees the diff."
+          },
+          {
+            "title": "earthtojake/text-to-cad",
+            "url": "https://github.com/earthtojake/text-to-cad",
+            "source": "github.com",
+            "stars": "18.2k",
+            "lang": "Python",
+            "body": "Gives an agent the ability to generate and edit real CAD models (STEP files) from text and iterate on them like code -- describe a bracket, get a parametric part, ask for a tweak, get a revision. It's aimed at mechanical engineers and roboticists who want the same agentic edit loop coders already have, but for physical parts instead of source files. Early-stage, but it's a clear sign the 'agent edits your artifact' pattern is spreading well past software into hardware design."
+          },
+          {
+            "title": "img2threejs/img2threejs",
+            "url": "https://github.com/img2threejs/img2threejs",
+            "source": "github.com",
+            "stars": "17.6k",
+            "lang": "Python",
+            "body": "Takes a reference image and rebuilds the object in it as a procedural, code-only Three.js model instead of a photogrammetry mesh -- meaning you get an editable, animatable scene graph, not a frozen blob of vertices. It's quality-gated (the agent checks its own output against the reference before calling it done) and built to be token-efficient, so it doesn't torch your context budget re-rendering the whole scene on every pass. Useful if you want real 3D web assets without opening Blender."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One build you can actually follow step by step, plus one that shows AI-assisted math up close.",
+        "items": [
+          {
+            "title": "Building a RAG pipeline for semantic code search",
+            "url": "https://blog.jetbrains.com/ai/2026/09/building-a-rag-pipeline-for-semantic-code-search-a-developer-diary-and-field-notes/",
+            "source": "Hacker News",
+            "author": "saikatsg",
+            "body": "A JetBrains engineer's field notes on building a semantic code search RAG pipeline from scratch: how they chunked source files by symbol rather than fixed line count after naive chunking returned garbage results, which embedding model they landed on after testing alternatives, how they added a reranking pass once top-k results were technically relevant but not actually useful, and where the pipeline still breaks (cross-file context, renamed symbols). It's written as a diary rather than a highlight reel, dead ends included, which makes it one of the few posts you could follow step by step to build your own code-search RAG this weekend."
+          },
+          {
+            "title": "AI-assisted proof of optimal packing for 11 squares",
+            "url": "https://github.com/Queuingtheorydotcom/11SquaresFormalized",
+            "source": "Hacker News",
+            "author": "bluepeter",
+            "body": "A GitHub repo documenting an AI-assisted path from informal proof to machine-checked result: formalizing a proof about optimal packing of 11 unit squares in Lean, the same proof-assistant language OpenAI used in its own math-progress post today. The repo lays out the Lean source and the formalization steps, so you can see where the AI helped translate informal reasoning into Lean's type-checked syntax and where a human had to step in to close gaps the model couldn't formalize cleanly. A real look at what AI-assisted formal math looks like at the file level, not as a press release."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- see you tomorrow."
+  },
+  {
     "id": "2026-10-03",
     "date": "October 3, 2026",
     "title": "AI Pulse",
