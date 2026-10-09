@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-10-09",
+    "date": "October 9, 2026",
+    "title": "AI Pulse",
+    "subtitle": "GPT-6 goes global, DeepMind opens an embedding model, and agents start doing CAD and browser work",
+    "intro": "OpenAI pushed GPT-6 out to every ChatGPT tier today with a new interactive UI layer, and DeepMind open-sourced a multimodal embedding model small enough to run on-device. The GitHub momentum this week isn't more chatbot wrappers -- it's agents generating CAD files, procedural 3D models, and self-healing browser automation. Nothing in today's build-log crop documented a full workflow end to end, so that section's thin.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new flagship model goes live, DeepMind opens up embeddings, and the agent-framework release train keeps rolling.",
+        "items": [
+          {
+            "title": "GPT-6 and Intelligent UI for everyone",
+            "url": "https://openai.com/index/gpt-6-for-everyone",
+            "source": "OpenAI",
+            "body": "GPT-6 is now rolling out to every ChatGPT tier, not just paid plans. The headline feature is Intelligent UI: instead of plain text, GPT-6 renders visuals and interactive elements directly in the conversation -- charts, maps, mini-tools -- generated on the fly based on what you asked, and responses land noticeably faster than GPT-5.6's. The rendering layer is expected to surface through the API too, which means structured, interactive output comes back instead of raw text you have to parse and build a UI around yourself."
+          },
+          {
+            "title": "EmbeddingGemma 2: an open, lightweight multimodal embedding model",
+            "url": "https://deepmind.google/blog/embeddinggemma-2-an-open-lightweight-multimodal-embedding-model/",
+            "source": "DeepMind",
+            "body": "DeepMind open-sourced EmbeddingGemma 2, an embedding model that handles text and images in the same vector space, not just text. It's built small on purpose -- light enough to run on-device or in cheap inference instead of a hosted API -- so you can embed and search mixed text/image corpora directly. That's a direct upgrade for anyone building RAG or semantic search over screenshots, scanned documents, product photos, or any corpus that isn't pure text. Being open-weight also means you can fine-tune it on your own domain instead of being stuck with whatever a closed embeddings endpoint gives you."
+          },
+          {
+            "title": "Introducing Playground: Create and play custom games",
+            "url": "https://blog.google/innovation-and-ai/technology/ai/playground-experimental-gaming-platform/",
+            "source": "Google AI",
+            "body": "Google launched Playground, a platform where you describe a game and it generates a playable version on the spot, then lets anyone else remix it. It's less a polished product than a public test of generative game creation: simple mechanics, instant iteration, no code editor in sight. The underlying generation loop -- describe, generate, play, remix -- is now stable enough for Google to put in front of a general audience rather than keep it as a research demo."
+          },
+          {
+            "title": "AutoGPT Platform beta v0.8.3",
+            "url": "https://github.com/Significant-Gravitas/AutoGPT/releases/tag/autogpt-platform-beta-v0.8.3",
+            "source": "AutoGPT",
+            "body": "The latest AutoGPT platform beta adds native approval cards: if your agent chat is linked to Discord, Slack, Teams, or Telegram, approval requests now show up as real buttons inside that channel instead of a separate dashboard tab. There's also a new ENABLE_USER_NOTIFICATIONS switch so production deployments can mute noisy alerts without touching code, OAuth start/failure events now report to PostHog for debugging auth flows, and question cards let users edit and combine suggested answers instead of picking just one. Small release, but the approval-in-chat feature removes a real piece of friction for anyone running agents that need human sign-off mid-task."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's stars go to repos solving genuinely new problems, not more LLM wrappers.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "246.3k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's new harness treats every capability -- tools, memory, planning, even the UI -- as a plugin you swap in and out, rather than a framework with fixed primitives. That design is likely why it pulled in a quarter-million stars almost overnight: instead of forking the framework to add a custom tool or memory backend, you write a plugin against a stable interface. It's aimed at teams building their own agent stack who've hit the ceiling of what LangChain-style frameworks let them customize without forking."
+          },
+          {
+            "title": "earthtojake/text-to-cad",
+            "url": "https://github.com/earthtojake/text-to-cad",
+            "source": "github.com",
+            "stars": "18.7k",
+            "lang": "Python",
+            "body": "Gives agents the ability to generate real CAD files -- STEP format, the kind mechanical engineers open in SolidWorks or Fusion 360 -- from a text description, not just a picture of a 3D model. That's a different problem than image generation: CAD has to be dimensionally precise and parametric, not just visually plausible. The repo wires an agent loop around a CAD kernel so it can generate geometry, check constraints, and fix errors automatically. Built for anyone prototyping mechanical parts or robotics components who wants a rough CAD starting point without opening a CAD program."
+          },
+          {
+            "title": "img2threejs/img2threejs",
+            "url": "https://github.com/img2threejs/img2threejs",
+            "source": "github.com",
+            "stars": "17.8k",
+            "lang": "Python",
+            "body": "Takes a reference image and rebuilds the object in it as a procedural Three.js model -- actual code, not a mesh dump -- producing a lightweight, animation-ready 3D asset instead of a multi-megabyte GLTF file. The token-efficient design matters here: an agent can reason about and regenerate the object without burning context on raw geometry data. Built for web developers who need quick 3D assets from product photos or concept art without a 3D artist in the loop."
+          },
+          {
+            "title": "browser-use/browser-harness",
+            "url": "https://github.com/browser-use/browser-harness",
+            "source": "github.com",
+            "stars": "18.4k",
+            "lang": "Python",
+            "body": "Browser Harness calls itself self-healing: when a selector breaks because a site changed its DOM, the harness has the LLM re-locate the element instead of just failing the task. That's the actual failure mode in browser automation for agents -- sites change constantly, and brittle selectors are the main reason long-running browser agents quietly stop working. Built for anyone driving a real browser over time rather than running a one-off scrape."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Today's pull was all tool announcements and news, nothing documented a full build workflow.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-10-07",
     "date": "October 7, 2026",
     "title": "AI Pulse",
