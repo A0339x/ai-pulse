@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-10-10",
+    "date": "October 10, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Small open models multiply, agent tooling creeps into CAD and binaries, and a Nokia 110 gets an LLM brain",
+    "intro": "The frontier labs mostly published customer-success recaps today, not new capabilities -- the real shipping news is in small open models built to run outside a hosted API: EmbeddingGemma 2, Falcon ASR, and LiquidAI's open-d1. On GitHub, agent harnesses keep colonizing new territory -- CAD files, native binaries, procedural 3D. Documented builds worth copying this weekend are thin on the ground today, but two show up.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Frontier labs published case studies; the open small-model crowd actually shipped something new.",
+        "items": [
+          {
+            "title": "EmbeddingGemma 2: an open, lightweight multimodal embedding model",
+            "url": "https://deepmind.google/blog/embeddinggemma-2-an-open-lightweight-multimodal-embedding-model/",
+            "source": "DeepMind",
+            "body": "DeepMind open-sourced EmbeddingGemma 2, a follow-up to its lightweight embedding model that now puts images and text in the same embedding space. That means you can match a photo against a text description, or search a text corpus with an image query, without stitching together separate vision and text encoders yourself. It's still small enough to run on-device, which is the point -- local search, on-device RAG, or any retrieval pipeline where you don't want a round trip to a hosted embedding API. Weights are open, so you can fine-tune it on your own data instead of settling for a generic embedding space."
+          },
+          {
+            "title": "Multimodal open d1 decision models for the edge",
+            "url": "https://huggingface.co/blog/LiquidAI/open-d1",
+            "source": "Hugging Face / LiquidAI",
+            "body": "LiquidAI released open-d1, small decision models built to run on edge hardware and take multimodal input -- text, images, sensor-style data -- and output a decision instead of a long completion. Think routing, classification, or control-loop tasks where you don't need a chatty LLM, you need a fast, cheap verdict. Being open and edge-sized means you can run these on a phone or a Raspberry Pi instead of calling out to a hosted model for every decision in a pipeline. Worth a look anywhere you're currently overpaying a big model to answer a yes/no or pick-one question."
+          },
+          {
+            "title": "Introducing Falcon ASR",
+            "url": "https://huggingface.co/blog/tiiuae/falcon-asr",
+            "source": "Hugging Face / TII",
+            "body": "TII open-sourced Falcon ASR, a speech recognition model you can self-host instead of paying per-minute for a hosted transcription API. If you're building voice interfaces, meeting transcription, or any pipeline currently shelling out to Whisper-as-a-service, this is a drop-in open alternative you can run on your own infra and fine-tune for accents, jargon, or audio conditions a generic model misses. The appeal is cost and control, not a new capability -- you get transcription you own end to end."
+          },
+          {
+            "title": "crewAI 1.15.27",
+            "url": "https://github.com/crewAIInc/crewAI/releases/tag/1.15.27",
+            "source": "GitHub / crewAI",
+            "body": "crewAI's latest release adds real operational visibility for anyone running agent crews past the toy stage: per-run cost and time tracking for crewai eval --models, logging for why an evaluation stopped before reaching a verdict, and tracking for what a deploy run attempted before it failed. It also adds deepinfra as an OpenAI-compatible provider and XPU support for OpenCLIP, plus a fix for a bug where stopSequences were getting sent to GPT-6/GPT-5.6/gpt-oss models that choke on them. Small release, but the eval and cost-tracking additions are exactly what you need once an agent crew is running against real budgets."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent harnesses and skills keep pushing into territory LLMs couldn't touch a year ago -- CAD, binaries, 3D.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "246.9k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's new agent harness treats everything -- model calls, tools, memory, even the UI -- as a plugin under its \"cordis\" plugin system. Instead of forking the harness to add a capability, you write a dsh-plugin and drop it in. Star count like this in days means a big chunk of the agent-building community is already building on top of it instead of rolling its own harness from scratch. If you're tired of every agent framework reinventing its own plugin API, this is worth a look as a potential common substrate rather than another bespoke wrapper."
+          },
+          {
+            "title": "morluto/rea",
+            "url": "https://github.com/morluto/rea",
+            "source": "github.com",
+            "stars": "65.2k",
+            "lang": "TypeScript",
+            "body": "rea lets an agent reverse-engineer a target top-down: start from observed app behavior and work down through decompiled binaries to build a map of what's actually happening, without source. It's a CLI built for work that used to require a human with a disassembler and a lot of patience -- the agent drives the tooling, tests hypotheses by running the binary, and iterates on what it finds. Useful for security research, malware triage, or just understanding an undocumented dependency you can't recompile. Ships as a CLI that plugs into Claude Code and Codex rather than a standalone app."
+          },
+          {
+            "title": "earthtojake/text-to-cad",
+            "url": "https://github.com/earthtojake/text-to-cad",
+            "source": "github.com",
+            "stars": "18.9k",
+            "lang": "Python",
+            "body": "text-to-cad gives an agent the ability to produce actual CAD geometry -- STEP files, not renders -- from a text description or a plan. That's a real gap: agents write code and generate images all day, but mechanical engineering and robotics work lives in CAD formats LLMs don't natively speak. This repo wires up the missing layer so an agent can iterate on a part design the way it iterates on code: generate, check constraints, revise. Early, but it turns \"describe the bracket you need\" into a file you can actually send to a machine shop."
+          },
+          {
+            "title": "img2threejs/img2threejs",
+            "url": "https://github.com/img2threejs/img2threejs",
+            "source": "github.com",
+            "stars": "17.9k",
+            "lang": "Python",
+            "body": "img2threejs takes a reference image and rebuilds the object in it as procedural, code-only Three.js -- an animatable, quality-gated scene graph generated from code an agent writes and checks against the source image, not a baked mesh from an image-to-3D model. The token-efficient framing matters: the agent works with compact procedural code instead of dumping huge 3D files into context, correcting itself against the reference as it goes. Good for anyone who wants agent-generated 3D web assets without a full modeling pipeline or expensive image-to-3D API calls."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Thin day for full build writeups -- two projects where the whole appeal is the stack, not the demo.",
+        "items": [
+          {
+            "title": "Show HN: I Put an AI Agent on a Nokia 110",
+            "url": "https://github.com/anupray95/AI-Agent-on-a-NOKIA",
+            "source": "Hacker News",
+            "author": "anupray",
+            "body": "anupray got an LLM agent running against a Nokia 110 -- a feature phone with no app runtime, just calls and SMS. Since the phone can't execute any agent code itself, the whole build has to live in a bridge: something sits between the phone and the model, catches texts, forwards them to an LLM backend, and texts the reply back. The actual engineering is in that bridge and in designing an agent loop that works over SMS's narrow, turn-based, laggy interface instead of a streaming chat API -- no partial responses, no retries mid-thought, just one shot per text. It's a solid template for building an agent for a device or channel that was never meant to run software, using tools most builders already have on hand: an LLM API key and a spare Pi or old Android phone as the gateway."
+          },
+          {
+            "title": "Talorys – A self-hosted personal AI agent on Cloudflare's free tier",
+            "url": "https://github.com/rociiu/talorys",
+            "source": "Hacker News",
+            "author": "rociiu",
+            "body": "rociiu built a personal AI agent that runs entirely inside Cloudflare's free tier -- Workers for compute, with state handled by Cloudflare's own storage primitives instead of a rented server. The pitch is an always-on personal agent you can wire up to whatever you want it to track, with no VPS bill and no third party holding your conversation history, since it all stays in your own Cloudflare account. It's a clean weekend build for anyone who wants a working personal agent without taking on an infrastructure bill to get there -- the free tier covers compute, storage, and hosting in one account."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-10-09",
     "date": "October 9, 2026",
     "title": "AI Pulse",
