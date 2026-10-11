@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-10-11",
+    "date": "October 11, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Open models multiply, agent tooling goes hybrid, and someone decompiled a shooter with half a trillion tokens.",
+    "intro": "The big labs had a quiet news day -- mostly customer case studies and policy posts, light on anything new to touch. The real action is in open model drops from DeepMind, TII, and LiquidAI, plus a wave of GitHub momentum around agent tooling that's starting to specialize -- CAD, code review, 3D -- instead of just wrapping another chat API.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Big labs mostly published case studies today -- the real new weights came from the open-model side.",
+        "items": [
+          {
+            "title": "EmbeddingGemma 2: an open, lightweight multimodal embedding model",
+            "url": "https://deepmind.google/blog/embeddinggemma-2-an-open-lightweight-multimodal-embedding-model/",
+            "source": "DeepMind",
+            "body": "EmbeddingGemma 2 adds images to what was a text-only embedding model, putting text and images into the same vector space. That means you can match a photo against a caption or a product description without bolting a separate vision encoder onto your retrieval stack. It's still built to be small enough to run on-device, so embedding generation in a RAG pipeline no longer has to mean a network call -- phones and edge hardware can do it locally. Weights are open on Hugging Face, so existing retrieval setups can swap it in without retraining anything downstream."
+          },
+          {
+            "title": "Introducing Falcon ASR",
+            "url": "https://huggingface.co/blog/tiiuae/falcon-asr",
+            "source": "TII",
+            "body": "TII put a speech recognition model into the Falcon lineup, giving teams running transcription pipelines an open, self-hostable alternative to closed ASR APIs. Download the weights, run it on your own infra, and the per-minute billing goes away. Falcon's catalog has leaned toward text generation, so a dedicated ASR release is a notable widening of what the family covers. For anyone building voice interfaces or transcription tools who's been paying per-call for speech-to-text, this is one more open option to benchmark against before renewing that API contract."
+          },
+          {
+            "title": "Multimodal open d1 decision models for the edge",
+            "url": "https://huggingface.co/blog/LiquidAI/open-d1",
+            "source": "LiquidAI",
+            "body": "LiquidAI's open-d1 models are built for the decision step in a pipeline, not open-ended generation -- fast classification and routing calls, now with multimodal input so a model can decide based on an image plus text rather than text alone. They're sized to actually run on edge hardware: phones, embedded devices, anything without a GPU cluster sitting next to it. If part of your agent pipeline is paying full LLM-call latency just to route a request or flag content, open-d1 is aimed squarely at replacing that call with something that runs locally and fast."
+          },
+          {
+            "title": "Introducing Playground: Create and play custom games",
+            "url": "https://blog.google/innovation-and-ai/technology/ai/playground-experimental-gaming-platform/",
+            "source": "Google AI",
+            "body": "Google AI launched Playground, a new platform for creating and playing custom games rather than just prototyping them in a research demo. It's a step beyond Google's earlier game-generation experiments showing up as closed tech demos -- this is a public surface where a game you build can actually be played, by you or by others. For builders, it's worth watching less as a tool you'd integrate today and more as a signal of where Google's game-gen research is headed: toward a real product, not just a paper and a video."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "The repos pulling in stars this week are specializing -- CAD, code review, 3D -- instead of reskinning the same agent loop.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "247.4k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's harness treats tools, memory, planning, and model routing as plugins rather than baking any of it into the core -- compose an agent out of swappable pieces (the dsh-plugin ecosystem) instead of inheriting one framework's opinions on how tool-calling should work. That's the actual novelty: most agent frameworks ship a fixed loop and let you configure around the edges, this one makes the loop itself replaceable. At 247k stars it's jumped to one of the largest agent frameworks on GitHub almost overnight, worth checking if you've been rewriting the same agent scaffolding for every new model."
+          },
+          {
+            "title": "alibaba/open-code-review",
+            "url": "https://github.com/alibaba/open-code-review",
+            "source": "github.com",
+            "stars": "46.1k",
+            "lang": "Go",
+            "body": "Alibaba open-sourced the code review tool it runs internally, and the architecture is the interesting part: a deterministic pipeline with built-in rulesets (NPE, thread-safety, XSS, SQL injection) handles what static analysis already does well, and an LLM agent only gets called in for repository-level context and judgment, producing precise line-level comments instead of a wall of generic feedback. It's compatible with both OpenAI and Anthropic models, so you point it at whatever you're already paying for. For anyone burned by LLM review tools that hallucinate issues or review files with no context on the rest of the repo, this hybrid split is the template to copy."
+          },
+          {
+            "title": "earthtojake/text-to-cad",
+            "url": "https://github.com/earthtojake/text-to-cad",
+            "source": "github.com",
+            "stars": "19.2k",
+            "lang": "Python",
+            "body": "Text-to-CAD gives an agent the ability to produce real CAD geometry -- STEP files, not renders -- from a text description, aimed at mechanical engineering and robotics work. That's new ground for agent tooling: most \"agent does X\" repos target code or browsers, not parametric solids that need to assemble and tolerance-check correctly. Point an agent at this and it can iterate on a part design the way it already iterates on code, generating and checking geometry in a loop instead of a human redrawing the part in Fusion or SolidWorks after every spec change."
+          },
+          {
+            "title": "img2threejs/img2threejs",
+            "url": "https://github.com/img2threejs/img2threejs",
+            "source": "github.com",
+            "stars": "17.9k",
+            "lang": "Python",
+            "body": "Feed it a reference image and img2threejs rebuilds the object as a procedural, code-only Three.js model -- parameters and geometry you can keep editing, not a baked mesh you're stuck with. It's quality-gated and animation-ready out of the box, and built to be token-efficient so an agent can do the image-to-3D conversion without burning a huge context budget shuttling raw mesh data back and forth. Useful if you're generating 3D assets for a web project and want something you can actually tweak afterward instead of an opaque GLB file handed to you once."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Two posts that actually show their work -- one at toy scale, one at absurd scale.",
+        "items": [
+          {
+            "title": "500B Tokens Later: Letting AI Agents Decompile a First-Person Shooter",
+            "url": "https://momo5502.com/posts/2026-10-09-game-decompilation/",
+            "source": "Hacker News",
+            "author": "davikr",
+            "body": "The author set agents loose on decompiling a shipped commercial first-person shooter from its binary, running enough iterations to burn roughly 500 billion tokens, and documented where it worked and where it didn't. Agents were strong at pattern-matching known compiler idioms and rebuilding struct layouts from memory access patterns -- the mechanical, local reconstruction work. They fell apart on anything requiring long-range reasoning across many functions or actual understanding of game-design intent rather than symbol recovery. It's a genuine stress test of agentic coding at a scale almost nobody tries -- not a function or a module, but an entire undocumented binary -- and a useful data point on exactly where current agents hit a wall on large, un-sourced codebases instead of curated benchmarks."
+          },
+          {
+            "title": "Build your own decision model",
+            "url": "https://nishtahir.com/build-your-own-decision-model/",
+            "source": "Hacker News",
+            "author": "softwaredoug",
+            "body": "The post argues for building a small, purpose-trained decision model instead of routing every yes/no or pick-one call in a pipeline through a general LLM prompt, and walks through actually doing it -- collecting labeled examples from real pipeline traffic, picking a lightweight architecture, training it, and swapping it in for the LLM call it replaces. The pitch is latency, cost, and consistency: a dedicated classifier doesn't hallucinate a format or drift between calls the way a prompted model can. The 95-comment thread pushes back hard, with plenty of readers arguing a cheap model with structured outputs gets you 90% of the way there for a fraction of the engineering effort -- worth reading the disagreement as much as the post itself."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow with whatever ships next."
+  },
+  {
     "id": "2026-10-10",
     "date": "October 10, 2026",
     "title": "AI Pulse",
