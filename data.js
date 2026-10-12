@@ -3,6 +3,111 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-10-12",
+    "date": "October 12, 2026",
+    "title": "AI Pulse",
+    "subtitle": "A new open embedding model, a generative games platform, and agents decompiling a shooter",
+    "intro": "Today's lab blogs lean heavy on customer-story marketing, but two real product drops are buried in there: a multimodal embedding model from DeepMind and a generative games platform from Google. On GitHub, one plugin-everything agent harness dwarfs the field at 248k stars. And the best build write-up of the day is a researcher's unflinching account of throwing 500 billion tokens of agent output at decompiling a commercial shooter.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Less marketing recap today, more actual new capability -- an open embedding model and a generative games platform lead the pack.",
+        "items": [
+          {
+            "title": "EmbeddingGemma 2: an open, lightweight multimodal embedding model",
+            "url": "https://deepmind.google/blog/embeddinggemma-2-an-open-lightweight-multimodal-embedding-model/",
+            "source": "DeepMind",
+            "body": "DeepMind released EmbeddingGemma 2, an open embedding model small enough to run on-device but now multimodal -- it embeds text and images into the same vector space instead of just text. That means you can build retrieval and search over mixed photo-and-text corpora without bolting a separate vision encoder onto your pipeline. It ships as open weights, so you can self-host it for RAG, dedup, clustering, or semantic search without a per-call API bill. For builders already running the first EmbeddingGemma for lightweight local search, this is a straight upgrade with a wider modality net."
+          },
+          {
+            "title": "Introducing Playground: Create and play custom games",
+            "url": "https://blog.google/innovation-and-ai/technology/ai/playground-experimental-gaming-platform/",
+            "source": "Google AI",
+            "body": "Google opened up Playground, a new experimental platform for generating and playing custom games on the fly. Describe a game and it builds a playable version right there, rather than handing you static assets or a code dump to assemble yourself. It's aimed at casual creation, not shipping production titles, but it's a real example of generative models producing an interactive, rules-based artifact instead of text or an image. Worth a look if you're curious how far \"prompt to playable\" has actually gotten, and what corners get cut to make a generated game feel like a game."
+          },
+          {
+            "title": "Helping teens learn, plan, and shape the future of AI",
+            "url": "https://openai.com/index/teens-learn-and-plan",
+            "source": "OpenAI",
+            "body": "ChatGPT for Teens is getting a College Planner, a new mode that helps students track application deadlines, compare schools, and manage the whole process instead of just answering one-off questions about essays. OpenAI is bundling it with flashcards and quizzes for study help, plus a teen advisory council to shape future features. It's a genuinely new structured workflow inside ChatGPT, not just a system prompt tweak -- the kind of thing that turns a chat window into a planning tool with state and checklists attached."
+          },
+          {
+            "title": "Radisson Hotel Group brings hotel discovery into ChatGPT",
+            "url": "https://openai.com/index/radisson",
+            "source": "OpenAI",
+            "body": "Radisson built a ChatGPT app, with Accenture, that lets you search, compare, and book its hotels without leaving the chat. It's one of the more concrete examples yet of OpenAI's Apps SDK being used for real commerce rather than a demo -- you can go from \"find me a hotel in Lisbon next weekend\" to an actual reservation in the same conversation. If you're building on the Apps SDK yourself, this is a useful reference for what a production travel-booking integration looks like end to end."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "One plugin-everything harness dwarfs the field, and the more interesting repos give agents new senses -- CAD, review judgment, book knowledge.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "248.2k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's agent harness takes the \"everything is a plugin\" idea all the way down -- tools, memory, planning, even the core loop are swappable plugins rather than hardcoded pieces of the harness. That's a different bet than most coding agents, which bolt plugins onto a fixed core. It means you can replace how the agent plans or remembers without forking the whole project. With 248k stars it's clearly become a default choice for people building on DeepSeek models, and the plugin ecosystem is already sprawling. Worth a look if you're frustrated with how rigid other agent harnesses are to extend."
+          },
+          {
+            "title": "alibaba/open-code-review",
+            "url": "https://github.com/alibaba/open-code-review",
+            "source": "github.com",
+            "stars": "46.5k",
+            "lang": "Go",
+            "body": "Alibaba open-sourced the code review tool it runs internally at scale: a hybrid of deterministic static-analysis pipelines (for NPE, thread-safety, XSS, SQL injection) and an LLM agent layer on top for judgment calls, producing precise line-level comments instead of a wall of generic feedback. It plugs into OpenAI- or Anthropic-compatible APIs, so you're not locked into one model provider. The pitch is reliability at scale -- deterministic checks catch what rules can catch, the agent handles the fuzzier repository-level context. If your team's been burned by LLM-only review tools hallucinating issues, this hybrid design is the more defensible bet."
+          },
+          {
+            "title": "earthtojake/text-to-cad",
+            "url": "https://github.com/earthtojake/text-to-cad",
+            "source": "github.com",
+            "stars": "19.6k",
+            "lang": "Python",
+            "body": "Text-to-CAD gives agents the ability to actually produce mechanical parts -- feed it a description and it generates real CAD geometry (STEP files), not just a rendering. That's a meaningfully different capability than image or mesh generation: the output is parametric, editable geometry that a robotics or mechanical engineering pipeline can consume directly. It's early and clearly built for agentic workflows, where an agent calls CAD as a tool rather than a human clicking through a GUI, but it's one of the first credible attempts at giving LLM agents hands in physical design instead of just code and pixels."
+          },
+          {
+            "title": "virgiliojr94/book-to-skill",
+            "url": "https://github.com/virgiliojr94/book-to-skill",
+            "source": "github.com",
+            "stars": "34.7k",
+            "lang": "Python",
+            "body": "Point this at a technical book PDF and it converts the book into a Claude Code skill -- structured and queryable, usable while you actually work instead of sitting unread on a shelf. It's a neat instance of a pattern worth stealing: turning static reference material into an always-available, context-engineered tool the agent can pull from mid-task instead of you having to remember and paste the right page yourself. If you've got a pile of O'Reilly PDFs you keep meaning to read, this turns them into something your agent can use today."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "The standout today is a no-punches-pulled account of agentic reverse engineering, plus two small self-hosted builds you could clone this weekend.",
+        "items": [
+          {
+            "title": "500B tokens later: Letting AI agents decompile a first-person shooter",
+            "url": "https://momo5502.com/posts/2026-10-09-game-decompilation/",
+            "source": "Hacker News",
+            "author": "davikr",
+            "body": "The author spent 500 billion tokens of agent output trying to get AI coding agents to decompile a commercial first-person shooter back into readable, compilable C++. The post walks through the actual pipeline: feeding agents the decompiled assembly and symbol stubs, having them iteratively rename variables, reconstruct structs, and verify behavior by diffing recompiled binaries against the original, then looping on whatever broke. It's refreshingly honest about the failure modes -- agents confidently inventing plausible-looking code that doesn't match the binary, context windows blowing past what a single reverse-engineering session needs, and how much human steering it still took to keep the agents from wandering. Read this before you believe either the hype or the dismissals of agentic reverse engineering."
+          },
+          {
+            "title": "Talorys - A self-hosted personal AI agent on Cloudflare's free tier",
+            "url": "https://github.com/rociiu/talorys",
+            "source": "Hacker News",
+            "author": "rociiu",
+            "body": "The author built a personal AI agent that runs entirely on Cloudflare's free tier -- Workers for compute, likely D1 or KV for memory, and Workers AI or a bring-your-own-key LLM for the model calls -- and open-sourced the whole thing. The appeal is the cost line: a real, always-on personal assistant with memory and tool access that costs nothing to host, as long as you stay inside Cloudflare's free quotas. It's a solid reference architecture for anyone who wants a persistent agent without committing to a VPS bill, and the repo is concrete enough that you could clone it and have your own running by Sunday night."
+          },
+          {
+            "title": "Show HN: Atticus - Hold-to-talk voice assistant for macOS that runs on Claude -p",
+            "url": "https://github.com/SaarthurR/atticus-mac",
+            "source": "Hacker News",
+            "author": "SaarthRanka",
+            "body": "Atticus is a hold-to-talk voice assistant for macOS that pipes straight into Claude Code's `-p` (print) mode -- hold a key, talk, release, and your speech goes out as a prompt with the response coming back without ever opening a terminal. It's a small, specific build: a hotkey listener, local speech-to-text, and a thin wrapper around `claude -p` for the response, glued into something that feels like a native voice assistant instead of a chat window. Useful if you want hands-free access to Claude while coding, and a decent template if you want to build the equivalent around your own CLI tool of choice."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-10-11",
     "date": "October 11, 2026",
     "title": "AI Pulse",
