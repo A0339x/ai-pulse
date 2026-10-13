@@ -3,6 +3,111 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-10-13",
+    "date": "October 13, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Google ships two new Gemini models in one day, DeepSeek's plugin harness crosses a quarter million stars, and someone decompiled a shooter with 500 billion tokens",
+    "intro": "Google had the busiest shipping day of the week, dropping a new flagship Gemini alongside a dedicated robotics variant and a refreshed open embedding model. On GitHub, the interesting repos aren't new wrappers, they're infrastructure for plugins, grounding, and checking agents' work. And the best build writeup of the day is a brute-force, verifiable pipeline for decompiling a 2000s-era shooter with agents.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Google doubles up on new models today, and Liquid ships a tiny model built to run agents on-device.",
+        "items": [
+          {
+            "title": "Gemini 4 Argon",
+            "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/",
+            "source": "Google DeepMind",
+            "body": "Google's new flagship model is out today, pitched explicitly at long-horizon reasoning and agentic work rather than chat. It launched alongside a dedicated robotics variant (Gemini 4 Argon for Robotics), so the same reasoning core that handles code and planning now also drives physical actuators. Google hasn't published independent benchmarks yet, just its own framing, but shipping a robotics-specific variant on day one signals where it wants the model judged: embodied, multi-step tasks, not just coding leaderboards. If you're building agents on Gemini, this is the model to point your hardest, multi-step tasks at first."
+          },
+          {
+            "title": "Gemini 4 Argon for Robotics",
+            "url": "https://deepmind.google/blog/gemini-4-argon-for-robotics/",
+            "source": "Google DeepMind",
+            "body": "A robotics-tuned version of Gemini 4 Argon shipped the same day as the general model, aimed at grounding the model's reasoning in physical action rather than text generation. It's a signal that Google is treating embodied control as a first-class deployment target now, not an afterthought bolted onto a language model months later. For anyone building on real hardware -- manipulators, mobile robots -- this is the first Gemini checkpoint built with that loop in mind from the start, rather than a general model fine-tuned after the fact."
+          },
+          {
+            "title": "EmbeddingGemma 2",
+            "url": "https://deepmind.google/blog/embeddinggemma-2-an-open-lightweight-multimodal-embedding-model/",
+            "source": "Google DeepMind",
+            "body": "A new open-weight embedding model that handles text and images in the same vector space, small enough to self-host cheaply. Drop it into an existing retrieval pipeline today and get multimodal search -- text queries matching images, images matching captions -- without standing up a separate vision embedding model or paying for a hosted multimodal API. Being open and lightweight matters here: it's a swap-in replacement for whatever text-only embedding model is currently sitting in your RAG stack, not a new service you have to architect around."
+          },
+          {
+            "title": "Run fast, private agents on-device with LFM2.5-24B-A2B",
+            "url": "https://huggingface.co/blog/LiquidAI/lfm25-24b-a2b",
+            "source": "Hugging Face",
+            "body": "Liquid AI's new model packs 24B total parameters into a mixture-of-experts setup that only activates a couple billion per token (the A2B in the name), which is what makes it fast enough to run locally. The pitch is on-device agents that don't phone home: tool-calling and multi-step reasoning on a laptop or edge box, with no API latency and no data leaving the machine. Worth a look today if you've been stuck choosing between a small local model that's fast but dumb, and a frontier API model that's capable but round-trips over the network."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Plugin architectures, grounding skills in real documents, and checking whether agents actually did their job -- no SDK wrappers made the cut today.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "248.9k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's agent harness is built around one idea: everything, including the core run loop, is a plugin. Planning, memory, tool execution, even the model backend, can be swapped without forking the core. That design is why the star count has exploded -- it's turning into the substrate a growing ecosystem of third-party plugins builds on, the same way editor extensions took over VS Code customization. For builders, it means you can bolt on a custom memory strategy or tool-use pattern to an existing agent instead of rewriting one from scratch."
+          },
+          {
+            "title": "virgiliojr94/book-to-skill",
+            "url": "https://github.com/virgiliojr94/book-to-skill",
+            "source": "github.com",
+            "stars": "34.8k",
+            "lang": "Python",
+            "body": "Feed it a technical book PDF, get back a ready-to-use Claude Code skill built from that book's structure, examples, and reference material. The use case is grounding: when you're working in a niche framework or against a hardware datasheet the model wasn't trained deeply on, this turns the actual source material into something your agent can look up mid-task instead of hallucinating from thin training data. It's a clean pattern for anyone sitting on a stack of PDFs that should be agent-queryable knowledge instead of static reference docs."
+          },
+          {
+            "title": "earthtojake/text-to-cad",
+            "url": "https://github.com/earthtojake/text-to-cad",
+            "source": "github.com",
+            "stars": "19.9k",
+            "lang": "Python",
+            "body": "Gives agents CAD superpowers: natural language or a reference image in, parametric mechanical models out, STEP-file ready. Most AI-for-CAD tools are chat wrappers bolted onto existing CAD software; this builds the actual toolchain so an agent can iterate on geometry the way it iterates on code -- generate, check constraints, revise, repeat. Aimed at mechanical engineers and robotics builders who want a fast first-pass part instead of grinding through manual modeling for every bracket and housing."
+          },
+          {
+            "title": "ifixai-ai/iFixAi",
+            "url": "https://github.com/ifixai-ai/iFixAi",
+            "source": "github.com",
+            "stars": "25.8k",
+            "lang": "Python",
+            "body": "Independent auditing for AI agents: point it at an agent, yours or someone else's, and it answers whether the agent is actually doing what it's supposed to in under two minutes, run by a human or by another agent. As more agents get wired into production workflows with less direct supervision, this kind of check layer becomes load-bearing infrastructure rather than a nice-to-have -- a way to verify agent behavior that isn't just the same model grading its own homework."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One brute-force decompilation pipeline, one model repurposed for a job it wasn't built for, and one clean voice-assistant glue job.",
+        "items": [
+          {
+            "title": "500B tokens later: Letting AI agents decompile a first-person shooter",
+            "url": "https://momo5502.com/posts/2026-10-09-game-decompilation/",
+            "source": "Hacker News",
+            "author": "davikr",
+            "body": "Documents months of running agent loops against the raw disassembly of an old FPS binary, turning it into readable, buildable C -- 500 billion tokens spent in the process. The actual pipeline: an agent picks a function, drafts a C rewrite, compiles it, and diffs the resulting assembly against the original byte for byte, looping until it matches. That compile-and-diff check is the key move -- it gives the agent a verifiable reward signal instead of trusting its own confidence. Covers the failure modes too: agents looping forever on heavily inlined or optimized functions where a byte-exact match is basically unreachable, and context limits choking on large functions. A solid blueprint if you want to point agents at another old binary and actually trust the output."
+          },
+          {
+            "title": "We turned EmbeddingGemma 2 into a speech-to-text model",
+            "url": "https://eg2.haku.sh/",
+            "source": "Hacker News",
+            "author": "amrrs",
+            "body": "Took Google's EmbeddingGemma 2 -- shipped this same week as a text/image embedding model, not a speech model -- and repurposed it into working speech-to-text, writing up the conversion end to end: how audio features get mapped into the embedding space, what layers needed retraining versus what stayed frozen, and the compute spent on the whole experiment. It's less about the resulting STT system and more a fast, legible template for the move everyone should be doing the week a new open-weight model drops: bend it into a shape its authors didn't ship, and document exactly how."
+          },
+          {
+            "title": "Show HN: Atticus - Hold-to-talk voice assistant for macOS that runs on Claude -p",
+            "url": "https://github.com/SaarthurR/atticus-mac",
+            "source": "Hacker News",
+            "author": "SaarthRanka",
+            "body": "A hold-to-talk voice assistant for macOS built from a global hotkey listener, local speech-to-text, and Claude's headless `-p` flag -- hold the key, talk, release, and the transcript gets piped straight into a one-shot Claude call with the reply streamed back, no chat window involved. The writeup covers the actual glue: hotkey capture, audio buffering, passing the transcript to `claude -p`, and handling the streamed response. The pattern -- hotkey, STT, headless model call, output -- generalizes to any CLI-capable model, making this a clean reference for a push-to-talk layer over whatever agent you're already running from a terminal."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan. Go build something before the next model drops."
+  },
+  {
     "id": "2026-10-12",
     "date": "October 12, 2026",
     "title": "AI Pulse",
