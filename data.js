@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-10-14",
+    "date": "October 14, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Gemini 4 Argon drops, agents learn to run for days, and GitHub's plugin wars heat up",
+    "intro": "Google dropped a new flagship model today, Gemini 4 Argon, alongside a robotics-specific variant -- the biggest shipping news of the day. OpenAI and Nous Research both pushed on agent endurance and setup friction, which is the real story under the hood: agents that run longer unattended and agents that are easier to get running in the first place. On GitHub, the plugin-architecture bet behind DeepSeek Harness keeps pulling ahead of single-purpose wrapper tools.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new Gemini flagship and two concrete pushes on how long and how easily agents can run.",
+        "items": [
+          {
+            "title": "Gemini 4 Argon: Built to solve your hardest problems",
+            "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/",
+            "source": "Google AI",
+            "body": "Google shipped Gemini 4 Argon today, the next flagship model in the Gemini line, pitched specifically at harder reasoning and problem-solving tasks rather than a general chat refresh. DeepMind published a parallel safety writeup alongside the launch, laying out how the model was red-teamed and evaluated before release -- a step it's now doing publicly for each major Gemini drop. It's live now across Google's surfaces. If your agent stack has been leaning on Gemini for planning or tool-calling, this is the version worth swapping in and re-benchmarking against today."
+          },
+          {
+            "title": "Gemini 4 Argon for Robotics",
+            "url": "https://deepmind.google/blog/gemini-4-argon-for-robotics/",
+            "source": "DeepMind",
+            "body": "Alongside the base model, DeepMind released a Gemini 4 Argon variant tuned specifically for robotics, aimed at letting one model handle perception, planning, and low-level control for physical robots instead of stitching together separate vision and planning models. It's the first Argon-generation model DeepMind is explicitly branding for embodied use, landing the same week as its on-device Gemma scam-detection work. If you're building anything in robotics or physical automation, this is the model to test against your current pipeline instead of a general-purpose Gemini checkpoint plus a bolted-on planner."
+          },
+          {
+            "title": "Hermes Agent v0.22.0 -- The Threshold Release",
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v0.22.0",
+            "source": "Nous Research",
+            "body": "Nous Research's open agent harness just shipped its biggest release yet: a fresh desktop install now opens straight into a guided setup chat running on a free-tier model, so you can get from zero to a working agent without touching a config file or an API key first. The release spans roughly 24,000 commits and 2,500 contributors since v0.21, which tells you how fast this project is moving. If you tried Hermes Agent before and bounced off the setup friction, this is the release that fixes exactly that."
+          },
+          {
+            "title": "How Third Moment Research runs 10,000 agents for 36+ hours",
+            "url": "https://openai.com/index/third-moment-research",
+            "source": "OpenAI",
+            "body": "OpenAI detailed how Third Moment Research keeps 10,000 agents running in parallel for over 36 hours straight, built on GPT-6 Astra and GPT-6.1 Sol, Codex, and the Daybreak cybersecurity model. The headline capability is persistence: agents that stay on task across a day and a half without drifting or needing a human restart, and that get better at the task the longer they run instead of degrading. That's a meaningfully longer horizon than the hour-long agent-loop demos you've seen so far, and it's a concrete bar to benchmark your own long-running agent setups against."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "The plugin-everything bet keeps winning, and a few repos push agents into genuinely new territory.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "249.6k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness treats everything -- models, tools, UI, memory -- as a swappable plugin, a different bet than frameworks that hardcode a model provider and let you plug tools in around the edges. At 249k stars it's already the most-starred thing on this list by a wide margin, and the plugin ecosystem forming around it (free model plugins, desktop clients, image-prompt libraries) is growing fast enough that it's starting to look like a platform rather than a library. Worth a look if you're tired of rewriting your agent's core loop every time you switch models."
+          },
+          {
+            "title": "alibaba/open-code-review",
+            "url": "https://github.com/alibaba/open-code-review",
+            "source": "github.com",
+            "stars": "47.1k",
+            "lang": "Go",
+            "body": "Alibaba open-sourced the code review tool it runs internally at scale: a hybrid pipeline that runs deterministic static-analysis rules (null pointer checks, thread safety, XSS, SQL injection) alongside an LLM agent, then merges both into precise line-level comments instead of one wall of AI-generated feedback. The deterministic layer catches what static analysis already handles well; the LLM layer handles the fuzzier repository-context judgment calls. It's OpenAI and Anthropic compatible, so you point it at whichever model you're already paying for. If your team's LLM code reviews are noisy, this is a concrete architecture for making them precise instead."
+          },
+          {
+            "title": "DietrichGebert/ponytail",
+            "url": "https://github.com/DietrichGebert/ponytail",
+            "source": "github.com",
+            "stars": "163.3k",
+            "lang": "JavaScript",
+            "body": "Ponytail is a set of rules and skills that push your coding agent to write less code, on the theory that the best fix usually deletes code rather than adds it. In practice it's a drop-in config for Claude Code and Cursor that nudges the agent to search for existing functions before writing new ones, skip unnecessary abstraction, and stop padding diffs with defensive code nobody asked for. It's climbing fast because it names a real failure mode -- agents generating plausible-looking bloat -- and gives you a cheap way to push back on it without rebuilding your whole prompting setup."
+          },
+          {
+            "title": "earthtojake/text-to-cad",
+            "url": "https://github.com/earthtojake/text-to-cad",
+            "source": "github.com",
+            "stars": "20.2k",
+            "lang": "Python",
+            "body": "This gives an agent the ability to generate real CAD geometry (STEP files) from text, aimed at mechanical engineers and roboticists who want to describe a bracket or housing in plain language and get a parametric model back instead of hand-modeling it. It's a narrow, concrete capability rather than a general 'AI does engineering' pitch, which is exactly why it's worth noting: CAD generation has resisted agents because geometry has to be exact, not just plausible. Worth trying if any part of your build involves physical parts and you've been stuck hand-rolling CAD files."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Today's Show HN and Launch HN crop is mostly product announcements, not documented builds -- nothing cleared the bar.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-10-13",
     "date": "October 13, 2026",
     "title": "AI Pulse",
