@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-10-15",
+    "date": "October 15, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Gemini 4 Argon lands, DeepSeek's plugin harness tops the charts, and AI video breaks the one-minute wall",
+    "intro": "Google's new flagship is the real news today, arriving with a robotics-specific variant and a privacy-first scam detector riding alongside it. On GitHub, DeepSeek's everything-is-a-plugin harness keeps climbing while agent tooling pushes further into CAD and 3D. Today's Show HN pile didn't turn up a workflow worth stealing, so Built With AI sits out.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new flagship model lands, and video and privacy tools quietly get sharper.",
+        "items": [
+          {
+            "title": "Gemini 4 Argon: Built to solve your hardest problems",
+            "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/",
+            "source": "Google AI",
+            "body": "Google shipped Gemini 4 Argon today, the newest Gemini pitched at hard, open-ended problems rather than everyday chat. It launched with a cluster of companion posts -- on how it was trained for safety, and on a dedicated robotics variant released at the same time -- which signals Google wants Argon treated as an infrastructure model for agents and physical systems, not just a chatbot bump. If you're already using Gemini, expect Argon to show up as a selectable model rather than a separate product."
+          },
+          {
+            "title": "Gemini 4 Argon for Robotics",
+            "url": "https://deepmind.google/blog/gemini-4-argon-for-robotics/",
+            "source": "DeepMind",
+            "body": "DeepMind rolled out a robotics-specific build of Gemini 4 Argon alongside today's general release, tuned for embodied tasks like perception and manipulation instead of text or code. It's notable that Google branched Argon into a specialized variant on day one rather than shipping one general model and leaving robotics teams to fine-tune it themselves. For anyone building on real hardware, that means a model built for the physical world is available now instead of something you'd have to adapt yourself."
+          },
+          {
+            "title": "Higgsfield takes AI video from 1 minute to over 10",
+            "url": "https://openai.com/index/higgsfield-longer-videos-voice",
+            "source": "OpenAI",
+            "body": "Higgsfield just broke its own 1-minute cap -- clips now run past 10 minutes, powered by GPT-6 Astra. The same update brings GPT-Image-2.5 for sharper, more precise visuals and opens an early path to voice-driven filmmaking through GPT-Live. That's the difference between making short clips and making something closer to an actual short film, and it's live in Higgsfield today rather than a roadmap promise."
+          },
+          {
+            "title": "Google DeepMind and Singapore Government collaborate to build fine-tuned AI model for scam detection",
+            "url": "https://deepmind.google/blog/on-device-ai-scam-detection-mddi/",
+            "source": "DeepMind",
+            "body": "DeepMind and Singapore's GovTech shipped a scam detector built on lightweight Gemma models that runs entirely on-device, with zero cloud data egress -- it reads private chats for scam patterns without ever sending that text off the phone. The privacy constraint is the actual news: a real national deployment of small local models doing a job that normally requires shipping text to a server. Worth watching if you're deciding when on-device models are good enough versus when you reach for the cloud."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent tooling keeps pushing past chat and code into CAD, 3D, and review pipelines.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "250.3k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's coding harness treats everything -- model routing, UI, tools, even other harnesses -- as a plugin, and it's already spawned its own ecosystem: a desktop app, plus free-model plugins that unlock DeepSeek V4.1 Flash and Kimi K3 with no API key required. The pitch is a harness that doesn't lock you into one model or workflow; you swap pieces instead of forking the whole tool. Worth a look if you're tired of coding agents that bake in one provider's assumptions by default."
+          },
+          {
+            "title": "alibaba/open-code-review",
+            "url": "https://github.com/alibaba/open-code-review",
+            "source": "github.com",
+            "stars": "47.3k",
+            "lang": "Go",
+            "body": "Alibaba open-sourced the code review tool it runs internally at scale: a hybrid pipeline pairing deterministic static-analysis rules (NPE, thread-safety, XSS, SQLi) with an LLM agent for judgment calls, producing precise line-level comments instead of vague summaries. It works with both OpenAI and Anthropic models and ships a multi-language ruleset out of the box. The useful idea is the hybrid split -- deterministic checks catch what they're reliably good at, the agent handles everything else, instead of asking an LLM to do the whole job."
+          },
+          {
+            "title": "earthtojake/text-to-cad",
+            "url": "https://github.com/earthtojake/text-to-cad",
+            "source": "github.com",
+            "stars": "20.6k",
+            "lang": "Python",
+            "body": "Gives coding agents the ability to actually produce mechanical CAD -- real STEP files, not renders -- so you can prompt your way to a part instead of modeling it by hand. It's aimed at mechanical engineering and robotics workflows, where \"give your agent CAD superpowers\" means the agent iterates on physical designs the same way it iterates on code. A good sign agent tooling is moving past text and images into engineering file formats that CAM/CNC tools can actually consume."
+          },
+          {
+            "title": "img2threejs/img2threejs",
+            "url": "https://github.com/img2threejs/img2threejs",
+            "source": "github.com",
+            "stars": "18.2k",
+            "lang": "Python",
+            "body": "Takes a reference image and rebuilds the object in it as a procedural, code-only Three.js model -- not a mesh dump, actual parametric code that's quality-gated and animation-ready. The token-efficient framing is the clever part: instead of generating a huge 3D file, the agent writes compact code that produces the geometry, which is cheaper to generate and far easier to edit afterward. Useful for turning product shots or concept art into usable 3D assets without a manual modeling pass."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's pile documented a full workflow, so we're skipping this section.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-10-14",
     "date": "October 14, 2026",
     "title": "AI Pulse",
