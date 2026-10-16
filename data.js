@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-10-16",
+    "date": "October 16, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Gemini 4 Argon lands, DeepSeek's plugin harness tops the charts, builders go quiet",
+    "intro": "Gemini 4 Argon is the headline today -- a new flagship model from Google plus a dedicated robotics variant. Everything else is quieter but still real: OpenAI opened sponsored academic access to its life-sciences model, DeepMind shipped an on-device scam detector that never phones the cloud, and GitHub's agent-tooling scene keeps compounding around plugin-everything harnesses and agent-driven CAD. Nothing in today's build-diary pile cleared the bar for a full documented workflow, so that section's empty.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new flagship model and a few genuinely new access tiers and capabilities, not just recaps.",
+        "items": [
+          {
+            "title": "Gemini 4 Argon: Built to solve your hardest problems",
+            "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/",
+            "source": "Google AI",
+            "body": "Google shipped Gemini 4 Argon today, a new flagship model line pitched at harder reasoning and longer-horizon tasks, with a dedicated robotics variant for perception-to-action control loops on physical systems. DeepMind also published a companion writeup on how Argon was red-teamed and evaluated before release. If you're running agentic workloads that stall out on long multi-step planning or tool use, Argon is worth a direct swap-in test against whatever you're on now. Robotics teams specifically get a model tuned for real-time control, not just chat -- that's the part that didn't exist yesterday."
+          },
+          {
+            "title": "Bringing GPT-Rosalind to academic research labs",
+            "url": "https://openai.com/index/introducing-the-rosalind-academic-plan",
+            "source": "OpenAI",
+            "body": "OpenAI opened a new access tier: eligible academic labs can now get sponsored access to GPT-Rosalind, its life-sciences-focused model, plus supporting research tools. This isn't a new capability, it's a new door -- labs that couldn't justify commercial pricing for frontier model access on genomics, protein, or chemistry workloads can now apply directly. The application process and eligibility criteria are live today. If you're in a university lab doing bio or chem research and have been priced out of frontier tooling, this is the tier to check first."
+          },
+          {
+            "title": "Google DeepMind and Singapore Government collaborate on scam detection",
+            "url": "https://deepmind.google/blog/on-device-ai-scam-detection-mddi/",
+            "source": "DeepMind",
+            "body": "DeepMind and GovTech Singapore shipped a fine-tuned, lightweight Gemma model that runs entirely on-device to catch conversational scams inside private chats -- no cloud calls, no data leaving the phone. That's the new part: earlier scam-detection tools had to ship message content to a server to classify it. This one does inference locally, which matters anywhere you need real-time text classification on sensitive content -- fraud, abuse, moderation -- without a privacy trade-off. Worth a look if you're building anything that needs on-device NLP classification at phone-app scale."
+          },
+          {
+            "title": "openclaw 2026.10.4",
+            "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.10.4",
+            "source": "openclaw",
+            "body": "openclaw pushed a release fixing two operational bugs and one security hole: the Gateway no longer restarts itself after the host sleeps or the system clock jumps, shutdown no longer hangs on a stalled transcript worker, and Tlon group DMs can no longer be tricked into treating another participant as the owner. If you're running openclaw's Gateway in production -- especially on a laptop that sleeps, or in a multi-tenant chat setup -- update now. The owner-impersonation fix is a real vulnerability closed, not just a stability patch."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Plugin-everything harnesses, agent-native browsing, and agents that design physical parts.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "251k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness treats everything -- model providers, tools, memory, UI -- as a plugin, so swapping any piece of your agent stack is a config change instead of a rewrite. It's the \"everything is a plugin\" idea taken further than most harnesses bother to, and an ecosystem is already forming around it: a free-model plugin, a desktop app, and dozens of community plugins have spun up in days. If you're tired of agent frameworks that lock you into one model provider or one tool-calling format, this is worth an afternoon to try."
+          },
+          {
+            "title": "lexmount/moli",
+            "url": "https://github.com/lexmount/moli",
+            "source": "github.com",
+            "stars": "18.9k",
+            "lang": "Rust",
+            "body": "A headless browser built from scratch in Rust specifically for AI agents, not adapted from Playwright or Puppeteer. The pitch is lite, fast, and high-compatibility -- the three things agent-driven browsing usually sacrifices one of. If your agents spend their time clicking through web UIs and you've hit the memory or speed ceiling of a Chromium-based headless setup, this is a direct alternative worth benchmarking against what you're running now."
+          },
+          {
+            "title": "earthtojake/text-to-cad",
+            "url": "https://github.com/earthtojake/text-to-cad",
+            "source": "github.com",
+            "stars": "20.9k",
+            "lang": "Python",
+            "body": "Gives coding agents the ability to generate actual CAD models -- STEP files, not renders -- from a text description, aimed at mechanical engineering and robotics workflows. The novel part is treating CAD like code an agent can iterate on: generate, check constraints, revise, repeat. If you've wanted to hand an agent \"design me a bracket that fits this enclosure\" instead of opening Fusion 360 yourself, this is the first version of that which looks real."
+          },
+          {
+            "title": "ifixai-ai/iFixAi",
+            "url": "https://github.com/ifixai-ai/iFixAi",
+            "source": "github.com",
+            "stars": "28.6k",
+            "lang": "Python",
+            "body": "An auditor built to answer one question about any AI agent: is it actually doing what it's supposed to be doing. Point it at an agent -- run by a human reviewer or by the agent auditing itself -- and get an answer in under two minutes. As agents get handed longer-running, higher-stakes jobs, \"did it actually do the task\" stops being obvious from a transcript alone. This treats agent auditing as its own product rather than a line in an eval script."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's pile documented a full, repeatable build -- skipping this section.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-10-15",
     "date": "October 15, 2026",
     "title": "AI Pulse",
