@@ -3,6 +3,111 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-10-17",
+    "date": "October 17, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Gemini 4 Argon lands, DeepSeek's harness crosses a quarter million stars, and someone deleted 168,000 lines of comments just to see if their agent cared",
+    "intro": "Google shipped its new flagship, Gemini 4 Argon, with a robotics-specific variant riding alongside it, while OpenAI quietly opened frontier life-sciences access to academic labs and put a malware-triage model into production at SentinelOne. On GitHub, the plugin-everything DeepSeek Harness is pulling absurd numbers, and a run of smaller, sharper tools are chipping at specific workflow pain instead of wrapping another chat API. The best read today isn't about a new model at all -- it's someone stress-testing what their coding agent actually needs to work well.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new flagship model, a new academic access tier, and AI quietly doing security and fraud triage in production.",
+        "items": [
+          {
+            "title": "Gemini 4 Argon: Built to solve your hardest problems",
+            "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/",
+            "source": "Google AI",
+            "body": "Google shipped Gemini 4 Argon, the newest flagship in the Gemini line, aimed at the hard end of reasoning work rather than general chat. DeepMind released it alongside a dedicated variant, Gemini 4 Argon for Robotics, built for embodied control tasks, plus a companion writeup on how the model was evaluated before launch. That's three releases bundled as one: a general frontier model, a robotics-specific version of it, and the safety documentation that goes with pushing a new flagship out the door. If you're building anything that currently hits the ceiling of Gemini -- multi-step planning, dense technical reasoning, or anything touching a robot arm -- this is the model to go test first."
+          },
+          {
+            "title": "Bringing GPT-Rosalind to academic research labs",
+            "url": "https://openai.com/index/introducing-the-rosalind-academic-plan",
+            "source": "OpenAI",
+            "body": "OpenAI opened a new access tier, the Rosalind Academic Plan, giving eligible academic life-sciences labs sponsored access to GPT-Rosalind and the research tooling built around it. Until now, serious use of Rosalind-class models for biology research has mostly run through enterprise deals or direct research partnerships. This extends that access straight to university labs that qualify, at no cost to them. If you're in an academic lab doing life sciences work and frontier-model pricing has kept you out, this is the door that just opened."
+          },
+          {
+            "title": "SentinelOne cuts malware analysis from weeks to hours",
+            "url": "https://openai.com/index/sentinelone",
+            "source": "OpenAI",
+            "body": "SentinelOne is now running malware analysis through OpenAI Daybreak, a model built specifically for security work, and cutting per-sample investigation time from weeks down to hours. That frees up analyst capacity to actually investigate more threats instead of triaging backlog. Daybreak is the real story here -- it's OpenAI's answer to whether an LLM can read and reason about malware safely and usefully at production scale, and SentinelOne is one of the first deployments proving it out. Worth a look if you're building security tooling on top of frontier models and need more than a general-purpose chat model can give you."
+          },
+          {
+            "title": "Google DeepMind and Singapore Government collaborate to build fine-tuned AI model for scam detection",
+            "url": "https://deepmind.google/blog/on-device-ai-scam-detection-mddi/",
+            "source": "DeepMind",
+            "body": "DeepMind and GovTech Singapore shipped a fine-tuned, lightweight Gemma model that runs entirely on-device to intercept conversational scams inside private chats, with zero cloud data egress. That's the notable part: scam detection usually means sending message content to a server, which is a nonstarter for anything touching private messages. Running it on-device with a small Gemma variant means the detection happens locally and nothing about the conversation leaves the phone. It's a solid proof point for what a fine-tuned small model can do in a privacy-sensitive, latency-sensitive setting outside the usual chatbot use case."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Plugin architectures and narrow, sharp tools are outpacing another round of chat wrappers this week.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "251.8k",
+            "lang": "TypeScript",
+            "body": "\"Everything is a plugin\" -- the whole harness, from model routing to tool execution to UI, is built as swappable plugins instead of a fixed pipeline. That's the novel bit: most agent harnesses hardcode their tool-calling loop and let you bolt extensions onto the edges, this one treats the core loop itself as a plugin slot. It's already spawned its own ecosystem -- free-model plugins, desktop clients, browser automation -- in the weeks since release, which is usually a sign the architecture is actually extensible and not just marketed that way. Worth reading the plugin API before building your own harness from scratch."
+          },
+          {
+            "title": "DietrichGebert/ponytail",
+            "url": "https://github.com/DietrichGebert/ponytail",
+            "source": "github.com",
+            "stars": "165.6k",
+            "lang": "JavaScript",
+            "body": "Ponytail is a set of agent rules built around one idea: the best code is the code you never wrote. Instead of optimizing your agent to produce more, it optimizes for an agent that pushes back -- skips unnecessary abstractions, refuses speculative config, deletes code instead of wrapping it. It's a direct counter to the typical agent failure mode of over-engineering every request into a framework. If your coding agent keeps shipping 200-line solutions to 20-line problems, these rules are worth dropping into your own setup."
+          },
+          {
+            "title": "virgiliojr94/book-to-skill",
+            "url": "https://github.com/virgiliojr94/book-to-skill",
+            "source": "github.com",
+            "stars": "35.1k",
+            "lang": "Python",
+            "body": "Feed it a technical book PDF and it turns the whole thing into a Claude Code skill -- chunked, indexed, structured so the agent can reference specific sections while you work instead of relying on whatever it half-remembers from training. The real use case is turning a textbook you already own into something your agent can cite accurately, rather than hallucinating API details from a book it's never actually seen in full. Useful if you work against a niche framework, hardware spec, or domain textbook that isn't well represented in a model's training data."
+          },
+          {
+            "title": "img2threejs/img2threejs",
+            "url": "https://github.com/img2threejs/img2threejs",
+            "source": "github.com",
+            "stars": "18.3k",
+            "lang": "Python",
+            "body": "Point it at a reference image and it rebuilds the object as a procedural, code-only Three.js model -- not a mesh dump, actual parametric code that generates the geometry, with quality gates and animation support built in. The pitch is token efficiency: instead of an agent burning context trying to describe or edit a raw 3D asset, it works with compact procedural code that's cheap to read, reason about, and iterate on. Useful for anyone doing image-to-3D pipeline work with coding agents who's tired of opaque binary mesh files eating the context window."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Three builds that show their actual workflow, not just the demo.",
+        "items": [
+          {
+            "title": "How the Claude Code team does code review",
+            "url": "https://claude.dev/blog/solving-code-review-at-anthropic/",
+            "source": "Hacker News",
+            "author": "pretext",
+            "body": "The Claude Code team published their actual internal code review pipeline -- not a \"we use AI for review\" announcement, but the specific setup: which subagents spin up for which kind of diff, where deterministic checks run before an LLM ever sees the code, and where a human still has to sign off. The useful part for anyone running their own agentic review setup is the division of labor -- cheap mechanical checks like formatting and test coverage get handled without burning a model call, and expensive reasoning gets reserved for the parts of a diff that actually need judgment. If your review bot is either too noisy or too slow, this is a blueprint for where to draw that line."
+          },
+          {
+            "title": "I Deleted 168,000 Lines of Comments. My AI Agent Didn't Notice",
+            "url": "https://openstation.blog/2026/10/13/i-deleted-168000-lines-of-comments-my-ai-agent-didnt-notice/",
+            "source": "Hacker News",
+            "author": "epeicher",
+            "body": "One developer stripped every comment out of a large codebase -- 168,000 lines -- specifically to test whether their AI coding agent actually relied on them for context. It didn't. The agent navigated, edited, and reasoned about the code just as well without the comments, which is a useful data point against the instinct to over-document a codebase \"for the AI.\" The workflow was blunt: script out every comment line, then run the same set of real tasks through the agent before and after and compare. If you're maintaining a legacy codebase and wondering whether your comment density actually helps your coding agent or just adds noise, this is the experiment to replicate before writing more docstrings for a reader that isn't you."
+          },
+          {
+            "title": "Llama.cpp on a jailbroken PS5: run any GGUF model natively on the console",
+            "url": "https://github.com/cobanov/PS5LM",
+            "source": "Hacker News",
+            "author": "Anon84",
+            "body": "PS5LM ports llama.cpp to run natively on a jailbroken PlayStation 5, turning the console's hardware into a local inference box that loads any standard GGUF model. The build chain is the interesting part: cross-compiling llama.cpp against the PS5's jailbroken SDK, working around its locked-down memory and GPU access, and getting a CPU/GPU inference loop stable enough to run full-size models instead of a toy demo. It's a niche build, but a genuinely useful one if you've already got a jailbroken PS5 sitting around and want a dedicated local LLM box instead of running inference on whatever laptop happens to be open."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-10-16",
     "date": "October 16, 2026",
     "title": "AI Pulse",
