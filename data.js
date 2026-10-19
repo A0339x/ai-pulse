@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-10-19",
+    "date": "October 19, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Gemini 4 Argon lands, agents learn to audit each other, and two builders show their scars",
+    "intro": "Google drops a new flagship model today while GitHub's agent tooling scene splits into two camps: making agents write less code, and making sure agents' work can be trusted. Pay closest attention to the two Hacker News build logs below -- they're the rare posts that actually show their failure points instead of just the win.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new flagship model lands, an agent CLI gets self-healing updates, and access tiers widen for science and privacy.",
+        "items": [
+          {
+            "title": "Gemini 4 Argon: Built to solve your hardest problems",
+            "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/",
+            "source": "Google AI",
+            "body": "Google's new flagship, Gemini 4 Argon, is live today, with DeepMind shipping a parallel release aimed at robotics -- running the same model on embodied tasks rather than just chat and code. The launch comes with a dedicated safety and responsible-development writeup instead of a quiet rollout, which signals Google expects this one to land in higher-stakes settings fast. If you're already building on Gemini, Argon is the model to point your hardest, most ambiguous tasks at first -- that's explicitly the use case Google built it for, not an incremental bump to the existing lineup."
+          },
+          {
+            "title": "openclaw 2026.10.5",
+            "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.10.5",
+            "source": "GitHub (openclaw/openclaw)",
+            "body": "openclaw's update mechanism just got a lot more boring, which is the point. Version 2026.10.5 fixes `openclaw update` so it finishes and recovers on its own across devices, filesystems, pnpm 12, Windows elevation, and macOS login shells -- it cleans up stale handoff leases and package-activation journals instead of leaving installs stranded, and it won't let a busy or unhealthy Gateway block an update anymore. `--no-restart` package updates also stop lying about success. If you run openclaw across a mixed fleet of machines, this release is the difference between update-and-forget and update-and-check-every-box."
+          },
+          {
+            "title": "Bringing GPT-Rosalind to academic research labs",
+            "url": "https://openai.com/index/introducing-the-rosalind-academic-plan",
+            "source": "OpenAI",
+            "body": "OpenAI opened a new access tier today: the Rosalind Academic Plan gives eligible academic life-sciences labs sponsored access to GPT-Rosalind, the lab's biology-focused model, plus the tooling built around it. Until now, Rosalind access has meant enterprise-scale pricing; this plan removes that barrier for university labs specifically. If you're running a wet lab or a computational biology group without a corporate budget behind you, this is the first real path to using Rosalind rather than watching from the sidelines while industry labs get the early access."
+          },
+          {
+            "title": "Google DeepMind and Singapore Government collaborate to build fine-tuned AI model for scam detection",
+            "url": "https://deepmind.google/blog/on-device-ai-scam-detection-mddi/",
+            "source": "DeepMind",
+            "body": "DeepMind and GovTech Singapore are now running a lightweight, fine-tuned Gemma model directly on-device to intercept conversational scams inside private chats -- no message content ever leaves the phone. That's the real news: a scam-detection model small enough to run locally with zero cloud data egress, sidestepping the privacy objection that's stalled most on-device moderation efforts. It's a government deployment rather than a public API, but it's concrete proof that Gemma-class models are now sharp and small enough to do real-time safety classification entirely on-device."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Four repos worth the star: a minimalist-agent philosophy, a hybrid code reviewer, an agent auditor, and image-to-3D that skips the mesh file entirely.",
+        "items": [
+          {
+            "title": "DietrichGebert/ponytail",
+            "url": "https://github.com/DietrichGebert/ponytail",
+            "source": "github.com",
+            "stars": "167.8k",
+            "lang": "JavaScript",
+            "body": "ponytail is less a tool than a prompt philosophy packaged as a Claude Code plugin -- it pushes your agent to act like \"the laziest senior dev in the room,\" favoring deletion, reuse, and minimal diffs over generated bulk. Instead of a config file full of rules, it ships as agent skills and cursor-rules that bias every suggestion toward the smallest viable change. If your agent's default mode is writing 200 lines to solve a 10-line problem, this is a drop-in corrective, and the framing is sticky enough that other agent-skill repos are already riffing on it."
+          },
+          {
+            "title": "alibaba/open-code-review",
+            "url": "https://github.com/alibaba/open-code-review",
+            "source": "github.com",
+            "stars": "47.6k",
+            "lang": "Go",
+            "body": "Alibaba open-sourced the code review tool it runs internally at scale, and the interesting part is the architecture: deterministic static-analysis pipelines run first (NPE, thread-safety, XSS, SQL injection) and an LLM agent only gets pulled in for the judgment calls rules can't catch. That split means precise, line-level comments without paying LLM cost or hallucination risk on checks a linter already handles better. It's OpenAI- and Anthropic-compatible, so you can point it at whichever model you already pay for instead of adopting a new vendor."
+          },
+          {
+            "title": "ifixai-ai/iFixAi",
+            "url": "https://github.com/ifixai-ai/iFixAi",
+            "source": "github.com",
+            "stars": "30.0k",
+            "lang": "Python",
+            "body": "iFixAi is an auditor for agents, not a wrapper around one. Point it at an agent -- run by a human reviewer or by another agent -- and it answers one question in under two minutes: is this agent actually doing what it's supposed to do? As more of the stack turns into agents hiring agents, independent verification like this is the piece that's been missing, and it's a sign the market is starting to treat agent output as something you audit rather than something you trust by default."
+          },
+          {
+            "title": "img2threejs/img2threejs",
+            "url": "https://github.com/img2threejs/img2threejs",
+            "source": "github.com",
+            "stars": "18.4k",
+            "lang": "Python",
+            "body": "Feed it a reference image and img2threejs rebuilds the object as procedural Three.js code -- no mesh file, no texture bake, just parametric code that generates the geometry. That makes the output quality-gated and animation-ready from the start, and it's far more token-efficient than asking a model to generate or describe a 3D asset directly, since it's writing compact code instead of raw geometry data. Useful if you're prototyping 3D scenes from mood-board images and don't want to round-trip through a modeling tool."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Two posts actually show their work: one on where tmux-driven Claude Code sessions hit a wall, one on surgically removing a small model's AI tells.",
+        "items": [
+          {
+            "title": "Tmux and Claude Code: Sessions, Send-Keys, and the Ceiling",
+            "url": "https://crystl.dev/guides/tmux-for-ai-agents/",
+            "source": "Hacker News",
+            "author": "ankitg12",
+            "body": "The post walks through running Claude Code inside tmux sessions and driving it with send-keys instead of the interactive TUI -- the appeal being that you can script, log, and multiplex several agent sessions the way you'd manage long-running build jobs, detaching and reattaching whenever you want. That gets you real parallelism and persistence. But it also surfaces the ceiling in the title: send-keys is a blunt instrument for an interface built around interactive back-and-forth, so timing, prompt interruption, and session-state tracking get fragile fast once you push past a couple of sessions. Worth a read if you're already running multiple Claude Code instances and want to know where that approach starts to crack before you automate further on top of it."
+          },
+          {
+            "title": "Show HN: Qwen3-4B with the AI writing tics trained out",
+            "url": "https://100toolkit.com/blog/deslop-model/",
+            "source": "Hacker News",
+            "author": "erikkannike",
+            "body": "The project takes Qwen3-4B and fine-tunes out the stuff that makes LLM writing instantly recognizable -- the \"it's not just X, it's Y\" constructions, the reflexive hedging, the tic-y sentence rhythms. Rather than prompting around the slop at inference time, the fix gets baked into the weights, so every downstream app built on the resulting checkpoint inherits normal-sounding prose for free. Because it's a 4B model, the whole fine-tune-and-eval loop runs locally on a single GPU, and the writeup is specific enough about what counts as a \"tic\" that you could build your own detector and training set against a different base model this weekend."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow with whatever ships next."
+  },
+  {
     "id": "2026-10-17",
     "date": "October 17, 2026",
     "title": "AI Pulse",

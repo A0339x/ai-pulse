@@ -1,9 +1,9 @@
 {
   "Aider-AI/aider": "v0.86.0",
-  "All-Hands-AI/OpenHands": "v1.27.1",
+  "All-Hands-AI/OpenHands": "v1.28.1",
   "Significant-Gravitas/AutoGPT": "autogpt-platform-beta-v0.8.4",
   "geekan/MetaGPT": "v0.8.1",
   "joaomdmoura/crewAI": "1.15.28",
   "nousresearch/hermes-agent": "v0.22.2",
-  "openclaw/openclaw": "v2026.10.4"
+  "openclaw/openclaw": "v2026.10.5"
 }
