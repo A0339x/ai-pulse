@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-10-20",
+    "date": "October 20, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Gemini 4 Argon lands everywhere at once, a plugin-everything harness owns GitHub, and someone's teaching tmux to babysit Claude Code",
+    "intro": "Google's the story today: Gemini 4 Argon shipped as a flagship release plus a dedicated robotics variant, and DeepMind quietly put a fine-tuned Gemma model on phones to catch scams before they start. On GitHub, the agent-tooling arms race keeps escalating, with one harness clearing a quarter-million stars. And two HN posts are worth your Saturday if you're running Claude Code or shipping AI-written diffs you haven't fully read yet.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Google owns the day with a new flagship model and a robotics spinoff; OpenAI's ecosystem partners get a peek at next-gen models.",
+        "items": [
+          {
+            "title": "Gemini 4 Argon",
+            "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/",
+            "source": "Google AI",
+            "body": "Google's new flagship model is live today across the Gemini app and API, positioned as the model for the hardest reasoning and agentic workloads rather than a general chat upgrade. It's the successor to the prior Gemini line and ships alongside a dedicated robotics variant and a separate safety writeup, suggesting a coordinated platform push rather than a single model drop. If you're building agents that need to plan multi-step tasks or hold up under long-horizon reasoning, this is the model to swap in and benchmark against whatever you're running now -- the API endpoints are already live."
+          },
+          {
+            "title": "Gemini 4 Argon for Robotics",
+            "url": "https://deepmind.google/blog/gemini-4-argon-for-robotics/",
+            "source": "DeepMind",
+            "body": "DeepMind released a robotics-tuned variant of Gemini 4 Argon alongside the main model, aimed at the perception-to-action loop for physical robots rather than chat or code. That's a distinct SKU from the general release -- built for teams doing embodied AI who need a model that reasons about physical space and translates that into control signals, not just text. Pairing a flagship release with a vertical-specific variant on day one is a shift from Google's usual pattern of shipping one model and letting the ecosystem adapt it later."
+          },
+          {
+            "title": "On-device Gemma for scam detection",
+            "url": "https://deepmind.google/blog/on-device-ai-scam-detection-mddi/",
+            "source": "DeepMind",
+            "body": "DeepMind and Singapore's GovTech built a lightweight, fine-tuned Gemma model that runs entirely on-device to intercept scam conversations in private chats -- no cloud round-trip, zero data egress. That's the notable part: previous scam-detection approaches needed server-side analysis of message content, which is a non-starter for private messaging. Running small Gemma variants locally means the detection happens on-phone in real time, which is the template you'd want if you're building any privacy-sensitive classifier that currently relies on a cloud API call."
+          },
+          {
+            "title": "Amp puts AI agents to work beyond code with OpenAI models",
+            "url": "https://openai.com/index/amp-beyond-coding",
+            "source": "OpenAI",
+            "body": "Coding agent Amp is now running on a cluster of new-sounding OpenAI models -- GPT-6 Astra, an Ultrafast tier, and GPT-Live-1 -- plus a new 'Sign in with ChatGPT' auth flow for third-party apps. The headline is that Amp is pushing these models past code generation into broader agentic work, which signals OpenAI is positioning this model family for general-purpose agent tasks, not just dev tools. If you're evaluating models for an agent product, GPT-6 Astra and the Ultrafast tier are worth a look now that a production tool is running on them."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Plugin architectures and anti-overengineering rules are pulling the most stars this week.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "255.9k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness, built around a single idea: everything -- models, tools, memory, UI -- is a plugin. Instead of a fixed framework with hooks bolted on, the core is minimal and almost everything you'd want to customize ships as a swappable plugin, including the model backend itself. That's what's pulling in a quarter-million stars: it's not tied to DeepSeek's own models, and the plugin ecosystem (dsh-plugin) is already spawning third-party add-ons for free model routing and desktop clients. Worth a look if you're tired of forking a harness just to swap one component."
+          },
+          {
+            "title": "DietrichGebert/ponytail",
+            "url": "https://github.com/DietrichGebert/ponytail",
+            "source": "github.com",
+            "stars": "169.0k",
+            "lang": "JavaScript",
+            "body": "A ruleset and skill pack that makes your coding agent behave like a skeptical senior engineer instead of an eager intern -- its core bet is that the best code is the code it talks you out of writing. Drop it into Claude Code or Cursor and it pushes the agent to push back on unnecessary abstractions, flag scope creep, and favor deletion over addition. It's less a tool than an opinionated prompt/skill layer, but it's resonating because 'my agent writes too much code' is a universal complaint right now, and this is a packaged fix rather than a one-off prompt you paste in every session."
+          },
+          {
+            "title": "alibaba/open-code-review",
+            "url": "https://github.com/alibaba/open-code-review",
+            "source": "github.com",
+            "stars": "47.7k",
+            "lang": "Go",
+            "body": "A hybrid code review tool that pairs deterministic static-analysis pipelines with an LLM agent layer, built and battle-tested at Alibaba's internal scale. The deterministic half catches the boring stuff -- NPEs, thread-safety, XSS, SQL injection -- with a built-in multi-language ruleset, while the LLM agent handles judgment calls and writes precise line-level comments instead of vague summaries. It's compatible with both OpenAI and Anthropic backends, so you're not locked into one vendor. The pitch that's landing: deterministic checks for what's checkable, LLM reasoning only where you actually need judgment."
+          },
+          {
+            "title": "img2threejs/img2threejs",
+            "url": "https://github.com/img2threejs/img2threejs",
+            "source": "github.com",
+            "stars": "18.5k",
+            "lang": "Python",
+            "body": "Feed it a reference image and it rebuilds the object as a procedural, code-only Three.js model -- not a mesh dump, actual generative code with quality gates and animation support baked in. The novel part is the token-efficient approach to image-to-3D: instead of generating or predicting raw geometry, it has an agent write and iterate on procedural construction code, checking its own output against the reference image. That makes the result editable and animatable in a way a raw generated mesh never is, which is the gap this fills for anyone doing 3D asset pipelines with an LLM in the loop."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Two posts worth stealing from this week: one on taming multi-session Claude Code, one on not shipping code you don't understand.",
+        "items": [
+          {
+            "title": "Tmux and Claude Code: Sessions, Send-Keys, and the Ceiling",
+            "url": "https://crystl.dev/guides/tmux-for-ai-agents/",
+            "source": "Hacker News",
+            "author": "ankitg12",
+            "body": "A documented setup for running multiple Claude Code sessions in parallel tmux panes, using send-keys to script input into each session instead of babysitting terminals by hand. The appeal is obvious if you're already running several agents on different parts of a codebase: one tmux session per agent, a scripted way to feed each one follow-up instructions, and a shared pane layout so you can eyeball all of them at once. The post is also upfront about where this breaks down -- the 'ceiling' is session state getting out of sync with what you think each agent is doing once you're past three or four panes, which is the part worth reading before you build your own version."
+          },
+          {
+            "title": "Sphinx: a hook that quizzes you on your AI's code before shipping",
+            "url": "https://sphinx-six-theta.vercel.app/",
+            "source": "Hacker News",
+            "author": "critiquebrowser",
+            "body": "A git hook that reads your AI-generated diff and quizzes you on it before letting the commit through -- answer wrong and it blocks the commit. It's a direct answer to the 'I'm shipping code I don't understand' problem that's also showing up as a top discussion thread today: instead of trusting that you read the diff carefully, the hook generates targeted questions about what the change actually does and forces you to prove you can answer them. It's a small, mechanical fix for a real problem, and it's the kind of thing you could wire into your own pre-commit setup this weekend without touching the rest of your workflow."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow with whatever ships overnight."
+  },
+  {
     "id": "2026-10-19",
     "date": "October 19, 2026",
     "title": "AI Pulse",
