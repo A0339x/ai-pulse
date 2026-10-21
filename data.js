@@ -3,6 +3,111 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-10-21",
+    "date": "October 21, 2026",
+    "title": "AI Pulse",
+    "subtitle": "OpenAI crosses into Google's cloud, DeepSeek's plugin empire keeps growing, and two deep security build logs",
+    "intro": "Today's biggest shipping news is about distribution, not capability: OpenAI's models landing in Google Cloud's Model Garden. GitHub's agent-plugin ecosystem keeps compounding around DeepSeek Harness, with a code-review tool and a code-only image-to-3D pipeline worth a look. The build-log pick of the day is a Wiz writeup on using an AI agent pipeline to find a real PHP RCE -- scope the agent, verify everything by hand.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "OpenAI, OpenHands, and Hugging Face have the day's real ships.",
+        "items": [
+          {
+            "title": "OpenAI models are coming to Google Cloud",
+            "url": "https://openai.com/index/openai-models-google-cloud",
+            "source": "OpenAI",
+            "body": "OpenAI's frontier models, plus Codex workflows, now sit alongside Gemini inside Google Cloud's Model Garden, available through Google Cloud Marketplace. That means GCP customers can call GPT models and Codex-style coding agents without leaving their existing Google Cloud billing, IAM, and VPC setup -- no separate OpenAI account or API key juggling required. It's the first time OpenAI has shipped its models through a competitor's cloud marketplace rather than keeping distribution to Azure and its own API. For builders already standardized on GCP infra, this removes a real procurement and networking barrier to using GPT-era models in production pipelines today."
+          },
+          {
+            "title": "OpenHands v1.29.0",
+            "url": "https://github.com/OpenHands/OpenHands/releases/tag/v1.29.0",
+            "source": "OpenHands",
+            "body": "This release lets you choose which skills attach to an agent profile directly from the server's skill catalog, instead of hardcoding a skill set per deployment. The backend selector now shows full organization names instead of truncated IDs, and launchers can read public skills straight from the bundled extensions package rather than requiring a separate install step. Together these changes make OpenHands' self-hosted agent setups easier to manage across teams -- swap which skills a given profile uses without redeploying, and onboard a new backend without guessing which org an ambiguous ID belongs to."
+          },
+          {
+            "title": "Granite Speech 5.0: Transcribe, Translate, and Attribute More Accurately and Faster",
+            "url": "https://huggingface.co/blog/ibm-granite/granite-speech-5",
+            "source": "Hugging Face (IBM Granite)",
+            "body": "IBM's new open speech model adds attribution on top of transcription and translation -- it tags who said what across a multi-speaker recording, not just a flat transcript. IBM says it's both faster and more accurate than the previous Granite Speech release on its benchmark suite. For builders, that's a drop-in open-weight option for meeting transcription or call-center pipelines that need speaker-level attribution without stitching together a separate diarization model, something most open ASR models still can't do natively."
+          },
+          {
+            "title": "NVIDIA Kumo Forecast Combines Pretrained Time-Series Representations with Historical Pattern Retrieval and Interpretability",
+            "url": "https://huggingface.co/blog/nvidia/kumo-forecast",
+            "source": "Hugging Face (NVIDIA)",
+            "body": "Kumo Forecast pairs a pretrained time-series foundation model with a retrieval step that pulls similar historical patterns before making a prediction, then surfaces which past patterns drove the forecast. That retrieval-plus-interpretability combo is new -- most time-series foundation models forecast as a black box with no way to see why. For demand forecasting, capacity planning, or anomaly detection, this gives you a pretrained starting point so you skip training from scratch, plus an audit trail per prediction, which matters more in forecasting than in chat."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "The plugin wars and a fresh crop of agent tooling are pulling stars this week.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "256.8k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness treats everything -- models, tools, UI panes, even the CLI's own commands -- as a plugin you can swap or fork, under a system they call Cordis. That's a step past the usual \"agent framework with a plugin API\" pattern: there's no privileged core, so a community plugin can replace pieces normally locked to the vendor, like the default model router or the session UI. It's become the hub the broader DeepSeek plugin ecosystem (free-model packs, desktop wrappers) now builds against, which is why it sits at the top of the trending chart."
+          },
+          {
+            "title": "DietrichGebert/ponytail",
+            "url": "https://github.com/DietrichGebert/ponytail",
+            "source": "github.com",
+            "stars": "171.0k",
+            "lang": "JavaScript",
+            "body": "Ponytail is a set of agent skills and Claude Code rules built around one idea: push your coding agent toward the smallest diff that solves the problem, not the most thorough one. It actively discourages the agent from adding abstractions, defensive error handling, or unrequested refactors -- the opposite instinct of most agent prompts, which try to make the model more proactive. Install it as a Claude Code plugin or Cursor rule set and your agent starts behaving like a reviewer would want: minimal surface area, fewer unrequested changes to approve."
+          },
+          {
+            "title": "alibaba/open-code-review",
+            "url": "https://github.com/alibaba/open-code-review",
+            "source": "github.com",
+            "stars": "47.8k",
+            "lang": "Go",
+            "body": "Alibaba open-sourced the hybrid code review pipeline it runs internally: deterministic static-analysis passes (null pointer, thread-safety, XSS, SQL injection rules) feed into an LLM agent that writes the actual line-level comments, rather than asking the model to review a whole diff freeform. That split matters -- the deterministic layer catches the boring stuff reliably, and the LLM layer only has to reason about what the rules already flagged, which cuts hallucinated comments. It works against both OpenAI and Anthropic APIs, so teams can drop it into existing CI without betting on one model vendor."
+          },
+          {
+            "title": "img2threejs/img2threejs",
+            "url": "https://github.com/img2threejs/img2threejs",
+            "source": "github.com",
+            "stars": "18.6k",
+            "lang": "Python",
+            "body": "Feed it a photo of an object and it writes procedural Three.js code that rebuilds that object as a 3D model -- no mesh generation model, no diffusion-based 3D pipeline, just an agent writing parametric code and checking the render against the reference image until it's close enough. The code-only approach is the novel part: output is a small, editable script instead of a multi-megabyte mesh file, and it's quality-gated so the agent iterates until the rendered result actually matches. Useful for anyone who wants cheap, tweakable 3D assets without touching a 3D modeling tool."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Two deep technical write-ups worth the full read today.",
+        "items": [
+          {
+            "title": "Tmux and Claude Code: Sessions, Send-Keys, and the Ceiling",
+            "url": "https://crystl.dev/guides/tmux-for-ai-agents/",
+            "source": "Hacker News",
+            "author": "ankitg12",
+            "body": "The post walks through running Claude Code inside persistent tmux sessions so an agent survives SSH drops and you can attach, watch, and steer it mid-task with send-keys instead of re-prompting from scratch. It covers the actual setup: naming sessions per task, piping agent output back into a pane you can grep, and using send-keys to inject follow-up instructions without breaking the agent's running context. The useful part is the \"ceiling\" section -- where this breaks down once you're running more than a handful of parallel sessions, because tmux itself becomes the bottleneck for tracking which pane is doing what. It's a concrete writeup of the glue layer between a terminal-based coding agent and a long-running dev environment, not just a \"look what I automated\" post."
+          },
+          {
+            "title": "PHP2Shell: AI uncovers critical RCE in PHP",
+            "url": "https://www.wiz.io/blog/php2shell-php-rce",
+            "source": "Hacker News",
+            "author": "danlark1",
+            "body": "Wiz's security team used an AI agent pipeline to fuzz and reason about PHP's internals and surfaced a critical remote-code-execution bug, then documented the whole chase: how they scoped the agent's search space, which parts of the codebase it flagged as suspicious, and how they verified the agent's claimed exploit path actually worked before reporting it. That verification step is the part worth reading closely -- the team treats the agent's output as a lead to confirm, not a finished finding, which is the opposite of trusting the model's first answer. It's a real template for using agents in vulnerability research: narrow scope, let the agent generate candidates, then manually confirm before you report anything."
+          },
+          {
+            "title": "Vite+ an excellent toolchain for AI agent development",
+            "url": "https://janmichalek.com/blog/vite-plus-agentni-vyvoj?lang=en",
+            "source": "Hacker News",
+            "author": "kanbaruu",
+            "body": "The author documents swapping their agent-assisted dev loop onto Vite+'s faster dev server and build pipeline specifically to shorten the feedback loop an agent needs to see whether its change worked -- fast HMR means the agent, and the human, sees a broken build in under a second instead of waiting on a full rebuild. The post walks through the actual project setup, which plugins were needed to keep hot reload working with agent-generated changes, and where the build still had to fall back to a full reload because an agent's change touched config rather than code. It's a practical account of tuning tooling around agent speed, not just model choice."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-10-20",
     "date": "October 20, 2026",
     "title": "AI Pulse",
