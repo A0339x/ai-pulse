@@ -3,6 +3,97 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-10-22",
+    "date": "October 22, 2026",
+    "title": "AI Pulse",
+    "subtitle": "OpenAI goes multi-cloud, a Node CVE forces an agent-harness upgrade, and a 360M model learns to fake a terminal",
+    "intro": "Today's shipping news is mostly plumbing: distribution deals, forecasting tooling, and a security patch you can't skip if you run an agent harness in prod. GitHub's climbing list is dominated by plugin architectures and agent-auditing tools, which says something about where the ecosystem's anxieties are right now. And the best build of the day is a small model that learned to hallucinate a shell convincingly.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Less new models today, more new pipes between the ones that already exist.",
+        "items": [
+          {
+            "title": "OpenAI models are coming to Google Cloud",
+            "url": "https://openai.com/index/openai-models-google-cloud",
+            "source": "OpenAI",
+            "body": "OpenAI and Google Cloud are putting OpenAI's frontier models and Codex workflows into Gemini's Model Garden, sold through Google Cloud Marketplace. If your infra and billing already live on GCP, you can now provision OpenAI models the same way you provision Gemini ones, without standing up a separate OpenAI account or billing relationship. That's the actual change: yesterday using OpenAI models inside a GCP-native stack meant a separate vendor relationship and a separate bill. Today it's one marketplace line item. Worth checking if this unblocks a procurement holdup that's been stalling a multi-model setup on your team."
+          },
+          {
+            "title": "openclaw 2026.10.6",
+            "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.10.6",
+            "source": "github.com",
+            "body": "This release requires Node 24.22.1+ or 26.12.1+, the patched runtimes that reject TLS chains signed with the compromised certificate keys fixed in October's Node.js security releases. Docker images now ship the patched Node, installers pick it automatically, and `openclaw update` refuses to run on an older Node with recovery instructions instead of quietly leaving you on a broken install. If you run openclaw anywhere that touches real traffic, this isn't optional -- older Node versions on your box can no longer establish trusted TLS connections at all, which means your agent harness can silently lose the ability to talk to its own tool endpoints."
+          },
+          {
+            "title": "Ensemble forecasting with IBM Granite time-series models",
+            "url": "https://huggingface.co/blog/ibm-research/granite-timeseries-ensemble-r1",
+            "source": "Hugging Face",
+            "body": "IBM Research published a recipe for combining multiple Granite time-series foundation model checkpoints into a single ensemble forecaster, with code, so you can reproduce it today rather than just read about it. The pitch is accuracy gains over any single Granite TS checkpoint, using models that already exist on the Hub -- no custom training run required. If you've got demand planning, anomaly detection, or capacity forecasting bolted onto a product, this gives you a foundation-model-level ensemble without building the ensembling logic yourself, which is normally the fiddly part of taking time-series forecasting from a notebook to production."
+          },
+          {
+            "title": "ChatGPT Ads expands to 26 new countries as over 100,000 advertisers have used the platform",
+            "url": "https://openai.com/index/chatgpt-ads-expands-26-new-countries",
+            "source": "OpenAI",
+            "body": "ChatGPT Ads is now live in 26 more countries, and OpenAI says over 100,000 advertisers have run on the platform since launch. The number that matters is the geography: if you're building anything that sits near ChatGPT's shopping or comparison flows -- product recommendation layers, affiliate tooling, anything monetized through ads-adjacent surfaces -- the addressable market for that just got a lot bigger overnight in markets that didn't have it last week. Worth a look if your product targets any of the newly added regions."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Plugin architectures and agent-auditing tools are eating the star charts this week.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "258k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's coding-agent harness takes 'everything is a plugin' literally: model routing, tool execution, memory, and UI are all swappable components instead of hardcoded paths, so swapping in a different model provider or memory backend doesn't mean forking the core. It's already spawned its own plugin ecosystem -- see the free-model plugin climbing right behind it on this same list -- which is the real signal here: this isn't just another CLI agent, it's becoming a platform other people build distribution on top of, the way Claude Code's skills ecosystem did before it."
+          },
+          {
+            "title": "google/artemis",
+            "url": "https://github.com/google/artemis",
+            "source": "github.com",
+            "stars": "13.8k",
+            "lang": "Python",
+            "body": "ARTEMIS turns plain-language instructions into Android automation that actually holds up: it runs end-to-end workflows, captures logs, and plugs into coding assistants like Antigravity, Codex, and Claude Code. Google claims 99%+ success on the AndroidWorld benchmark, which matters because UI automation on mobile has historically been brittle -- selectors break, timing is flaky, apps update their layouts. If you've been hand-rolling Appium scripts to let an agent drive a phone, this is a from-Google, benchmarked alternative worth swapping in instead of maintaining your own automation layer."
+          },
+          {
+            "title": "virgiliojr94/book-to-skill",
+            "url": "https://github.com/virgiliojr94/book-to-skill",
+            "source": "github.com",
+            "stars": "35.7k",
+            "lang": "Python",
+            "body": "Feed it a technical book PDF and it extracts and structures the content into a ready-to-load Claude Code skill, so the book becomes queryable reference material inside your coding sessions instead of a PDF you dump wholesale into context and hope the model remembers. The novel part is treating a book as a skill-shaped artifact rather than a RAG corpus -- you get structured, referenceable chunks tied to the book's own organization, not just chunked-and-embedded text. Useful if you're working through a dense spec or textbook and want it live in your agent's working memory while you code against it."
+          },
+          {
+            "title": "ifixai-ai/iFixAi",
+            "url": "https://github.com/ifixai-ai/iFixAi",
+            "source": "github.com",
+            "stars": "33k",
+            "lang": "Python",
+            "body": "An independent auditing layer for AI agents, runnable by a human or by the agent itself, built to answer one question fast: is the agent actually doing what it's supposed to be doing. The pitch is sub-120-second audits, which matters as more pipelines hand off real decisions to agents without anyone checking the agent's own account of what it did. It's a sign of where the ecosystem's attention is shifting -- from building more agents to verifying the ones already running, which is the harder and more necessary problem once agents are doing things you can't easily eyeball."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One build worth your weekend: a model that learned to fake a shell instead of running one.",
+        "items": [
+          {
+            "title": "WorldTUI: I trained a 360M model to pretend to be a terminal",
+            "url": "https://simedw.com/2026/10/21/world-model-terminal/",
+            "source": "Hacker News",
+            "author": "alphax314",
+            "body": "The build trains a 360M-parameter transformer to behave like a terminal: you type a command, and the model generates plausible shell output token by token, with no real binary, filesystem, or process running underneath it. It's a world model for a narrow, highly structured environment instead of a video game or a robot -- the write-up walks through building a dataset of real shell sessions to learn command-to-output pairs, picking an architecture small enough to feel responsive interactively, and the failure modes that show up over longer sessions, like the model losing track of which directory it's supposedly in or inventing files that were never created. Less a tool you'd ship and more a clean demonstration of how far a small model gets at faking a known environment convincingly."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow with whatever ships overnight."
+  },
+  {
     "id": "2026-10-21",
     "date": "October 21, 2026",
     "title": "AI Pulse",
