@@ -3,6 +3,97 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-10-23",
+    "date": "October 23, 2026",
+    "title": "AI Pulse",
+    "subtitle": "A new decisions API lands at OpenAI, a 259k-star plugin harness eats GitHub, and someone trained a model to dream up a terminal",
+    "intro": "Quiet day for frontier model drops but a loaded one for infrastructure: OpenAI is shipping narrower, cheaper APIs instead of bigger models, and open-source agent platforms keep pushing out dense feature releases. On GitHub, the plugin-everything philosophy behind DeepSeek's harness is pulling an enormous amount of the ecosystem into its orbit. One build stands out today: a 360M-parameter model trained to simulate a shell.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Less new model, more new plumbing -- APIs, distribution deals, and dense point releases.",
+        "items": [
+          {
+            "title": "Build more responsive apps with the Decisions API",
+            "url": "https://openai.com/index/decisions-api",
+            "source": "OpenAI",
+            "body": "OpenAI split decision-making out of full chat completions into its own endpoint. Instead of sending a classification or routing question through a general-purpose completion call, you hit the Decisions API for a fast, narrow answer -- think content routing, moderation gates, or branching logic inside an agent loop -- at lower cost and latency than a full generation. It's built for the parts of an app that need a cheap yes/no or pick-one-of-N, not prose. If you've been overpaying token costs to get a single classification out of a chat model, this is the endpoint built for exactly that job."
+          },
+          {
+            "title": "OpenAI models are coming to Google Cloud",
+            "url": "https://openai.com/index/openai-models-google-cloud",
+            "source": "OpenAI",
+            "body": "OpenAI's frontier models and Codex workflows are now listed in Vertex AI's Model Garden, available through Google Cloud Marketplace. That means GCP shops can provision and bill GPT and Codex access the same way they provision any other Google Cloud service, instead of routing around existing cloud contracts to hit OpenAI's API directly. For enterprise teams whose procurement and compliance already run through GCP, this removes a real adoption blocker -- you can stand up OpenAI-backed workflows today without a separate vendor relationship."
+          },
+          {
+            "title": "OpenHands v1.33.0",
+            "url": "https://github.com/OpenHands/OpenHands/releases/tag/v1.33.0",
+            "source": "All-Hands-AI/OpenHands",
+            "body": "New launch flags --mars-web and --lock-to-cloud ship for verify-openhands, giving you finer control over whether a run stays local or pins to cloud execution. The DigitalOcean-hosted web build now keeps sessions signed in across restarts, so you stop getting logged out mid-task. Automations also got a fix so the current_phase shown actually reflects what's happening on live runs instead of a stale state. Small release, but each fix removes a specific daily annoyance if you're running OpenHands as your agent driver."
+          },
+          {
+            "title": "AutoGPT Platform beta v0.9.0",
+            "url": "https://github.com/Significant-Gravitas/AutoGPT/releases/tag/autogpt-platform-beta-v0.9.0",
+            "source": "Significant-Gravitas/AutoGPT",
+            "body": "Every block in the platform now declares its own effect, so Auto can silently approve cheap, reversible actions and stop to ask permission before anything costly -- a real step toward agents that don't need a human babysitting every single tool call. You can also self-host straight from the Docker Hub image with a new Windows installer, no build step required. On the ops side there's a new admin page to look up, rate-limit, ban, or impersonate users, plus tooling aimed at multi-account abuse -- useful if you're running this platform for other people, not just yourself."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent infrastructure dominates this week's stars, led by one plugin-first harness pulling the rest of the ecosystem along with it.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "259.2k",
+            "lang": "TypeScript",
+            "body": "The pitch is in the tagline: everything is a plugin. Model routing, tool execution, memory, UI -- all of it runs through the same dsh plugin interface instead of being baked into a monolithic core. That design choice is why a whole secondary ecosystem of dsh-plugin repos (free-model shims, desktop wrappers) has sprung up around it almost overnight. If you're tired of agent CLIs that force you to fork the whole codebase to change one behavior, this is built for swapping pieces in and out instead."
+          },
+          {
+            "title": "DietrichGebert/ponytail",
+            "url": "https://github.com/DietrichGebert/ponytail",
+            "source": "github.com",
+            "stars": "174.5k",
+            "lang": "JavaScript",
+            "body": "A Claude Code skill built around one idea: the best code is the code you never wrote. Instead of nudging your agent toward more thorough implementations, ponytail actively pushes back against unnecessary abstraction, speculative flexibility, and scope creep -- it makes your agent argue for the smaller diff. For builders who've watched an agent turn a three-line fix into a new config system, this is a corrective skill rather than another capability add-on."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "14.1k",
+            "lang": "Rust",
+            "body": "A single Rust binary that gives agents BM25, vector, and hybrid search over code, docs, logs, and JSONL/CSV/PDF files -- no separate vector DB, no grep. It exposes an Elasticsearch-compatible API and ships with Corpus Hub, a library of prebuilt reference corpora you can point an agent at for memory or RAG without indexing anything yourself. Useful if your current agent memory setup is a pile of embeddings scripts duct-taped together."
+          },
+          {
+            "title": "lexmount/moli",
+            "url": "https://github.com/lexmount/moli",
+            "source": "github.com",
+            "stars": "20.3k",
+            "lang": "Rust",
+            "body": "A headless browser written in Rust specifically for agent workloads, built to be lighter and faster to spin up than wrapping Chromium through Playwright or Puppeteer. For agents that constantly open, use, and tear down browser sessions -- scraping, computer-use loops, UI testing -- the cold-start and memory overhead of a full browser instance adds up fast, and that's the problem this targets directly."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One build worth your weekend: a tiny model that learned to simulate a shell.",
+        "items": [
+          {
+            "title": "WorldTUI: I trained a 360M model to pretend to be a terminal",
+            "url": "https://simedw.com/2026/10/21/world-model-terminal/",
+            "source": "Hacker News",
+            "author": "alphax314",
+            "body": "The build: a 360M-parameter model trained purely to behave like a terminal -- take a command as input, predict the realistic shell output as output, including the quirks and failure modes a real shell produces. That's small enough to train without a datacenter, which is the point: instead of running a coding agent against a real, slow, stateful sandbox during training or eval, you swap in a learned simulator that's cheap to step through and fast to reset. It's the same world-model idea behind game-playing agents, pointed at the much more mundane target of bash. 582 points and 178 comments suggests a lot of people are now thinking about where else this trick applies -- any environment an agent interacts with repeatedly is a candidate for being learned instead of simulated."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-10-22",
     "date": "October 22, 2026",
     "title": "AI Pulse",
