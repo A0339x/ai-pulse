@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-10-24",
+    "date": "October 24, 2026",
+    "title": "AI Pulse",
+    "subtitle": "OpenAI ships a cheap decisions API, agent harnesses get disciplined about memory",
+    "intro": "No new frontier model today, so the action is in the plumbing: a task-specific API that's cheaper than a full chat call, an agent harness closing holes in session recovery, and a training trick that turns database grading into RL rewards. On GitHub, the momentum is all agent infrastructure -- search, memory, code review -- not more chatbot wrappers.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "No flashy model drop today -- the real news is infrastructure that makes agents cheaper and steadier to run.",
+        "items": [
+          {
+            "title": "Build more responsive apps with the Decisions API",
+            "url": "https://openai.com/index/decisions-api",
+            "source": "OpenAI",
+            "body": "OpenAI shipped a new endpoint built for a narrower job than chat completions: fast, cheap, single-shot decisions -- routing a request, scoring a response, picking between options -- without spinning up a full conversational call. It's optimized for latency and cost over open-ended generation, meant for the thousands of small binary or categorical calls apps make under the hood: should this ticket escalate, is this comment toxic, which template fits. If you've been hacking together cheap classification out of chat completions to save money, this is a dedicated, cheaper lane for exactly that pattern."
+          },
+          {
+            "title": "openclaw 2026.10.7: replay-safe session recovery",
+            "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.10.7",
+            "source": "GitHub / openclaw",
+            "body": "This release fixes a nasty class of bug in long-running agent fleets: sessions interrupted mid-task now retain proper recovery provenance instead of silently losing track of unfinished tool calls. Stopped conversations clear leftover recovery state before the next message arrives, rejected Claude CLI drafts no longer leak into final replies, and large batches of child-agent completions now stay within the requester's context window instead of blowing past it. If you're orchestrating multiple coding agents at once through openclaw, this closes the gap between 'agent looks stuck' and 'agent silently did the wrong thing.'"
+          },
+          {
+            "title": "Turning Database Grading into RL Rewards: Post-Training Agents with ThinkingBox",
+            "url": "https://huggingface.co/blog/microsoft/thinkingbox-training",
+            "source": "Hugging Face / Microsoft",
+            "body": "Microsoft published a method for post-training agents that write and execute database queries: instead of hand-labeling 'good' vs 'bad' results, ThinkingBox grades an agent's output against the database itself and turns that grade directly into an RL reward signal. That closes the loop for tasks where correctness is checkable but expensive to label by hand -- SQL generation, data-analysis agents, anything where 'did this actually answer the question' can be verified programmatically. The writeup includes the full reward pipeline, not just the result, so it's replicable on your own agent's task."
+          },
+          {
+            "title": "Does Your Model Run on AWS Trainium? Look It Up",
+            "url": "https://huggingface.co/blog/torch-neuronx-model-support",
+            "source": "Hugging Face",
+            "body": "Hugging Face shipped a searchable compatibility lookup for which models actually run on AWS Trainium via torch-neuronx, instead of making you find out by trying to compile and watching it fail. Punch in a model id and get a straight answer on support status instead of digging through GitHub issues or AWS docs. Small thing, but if you've been eyeing Trainium instances for cheaper training or inference and didn't want to burn an afternoon finding out your architecture isn't supported, this saves that afternoon."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's stars go to agent infrastructure -- memory, search, and review -- not more chat-API wrappers.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "260.2k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's agent harness is built on one bet: every capability -- tools, memory, routing, UI -- is a plugin rather than a baked-in feature. That's a different stance than Claude Code or Codex's extension models, where a fixed core exposes an API for add-ons; here the core is deliberately thin and almost everything ships as a swappable dsh-plugin. The ecosystem that's sprung up around it in weeks -- a desktop app, free-model plugins, provider proxies -- is the real signal: a plugin-first architecture is pulling contributors in faster than a monolithic one would. Worth studying if you're deciding how much to bake into your own harness versus expose."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "15.2k",
+            "lang": "Rust",
+            "body": "xerj is a single Rust binary that gives agents real search instead of grep: it indexes code, docs, logs, JSONL/CSV, and PDFs, then serves BM25 full-text, vector, and hybrid search over an Elasticsearch-compatible API. The pitch is agent memory and RAG without standing up Elasticsearch or a vector DB -- point it at a repo or a log folder and it becomes a local-first MCP server your agent can query. The 'Corpus Hub' adds hundreds of prebuilt reference corpora you can mount directly, so an agent gets instant recall over, say, a language's full docs without you building the index yourself."
+          },
+          {
+            "title": "alibaba/open-code-review",
+            "url": "https://github.com/alibaba/open-code-review",
+            "source": "github.com",
+            "stars": "48.2k",
+            "lang": "Go",
+            "body": "Alibaba open-sourced the code review tool it runs internally at scale: a hybrid pipeline that pairs deterministic static-analysis rules (NPE checks, thread-safety, XSS, SQL injection) with an LLM agent for the fuzzier judgment calls, then merges both into precise line-level comments instead of a wall of generic feedback. It works against OpenAI- and Anthropic-compatible APIs, and the ruleset covers multiple languages out of the box. The interesting part is the split: rules catch what rules are good at catching, the agent handles repository-level context and style judgment, and neither has to pretend to be the other."
+          },
+          {
+            "title": "DietrichGebert/ponytail",
+            "url": "https://github.com/DietrichGebert/ponytail",
+            "source": "github.com",
+            "stars": "175.3k",
+            "lang": "JavaScript",
+            "body": "ponytail is a Claude Code / Cursor skill built around one idea: the best code is the code you never wrote. It nudges your agent to push back on unnecessary abstractions, skip speculative features, and default to the smallest diff that solves the actual problem -- encoding 'lazy senior engineer' instincts as agent-skill rules instead of hoping your prompt covers it. It's a useful contrast to most agent tooling right now, which is about getting agents to do more; this is about getting them to do less, on purpose, which is often the harder habit to instill."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's pile documented a real end-to-end workflow -- check back tomorrow.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow with more."
+  },
+  {
     "id": "2026-10-23",
     "date": "October 23, 2026",
     "title": "AI Pulse",
