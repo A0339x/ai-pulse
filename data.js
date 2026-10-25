@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-10-25",
+    "date": "October 25, 2026",
+    "title": "AI Pulse",
+    "subtitle": "OpenAI ships a cheaper decisions API while DeepSeek's plugin-everything harness clears a quarter million stars",
+    "intro": "Shipping is light on flashy model drops and heavy on infrastructure -- a narrower, cheaper API from OpenAI and a run of research tooling from Hugging Face's partners. The GitHub climb is all agent infrastructure: harnesses, review bots, and local search built for agents instead of humans. Nothing in the build-log pile today had enough detail to meet the bar, so that section sits empty.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Less new model, more new plumbing for the stuff you're already building.",
+        "items": [
+          {
+            "title": "Build more responsive apps with the Decisions API",
+            "url": "https://openai.com/index/decisions-api",
+            "source": "OpenAI",
+            "body": "New API endpoint built for narrow, high-frequency decisions -- route this to agent A or B, approve or deny, classify this intent -- instead of paying full chat-completion cost and latency for a binary or categorical call. Today you'd fake this with a full model request and a tiny system prompt; now it's a dedicated, cheaper, faster call shaped for exactly that job. If your app makes a lot of small gating or routing decisions between bigger LLM calls, this is the piece to swap in -- it's meant to sit inside pipelines, not replace your main model."
+          },
+          {
+            "title": "Does Your Model Run on AWS Trainium? Look It Up",
+            "url": "https://huggingface.co/blog/torch-neuronx-model-support",
+            "source": "Hugging Face",
+            "body": "New searchable compatibility index tells you whether a given Hugging Face model actually runs on AWS Trainium via torch-neuronx, pulled from a continuously tested list rather than the vendor's marketing claims. Before today, finding out meant provisioning a Trainium instance and running a trial compile. Now it's a lookup. If you're pricing Trainium against GPUs for a training or inference job, this collapses an afternoon of trial-and-error into one search."
+          },
+          {
+            "title": "NVIDIA Kumo Relational Outperforms Supervised Machine Learning on Relational Data, No Training Required",
+            "url": "https://huggingface.co/blog/nvidia/kumo-relational",
+            "source": "Hugging Face / NVIDIA",
+            "body": "New relational foundation model beats task-specific supervised models on relational-database prediction problems -- churn, fraud, recommendation-style tasks -- with zero training on your data. Point it at your schema and tables and it predicts directly, skipping the feature engineering and model-fitting cycle data teams normally run for this kind of problem. If you've been bolting XGBoost onto joined SQL tables, this is a zero-shot alternative worth benchmarking against what you've already got in production."
+          },
+          {
+            "title": "Turning Database Grading into RL Rewards: Post-Training Agents with ThinkingBox",
+            "url": "https://huggingface.co/blog/microsoft/thinkingbox-training",
+            "source": "Hugging Face / Microsoft",
+            "body": "New post-training recipe uses database query correctness -- did the agent's output return the right rows -- as the RL reward signal, instead of human preference labels or an LLM-judge score. Framework and training code are live on Hugging Face. For anyone RL-tuning tool-using or data-querying agents, this gives you a concrete way to train on ground-truth pass/fail instead of a judge model's opinion of quality."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "The stars this week are all agent infrastructure -- harnesses, review bots, and search built for agents, not humans.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "261.2k",
+            "lang": "TypeScript",
+            "body": "Agent harness built around one rule: nothing is hardcoded, everything -- model routing, tool definitions, memory, UI -- ships as a swappable plugin. Instead of forking the harness to add a capability, you write a plugin and drop it in. The plugin ecosystem forming around it (a free-model plugin and a desktop client are both climbing this same chart) suggests the architecture is actually sticking, not just a star-farming repo. For anyone tired of maintaining a fork of their agent framework just to add one feature, this flips the default: the core stays thin, your changes stay external."
+          },
+          {
+            "title": "DietrichGebert/ponytail",
+            "url": "https://github.com/DietrichGebert/ponytail",
+            "source": "github.com",
+            "stars": "175.9k",
+            "lang": "JavaScript",
+            "body": "A skill layer for coding agents built on one philosophy: the best code is the code you never wrote. Instead of prompting an agent to add abstractions, error handling, and edge-case coverage nobody asked for, this constrains it to act like the laziest senior dev in the room -- solve exactly the stated problem, skip the speculative generality. Drop it in as a rules or skill file for Claude Code or Cursor to counter the most common agent failure mode: over-building a simple request into a mini-framework."
+          },
+          {
+            "title": "alibaba/open-code-review",
+            "url": "https://github.com/alibaba/open-code-review",
+            "source": "github.com",
+            "stars": "48.2k",
+            "lang": "Go",
+            "body": "Code review tool running at Alibaba's internal scale, pairing deterministic static-analysis pipelines -- null-pointer, thread-safety, XSS, SQL injection rules -- with an LLM agent for the judgment calls static analysis can't make. It posts precise line-level comments instead of a wall of generic feedback, and works against both OpenAI- and Anthropic-style APIs. For teams building their own review bot, this is a working reference for the hybrid-pipeline-plus-agent pattern instead of an LLM-only reviewer that hallucinates rule violations."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "15.5k",
+            "lang": "Rust",
+            "body": "Single Rust binary that gives agents local-first hybrid search -- BM25 full-text, vector, and combined -- over code, docs, logs, JSONL/CSV, and PDFs, with an Elasticsearch-compatible API and an MCP server built in. It's built specifically as agent memory and RAG infrastructure, not a general search tool, and ships with a 'Corpus Hub' of prebuilt reference corpora. If you've stood up Elasticsearch or a vector DB just so an agent can search your repo and docs, this replaces that stack with one binary."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's batch documented an actual workflow -- just headlines and point counts -- so we're leaving this empty rather than guess.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow with whatever ships overnight."
+  },
+  {
     "id": "2026-10-24",
     "date": "October 24, 2026",
     "title": "AI Pulse",
