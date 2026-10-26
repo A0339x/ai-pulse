@@ -3,6 +3,83 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-10-26",
+    "date": "October 26, 2026",
+    "title": "AI Pulse",
+    "subtitle": "A quiet ship day, a loud GitHub plugin economy, and nothing in the build pile worth your weekend",
+    "intro": "Today's actual shipping news is thin -- most lab blogs posted partnership and infra recaps rather than new capability, so the real action is a new low-cost OpenAI endpoint and two solid Hugging Face model drops. GitHub's agent-tooling scene keeps compounding on itself: today's risers turn books into skills, add a persistent memory layer for agents, and formalize the 'loop engineering' practice builders are already doing by hand. Nothing in the build-workflow pile cleared the bar today, so that section's empty -- check back tomorrow.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Light day for new capability -- one new API and two model drops are the real news under all the recap posts.",
+        "items": [
+          {
+            "title": "Build more responsive apps with the Decisions API",
+            "url": "https://openai.com/index/decisions-api",
+            "source": "OpenAI",
+            "body": "OpenAI launched the Decisions API, a new endpoint built specifically for the small, high-volume calls buried inside bigger workflows: routing, classification, yes/no gates, ranking a short list. Instead of spinning up a full chat completion for a single binary choice, you hit this endpoint and get a fast, cheap, focused answer tuned for exactly that job. If your app currently burns a GPT-4-class call every time it needs to decide which branch of logic to take, this gives you a cheaper, lower-latency path built for that specific shape of problem, not general-purpose generation."
+          },
+          {
+            "title": "Turning Database Grading into RL Rewards: Post-Training Agents with ThinkingBox",
+            "url": "https://huggingface.co/blog/microsoft/thinkingbox-training",
+            "source": "Hugging Face",
+            "body": "Microsoft released ThinkingBox, a post-training pipeline that turns database query grading into a reward signal for reinforcement learning. Instead of hand-labeling agent trajectories or relying on an LLM judge, ThinkingBox checks whether an agent's generated query actually returns the right rows from a real database and feeds that pass/fail straight into RL training. That gives you a reward function that's cheap to compute and hard to game, since it's checking against ground truth data rather than a model's opinion. It's aimed at teams post-training agents for data analysis, text-to-SQL, and similar grounded tasks."
+          },
+          {
+            "title": "Ensemble forecasting with IBM Granite time-series models",
+            "url": "https://huggingface.co/blog/ibm-research/granite-timeseries-ensemble-r1",
+            "source": "Hugging Face",
+            "body": "IBM Research shipped a new ensemble release on top of its Granite time-series model family (R1), combining multiple forecasting heads into a single pipeline instead of picking one model per dataset. The ensemble averages predictions across variants tuned for different horizon lengths and seasonality patterns, which cuts the variance you'd otherwise get betting on a single checkpoint. It's available now on Hugging Face and drops straight into existing forecasting pipelines that already call Granite TS models, so you can swap in the ensemble without rebuilding your inference code around it."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "GitHub's agent-tooling gold rush keeps minting plugin ecosystems -- these four actually add something new.",
+        "items": [
+          {
+            "title": "virgiliojr94/book-to-skill",
+            "url": "https://github.com/virgiliojr94/book-to-skill",
+            "source": "github.com",
+            "stars": "36.2k",
+            "lang": "Python",
+            "body": "Feed it a technical book PDF and it spits out a ready-to-use Claude Code skill -- chunked, indexed, and wired up so the agent can reference the book's actual content while you work instead of relying on whatever it half-remembers from training. It's a clean answer to a real problem: you own a $50 O'Reilly book that covers your stack better than any blog post, but your agent can't read it. This turns static references into live context without you hand-rolling a RAG pipeline for every book you own."
+          },
+          {
+            "title": "alibaba/open-code-review",
+            "url": "https://github.com/alibaba/open-code-review",
+            "source": "github.com",
+            "stars": "48.3k",
+            "lang": "Go",
+            "body": "Alibaba open-sourced the code review tool it runs internally at scale: a hybrid system that pairs deterministic static-analysis pipelines (NPE checks, thread-safety, XSS, SQL injection) with an LLM agent for the judgment calls regex can't make. Line-level comments, multi-language ruleset, works with either OpenAI or Anthropic models. The pitch is that pure-LLM review hallucinates and pure-static-analysis review misses context, so you run both and let the deterministic pass catch what it's good at while the agent handles everything fuzzier. Worth a look if your current review bot is either all-rules or all-prompt."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "16.8k",
+            "lang": "Rust",
+            "body": "A single Rust binary that gives your agents a local-first search engine instead of grep. It indexes code, docs, logs, and JSONL/CSV/PDF files for BM25 full-text, vector, and hybrid search, exposes an Elasticsearch-compatible API, and runs as an MCP server so any agent can query it directly. The novel piece is Corpus Hub: a library of prebuilt reference corpora you can mount for agent memory and RAG without indexing everything yourself from scratch. If you're tired of agents re-reading your whole repo for context on every call, this is built to be the persistent memory layer underneath them."
+          },
+          {
+            "title": "cobusgreyling/loop-engineering",
+            "url": "https://github.com/cobusgreyling/loop-engineering",
+            "source": "github.com",
+            "stars": "11.6k",
+            "lang": "TypeScript",
+            "body": "A set of CLI tools and patterns for the part of agent work nobody's formalized yet: designing the loop that prompts and orchestrates the agent itself. loop-init scaffolds a new agent loop, loop-audit checks an existing one for common failure patterns, and loop-cost tracks what each iteration is actually costing you in tokens. It's less a framework than a named vocabulary and toolkit for a practice a lot of builders are already doing ad hoc -- useful if you're running Claude Code or Codex in autonomous loops and want to stop reinventing the scaffolding each time."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's build posts actually walks through a repeatable workflow, so this section sits empty.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-10-25",
     "date": "October 25, 2026",
     "title": "AI Pulse",
