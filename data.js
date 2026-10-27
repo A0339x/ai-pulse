@@ -3,6 +3,83 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-10-27",
+    "date": "October 27, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Two labs drop new models on the same day, DeepSeek's plugin harness crosses a quarter million stars, and nobody documented a build worth stealing.",
+    "intro": "Today brought two real model drops instead of the usual blog-post parade: OpenAI's fast computer-use model and DeepMind's fourth-generation world simulator landed within hours of each other. On GitHub, the agent-harness wars keep escalating, with DeepSeek's plugin-based DSH now bigger than almost anything else in the space. Nothing in today's build write-ups cleared the bar for a workflow worth copying, so that section's empty.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two new models shipped today, plus a quieter infra upgrade for anyone running agents on their own stack.",
+        "items": [
+          {
+            "title": "Introducing GPT-6.1 Terra",
+            "url": "https://openai.com/index/introducing-gpt-6-1-terra",
+            "source": "OpenAI",
+            "body": "OpenAI shipped GPT-6.1 Terra, a model built specifically for computer use: it looks at a screen, moves the cursor, clicks, types, and gets through multi-step tasks across apps without a custom integration for each one. The pitch is speed -- earlier computer-use models were accurate but slow enough that watching them work was painful. Terra cuts that latency enough to make screen-based agents usable for everyday tasks like filling out forms, navigating dashboards, or testing your own app's UI. It's rolling out broadly instead of staying behind an enterprise paywall, so anyone building a desktop or browser agent now has a faster base model to build on instead of stitching together vision models and heuristics."
+          },
+          {
+            "title": "Genie 4: A new generation of world simulation",
+            "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+            "source": "DeepMind",
+            "body": "DeepMind's fourth Genie model generates interactive 3D worlds in real time from a single image or text prompt, and you can walk through them, not just watch a clip. Earlier Genie versions produced short, blurry playable scenes; Genie 4 pushes resolution and consistency far enough that the world holds together for minutes instead of seconds. That makes it a different category of tool than a video generator -- it's a controllable simulator, which is what robotics and game teams actually need for training environments rather than demo reels. If you've been waiting for a world model that's usable instead of a tech demo, this is the first one that reads that way."
+          },
+          {
+            "title": "OpenHands v1.34.0",
+            "url": "https://github.com/OpenHands/OpenHands/releases/tag/v1.34.0",
+            "source": "OpenHands",
+            "body": "OpenHands' latest release gives every conversation its own Docker runtime, managed from a new Settings → Runtime page instead of a shared global sandbox. That matters if you run multiple coding agents at once -- before this, they could step on each other's environment; now each session gets isolated dependencies and state. The release also adds tag filtering and editing for automations, so you can organize scheduled agent jobs instead of scrolling a flat list, and adds DigitalOcean as a supported provider for verifying Managed Agents. Not flashy, but if OpenHands is your daily driver for agentic coding, per-conversation isolation is the kind of infra fix that stops silent cross-contamination bugs before they start."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent-harness plugin ecosystems keep eating the chart, with a few genuinely new infra ideas mixed in.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "263.5k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's answer to Claude Code and Codex is a harness built around one idea: everything -- model routing, tools, UI, even auth -- is a plugin. Instead of a monolithic CLI you fork to customize, DSH exposes a plugin API built on the Cordis framework, and third parties are already shipping free-model backends, desktop wrappers, and alternate UIs on top of it, several of which are climbing the charts alongside it. A quarter million stars says this isn't a niche experiment; it's fast becoming the default extensible agent harness outside the US labs' own tools. Worth a look if you've hit the ceiling of what Claude Code's or Codex's plugin systems let you customize."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "17k",
+            "lang": "Rust",
+            "body": "A single Rust binary that gives your agents real local search instead of grep and a vector DB bolted on afterward. It indexes code, docs, logs, JSONL/CSV, and PDFs, then serves BM25 full-text, vector, and hybrid search through an Elasticsearch-compatible API and an MCP server your agent can call directly. The useful idea is treating agent memory and RAG as infrastructure you run once, locally, rather than a cloud service you wire up per project -- and Corpus Hub adds a library of prebuilt reference corpora you can mount instead of indexing from scratch. If you're tired of reinventing retrieval for every agent project, this is a reasonable default to standardize on."
+          },
+          {
+            "title": "yetone/magpie",
+            "url": "https://github.com/yetone/magpie",
+            "source": "github.com",
+            "stars": "23.5k",
+            "lang": "Go",
+            "body": "A menu bar app that sits between your agent CLIs and whatever model backend you actually want to pay for -- Codex talking to DeepSeek, Claude Code talking to Kimi, swapped from one place instead of editing config files and env vars per tool. The idea is simple: your favorite agent's interface doesn't have to be locked to its default model, and switching shouldn't require remembering four different config formats. For builders who mix frontier and open-weight models depending on cost and task, this collapses that juggling into one macOS menu bar click."
+          },
+          {
+            "title": "virgiliojr94/book-to-skill",
+            "url": "https://github.com/virgiliojr94/book-to-skill",
+            "source": "github.com",
+            "stars": "36.3k",
+            "lang": "Python",
+            "body": "Point it at a technical book PDF and it turns the whole thing into a Claude Code skill -- chunked, indexed, and structured so the book shows up as reference knowledge while you work instead of sitting unread on a shelf. It's a narrow, sharp idea: most of what you'd ask an agent to look up from a reference text is buried in formatting that's annoying to search, and converting the whole book into a skill once beats re-explaining context every session. Useful if you build agent workflows around a specific framework, language, or domain where the best documentation is still a book, not a website."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing today documented a real build end to end -- just opinions and show-offs.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-10-26",
     "date": "October 26, 2026",
     "title": "AI Pulse",
