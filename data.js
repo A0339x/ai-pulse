@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-10-28",
+    "date": "October 28, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Manus goes 2.0, a DeepSeek plugin harness tops GitHub, and someone built a fully offline survival LLM",
+    "intro": "Manus is the story on the shipping side today, relaunching as a bundled 2.0 platform instead of trickling out features one at a time. GitHub's agent-tooling charts are still dominated by the DeepSeek Harness ecosystem, but the more interesting climbers are infra plays: agent search/memory in one binary, and an Android automation agent clearing 99% on a real benchmark. On the builder side, someone shipped a fully offline survival assistant worth studying if you've ever wanted an LLM that doesn't need a network connection.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Manus repackages a pile of new agent modes into one 2.0 release; Anthropic hands a key spec to a neutral foundation.",
+        "items": [
+          {
+            "title": "Introducing Manus 2.0",
+            "url": "https://manus.im/blog/introducing-manus-2-0",
+            "source": "Manus",
+            "body": "Manus relaunches as a 2.0 platform, bundling a wave of previously separate capabilities -- Game Developer, Video Editor, Design View, Cloud Computer, Branch, and Auto Publish -- into one coherent agent workspace instead of shipping them as disconnected side features. The practical change: you can take a single brief, have the agent build a game, a video, or a designed app, iterate on a branch, and publish it, all without leaving one session or stitching tools together yourself. Previously these lived as scattered, narrower product surfaces. Today they're one pipeline, which matters if you've been using Manus for one task (say, web building) and ignoring the rest because they didn't compose."
+          },
+          {
+            "title": "Introducing Game Developer",
+            "url": "https://manus.im/blog/introducing-game-developer",
+            "source": "Manus",
+            "body": "New agent mode purpose-built for shipping playable games, not just demos or prototypes. Where general-purpose coding agents can produce a game loop if you push hard enough, Game Developer is scoped specifically to game logic, asset handling, and export, meaning you can hand it a prompt and get something actually playable back rather than a script you then have to wire into an engine yourself. It's part of today's Manus 2.0 bundle, so it ships with the same publish and branch tooling as the rest of the platform."
+          },
+          {
+            "title": "Introducing Manus Flex",
+            "url": "https://manus.im/blog/introducing-manus-flex",
+            "source": "Manus",
+            "body": "New usage-based pricing tier alongside Manus's existing subscription plans. Instead of committing to a fixed monthly credit allotment, Flex lets you pay for what you actually run, which is the better deal if your usage is bursty -- heavy build weeks followed by quiet stretches -- rather than steady. It's aimed squarely at builders who've been over-paying for idle subscription credits or hitting caps mid-project under the old plans."
+          },
+          {
+            "title": "Donating Agent Skills to the Agentic AI Foundation",
+            "url": "https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation",
+            "source": "Anthropic",
+            "body": "Anthropic is handing its Agent Skills format over to the Agentic AI Foundation, a neutral body, instead of keeping it as a Claude-only spec. Until now, Skills -- the packaged, reusable instructions/tools format for agents -- lived entirely inside Anthropic's ecosystem. Moving it to a foundation is a bet that Skills becomes a shared format other agent runtimes can target and extend, the way MCP did for tool connectivity. If it takes, expect non-Claude harnesses to start consuming the same Skills packages you've already built."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Plugin-everything harnesses still dominate, but the sharper climbers are agent memory infra and a benchmark-topping automation agent.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "264.6k",
+            "lang": "TypeScript",
+            "body": "An agent harness built on one principle: everything -- model routing, tools, UI extensions -- is a plugin via a common dsh-plugin format. That architecture is why an entire side ecosystem has sprung up around it almost overnight: free-model plugins, desktop ports, alternative frontends, all built against the same plugin surface instead of forking the core. If you want a harness you can genuinely extend rather than configure, this is the one currently pulling the most community gravity."
+          },
+          {
+            "title": "DietrichGebert/ponytail",
+            "url": "https://github.com/DietrichGebert/ponytail",
+            "source": "github.com",
+            "stars": "178.9k",
+            "lang": "JavaScript",
+            "body": "A set of agent skills/rules for Claude Code and Cursor built around deliberate laziness: the agent is instructed to prefer deletion over addition, avoid speculative abstractions, and stop writing code the moment the task is actually done. It's a direct counter to the usual failure mode of coding agents over-building and over-engineering. Install it as a skill and your agent starts pushing back on its own instinct to add more."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "17.3k",
+            "lang": "Rust",
+            "body": "A single Rust binary that indexes code, docs, logs, and JSONL/CSV/PDF files for BM25, vector, and hybrid search, exposed over an Elasticsearch-compatible API. It's built specifically as agent memory and RAG infrastructure -- code search without grep, long-term memory without standing up a vector DB and a separate search cluster. The Corpus Hub ships with hundreds of pre-built reference corpora you can point an agent at directly, which is the part worth trying if you've been hand-rolling retrieval for agent context."
+          },
+          {
+            "title": "google/artemis",
+            "url": "https://github.com/google/artemis",
+            "source": "github.com",
+            "stars": "15.4k",
+            "lang": "Python",
+            "body": "Turns plain-English instructions into reliable Android automation -- full end-to-end workflows, not single taps -- and reports 99%+ success on the AndroidWorld benchmark, a real jump over prior automation agents on that test. It integrates directly with coding assistants like Antigravity, Codex, and Claude Code, and logs everything it does, which matters for QA teams who need agents driving real devices rather than brittle scripted UI tests."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Two builds worth copying this weekend: a fully offline survival assistant, and an on-device alternative to hosted agent desktop apps.",
+        "items": [
+          {
+            "title": "Survival LLM: AI assistant and emergency library that runs on your own computer",
+            "url": "https://www.brangus.io/survival-llm",
+            "source": "Hacker News",
+            "author": "Luc",
+            "body": "A fully offline assistant built to answer emergency and survival questions with zero network dependency -- the whole point is that it works when connectivity doesn't. That constraint shapes every choice: a small enough local model to run on ordinary hardware, paired with a curated reference library (medical, off-grid, disaster-prep material) so the model isn't relying on parametric knowledge alone for anything life-critical. The 174-comment HN thread is mostly a fight over which local model is actually trustworthy enough for this use case versus which is just small and fast, which is the real design tension if you're building anything similar: offline capability is easy, offline reliability for high-stakes answers is the hard part."
+          },
+          {
+            "title": "Show HN: Hob - Open-source, on-device alternative to Claude Cowork and ChatGPT",
+            "url": "https://github.com/FrigadeHQ/hob",
+            "source": "Hacker News",
+            "author": "pancomplex",
+            "body": "An open-source desktop app that replicates the Claude Cowork / ChatGPT desktop experience but keeps the whole agent loop on-device and inspectable, instead of hidden behind someone else's hosted client. The appeal for builders: you can swap the underlying model, read exactly what context and tools get passed on each turn, and modify the agent loop itself rather than treating the desktop app as a black box. Worth cloning if you've ever wanted to see precisely what Cowork-style apps are doing under the hood."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-10-27",
     "date": "October 27, 2026",
     "title": "AI Pulse",
