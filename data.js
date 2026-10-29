@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-10-29",
+    "date": "October 29, 2026",
+    "title": "AI Pulse",
+    "subtitle": "DeepMind doubles up with two frontier models, agent frameworks patch security holes, and GitHub's plugin wars keep escalating",
+    "intro": "DeepMind is the story today: a new frontier model and a new world simulator landed back to back. Underneath that, the agent-tooling layer is in patch-and-ship mode -- openclaw closed real security holes and crewAI's CLI got sharper. On GitHub, the plugin-everything approach to agent harnesses keeps pulling stars away from single-purpose tools.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two new frontier models from DeepMind, plus patches that matter if you're running agents in production.",
+        "items": [
+          {
+            "title": "Gemini 4 Carbon: Our next frontier model",
+            "url": "https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/",
+            "source": "DeepMind",
+            "body": "DeepMind's newest frontier model is live, and it's already landed at #1 on the Artificial Analysis Intelligence Index v5, the benchmark aggregator builders use to pick a default model. That's the fastest a new release has taken the top spot this year. If you're routing requests across providers based on capability-per-dollar, Gemini 4 Carbon is worth a slot in your eval harness today -- not next quarter. Expect the usual wave of API access rollout over the coming days; check your console for availability before rewriting prompts against it."
+          },
+          {
+            "title": "Genie 4: A new generation of world simulation",
+            "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+            "source": "DeepMind",
+            "body": "Genie 4 is DeepMind's new world model, generating interactive, real-time environments you can act inside rather than just watch. The jump from prior Genie versions is realism and persistence -- environments hold state longer and respond to actions with less visual drift. For builders, this is the first version worth prototyping against if you're working on robotics sim training, game-world generation, or anything needing a controllable, generated environment instead of a hand-built one."
+          },
+          {
+            "title": "openclaw 2026.10.9",
+            "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.10.9",
+            "source": "GitHub",
+            "body": "This release closes real holes, not hygiene busywork. fast-uri 4.2.3 now rejects malformed URI schemes and hosts during MCP schema validation, oversized Zod collections get rejected early in A2UI and the Discord embedded app SDK, nodemailer 10.1.4 stops spoofed IMAP senders from passing the sender token gate, and MSAL Node 7.1.1 patches the Teams integration. `tools.fs.workspaceOnly` now also applies to Gateway-built tools, so delegated agents can't escape the workspace sandbox through a side door. If you're running openclaw as an MCP gateway, update now."
+          },
+          {
+            "title": "crewAI 1.15.33",
+            "url": "https://github.com/crewAIInc/crewAI/releases/tag/1.15.33",
+            "source": "GitHub",
+            "body": "crewAI's CLI picked up three features worth knowing: `crewai skill search` lists your org's registered skills without digging through dashboards, `crewai run --inputs` lets you pass inputs straight into a Python flow from the command line, and `deploy create --zip` prints the exact commit a deployed zip was built from, which fixes the \"wait, which version is live\" problem. Bug fixes include correct token-usage reporting for LiteLLM tool-call and structured-output calls, and the JSON crew runner now loads against older crewai-core versions again."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "The plugin-everything approach to agent harnesses is pulling stars, and so is anything that stops agents from overbuilding.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "265.7k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness, built around a single idea: everything -- models, tools, UI, even the free-tier model swap -- is a plugin loaded on top of a core called cordis. That architecture is already spawning a visible ecosystem: a free frontier-model plugin and a desktop client have both shown up as separate repos within days of each other. For builders, the appeal is not forking the harness to add a model or tool, just dropping in a plugin. Worth watching as the reference implementation for plugin-first agent tooling."
+          },
+          {
+            "title": "DietrichGebert/ponytail",
+            "url": "https://github.com/DietrichGebert/ponytail",
+            "source": "github.com",
+            "stars": "179.9k",
+            "lang": "JavaScript",
+            "body": "A Claude Code / Cursor plugin that pushes back on the default coding-agent instinct to generate new code for everything. It biases the agent toward deletion, reuse, and minimal diffs -- the best code is the code you never wrote. If you've fought an agent that keeps adding abstractions for a one-line fix, this is a direct counter-prompt packaged as a reusable skill, not a one-off system prompt tweak you write yourself every time."
+          },
+          {
+            "title": "alibaba/open-code-review",
+            "url": "https://github.com/alibaba/open-code-review",
+            "source": "github.com",
+            "stars": "48.9k",
+            "lang": "Go",
+            "body": "A code review bot that pairs deterministic pipelines with an LLM agent instead of handing review entirely to a model. The deterministic layer catches known-pattern bugs -- NPEs, thread-safety issues, XSS, SQL injection -- with a built-in multi-language ruleset, and the LLM layer handles the judgment calls, producing precise line-level comments. It's OpenAI and Anthropic compatible and battle-tested at Alibaba's internal scale. Useful if you want review automation without the hallucinated-bug risk of a pure-LLM reviewer."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "17.5k",
+            "lang": "Rust",
+            "body": "A single Rust binary that indexes code, docs, logs, JSONL/CSV, and PDFs for BM25 full-text, vector, and hybrid search, exposed as both an MCP server and an Elasticsearch-compatible API. It's built specifically as agent memory and RAG infrastructure, not a general search product bolted onto agents after the fact. Corpus Hub adds shared reference corpora you can mount directly instead of building your own. For anyone standing up RAG without wanting to run an Elasticsearch cluster, this replaces a chunk of that stack with one binary."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's pull documents a full build you could replicate this weekend.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-10-28",
     "date": "October 28, 2026",
     "title": "AI Pulse",
