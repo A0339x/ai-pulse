@@ -3,6 +3,97 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-10-31",
+    "date": "October 31, 2026",
+    "title": "AI Pulse",
+    "subtitle": "DeepMind doubles up with a frontier model and a world simulator, Mistral ships Le Chonk, and agent harnesses keep eating their own tail on GitHub.",
+    "intro": "DeepMind dropped a new frontier model and a new world simulator in the same week, Mistral and IBM both pushed model updates, and the GitHub agent-tooling ecosystem keeps compounding on itself -- plugins on top of harnesses on top of plugins. The one build log worth your time today tests multi-agent coordination across two completely different game genres.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "DeepMind ships two frontier releases in two days, Mistral and IBM update their flagships.",
+        "items": [
+          {
+            "title": "Gemini 4 Carbon: Our next frontier model",
+            "url": "https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/",
+            "source": "DeepMind",
+            "body": "DeepMind's next flagship model is live, dropping the same week as Genie 4. Carbon is positioned as the successor to the Gemini 3 line and becomes the new top-end model across the Gemini API and Google's own products. It's the model DeepMind will point to as state of the art until the next one ships -- which, given the pace this year, won't be long. If you're building on Gemini, this is the model worth re-benchmarking your pipeline against before assuming your current model choice still holds up."
+          },
+          {
+            "title": "Genie 4: A new generation of world simulation",
+            "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+            "source": "DeepMind",
+            "body": "Genie 4 generates playable, real-time 3D worlds from a prompt or image, and DeepMind says the jump in realism over Genie 3 is the biggest yet. Feed it a scene and it builds an interactive, physics-consistent environment around it that you can move through and act in as it's generated. The use case DeepMind keeps pointing at is training data: a world model like this can spin up endless simulated environments for agents and robotics systems to practice in, instead of relying on a fixed set of hand-built levels. That's the real unlock -- unlimited environments on demand."
+          },
+          {
+            "title": "Welcome Le Chonk: Mistral Large 4 on Hugging Face",
+            "url": "https://huggingface.co/blog/mistral-large4",
+            "source": "Hugging Face",
+            "body": "Mistral's new flagship, Large 4 -- nicknamed Le Chonk -- landed on Hugging Face today. It's the successor to Large 3 and slots in as Mistral's top-end open-weight model, meaning you can pull the weights directly instead of waiting on API access. For anyone already running Mistral self-hosted, this is the one to swap in and re-test against whatever you're currently serving, especially if keeping weights in-house (instead of calling out to a hosted API) matters to your stack."
+          },
+          {
+            "title": "Granite Switch 4.1.1 — Update models like you update software",
+            "url": "https://huggingface.co/blog/ibm-granite/granite-switch-4-1-1",
+            "source": "Hugging Face",
+            "body": "IBM's Granite Switch now ships point releases -- 4.1.1 is a patch you pull the same way you'd pull a software update, not a full retrain-and-redeploy cycle. That's new: most model updates still mean swapping the entire checkpoint and re-validating everything downstream. Granite Switch's pitch is incremental updates that fix specific behaviors without disturbing the rest of the model, versioned like semver instead of named like a new model generation. If you're running Granite in production, worth checking whether 4.1.1 fixes something you've been patching around with prompt hacks."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent infrastructure is stacking on itself -- harnesses, search engines, and review pipelines all gaining ground.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "267.3k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness, built on the idea that everything -- model routing, tool calls, memory, UI -- is a plugin. That architecture is why it's already spawned a plugin ecosystem of its own: free-model proxies, desktop clients, alternate UIs, all bolting onto the same core instead of forking it. It's less a single tool than a substrate other tools build on top of, which explains the star count. If you want to see where a chunk of the agent-tooling ecosystem is actually heading, this is the base layer a lot of it now sits on."
+          },
+          {
+            "title": "alibaba/open-code-review",
+            "url": "https://github.com/alibaba/open-code-review",
+            "source": "github.com",
+            "stars": "49.2k",
+            "lang": "Go",
+            "body": "Alibaba open-sourced the code review tool it runs internally: a hybrid pipeline that pairs deterministic static-analysis rules (NPE, thread-safety, XSS, SQL injection) with an LLM agent for the judgment calls rules can't make. Comments land at the exact line, not a vague summary at the top of the PR, and it works against both OpenAI and Anthropic backends so you're not locked into one vendor. The interesting part is the split: let deterministic checks catch what's cheap and certain, and only hand the LLM the cases that actually need reasoning."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "17.9k",
+            "lang": "Rust",
+            "body": "One Rust binary that indexes code, docs, logs, JSONL/CSV, and PDFs for BM25, vector, and hybrid search, then exposes it all as an MCP server with an Elasticsearch-compatible API. The pitch: agents shouldn't have to grep a codebase or re-embed the same docs every session -- point xerj at a corpus once and let agents query it as memory or RAG without standing up a vector DB yourself. Corpus Hub adds a library of pre-built reference corpora you can mount directly, which is handy if you're tired of hand-rolling retrieval infra for every agent project."
+          },
+          {
+            "title": "DietrichGebert/ponytail",
+            "url": "https://github.com/DietrichGebert/ponytail",
+            "source": "github.com",
+            "stars": "181.3k",
+            "lang": "JavaScript",
+            "body": "A Claude Code plugin built around one rule: the best code is the code you never wrote. Instead of optimizing your agent to produce more, ponytail nudges it toward the smallest possible diff -- reuse before you write, delete before you add, push back when a request doesn't need building at all. It's a direct answer to the usual agent failure mode of generating sprawling, over-engineered solutions to simple problems. Drop it in as a Claude Code plugin or port the rules into Cursor, and your agent starts asking 'does this need to exist' before it starts typing."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One real experiment in multi-agent coordination, run across two genres instead of one.",
+        "items": [
+          {
+            "title": "We ran AI agent swarms in Minecraft and Mindustry",
+            "url": "https://labs.ycombinator.com/projects/games/index.html",
+            "source": "Hacker News",
+            "author": "sandslash",
+            "body": "YC's research team turned the same swarm of AI agents loose in two very different game worlds to see how coordination holds up when the rules change underneath it. Minecraft is open-ended building and survival -- agents have to negotiate who gathers what and who builds where with no central plan. Mindustry is closed-loop factory logistics and combat, where the bottleneck isn't creativity but throughput and defense under pressure. Running the same architecture against both exposed where coordination strategies that work in one genre fall apart in the other -- what makes a Minecraft swarm cooperate doesn't automatically help a Mindustry swarm survive. Worth a read if you're building multi-agent systems and have only ever stress-tested them in one kind of environment."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- see you tomorrow."
+  },
+  {
     "id": "2026-10-29",
     "date": "October 29, 2026",
     "title": "AI Pulse",
