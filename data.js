@@ -3,6 +3,97 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-11-01",
+    "date": "November 1, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Google double-ships a frontier model and a world simulator, Mistral drops its biggest open model, and 50 agents can't govern a Minecraft village",
+    "intro": "Two real model drops lead today: Google DeepMind shipped both a new Gemini and a new Genie on back-to-back days, and Mistral's flagship landed on Hugging Face. On GitHub, the DeepSeek agent harness ecosystem keeps metastasizing, alongside some genuinely new tooling for agent memory and agent-native CAD. And a YC research project on multi-agent coordination is worth your two minutes if you're building anything with more than one agent in the loop.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two frontier drops from Google DeepMind, a new flagship from Mistral, and a cross-industry opt-out standard.",
+        "items": [
+          {
+            "title": "Gemini 4 Carbon: Our next frontier model",
+            "url": "https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/",
+            "source": "Google DeepMind",
+            "body": "Google DeepMind shipped Gemini 4 Carbon, the next entry in its frontier line, rolling out today across Google's AI products and the Gemini API. It succeeds the Gemini 3 generation as DeepMind's new top-tier model for reasoning and multimodal work. Because it drops into the same API surface, you can point existing Gemini integrations at the new model without rewriting anything -- same endpoints, same request shape, different model underneath. Expect a wave of benchmark comparisons over the next few days; the number that actually matters is how it does on your own long-context or agentic workloads, not the leaderboard DeepMind leads with in the announcement."
+          },
+          {
+            "title": "Genie 4: A new generation of world simulation",
+            "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+            "source": "Google DeepMind",
+            "body": "DeepMind's world model now generates interactive, playable environments in real time with a fidelity jump that's the real headline -- scenes that used to look like rough sketches now hold up at close range, with textures, lighting, and physics-adjacent behavior staying coherent for longer stretches. You type or sketch a scene and get back a world you can move through frame by frame, generated on the fly rather than pre-built. If you're prototyping training environments for embodied agents or sketching game worlds from a prompt, Genie 4 is the first version of this worth using for real work instead of demo reels."
+          },
+          {
+            "title": "Welcome Le Chonk: Mistral Large 4 on Hugging Face",
+            "url": "https://huggingface.co/blog/mistral-large4",
+            "source": "Hugging Face",
+            "body": "Mistral Large 4, codenamed 'Le Chonk' in the release notes, landed on Hugging Face today as the new flagship in Mistral's lineup, with model cards and inference access live now. It's the direct upgrade path from Large 3 -- same general shape, bigger model underneath, available through the usual Transformers and Inference Endpoints flow. For anyone already running Mistral models through Hugging Face, this is a swap-in test: point your existing eval harness at the new weights and see where it actually beats Large 3 on your tasks, rather than taking Mistral's own benchmark slides at face value."
+          },
+          {
+            "title": "Making it easier for websites to express AI training preferences",
+            "url": "https://openai.com/index/helping-websites-express-ai-training-preferences",
+            "source": "OpenAI",
+            "body": "OpenAI will now honor a shared robots.txt signal that lets site operators state their AI training preferences once, instead of maintaining separate opt-outs for every crawler by hand. It's a joint standard with other participating providers, so a single directive in your robots.txt applies across whichever companies have signed on, rather than you chasing down each lab's bot-blocking docs individually. If you've been hand-maintaining a block list for GPTBot and friends, check whether your CMS or static site generator already supports the shared directive before you keep patching robots.txt yourself."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "An agent-harness ecosystem explosion, plus three repos that actually push on a new idea instead of wrapping an SDK.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "268k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness has hit 268k stars by betting on one idea: nothing is built in, everything -- model providers, tools, UI -- is a plugin loaded at runtime. That's why an entire ecosystem has spun up around it almost overnight: free-model plugins, desktop wrappers, menu-bar model switchers, all built against the same plugin API instead of forking the core. For builders, the pitch is a harness that doesn't lock you into DeepSeek's own models or opinions about workflow -- you install the pieces you want and leave the rest out. Worth a look if you're tired of agent frameworks that ship with everything baked in and nothing removable."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "18.6k",
+            "lang": "Rust",
+            "body": "One Rust binary indexes your code, docs, logs, and PDFs, then serves BM25, vector, and hybrid search over all of it through an Elasticsearch-compatible API and an MCP server. The pitch is agent memory and RAG without standing up a search cluster -- point it at a repo or a folder of mixed file types and it builds a queryable index your agent hits directly over MCP, no grep required. The Corpus Hub lets you pull in pre-built reference corpora instead of indexing everything from scratch. For anyone wiring up retrieval for a coding agent or a long-running assistant, this collapses a stack that used to need Elasticsearch plus a vector DB plus glue code into one binary."
+          },
+          {
+            "title": "img2threejs/img2threejs",
+            "url": "https://github.com/img2threejs/img2threejs",
+            "source": "github.com",
+            "stars": "20k",
+            "lang": "Python",
+            "body": "Feed it a reference image and it rebuilds the object as procedural Three.js code -- not a mesh dump, actual parametric code that generates the geometry, which stays small enough to fit in a context window and comes out animation-ready. That's the novel part: most image-to-3D tools hand you a point cloud or a baked mesh; this hands you editable code an agent can keep iterating on. A quality gate checks the render against the source image before calling the job done. Useful if you're generating 3D assets inside an agent loop and need something cheap to pass back and forth instead of a multi-megabyte model file."
+          },
+          {
+            "title": "tangency-labs/solidcraft",
+            "url": "https://github.com/tangency-labs/solidcraft",
+            "source": "github.com",
+            "stars": "12.8k",
+            "lang": "Rust",
+            "body": "A full parametric CAD application -- brep modeling, the precise feature-based geometry mechanical engineers actually need -- built from scratch in Rust, running on desktop and in the browser. The part that matters here: it exposes its modeling operations through MCP, so an agent can drive the CAD kernel directly instead of generating an STL file and hoping for the best. That turns 'design me a bracket with these mounting holes' from a one-shot generation into an iterative CAD session an agent can actually hold open and revise. Early, but one of the only serious attempts at agent-native CAD instead of agent-adjacent CAD."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One real experiment in multi-agent coordination, with a failure mode worth stealing lessons from.",
+        "items": [
+          {
+            "title": "We ran AI agent swarms in Minecraft and Mindustry",
+            "url": "https://labs.ycombinator.com/projects/games/index.html",
+            "source": "Hacker News",
+            "author": "sandslash",
+            "body": "YC's research team turned Minecraft and Mindustry into a testbed for multi-agent coordination: drop dozens of LLM agents into a shared world with a goal -- build a functioning settlement -- and watch what happens when they have to divide labor, trade resources, and make collective decisions with no human in the loop. The useful part is the failure mode the follow-up coverage documented: 50-agent teams didn't collapse from weak models or bad planning, they collapsed into bureaucracy. Agents burned cycles negotiating roles, re-litigating settled decisions, and routing requests through self-appointed coordinators until the overhead outran the output. If you're scaling a multi-agent system and assuming more agents means more throughput, this is the concrete case where that assumption breaks -- coordination overhead became the bottleneck, not model capability."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow with whatever ships overnight."
+  },
+  {
     "id": "2026-10-31",
     "date": "October 31, 2026",
     "title": "AI Pulse",
