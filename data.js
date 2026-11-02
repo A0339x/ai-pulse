@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-11-02",
+    "date": "November 2, 2026",
+    "title": "AI Pulse",
+    "subtitle": "DeepMind drops two frontier models, agent plugins eat CAD and search, and the build diaries took the day off",
+    "intro": "DeepMind had the biggest day, shipping both a new flagship model and a new world simulator within 48 hours of each other. On GitHub, the agent-harness plugin wars keep expanding into adjacent territory -- CAD, search, 3D -- instead of staying in the chat-wrapper lane. Nothing in today's source list cleared the bar for a real build writeup, so that section sits empty today.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two new frontier models landed this week, plus a concrete code-review integration and a papercut-fixing crewAI release.",
+        "items": [
+          {
+            "title": "Gemini 4 Carbon: Our next frontier model",
+            "url": "https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/",
+            "source": "DeepMind",
+            "body": "DeepMind shipped Gemini 4 Carbon, the new flagship in its lineup, succeeding Gemini 3 Carbon at the top of the stack. The announcement doesn't publish scorecards, so the real test is pointing whatever evals you've already got at the new model id and comparing against the old one. Carbon has been DeepMind's name for its highest-capability tier since Gemini 3, so if your agents or coding workflows were already tuned around that tier, this is the direct upgrade path. Capability claims will come from third-party benchmarks over the next few days -- worth watching before you migrate anything load-bearing."
+          },
+          {
+            "title": "Genie 4: A new generation of world simulation",
+            "url": "https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/",
+            "source": "DeepMind",
+            "body": "Genie 4 is out, and the headline claim is real-time realism the Genie line hasn't hit before. A world model like this generates interactive, playable environments frame by frame as you act in them, instead of rendering from a fixed 3D scene. That matters for game prototyping, robotics training, or agent sandboxes: you generate the simulator on the fly from a prompt or seed image instead of hand-building one. Earlier Genie versions were short-horizon and rough around the edges; four generations in, the pitch is that the output holds up long enough to actually train on, not just demo."
+          },
+          {
+            "title": "Qodo builds context into AI code review with Codex",
+            "url": "https://openai.com/index/qodo-codex-plugin",
+            "source": "OpenAI",
+            "body": "Qodo shipped a Codex plugin that pulls your company's actual coding standards and codebase history into review, instead of judging every PR against generic best practices. The pitch is catching P0 issues across repositories before a PR even opens, by grounding Codex's review in context it didn't have before -- prior incidents, internal conventions, cross-repo dependencies. If you're already running Codex for review, this closes the gap between 'technically correct suggestion' and 'suggestion that matches how your team actually works.' Worth trying if your current AI review setup keeps flagging non-issues while missing the stuff that actually breaks production."
+          },
+          {
+            "title": "crewAI 1.15.34",
+            "url": "https://github.com/crewAIInc/crewAI/releases/tag/1.15.34",
+            "source": "crewAI (GitHub)",
+            "body": "The new release adds a standalone LiteLLM model catalog you can browse without digging through code, plus a crewai skill search command to list your org's available skills. You can now pass crewai run --inputs straight into a Python flow, and deploy create --zip bakes the exact commit hash into the build so you know what's actually live. On fixes: it stops offering shut-down Gemini models during crewai create and raises a proper MissingAPIKeyError instead of a cryptic failure when an OpenAI-compatible endpoint is missing credentials. Small release, but the kind of papercut fix that matters once crews are running in production."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent tooling keeps eating adjacent categories -- search, CAD, and 3D all got agent-native rewrites this week.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "269.5k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's agent harness treats everything -- model providers, tools, UI, even auth -- as a plugin, and the ecosystem around that is exploding. The clearest proof: a community plugin already exists that gives you DeepSeek V4.1 Flash and Kimi K3 for free with no signup, just installed as a plugin into the harness. That's the novel part -- this isn't a wrapper around one provider's SDK, it's a plugin bus any provider or tool can slot into, and the community is already using that openness to commoditize the model layer itself. Worth a look if you're tired of harnesses that lock you into one vendor's roadmap."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "18.8k",
+            "lang": "Rust",
+            "body": "xerj is a single Rust binary that indexes code, docs, logs, and JSONL/CSV/PDF files for BM25, vector, and hybrid search, then exposes it through an MCP server so agents can query it like a search engine instead of grepping. It doubles as agent memory and a RAG backend, with an Elasticsearch-compatible API for anyone with tooling already built around that interface. The novel bit is Corpus Hub: hundreds of pre-built reference corpora you can mount instead of indexing from scratch. If your agents keep burning context re-reading the same docs, this is a drop-in way to give them real search instead."
+          },
+          {
+            "title": "tangency-labs/solidcraft",
+            "url": "https://github.com/tangency-labs/solidcraft",
+            "source": "github.com",
+            "stars": "13.1k",
+            "lang": "Rust",
+            "body": "SolidCraft is a parametric CAD app, boundary representation and all, built in pure Rust -- and it's automatable through MCP, meaning an agent can drive real CAD operations instead of just generating a mesh and hoping. That's the novel part: most AI-and-3D tooling right now works in meshes that look right but aren't manufacturable. A parametric CAD kernel with an MCP interface means an agent can produce a model with real constraints, dimensions, and features that a machinist or printer can actually use downstream. Runs as desktop, web, or headless automation, so you can wire it into a pipeline instead of clicking through a UI yourself."
+          },
+          {
+            "title": "img2threejs/img2threejs",
+            "url": "https://github.com/img2threejs/img2threejs",
+            "source": "github.com",
+            "stars": "20.1k",
+            "lang": "Python",
+            "body": "img2threejs takes a reference image and rebuilds the object in it as a procedural, code-only Three.js model -- not a baked mesh, but parametric code that generates the geometry, with quality gates and animation rigging built in. It's tuned to be token-efficient, which matters if you're driving it from Claude Code or another agent harness where every round-trip costs context. The novel idea is treating image-to-3D as a code-generation problem instead of a mesh-generation problem: you get something editable and re-parametrizable afterward, instead of a static blob out of a diffusion model."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's source list documented a real end-to-end build, so this section sits empty.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-11-01",
     "date": "November 1, 2026",
     "title": "AI Pulse",
