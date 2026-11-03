@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-11-03",
+    "date": "November 3, 2026",
+    "title": "AI Pulse",
+    "subtitle": "DeepMind drops a new frontier model, OpenAI rebuilds Git for agent-scale commits, and GitHub's agent-harness plugin economy keeps exploding",
+    "intro": "Today's shipping news skews infrastructure: a new top-end Gemini, a custom Git backend built for Codex-scale commit volume, and a benchmark designed specifically to catch models that lose track of state over long documents. On GitHub, the story is ecosystems forming around agent harnesses -- plugins, memory layers, even a CAD kernel wired up for direct agent control. Nothing in today's build-diary pile actually shows its work end to end, so we're skipping that section rather than padding it.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A new frontier model, plus the plumbing needed to actually run agents at scale.",
+        "items": [
+          {
+            "title": "Gemini 4 Carbon: Our next frontier model",
+            "url": "https://deepmind.google/blog/gemini-4-carbon-our-next-frontier-model/",
+            "source": "DeepMind",
+            "body": "Gemini 4 Carbon is DeepMind's newest frontier model, replacing Gemini 3 at the top of the lineup. The jump to a full version number plus a code name (\"Carbon\") marks it as a generational release rather than a point update -- the kind of model DeepMind ships maybe once or twice a year. Early detail beyond the announcement is thin, but the framing is clear: this is now the model to benchmark everything else against. If you've got eval harnesses pointed at Gemini 3, repoint them at Carbon and see where the frontier actually sits this week."
+          },
+          {
+            "title": "Scaling Git at OpenAI",
+            "url": "https://openai.com/index/scaling-git-at-openai",
+            "source": "OpenAI",
+            "body": "OpenAI built Pando, a Git-compatible backend made to handle the volume of commits that Codex-driven development now generates. Regular Git wasn't designed for hundreds of agents pushing changes in parallel across massive monorepos, and OpenAI hit that wall internally. Pando keeps the Git interface -- same commands, same mental model -- but swaps the storage and sync layer underneath for agent-scale throughput. It's not open-sourced yet, but the writeup goes into enough architectural detail that anyone running their own agent fleet against a big repo can start figuring out where their current Git setup will buckle first."
+          },
+          {
+            "title": "Qodo builds context into AI code review with Codex",
+            "url": "https://openai.com/index/qodo-codex-plugin",
+            "source": "OpenAI",
+            "body": "Qodo shipped a Codex plugin that pipes company-specific context -- internal coding standards, past incident patterns, repo conventions -- directly into Codex's review pass. Instead of generic lint-style comments, Codex now flags P0-severity issues, the ones that'd actually break prod, before a PR even opens, using context pulled from across your repos rather than just the diff in front of it. If you're already running Codex for review and tired of it catching style nits while missing the actual landmines, this is a plugin install away, not a new tool to adopt."
+          },
+          {
+            "title": "StateBench: Testing how language models track state changes over long documents",
+            "url": "https://huggingface.co/blog/allenai/statebench",
+            "source": "Hugging Face / AllenAI",
+            "body": "StateBench gives you a concrete way to test something most benchmarks ignore: whether a model tracks state changes across a long document instead of just recalling facts from it. Think a contract amended three times, or a codebase where a variable's type changes halfway through -- StateBench checks if the model knows what's true now, not just what was said somewhere earlier in the context window. If you're feeding models long, evolving documents -- legal review, multi-turn agent logs, iterative specs -- this is a faster way to find out which models actually track state versus which ones just pattern-match on the most recent mention."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent-harness plugin ecosystems are eating GitHub, and agents are reaching into new domains like CAD.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "270.9k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness just crossed a quarter-million stars on one premise: everything -- every tool, every workflow, every integration -- is a plugin. No core feature is hardcoded; the base harness just loads plugins for whatever you need, from model routing to memory to custom tool calls. That architecture is why an entire plugin ecosystem has already sprung up around it, including a free-model plugin and a desktop app also climbing this week. If you want an agent harness that doesn't lock you into one vendor's opinions about how agents should work, this is the one to clone first."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "18.9k",
+            "lang": "Rust",
+            "body": "xerj is a single Rust binary that turns code, docs, logs, JSONL/CSV, and PDFs into a search index your agents can actually query -- BM25, vector, and hybrid search, plus an Elasticsearch-compatible API, with no separate search cluster to stand up. It doubles as agent memory and a RAG backend over the same index, and \"Corpus Hub\" serves pre-built reference corpora you can mount instead of indexing from scratch. The pitch is code search without grep, and agent memory without a vector DB subscription -- worth a look if your current agent setup means bolting together three different search tools."
+          },
+          {
+            "title": "tangency-labs/solidcraft",
+            "url": "https://github.com/tangency-labs/solidcraft",
+            "source": "github.com",
+            "stars": "13.4k",
+            "lang": "Rust",
+            "body": "SolidCraft is a parametric, brep-based 3D CAD application built entirely in Rust -- and it exposes itself over MCP, so an agent can drive the CAD kernel directly instead of generating a mesh and hoping for the best. That's the real novelty: most \"AI + CAD\" tools spit out dumb geometry, while SolidCraft lets an agent build and edit real parametric features -- constraint-based modeling, not blob meshes -- through tool calls. Desktop and web both ship from the same core. If you've wanted an agent that can design a bracket instead of just describing one, this is the first serious attempt at it."
+          },
+          {
+            "title": "alibaba/open-code-review",
+            "url": "https://github.com/alibaba/open-code-review",
+            "source": "github.com",
+            "stars": "49.4k",
+            "lang": "Go",
+            "body": "Alibaba open-sourced the code review tool it runs internally at its own scale: a hybrid pipeline pairing deterministic static-analysis rules (NPE checks, thread-safety, XSS, SQL injection) with an LLM agent for everything a ruleset can't catch. The split matters -- deterministic passes catch the known stuff fast and cheap, the agent handles judgment calls, and comments land on exact lines instead of a vague PR summary. It speaks both OpenAI and Anthropic APIs, so you're not locked to one model vendor. If your current AI code review is \"paste the diff into a prompt,\" this is what it looks like built for production scale."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's pile actually documented its workflow, so this section sits empty.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-11-02",
     "date": "November 2, 2026",
     "title": "AI Pulse",
