@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-11-04",
+    "date": "November 4, 2026",
+    "title": "AI Pulse",
+    "subtitle": "OpenAI goes shopping for Codex, DeepSeek's plugin harness goes supernova, nobody documented a real build today",
+    "intro": "OpenAI spent the morning on deal-making and infrastructure -- a Codex acquisition and a GovCloud rollout for its cybersecurity model -- while two open-source agent platforms pushed out concrete feature updates instead. On GitHub, a plugin-everything agent harness and an anti-overengineering agent skill are both climbing at absurd speed, which says more about what builders actually want from their agents than any roadmap post would. Nothing on HN or Reddit today documented a build start-to-finish, so Built With AI sits empty rather than padded.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A Codex acquisition, a compliance unlock, and two agent platforms with real new features.",
+        "items": [
+          {
+            "title": "OpenAI to acquire Pierre Computer Company, Inc.",
+            "url": "https://openai.com/index/openai-to-acquire-pierre",
+            "source": "OpenAI",
+            "body": "OpenAI is acquiring Pierre Computer Company and folding it into Codex, pitched as expanding the agent's tools for building, understanding, and reviewing code. No pricing or product details yet -- this is an acquisition announcement, not a feature drop -- but it's the third straight week OpenAI has bought its way into a specific Codex capability rather than building it in-house. If the pattern holds, expect the actual user-facing change (likely something in code review or codebase comprehension) to surface in Codex within a release or two rather than as a standalone product."
+          },
+          {
+            "title": "Daybreak Red is now available in AWS GovCloud (US-East)",
+            "url": "https://openai.com/index/daybreak-red-aws-govcloud",
+            "source": "OpenAI",
+            "body": "Daybreak Red, OpenAI's GPT-5.6 Cyber model, now runs in AWS GovCloud (US-East) via Amazon Bedrock. That's a compliance unlock, not a capability upgrade: approved government and defense customers who were previously blocked by data-residency requirements can now run authorized cybersecurity workloads -- offense and defense tooling -- inside a GovCloud boundary instead of waiting on commercial-region access. It's gated to vetted customers doing authorized security work, so this isn't a wider release, but it's the first time this specific model has had a path into federal/defense environments at all."
+          },
+          {
+            "title": "OpenHands v1.35.0",
+            "url": "https://github.com/OpenHands/OpenHands/releases/tag/v1.35.0",
+            "source": "All-Hands-AI/OpenHands (GitHub)",
+            "body": "OpenHands' home screen now remembers your last-picked cloud repository and lets you clear it, instead of making you reselect it every session. Automations can store picked Bitbucket Data Center repos as clone URLs rather than breaking when picker state goes stale, and each event source now lists its own event types so you can wire a trigger to exactly the event you want instead of a generic catch-all. None of this is flashy, but it's the kind of friction removal that matters once you're running OpenHands daily instead of demoing it once."
+          },
+          {
+            "title": "AutoGPT Platform v0.11.0",
+            "url": "https://github.com/Significant-Gravitas/AutoGPT/releases/tag/autogpt-platform-beta-v0.11.0",
+            "source": "Significant-Gravitas/AutoGPT (GitHub)",
+            "body": "Payment enforcement on self-hosted AutoGPT platforms is now a backend setting (ENABLE_PLATFORM_PAYMENT, off by default) instead of a feature flag -- if you charge users on your own instance, you now have to explicitly turn it on, and the old FORCE_FLAG environment variables no longer do anything. The API also now caps request bodies at 10 MiB by default, returning a 413 on anything larger. Both are breaking changes, but the right direction: self-hosters get a safer default instead of silent payment enforcement, plus a guard against oversized requests taking down the platform."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "A plugin-everything harness and an anti-overengineering skill are outpacing everything else on GitHub this week.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "272k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's agent harness has already spawned its own plugin ecosystem -- 272k stars and climbing on a framework whose entire pitch is 'everything is a plugin.' Instead of a monolithic agent with hardcoded tools and UI, DSH exposes behavior, model routing, and surfaces as swappable plugins, which is why there's already a side industry of DSH plugins (free-model routers, desktop shells) built on top of it within weeks. If you're choosing an agent harness to extend rather than just run as-is, this is the one accumulating a plugin ecosystem fastest right now."
+          },
+          {
+            "title": "DietrichGebert/ponytail",
+            "url": "https://github.com/DietrichGebert/ponytail",
+            "source": "github.com",
+            "stars": "184k",
+            "lang": "JavaScript",
+            "body": "Ponytail is an agent-skill/rules pack with one job: stop your coding agent from overengineering. Drop it into Claude Code, Cursor, or similar, and it nudges every suggestion toward the smallest diff that actually solves the problem -- no premature abstractions, no speculative config, no unrequested scaffolding. It's essentially a prompt layer encoding 'the best code is the code you never wrote,' and 184k stars for what amounts to a ruleset says a lot of builders are fighting the same agent habit of padding every change with extra structure nobody asked for."
+          },
+          {
+            "title": "alibaba/open-code-review",
+            "url": "https://github.com/alibaba/open-code-review",
+            "source": "github.com",
+            "stars": "49.4k",
+            "lang": "Go",
+            "body": "Alibaba open-sourced the code review tool it runs at its own scale: deterministic static-analysis rules (NPE checks, thread-safety, XSS, SQL injection) run alongside an LLM agent for the fuzzier judgment calls, merged into precise line-level PR comments. It speaks both OpenAI- and Anthropic-compatible APIs, so it plugs into whatever model you're already paying for. The pitch is accuracy over vibes -- deterministic checks catch what they always catch, and the LLM only gets invoked where static analysis genuinely can't help, which keeps false positives down at review-bot scale."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "19.1k",
+            "lang": "Rust",
+            "body": "Xerj packages a full search engine into a single Rust binary and aims it at agents: BM25 full-text, vector, and hybrid search over code, docs, logs, JSONL/CSV, and PDFs, exposed as an MCP server so any agent can query it instead of grepping. It's positioned as agent memory and RAG infrastructure with an Elasticsearch-compatible API, plus a 'Corpus Hub' for sharing prebuilt reference corpora. If you're currently wiring a vector DB, a keyword index, and a memory layer separately for every agent project, this collapses all three into one binary."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's sources actually documented a build end-to-end.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-11-03",
     "date": "November 3, 2026",
     "title": "AI Pulse",
