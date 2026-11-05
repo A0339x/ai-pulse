@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-11-05",
+    "date": "November 5, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Google and OpenAI both drop new multimodal models, agent harnesses keep eating GitHub's trending page",
+    "intro": "Three labs shipped real capability today: a faster/cheaper Gemini Omni tier, a bump to OpenAI's image stack, and an on-device TTS model claiming the top of the benchmarks. On GitHub, plugin-based agent harnesses are swallowing the trending page -- one repo alone is past a quarter million stars. And on HN, nearly 600 comments pile onto the question every builder is actually asking right now: what's in your agent stack.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two model upgrades, a new TTS entrant, and a bug-fix release worth pulling.",
+        "items": [
+          {
+            "title": "Gemini Omni 1.2 Flash: Fast and cost-effective with longer clips",
+            "url": "https://deepmind.google/blog/gemini-omni-12-flash-fast-and-cost-effective-with-longer-clips/",
+            "source": "Google DeepMind",
+            "body": "Google's fast, cheap Gemini tier gets an upgrade: Omni 1.2 Flash now handles longer video clips while cutting latency and cost versus the prior Flash build. It runs on the same any-to-any multimodal backbone as the full Omni line but tuned to run leaner, so if you were hitting clip-length or cost ceilings piping video into Gemini, those limits just moved. Available now through the Gemini API and AI Studio -- no separate request or waitlist needed to try it."
+          },
+          {
+            "title": "Introducing Images 2.6",
+            "url": "https://openai.com/index/introducing-images-2-6",
+            "source": "OpenAI",
+            "body": "OpenAI's image model gets faster generation, native GIF output, and more precise editing controls, live now across ChatGPT, Codex, and the API. The precision edits let you target specific regions or objects for changes without regenerating the whole image, and new API controls expose generation parameters directly instead of relying on prompt tricks to get them. GIF creation is new to the lineup entirely. If you're building image tooling on OpenAI's stack, this is a drop-in upgrade with no migration work required."
+          },
+          {
+            "title": "A Closer Look at Phonon TTS",
+            "url": "https://huggingface.co/blog/phonon-tts",
+            "source": "Hugging Face",
+            "body": "A new text-to-speech model claims the top of the quality benchmarks while running fully on-device -- no API call, no round-trip latency, no audio leaving the machine. That matters for anything privacy-sensitive or offline: voice assistants, accessibility tools, embedded hardware. Weights are on Hugging Face now, so you can swap it into an existing TTS pipeline today and compare quality directly against whatever cloud TTS you're currently paying per character for."
+          },
+          {
+            "title": "openclaw 2026.11.1",
+            "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.11.1",
+            "source": "openclaw",
+            "body": "This release fixes two real pain points for anyone running openclaw as a background agent: Mac config saves no longer silently overwrite secrets on failure, and Telegram/Discord/webhook conversations now keep reaching the agent after earlier turns or request handlers finish, instead of going quiet mid-thread. Small release, but if you've lost a secret to a bad config save or had a channel bot stop responding partway through a conversation, this is the fix. Update now if you're running openclaw as a persistent agent on any of those channels."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent harnesses and infra tools dominate, with a couple of genuinely novel ideas in the mix.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "273.7k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness treats everything -- models, tools, memory, UI -- as a plugin, and it's already past a quarter million stars. The pitch: instead of a monolithic agent framework, you compose a harness out of swappable plugin pieces, so switching models or adding a tool doesn't mean forking the core. Worth a look if you're tired of agent frameworks that lock you into one model provider or one tool-calling convention -- DeepSeek is betting the ecosystem value sits in the plugin API, not the harness itself."
+          },
+          {
+            "title": "DietrichGebert/ponytail",
+            "url": "https://github.com/DietrichGebert/ponytail",
+            "source": "github.com",
+            "stars": "185.1k",
+            "lang": "JavaScript",
+            "body": "ponytail is an agent-skills package that makes Claude Code or Cursor behave like a senior dev who refuses to write code they don't have to. Instead of the usual skill library that adds capabilities, this one adds restraint -- rules and prompts tuned to push back on unnecessary abstractions, premature scaffolding, and code that could've been a one-liner. If your agent keeps generating more code than the task needs, this is a direct counter to that failure mode rather than another prompt tweak."
+          },
+          {
+            "title": "alibaba/open-code-review",
+            "url": "https://github.com/alibaba/open-code-review",
+            "source": "github.com",
+            "stars": "49.5k",
+            "lang": "Go",
+            "body": "Alibaba open-sourced the code review tool it runs internally at scale: a hybrid pipeline that pairs deterministic static-analysis rules (NPE, thread-safety, XSS, SQLi) with an LLM agent for the judgment calls, producing precise line-level comments instead of a wall of generic feedback. It works with both OpenAI and Anthropic models. The hybrid split is the interesting part -- deterministic rules catch what rules are good at, the agent handles the ambiguous cases, and you're not paying for an LLM call on every static check."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "19k",
+            "lang": "Rust",
+            "body": "xerj is a single Rust binary that turns a pile of code, docs, logs, JSONL/CSV, and PDFs into a searchable corpus -- BM25, vector, and hybrid search, plus an Elasticsearch-compatible API and an MCP server so agents can query it directly. It's pitched as code search without grep and as agent memory: point it at a repo or knowledge base and your agent gets real search instead of everything getting stuffed into context. Corpus Hub adds hundreds of pre-built reference corpora you can mount instead of building your own."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "A real training-budget writeup and the agentic-setup megathread everyone's reading.",
+        "items": [
+          {
+            "title": "A decent text-to-image model trained for ~$20K (Apache 2.0 Weights)",
+            "url": "https://www.linum.ai/field-notes/pjit-21k",
+            "source": "Hacker News",
+            "author": "schopra909",
+            "body": "Linum trained a usable text-to-image model for roughly $20,000 and published the weights under Apache 2.0. The field notes lay out the actual budget trade-offs: what compute they rented, where they cut corners on data curation versus model scale, and what quality they got for the price versus a frontier text-to-image model that costs orders of magnitude more to train. For anyone who's assumed training your own image model requires a nine-figure compute budget, this is a concrete counter-example with the receipts attached -- useful if you want a model you fully own instead of renting one through an API."
+          },
+          {
+            "title": "Ask HN: What's your current AI agentic setup?",
+            "url": "https://news.ycombinator.com/item?id=50366117",
+            "source": "Hacker News",
+            "author": "eggbrain",
+            "body": "The top story on HN today isn't a launch, it's nearly 600 comments of builders describing their actual agent stacks -- which CLI they run (Claude Code, Codex, aider, and others), which models they route to which tasks, how they handle context and memory, and where agents still need a human in the loop. It's messier than a single documented build, but it's the closest thing to a real-time survey of what's actually working in production versus what's demo-only. Worth skimming for the setups that get echoed by multiple commenters independently -- that repetition is usually the signal that a pattern holds up outside one person's workflow."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-11-04",
     "date": "November 4, 2026",
     "title": "AI Pulse",
