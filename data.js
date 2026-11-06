@@ -3,6 +3,97 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-11-06",
+    "date": "November 6, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Gemini gets a cheap Omni tier, GPT-6 goes hunting for bugs, and a $20K text-to-image model opens its weights",
+    "intro": "Two labs dropped new models today while the agent-tooling world quietly got better memory, better CAD access, and a harness built entirely out of plugins. The one actual build worth reading start to finish is a $20K text-to-image model with its weights wide open. Nothing enormous happened, but most of what's below is something you can use by lunch.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two frontier labs ship new models today, and the agent-framework crowd catches up with multi-model support.",
+        "items": [
+          {
+            "title": "Gemini Omni 1.2 Flash: Fast and cost-effective with longer clips",
+            "url": "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/",
+            "source": "Google AI",
+            "body": "Google adds a Flash tier to its Omni line, trading some depth for speed and a lower price. Omni 1.2 Flash is built to chew through longer video clips than earlier Omni checkpoints without the latency or cost of the full model, ships today in the Gemini API. It's the pick for high-volume omni workloads -- batch video tagging, moderation, clip-level summarization -- where running the full Omni model per request was overkill on both time and bill. If you benched Omni before and bounced off the cost, this tier is the one to re-run your numbers against today."
+          },
+          {
+            "title": "GPT-6 Cyber: Advancing the frontier of aligned cybersecurity agents",
+            "url": "https://openai.com/index/introducing-gpt-6-cyber",
+            "source": "OpenAI",
+            "body": "OpenAI ships a model built specifically to hunt vulnerabilities, not avoid the subject. GPT-6 Cyber is trained for the security grind: scanning code and systems for exploitable bugs, then proposing fixes, while staying inside whatever authorization boundary a user or org sets instead of freelancing into out-of-scope targets. That's a different ask than a general chat model doing security work on the side -- it means tighter recall on real vuln classes and tighter guardrails against going rogue mid-scan. If you run a pentest or bug-bounty pipeline, this is the first OpenAI model built to slot directly into that workflow instead of being bent into it."
+          },
+          {
+            "title": "Hermes Agent v0.23.0 -- The Hearth Release",
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v0.23.0",
+            "source": "Nous Research",
+            "body": "Hermes Agent's v0.23.0 -- 666 contributors, ~10,080 commits since the last tag -- centers on folding your whole Desktop workspace into the agent session itself, instead of treating Hermes as a window bolted onto whatever else you're running. Where v0.22 was about getting new users through the door, this release is about giving them somewhere to actually work: one surface for the files, terminals, and context a session already touches. For a project moving at this pace (nearly 2,000 merged PRs in one cycle), that kind of consolidation matters more than any single feature -- it's a bet that the agent itself should be the desktop, not a panel inside one."
+          },
+          {
+            "title": "crewAI 1.15.36",
+            "url": "https://github.com/crewAIInc/crewAI/releases/tag/1.15.36",
+            "source": "crewAI",
+            "body": "crewAI's latest point release adds conversational Agent sessions -- still experimental -- so you can talk to a running crew back and forth instead of firing a task and waiting for a final answer. The release also wires in support for calling GPT-6 Astra and GPT-6.1 Sol directly, catches missing API keys before a run fails silently, and cleans up how crewai run reports which app or project it couldn't resolve. None of it is a new paradigm, but if you're running crews in production, the conversational mode plus clearer failure messages are the two changes worth pulling today."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent infrastructure keeps eating new domains -- memory, CAD, and 3D modeling all picked up an AI harness this week.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "274.8k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness, built on one idea: everything -- model routing, tools, UI panes, memory backends -- is a plugin, with no privileged core. That's a different bet than Claude Code or Codex's extension model, where the base agent ships fixed and plugins bolt onto the edges; here the base is minimal and plugins (dsh-plugins) are how you get anything done, including picking your model. It's already spawned its own plugin ecosystem (see the free-model and Desktop plugins climbing right alongside it). Worth a look if you're building agent tooling and tired of fighting a host app's assumptions about what a 'tool' or 'session' should look like."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "19.1k",
+            "lang": "Rust",
+            "body": "One Rust binary that gives an agent memory and search without standing up a vector DB. xerj indexes code, docs, logs, and JSONL/CSV/PDF files for BM25 full-text, vector, and hybrid search behind an Elasticsearch-compatible API, and doubles as an MCP server so any agent can query it directly -- code search without grep, long-term memory without a separate RAG stack. The Corpus Hub ships hundreds of pre-built reference corpora you can mount straight into an agent's search path. For anyone tired of wiring Postgres + pgvector + a chunking script together just to give an agent decent recall, this collapses it into one binary."
+          },
+          {
+            "title": "img2threejs/img2threejs",
+            "url": "https://github.com/img2threejs/img2threejs",
+            "source": "github.com",
+            "stars": "20.4k",
+            "lang": "Python",
+            "body": "Feed it a reference image and it rebuilds the object as actual Three.js code -- procedural, not a mesh dump. img2threejs is built for Claude Code and other coding agents specifically: instead of generating a giant point cloud or a GLTF blob, it writes quality-gated, animation-ready Three.js source you can keep editing in the same session. That's the real novelty -- most image-to-3D tools hand you a static asset; this hands you code. Useful if you're prototyping 3D web scenes from mood-board images and don't want to round-trip through Blender."
+          },
+          {
+            "title": "tangency-labs/solidcraft",
+            "url": "https://github.com/tangency-labs/solidcraft",
+            "source": "github.com",
+            "stars": "14.5k",
+            "lang": "Rust",
+            "body": "A real parametric CAD kernel -- brep modeling, not a toy -- written in pure Rust, with desktop, web, and MCP interfaces into the same underlying model. The MCP server is the interesting part: it means an agent can drive actual CAD operations (extrude, fillet, boolean) on a real part file instead of generating a STEP file blind and hoping it's manufacturable. For anyone trying to get agents doing mechanical design instead of just code, this is the first CAD tool built with that use case as a first-class target rather than bolted onto an existing desktop app."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Just one post this round clears the bar for an actual documented build.",
+        "items": [
+          {
+            "title": "A decent text-to-image model trained for ~$20K (Apache 2.0 Weights)",
+            "url": "https://www.linum.ai/field-notes/pjit-21k",
+            "source": "Hacker News",
+            "author": "schopra909",
+            "body": "Linum's field notes walk through training a usable text-to-image model on a ~$20K compute budget and releasing the weights under Apache 2.0 -- no license gate, no API tax. That price point is the actual story: it's cheap enough that a small team or a well-funded solo dev could rerun the recipe instead of just reading about it, which is exactly the gap most 'we trained a model' posts leave open. The HN thread (28 comments, high signal for its size) is mostly people checking the math on cost-per-sample and asking where corners got cut to hit that number -- worth reading before assuming you could repro it on a weekend budget."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- go ship something."
+  },
+  {
     "id": "2026-11-05",
     "date": "November 5, 2026",
     "title": "AI Pulse",
