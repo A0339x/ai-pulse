@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-11-07",
+    "date": "November 7, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Two new frontier models ship, Agent Skills gets a neutral home, and GitHub's climbing list says agents are starting to touch real tools -- CAD kernels, search engines, CI pipelines.",
+    "intro": "OpenAI and Google both shipped new models today -- one for security work, one for video -- while Anthropic handed governance of Agent Skills to a neutral foundation, the same move MCP made before it went industry-wide. On GitHub, the more interesting climbers aren't chat wrappers but agents that drive actual tools: a CAD kernel over MCP, a single-binary search engine, a hybrid deterministic-plus-LLM code reviewer. Nothing in today's build writeups cleared the bar for a real end-to-end workflow, so that section's empty.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two new models, one new standards move, one small but useful OSS feature drop.",
+        "items": [
+          {
+            "title": "GPT-6 Cyber: Advancing the frontier of aligned cybersecurity agents",
+            "url": "https://openai.com/index/introducing-gpt-6-cyber",
+            "source": "OpenAI",
+            "body": "OpenAI ships GPT-6 Cyber, a model fine-tuned specifically for finding exploitable vulnerabilities and writing the fixes for them, not a general coder prompted into pentesting. It's trained to stay within authorized scope, which matters if you're pointing it at your own infra rather than someone else's. Expect it to show up fast in bug bounty pipelines and internal red-team tooling rather than consumer products -- the whole point is a model that catches issues broader coding models miss and ships a patch without a human rewriting half of it first."
+          },
+          {
+            "title": "Gemini Omni 1.2 Flash: Fast and cost-effective with longer clips",
+            "url": "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/",
+            "source": "Google AI",
+            "body": "Google bumps its omni model to 1.2 Flash, and the real change is video: it now handles longer clips at the same low latency and price as before. Flash has always been the tier you reach for when speed matters more than raw capability; 1.2 extends that tradeoff to multi-minute video understanding and generation without the usual cost jump. If you're building anything that ingests video -- summarizing calls, tagging footage, generating clips from a prompt -- this is the model to re-test today, since the practical context window on video just got meaningfully bigger for the same bill."
+          },
+          {
+            "title": "Donating Agent Skills to the Agentic AI Foundation",
+            "url": "https://www.anthropic.com/news/donating-agent-skills-to-the-agentic-ai-foundation",
+            "source": "Anthropic",
+            "body": "Anthropic is handing governance of Agent Skills -- the packaging format Claude uses for reusable agent capabilities -- to a new neutral body, the Agentic AI Foundation. It's the same playbook MCP followed: ship it from one lab, prove it out, then move it somewhere vendor-neutral so other labs will actually adopt it instead of treating it as Anthropic's proprietary format. If you've built Skills for Claude, expect the spec to stabilize and start showing up as a target in tools outside Anthropic's own ecosystem, the way MCP went from an Anthropic thing to an industry default."
+          },
+          {
+            "title": "crewAI 1.15.37",
+            "url": "https://github.com/crewAIInc/crewAI/releases/tag/1.15.37",
+            "source": "crewAI (GitHub)",
+            "body": "Two small but genuinely useful additions: agents can now read spreadsheets directly through crewai-files, and you can scaffold a standalone agent project instead of building everything inside an existing crew. The spreadsheet reader closes an annoying gap -- most \"give your agent a tool\" setups make you write your own CSV/XLSX parser first. The standalone scaffold matters more: it makes crewAI usable for a one-off single-agent script instead of forcing every project into its full multi-agent crew structure, which was overkill for small jobs."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "The repos actually worth cloning are the ones letting agents drive real tools, not just chat.",
+        "items": [
+          {
+            "title": "alibaba/open-code-review",
+            "url": "https://github.com/alibaba/open-code-review",
+            "source": "github.com",
+            "stars": "49.6k",
+            "lang": "Go",
+            "body": "Alibaba open-sources the code review tool it runs internally, and the interesting part is the split: deterministic pipelines handle what doesn't need a model -- NPE checks, thread-safety, XSS, SQL injection patterns -- while an LLM agent handles judgment calls, and both produce precise line-level comments instead of a wall of prose. It's OpenAI and Anthropic compatible, so you point it at whatever model you're already paying for. If your LLM code reviewer keeps missing the boring stuff a linter would catch, this hybrid split is the actual fix, not a bigger prompt."
+          },
+          {
+            "title": "tangency-labs/solidcraft",
+            "url": "https://github.com/tangency-labs/solidcraft",
+            "source": "github.com",
+            "stars": "14.7k",
+            "lang": "Rust",
+            "body": "A parametric CAD app written in pure Rust that exposes itself through MCP, so an agent can call real CAD operations -- extrude, fillet, boolean -- directly on the kernel instead of generating G-code or an STL file blind and hoping it's right. That's a real shift from describing a part in text to actually manipulating it. Runs as desktop, web, or headless automation. Worth a look if you're experimenting with agents that need to design or modify physical parts, not just write code about them."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "18.5k",
+            "lang": "Rust",
+            "body": "One Rust binary that indexes code, docs, logs, and PDFs, then serves BM25, vector, and hybrid search over all of it through an Elasticsearch-compatible API, plus agent memory and RAG on top. The pitch is collapsing the usual stack -- a vector DB, a separate search engine, a memory store -- into a single process an agent can call over MCP. It also ships \"Corpus Hub,\" prebuilt reference corpora you can mount instead of indexing from scratch. Useful if you're tired of wiring together pgvector, grep, and a memory layer for every agent project."
+          },
+          {
+            "title": "img2threejs/img2threejs",
+            "url": "https://github.com/img2threejs/img2threejs",
+            "source": "github.com",
+            "stars": "20.5k",
+            "lang": "Python",
+            "body": "Point it at a reference image and it rebuilds the object as a procedural Three.js model -- actual parametric code you can edit and re-render, not a mesh dump. \"Quality-gated\" means it checks its own output against the reference image before calling it done; \"token-efficient\" means it's optimized for how much an LLM generation costs, not just visual fidelity. For generative 3D in games or on the web, procedural code output is a meaningfully different and more editable result than the usual diffusion-to-mesh pipeline."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing today actually documented a workflow you could follow -- mostly launches and opinion pieces.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-11-06",
     "date": "November 6, 2026",
     "title": "AI Pulse",
