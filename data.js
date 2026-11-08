@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-11-08",
+    "date": "November 8, 2026",
+    "title": "AI Pulse",
+    "subtitle": "A cybersecurity model lands, Gemini gets a cheaper Flash tier, and someone crammed a 284B model onto a GPU-less desktop.",
+    "intro": "Today's shipping news skews toward specialization: new models built for narrow, high-stakes domains (security, chemistry, video) instead of another general chat model. On GitHub, the novel stuff is infrastructure that replaces duct-taped RAG and CAD stacks with single, agent-native tools. And the best build writeup of the day is about ripping LLM calls OUT of a pipeline, not adding more in.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Less \"bigger model,\" more \"model built for one job.\"",
+        "items": [
+          {
+            "title": "GPT-6 Cyber: Advancing the frontier of aligned cybersecurity agents",
+            "url": "https://openai.com/index/introducing-gpt-6-cyber",
+            "source": "OpenAI",
+            "body": "OpenAI shipped GPT-6 Cyber, a model built specifically to find exploitable vulnerabilities and write fixes for them, trained to stay inside explicit authorization boundaries instead of wandering off-scope. This is OpenAI packaging a capability that's already real -- general models finding actual bugs -- into something a security team can point at a codebase under contract, with guardrails baked in rather than bolted on. It lands alongside a new bug-bounty partnership with Hacktron, so OpenAI is using the model on its own infrastructure, not just announcing it. If you run a security team evaluating AI-assisted pentesting, this is the first model from OpenAI purpose-built for that job rather than a general model repurposed for it."
+          },
+          {
+            "title": "Gemini Omni 1.2 Flash: Fast and cost-effective with longer clips",
+            "url": "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/",
+            "source": "Google DeepMind",
+            "body": "Google shipped Gemini Omni 1.2 Flash, a cheaper, faster version of its omni model that now handles longer video clips in one pass instead of forcing you to chunk them first. Flash tiers exist to make frontier capability cheap enough to run inside a production loop, and the extended clip length matters specifically for video workflows -- summarizing a full recording, tagging a long screen capture, running moderation on an uncut upload -- where chunking previously broke context. If cost or clip-length limits were the reason you skipped Gemini for a video-heavy pipeline, that constraint just got weaker."
+          },
+          {
+            "title": "New NVIDIA Cosmos 3 Open Models for Interactive World Simulation",
+            "url": "https://huggingface.co/blog/nvidia/cosmos-interactive-world-simulation",
+            "source": "Hugging Face / NVIDIA",
+            "body": "NVIDIA released Cosmos 3, open-weight world-simulation models that generate interactive, physically plausible video environments, available directly on Hugging Face. Robotics and simulation teams use models like this to generate synthetic training data without touching physical hardware -- an agent can act inside the simulated world and the model renders consequences in real time. The open release means you can download weights and run them locally instead of waiting on an API, which matters if your robot-learning pipeline needs tight iteration loops rather than round-trips to a hosted endpoint."
+          },
+          {
+            "title": "Agentic cheminformatics with Google Antigravity",
+            "url": "https://deepmind.google/blog/agentic-cheminformatics-with-google-antigravity/",
+            "source": "Google DeepMind",
+            "body": "Google shipped Cheminformatics Skills for Antigravity, letting agents search compound databases and propose novel drug candidates -- including rigidified macrocycles -- on their own. This turns Antigravity into something usable for actual drug-discovery work instead of a research demo: an agent can search chemical space, filter for synthesizability, and hand back a structure a chemist would recognize as a real lead. It's a concrete example of agent skills shipping into a specialized scientific domain rather than staying general-purpose, and it's a template for what a domain-specific skill pack looks like beyond coding."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "The repos gaining ground are replacing whole infra stacks with one binary or one MCP server, not wrapping an SDK.",
+        "items": [
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "18.6k",
+            "lang": "Rust",
+            "body": "One Rust binary that indexes code, docs, logs, and JSONL/CSV/PDF files for BM25, vector, and hybrid search, exposed through an Elasticsearch-compatible API and an MCP server. The pitch: agents doing RAG or code search no longer need a self-hosted ES cluster plus a separate vector DB plus glue code -- xerj replaces all three with a single binary you can drop into CI or run on a laptop. Its \"Corpus Hub\" ships pre-built reference corpora so an agent can pull in domain knowledge without building the index itself. Good fit if your RAG stack is currently three services duct-taped together."
+          },
+          {
+            "title": "alibaba/open-code-review",
+            "url": "https://github.com/alibaba/open-code-review",
+            "source": "github.com",
+            "stars": "49.6k",
+            "lang": "Go",
+            "body": "Alibaba open-sourced its internal code review tool: a hybrid pipeline that runs deterministic rule checks (NPE, thread-safety, XSS, SQL injection) alongside an LLM agent with repository-level context, then merges both into precise line-level comments. The deterministic layer catches the boring, well-defined bugs cheaply and reliably; the LLM layer handles the fuzzier \"does this violate an implicit convention in this codebase\" calls. It works with OpenAI- and Anthropic-compatible backends. Worth a look if your current AI code review setup is all-LLM and keeps missing things a plain linter would've caught for free."
+          },
+          {
+            "title": "tangency-labs/solidcraft",
+            "url": "https://github.com/tangency-labs/solidcraft",
+            "source": "github.com",
+            "stars": "15.0k",
+            "lang": "Rust",
+            "body": "A parametric CAD application built from scratch in Rust, with an MCP server so agents can drive modeling operations directly instead of generating G-code or STL files blind. It runs as a desktop app, in-browser, and headless for automation, using a real boundary-representation geometry kernel instead of a mesh hack. The MCP layer is the interesting part: an agent can create features, query geometry, and iterate on a part the way a human would in Fusion 360, instead of one-shotting a model with no feedback loop."
+          },
+          {
+            "title": "img2threejs/img2threejs",
+            "url": "https://github.com/img2threejs/img2threejs",
+            "source": "github.com",
+            "stars": "20.9k",
+            "lang": "Python",
+            "body": "Give it a reference image and it rebuilds the object as a procedural, animation-ready Three.js model, not a mesh dump. The code-only output stays editable and lightweight, and a \"quality-gated\" step checks the generated model against the reference before handing it back, which cuts the token cost of iterating on 3D generation with an agent. Useful if you've been generating 3D assets by having an agent fumble through raw mesh coordinates -- this skips straight to a structured, inspectable scene graph."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Today's standout build is about removing LLM calls, not adding them.",
+        "items": [
+          {
+            "title": "Stop running everything through LLMs: How I fixed my research agent",
+            "url": "https://www.tinyfish.ai/blog/inside-tinyresearch",
+            "source": "Hacker News",
+            "author": "manavm12",
+            "body": "The author's research agent routed every step -- search, extraction, dedup, summarization -- through an LLM call, which made it slow, expensive, and inconsistent on subtasks that never needed a language model in the first place. The fix: push extraction and dedup into deterministic code, keep the LLM only for steps that need actual judgment (query planning, final synthesis), and cache aggressively between the two. The writeup traces where the old pipeline broke -- mostly parsing and dedup, where nondeterministic LLM output compounded across a multi-step loop into duplicate or missing results -- and shows the latency and cost drop after moving those steps out of the model. A clean pattern for anyone whose agent is currently \"LLM all the way down\" and paying for it."
+          },
+          {
+            "title": "Llama-modchip: 284B DeepSeek on 64GB RAM, no GPU",
+            "url": "https://github.com/synchopate/llama-modchip",
+            "source": "Hacker News",
+            "author": "joshcsimmons",
+            "body": "A technique and codebase for running a 284-billion-parameter DeepSeek model on 64GB of RAM with zero GPU, by aggressively quantizing weights and streaming inactive mixture-of-experts off disk instead of keeping the whole model resident in memory. The repo lays out the tradeoff plainly: token generation is slower than a GPU rig, but a model that normally needs multiple GPUs now runs on a beefy consumer desktop. If you've wanted to run frontier-scale open-weight models locally without renting cloud GPUs, this is the kind of offloading hack that makes it possible, at the cost of throughput."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- see you tomorrow."
+  },
+  {
     "id": "2026-11-07",
     "date": "November 7, 2026",
     "title": "AI Pulse",
