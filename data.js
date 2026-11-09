@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-11-09",
+    "date": "November 9, 2026",
+    "title": "AI Pulse",
+    "subtitle": "A cybersecurity model from OpenAI, a faster Gemini for video, and a 277k-star plugin harness eating GitHub's charts",
+    "intro": "Today's shipping news skews toward specialized models rather than general ones -- OpenAI built a model just for vuln-hunting, Google made video understanding cheaper and longer. The bigger story is on GitHub, where deepseek-harness's plugin architecture has spawned a dozen satellite repos in days flat. Nothing in today's build-log pile actually shows its work, so that section's empty -- go build something instead.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Fewer general-purpose model drops today, more purpose-built tools for specific jobs.",
+        "items": [
+          {
+            "title": "GPT‑6 Cyber: Advancing the frontier of aligned cybersecurity agents",
+            "url": "https://openai.com/index/introducing-gpt-6-cyber",
+            "source": "OpenAI",
+            "body": "OpenAI shipped a dedicated cybersecurity model today: GPT-6 Cyber. It's tuned specifically for finding exploitable vulnerabilities and then writing the fix, not just the finding -- a full triage-to-patch loop in one model. Training emphasizes staying within authorized scope, aimed at pentesters and internal security teams rather than open-ended scanning. That focus matters: a model optimized for \"find and fix\" inside defined boundaries is a different product than a general-purpose model asked to do security work on the side. If you run a bug bounty program or an internal red team, this is now a model built for that job specifically, not adapted to it."
+          },
+          {
+            "title": "Gemini Omni 1.2 Flash: Fast and cost-effective with longer clips",
+            "url": "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/",
+            "source": "Google",
+            "body": "Google dropped a faster, cheaper version of Gemini Omni today. The headline change is clip length -- Omni 1.2 Flash handles meaningfully longer video inputs than its predecessor while cutting cost per call, the two-part tradeoff that's kept Flash-tier models from being viable for video-heavy agent pipelines. If you've been avoiding Gemini for video analysis because of per-minute pricing or hard duration caps, both constraints just loosened. Combined with DeepMind's same-day cross-post, this reads as the default multimodal tier for anyone building video-understanding features into an agent rather than running a one-off demo."
+          },
+          {
+            "title": "openclaw 2026.11.2",
+            "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.11.2",
+            "source": "GitHub (openclaw/openclaw)",
+            "body": "openclaw pushed version 2026.11.2 today -- 166 commits and 113 merged PRs from 64 contributors, a big release cadence for an open agent harness. The project now ships changelogs in two formats on purpose: human-readable release notes and a plain-Markdown version meant to be fed straight to an agent, a small but telling detail about who's actually reading changelogs now. If you're running openclaw in production, diff the plain-Markdown changelog against your config before upgrading given the size of this release."
+          },
+          {
+            "title": "Measuring how AI agents handle everyday wet-lab science",
+            "url": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science",
+            "source": "OpenAI",
+            "body": "OpenAI released BioBasicsBench today, a new 100-task benchmark checking whether an agent can actually interpret raw experimental data -- the unglamorous wet-lab stuff like reading a gel image or sanity-checking a pipetting protocol, not writing a research proposal about one. That's a meaningfully different skill than the biology-knowledge benchmarks that already exist, and it gives anyone building lab-automation agents a concrete yardstick instead of vibes. If you're evaluating a model for use in an actual lab workflow, this is the first benchmark built specifically to catch the gap between \"sounds right\" and \"is right\" on real experimental data."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "One plugin-first harness is pulling an entire ecosystem up with it.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "277.3k",
+            "lang": "TypeScript",
+            "body": "deepseek-harness is the plugin-first agent harness apparently eating the GitHub stars chart this week -- 277k stars and an entire ecosystem of satellite repos (free-model plugins, desktop ports, mobile ports) built on top of it. The pitch is \"everything is a plugin\": models, tools, UI surfaces all swappable through the same interface instead of being hardcoded into the harness. That structural bet has turned it into a platform rather than just another CLI -- other teams are shipping plugins into it faster than the core team could ship features alone. Worth a look if you're tired of forking a harness every time you want a different model backend."
+          },
+          {
+            "title": "alibaba/open-code-review",
+            "url": "https://github.com/alibaba/open-code-review",
+            "source": "github.com",
+            "stars": "49.7k",
+            "lang": "Go",
+            "body": "Alibaba open-sourced the code review tool it runs internally at its own scale: a hybrid architecture pairing deterministic pipelines (actual static analysis for NPE, thread-safety, XSS, SQL injection) with an LLM agent for the judgment calls a ruleset can't make. The split matters -- deterministic checks catch known bug classes cheaply and reliably, the agent handles everything else and leaves precise line-level comments instead of a wall of text. It's OpenAI- and Anthropic-compatible, so you can point it at whichever model you're already paying for. If your current AI code review setup is \"LLM reads the diff and vibes,\" this is a more disciplined version of the same idea."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "18.7k",
+            "lang": "Rust",
+            "body": "xerj is a single Rust binary that replaces grep, your vector DB, and half your RAG stack for agent workloads. It indexes code, docs, logs, and JSONL/CSV/PDF files and serves BM25 full-text, vector, and hybrid search over all of it through an Elasticsearch-compatible API, plus a dedicated agent-memory layer. The \"Corpus Hub\" piece is the more unusual bit -- hundreds of pre-built reference corpora you can mount instead of indexing from scratch. For anyone building an agent that needs to search its own codebase or a pile of logs without standing up Elasticsearch, this collapses what used to be three separate services into one binary."
+          },
+          {
+            "title": "img2threejs/img2threejs",
+            "url": "https://github.com/img2threejs/img2threejs",
+            "source": "github.com",
+            "stars": "21.1k",
+            "lang": "Python",
+            "body": "img2threejs takes a reference image and rebuilds the object in it as a procedural, code-only Three.js model -- not a mesh dump, actual generated code that's quality-gated and animation-ready out of the box. The token-efficient framing is the real pitch: instead of asking a model to reason over a giant 3D file format, it reasons over compact procedural code and lets Three.js handle rendering. That's a meaningfully cheaper way to get image-to-3D out of an LLM than asset-generation approaches that ship raw geometry. Useful if you need quick 3D props from a photo rather than a from-scratch asset pipeline."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's pile actually walked through a build end to end -- benchmark scores and opinion pieces, not workflows.",
+        "items": []
+      }
+    ],
+    "closing": "Back tomorrow with more."
+  },
+  {
     "id": "2026-11-08",
     "date": "November 8, 2026",
     "title": "AI Pulse",
