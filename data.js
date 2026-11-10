@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-11-10",
+    "date": "November 10, 2026",
+    "title": "AI Pulse",
+    "subtitle": "DeepMind proves Signal's crypto correct, Gemini gets a new flagship, and DeepSeek's plugin harness eats GitHub's trending page",
+    "intro": "DeepMind had the biggest day on the lab side: a new flagship Gemini model and a formal-verification result on real production crypto, not a benchmark toy. On GitHub, the DeepSeek Harness plugin ecosystem keeps metastasizing -- half of today's climbers are either built on it or competing directly with it. Nothing in today's build-log posts actually showed its receipts, so skip straight to shipping and climbing.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "DeepMind's day: a new flagship model and a security-grade proof result, hours apart.",
+        "items": [
+          {
+            "title": "Introducing AlphaProof Code: a breakthrough in verifying complex software at depth",
+            "url": "https://deepmind.google/blog/introducing-alphaproof-code/",
+            "source": "DeepMind",
+            "body": "AlphaProof Code agents wrote three million lines of formal proofs in Lean to verify Signal's core encryption implementation -- a real production cryptographic codebase, not a toy function. That's a different class of work than code review or test generation: it's machine-checked proof that the implementation matches spec, with no gap for a subtle bug to hide in. If this generalizes past the one case, it's a real path toward formally verifying security-critical code at a scale that's never been practical by hand. Worth watching if you touch crypto, auth, or anything else where 'probably correct' isn't good enough."
+          },
+          {
+            "title": "Gemini 4 Carbon is now available",
+            "url": "https://deepmind.google/blog/gemini-4-carbon-is-now-available/",
+            "source": "DeepMind",
+            "body": "Gemini 4 Carbon is live today across the Gemini app, the API, and Vertex AI, replacing Gemini 4 as the default top-tier model for anyone building on Google's stack. Same endpoints, same integration points -- it's a swapped-in model id, so existing Gemini 4 API calls get a drop-in upgrade path to test first. The release notes don't detail benchmarks yet beyond availability, so the move is the usual one: point your existing eval harness at Carbon before you migrate production traffic over."
+          },
+          {
+            "title": "Gemini Omni 1.2 Flash: Fast and cost-effective with longer clips",
+            "url": "https://blog.google/innovation-and-ai/technology/developers-tools/introducing-gemini-omni-1-2-flash/",
+            "source": "Google AI",
+            "body": "Google's omni-modal Flash model -- text, image, audio, and video in one model -- gets longer clip support, faster inference, and a lower cost per request. The clip-length bump is the practical change: you can hand it more footage without chunking it yourself first. Paired with the cost cut, it's a more realistic pick for production video-understanding pipelines -- captioning, scene search, moderation -- rather than just demos. Available now through the Gemini API and AI Studio."
+          },
+          {
+            "title": "All-Hands-AI/OpenHands v1.38.0",
+            "url": "https://github.com/OpenHands/OpenHands/releases/tag/v1.38.0",
+            "source": "OpenHands",
+            "body": "OpenHands' latest release adds a semantic meter that shows conversation budget burn in real time instead of a raw token count, editable executable plugin configuration straight from the automation UI, and a new Paper theme for Agent Canvas. The budget meter is the one that matters day to day -- it's the difference between seeing a budget crunch coming and finding out mid-task. Grab it from the usual release channel (GitHub release, Docker image, or the hosted app)."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "DeepSeek Harness's plugin ecosystem dominates the trending list, but the sharpest ideas live outside it.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "278.1k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's agent harness has gone from tool to platform: the whole pitch is 'everything is a plugin,' and the ecosystem around it proves it out -- free-model plugins, mobile ports, desktop apps, and alternative frontends are all built as DSH plugins rather than forks. Worth studying the plugin API surface even if you don't run DeepSeek models -- it's the clearest live example of a fully pluggable agent runtime, at a scale (278k stars) that means the API isn't getting ripped up anytime soon."
+          },
+          {
+            "title": "DietrichGebert/ponytail",
+            "url": "https://github.com/DietrichGebert/ponytail",
+            "source": "github.com",
+            "stars": "188.3k",
+            "lang": "JavaScript",
+            "body": "Ponytail is a skill/ruleset for Claude Code, Cursor, and similar agents built around one idea: the best code is code you never wrote. It pushes the agent to act like a lazy senior engineer -- delete instead of add, pick the boring solution, refuse abstractions nobody asked for. It's a direct countermeasure to the most common complaint about AI-generated code: technically correct but bloated. Install it as a Claude Code plugin or Cursor rule set and the agent's default output shifts toward minimal diffs and fewer new files."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "18.8k",
+            "lang": "Rust",
+            "body": "Xerj packs BM25 full-text, vector, and hybrid search plus an Elasticsearch-compatible API into one Rust binary you point at code, docs, logs, JSONL/CSV, and PDFs. It doubles as an MCP server, so an agent queries it directly instead of grepping your repo or standing up a separate vector DB. Its 'Corpus Hub' adds hundreds of pre-built reference corpora for agent memory or RAG without your own ingestion pipeline. Collapses three things people usually bolt together -- BM25 index, vector store, MCP wrapper -- into one dependency."
+          },
+          {
+            "title": "img2threejs/img2threejs",
+            "url": "https://github.com/img2threejs/img2threejs",
+            "source": "github.com",
+            "stars": "21.1k",
+            "lang": "Python",
+            "body": "Feed it a reference image and img2threejs rebuilds the object as a procedural, code-only Three.js model -- actual generated code constructing geometry, materials, and rig, not a mesh dump. It's quality-gated, checking its own output against the reference before returning it, and built to be token-efficient so you're not burning a huge context window per asset. Useful if you're generating 3D assets for web or game prototypes from a product photo or mood board instead of modeling from scratch."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's build posts showed the receipts -- tools, prompts, failures -- so there's nothing to curate here.",
+        "items": []
+      }
+    ],
+    "closing": "Tomorrow: more plugins, probably."
+  },
+  {
     "id": "2026-11-09",
     "date": "November 9, 2026",
     "title": "AI Pulse",
