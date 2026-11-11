@@ -3,6 +3,97 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-11-11",
+    "date": "November 11, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Google ships a decision-making API, DeepSeek's plugin harness tops the charts, and 48 agents find a lost pyramid",
+    "intro": "The big labs shipped infrastructure today, not demos -- a dedicated decisions model from Google and a business-identity layer inside ChatGPT. On GitHub, DeepSeek's plugin-first agent harness is eating the charts, alongside some genuinely new tooling for agent memory and CAD. And the best AI story of the week isn't a chatbot screenshot -- it's a parallel agent swarm doing real archaeological fieldwork.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A dedicated decision model, a business-identity layer for ChatGPT, and two agent-harness patches worth knowing about.",
+        "items": [
+          {
+            "title": "Gemini Decisions API: Fast, calibrated multimodal decisions",
+            "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+            "source": "Google AI",
+            "body": "Google split 'make a decision' out of the chat-completion loop. The new Gemini Decisions API runs on a dedicated model, Gemini Decision, built to take text, image, audio, or video input and return a single calibrated answer -- a classification, a routing choice, a moderation call -- fast, with a confidence score you can actually threshold against. That's different from asking a general chat model to just answer yes or no: decision-specific models skip the verbose reasoning pass and tune directly for calibration, so the confidence number means something statistically. If you're building agent pipelines that gate on a yes/no/maybe at every step, this is a purpose-built primitive for that instead of a repurposed chatbot call."
+          },
+          {
+            "title": "Introducing Businesses in ChatGPT",
+            "url": "https://openai.com/index/introducing-businesses-chatgpt",
+            "source": "OpenAI",
+            "body": "ChatGPT now lets any business claim a profile, control the facts ChatGPT states about it, and see analytics on how often and how it gets surfaced in conversations. Practically: if someone asks ChatGPT about your hours, your return policy, or whether you deliver, you can now set that answer directly instead of hoping the model got it right from stale web data. There's also a path from 'ChatGPT mentioned you' to an actual conversion -- bookings, orders, inquiries -- inside the chat itself. It's the first real business-identity layer OpenAI has shipped inside the consumer product, and it matters for any builder whose product gets name-checked by users asking ChatGPT for recommendations."
+          },
+          {
+            "title": "openclaw 2026.11.3",
+            "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.11.3",
+            "source": "GitHub",
+            "body": "Three fixes aimed squarely at multi-agent orchestration. Subagent completions can now stay private instead of leaking into the streamed chat reply, so a parent agent can run noisy exploratory subagents without flooding the user-facing transcript. Cancelling a child task no longer blocks the parent from handing off to replacement work -- previously a cancelled child's pending completion receipt could wedge the whole handoff. And tool failures that used to go unreported now surface instead of silently ending a turn. None of these are flashy, but if you're running openclaw for real multi-step agent workflows, they're the difference between a pipeline that degrades loudly versus one that just quietly stops."
+          },
+          {
+            "title": "OpenHands v1.39.0",
+            "url": "https://github.com/OpenHands/OpenHands/releases/tag/v1.39.0",
+            "source": "GitHub",
+            "body": "The automations dashboard can now filter by owner, including a dedicated 'Service accounts' view -- useful once you've got more than a couple of bots running scheduled jobs across a team. Chat UI gets two small but real fixes: message timestamps moved closer to the message they belong to, and feedback from Stop hooks no longer clutters the conversation view. It's an incremental release, but OpenHands ships weekly at this point, and the automations filtering is the one here worth knowing about if you're managing OpenHands at team scale rather than running it solo."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "A plugin-first agent harness is eating GitHub, and the more interesting repos underneath it are memory infra and agent-driven CAD.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "278.9k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's answer to Claude Code and Codex is a harness built around a plugin protocol instead of a fixed toolset -- the README's tagline is literally 'everything is a plugin.' Models, memory backends, sandboxes, and UI surfaces are all swappable through the same plugin interface rather than hardcoded into the core. That design is why an entire ecosystem of third-party plugins (model swaps, desktop ports, mobile ports) has sprung up around it in a matter of weeks. At 278k stars it's now one of the most-starred repos on GitHub period, and it's worth a look specifically for the plugin architecture -- a cleaner separation of concerns than most agent harnesses ship with."
+          },
+          {
+            "title": "tangency-labs/solidcraft",
+            "url": "https://github.com/tangency-labs/solidcraft",
+            "source": "github.com",
+            "stars": "15.7k",
+            "lang": "Rust",
+            "body": "A parametric CAD application, boundary-rep and all, written in pure Rust -- and it exposes its modeling operations over MCP, so an agent can drive real CAD design instead of just generating a mesh. That's the actual novelty: most AI-for-3D tools generate geometry once and hand you a static file, but SolidCraft lets an agent call parametric operations the way a human would in Fusion 360 or SolidWorks, which means the output stays editable and constraint-driven. It runs as desktop, web, or headless automation. Worth watching if you're building agents meant to do real engineering design work rather than decorative 3D assets."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "18.9k",
+            "lang": "Rust",
+            "body": "A single Rust binary that gives agents an actual search and memory layer: BM25 full-text, vector, and hybrid search over code, docs, logs, JSONL/CSV, and PDFs, with an Elasticsearch-compatible API so it drops into existing tooling. The pitch is code search without grep and RAG without standing up a separate vector DB. It also runs a 'Corpus Hub' serving hundreds of pre-built reference corpora, so an agent can pull in indexed documentation for a library instead of you feeding it in manually. If your agent setup currently leans on ripgrep and a janky embeddings script, this is a more serious replacement for both halves."
+          },
+          {
+            "title": "DietrichGebert/ponytail",
+            "url": "https://github.com/DietrichGebert/ponytail",
+            "source": "github.com",
+            "stars": "189k",
+            "lang": "JavaScript",
+            "body": "A skill/persona pack that makes your coding agent behave like a jaded senior engineer who'd rather delete code than write it. Concretely: it biases the agent toward the smallest diff that solves the problem, pushes back on new abstractions and dependencies, and favors deleting dead code over leaving it. It's a direct counter to the default failure mode of coding agents -- generating sprawling, over-engineered solutions to simple problems. Install it as a Claude Code or Cursor rule set and the difference shows up immediately in diff size. Less a tool than a prompt-engineering fix for a problem every agent user has run into."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One build this week actually shows the workflow end to end -- and it found a pyramid.",
+        "items": [
+          {
+            "title": "Google SWE points 48 AI agents at NASA Lidar, finds unmapped Maya pyramid in 72h",
+            "url": "https://pietromiotti.com/latest/maya-site/?maya",
+            "source": "Hacker News",
+            "author": "eyvindn",
+            "body": "A Google engineer took NASA's publicly released lidar scans of the Yucatan and ran 48 AI agents against them in parallel, each one scanning a grid section of terrain for the elevation and shape signatures that separate a buried structure from natural topography. Lidar archaeology itself isn't new -- researchers have used it for over a decade to spot hidden Maya sites under jungle canopy -- but doing it by hand means a specialist eyeballing enormous swaths of point-cloud data. Splitting the search across dozens of agents running concurrently compressed what's normally a slow manual survey into 72 hours, surfacing one strong candidate that a human then verified in the field: a previously unmapped pyramid. It's the clearest example yet of agents doing real scientific grunt work instead of chat demos -- massively parallel pattern search over public data, with a human in the loop only at the final confirmation step."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan. Back tomorrow."
+  },
+  {
     "id": "2026-11-10",
     "date": "November 10, 2026",
     "title": "AI Pulse",
