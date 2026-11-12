@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-11-12",
+    "date": "November 12, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Google rewires Search around a new model, DeepSeek's plugin harness eats the charts, and businesses get a seat inside ChatGPT",
+    "intro": "Google owns today: Gemini 4 Hydrogen is live in Search and a new Decisions API splits fast calibrated classification out from general chat. On GitHub, DeepSeek's plugin-everything agent harness is dragging an entire ecosystem up the charts with it, but the sturdier picks are the infra underneath -- hybrid search, hybrid code review. Nothing in today's build write-ups had enough actual workflow detail to earn a slot, so that section's empty.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Google ships two new ways to call a model, OpenAI opens a new surface, and OpenHands patches a trust-eroding chat bug.",
+        "items": [
+          {
+            "title": "Google Search gets a major upgrade with Gemini 4 Hydrogen",
+            "url": "https://blog.google/products-and-platforms/products/search/gemini-4-hydrogen-search-upgrade/",
+            "source": "Google",
+            "body": "Google is rolling Gemini 4 Hydrogen directly into Search results today. The new model powers AI Mode's multimodal answers and the rotating result carousels now showing up in search, handling harder multi-step and visual queries natively instead of bouncing you to a separate tab. If you're building anything that scrapes, ranks against, or competes with Search results, expect answer boxes to get denser and more interactive starting today -- Hydrogen is live in production, not a limited preview."
+          },
+          {
+            "title": "Gemini Decisions API: Fast, calibrated multimodal decisions",
+            "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+            "source": "Google",
+            "body": "Google launched a new API today built on Gemini Decision, a model tuned for fast yes/no and multi-way classification across text, image, and video -- not freeform generation. Calibrated means the confidence scores it returns are meant to actually track real-world accuracy, which matters if you're wiring decisions into moderation, routing, or fraud pipelines where you threshold on a score instead of parsing prose. It's a distinct product tier from the general Gemini API, priced and latency-tuned for high-volume classification rather than chat. Worth a look if you're currently burning a chat model just to get a boolean out."
+          },
+          {
+            "title": "Introducing Businesses in ChatGPT",
+            "url": "https://openai.com/index/introducing-businesses-chatgpt",
+            "source": "OpenAI",
+            "body": "OpenAI shipped a new surface in ChatGPT today letting businesses claim and manage a profile that shows up when users ask about them -- a verified listing plus analytics on how your business appears in ChatGPT answers, with tools to turn that visibility into bookings or signups. It's the clearest sign yet that ChatGPT is becoming a discovery layer businesses need to actively manage, the same way they manage a Google Business Profile today. If your product lives or dies by local or branded search, this is a new channel to claim now."
+          },
+          {
+            "title": "OpenHands v1.40.0",
+            "url": "https://github.com/OpenHands/OpenHands/releases/tag/v1.40.0",
+            "source": "OpenHands (GitHub release)",
+            "body": "OpenHands pushed v1.40.0 today with a cleaner Codex subscription auth flow and two chat-reliability fixes: messages no longer get mangled at history page boundaries, and delayed echoes stop clobbering drafts you've already moved past. Small release, but if you're running OpenHands as your coding agent harness and have hit either of those chat bugs, update now -- they were the kind of silent-data-loss bugs that erode trust in a long agent session."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "DeepSeek's plugin-native agent harness is pulling a whole ecosystem up with it, but the real finds are the infra underneath.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "279.7k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness treats everything -- models, tools, memory, UI -- as a swappable plugin, and it's rocketing up the charts because the plugin ecosystem around it (desktop clients, mobile ports, free-model bridges) is exploding just as fast. It's less a single tool than a new substrate: install a plugin and your agent's backend model, context store, or terminal integration changes without touching core. For builders tired of forking an agent every time they want a different backend, this is the plugin-native architecture other harnesses have been edging toward, done from day one."
+          },
+          {
+            "title": "alibaba/open-code-review",
+            "url": "https://github.com/alibaba/open-code-review",
+            "source": "github.com",
+            "stars": "50k",
+            "lang": "Go",
+            "body": "Alibaba open-sourced the code review tool it runs internally at scale: a hybrid pipeline that pairs deterministic static analysis (NPE, thread-safety, XSS, SQL injection rules) with an LLM agent for the judgment calls static rules can't make, then posts precise line-level comments instead of a wall of text. It works against both OpenAI- and Anthropic-compatible backends. The pitch is that pure-LLM review bots hallucinate and pure-static tools miss context -- splitting the work lets each half do what it's actually good at. Worth trying if your current AI review bot is either too noisy or too vague."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "19k",
+            "lang": "Rust",
+            "body": "One Rust binary that indexes code, docs, logs, and JSONL/CSV/PDF files for BM25, vector, and hybrid search, then exposes it as an MCP server so agents can search without shelling out to grep. It also doubles as agent memory and ships an Elasticsearch-compatible API plus a 'Corpus Hub' of prebuilt reference corpora. The novel part isn't any one search mode -- it's bundling full-text, vector, and hybrid retrieval plus memory into a single static binary with nothing to stand up, which is the boring infra that makes agent RAG setups actually reproducible."
+          },
+          {
+            "title": "lexmount/moli",
+            "url": "https://github.com/lexmount/moli",
+            "source": "github.com",
+            "stars": "23.5k",
+            "lang": "Rust",
+            "body": "A headless browser built from scratch in Rust specifically for AI agents to drive, not humans -- lighter and faster to spin up than a full Chromium instance, with compatibility aimed squarely at the sites agents actually need to navigate. Browser automation has been a weak link in agent tooling: Playwright and Puppeteer wrap full browsers built for rendering fidelity, not thousands of cheap concurrent agent sessions. Moli trades some of that fidelity for speed and footprint, which is the right trade for fleets of agents doing web tasks in parallel."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's feed had enough workflow detail to clear the bar -- just headlines and point counts, no documented build.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-11-11",
     "date": "November 11, 2026",
     "title": "AI Pulse",
