@@ -3,6 +3,97 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-11-13",
+    "date": "November 13, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Google rewires Search and launches a healthcare model, OpenAI gives agents a wallet, and a DeepSeek plugin framework hits 280k stars.",
+    "intro": "Google had the biggest shipping day of the week -- a new model inside Search itself, a dedicated decision-making API, and a healthcare-specific Gemini -- while OpenAI gave its agents a way to actually spend your money. On GitHub, a DeepSeek plugin ecosystem is having a moment and a 'write less code' philosophy is spreading just as fast. The build worth your full attention: one researcher's agent-assisted hunt for an unmapped Maya site.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Google ships three new surfaces for Gemini in one week, and OpenAI lets agents hold a wallet.",
+        "items": [
+          {
+            "title": "Introducing ChatGPT Wallet",
+            "url": "https://openai.com/index/introducing-chatgpt-wallet",
+            "source": "OpenAI",
+            "body": "ChatGPT can now actually buy things. Wallet lets agents running inside ChatGPT Work, Codex, and dots complete purchases on your behalf, using your existing cards and the fraud protections that come with them. You approve the purchase before it clears -- the agent finds the flight or renews the subscription, then hands you a one-tap confirmation instead of a link to click through yourself. It's the missing piece for agents that plan multi-step tasks (book this, buy that, restock the other thing) without you manually completing every checkout. Rollout is limited to the three surfaces named above for now, not the consumer ChatGPT app."
+          },
+          {
+            "title": "Google Search gets a major upgrade with Gemini 4 Hydrogen",
+            "url": "https://blog.google/products-and-platforms/products/search/gemini-4-hydrogen-search-upgrade/",
+            "source": "Google",
+            "body": "Google swapped the model behind AI Mode and AI Overviews for Gemini 4 Hydrogen, and it shows up today as a rotating carousel of cards instead of a wall of generated text. A search that used to return one summary paragraph now returns multiple structured cards -- comparisons, step-by-steps, shortlists -- laid out directly in the results page. That's an interface change as much as a model upgrade: Search is starting to look more like a dashboard than a results list. It's rolling out inside Google Search itself today, no separate app, opt-in, or waitlist required."
+          },
+          {
+            "title": "Gemini Decisions API: Fast, calibrated multimodal decisions",
+            "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+            "source": "Google",
+            "body": "Google shipped an API built for yes/no and multiple-choice calls, not open-ended generation. The Gemini Decisions API runs on a new dedicated model, Gemini Decision, tuned to return fast, calibrated confidence scores on multimodal input -- text, images, whatever you send it -- instead of generated prose you then have to parse into a verdict yourself. That's a different product shape than a chat model: it's built for the classification and moderation calls buried inside agent pipelines (is this image policy-violating, does this transaction look fraudulent, does this answer pass the check) where you need a trustworthy score fast, not an essay explaining the reasoning."
+          },
+          {
+            "title": "Google Cloud launches Gemini for healthcare",
+            "url": "https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/gemini-for-healthcare/",
+            "source": "Google Cloud",
+            "body": "Google Cloud rolled out a healthcare-specific Gemini built to sit on top of clinical data that's normally scattered across EHRs, labs, and scheduling systems. It unifies that data and automates the paperwork layer -- intake notes, chart summaries, scheduling -- that hospitals cite as a major driver of clinician burnout. This isn't a general model with a healthcare skin on it; it's aimed at hospital IT teams who need something that already understands clinical workflows and can plug into existing records systems today, not a research preview to build toward later."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "A DeepSeek plugin ecosystem goes supernova, and a 'write less code' philosophy spreads just as fast.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "280.4k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness just went vertical on the premise that everything is a plugin. Instead of a monolithic coding agent with hardcoded tools, deepseek-harness exposes every capability -- model routing, memory, tool execution -- as a swappable plugin, and a plugin ecosystem has exploded around it overnight: free-model plugins, mobile ports, desktop wrappers, all riding on the same core. It's effectively trying to be the Emacs of AI agents: a thin core plus whatever the community bolts on. Worth watching less for the harness itself and more for what the plugin economy around it looks like in a month."
+          },
+          {
+            "title": "DietrichGebert/ponytail",
+            "url": "https://github.com/DietrichGebert/ponytail",
+            "source": "github.com",
+            "stars": "190.2k",
+            "lang": "JavaScript",
+            "body": "ponytail is a set of agent skills built around one idea: the best code is the code you never wrote. Point it at Claude Code or Cursor and it actively pushes back on feature creep -- flagging unnecessary abstractions, suggesting deletions over additions, and defaulting to the smallest possible diff for a given task. It's less a tool than an opinionated prompt layer that fights the tendency of coding agents to overbuild. Picking up 190k stars this fast suggests a lot of developers are tired of agents generating code they then have to simplify by hand."
+          },
+          {
+            "title": "alibaba/open-code-review",
+            "url": "https://github.com/alibaba/open-code-review",
+            "source": "github.com",
+            "stars": "50.4k",
+            "lang": "Go",
+            "body": "Alibaba open-sourced the code review tool it runs internally at its own scale. open-code-review pairs deterministic static-analysis pipelines -- null pointer checks, thread-safety, XSS, SQL injection -- with an LLM agent layer on top that writes precise, line-level comments, so you get a linter's hard guarantees plus a reviewer's judgment in one pass. It's OpenAI and Anthropic compatible, so you point it at whichever model you already pay for. For teams tired of LLM-only review tools hallucinating issues or missing bugs a basic ruleset would've caught, this is a genuinely different architecture, not just another prompt wrapper."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "19k",
+            "lang": "Rust",
+            "body": "xerj is a single Rust binary that indexes code, docs, logs, and CSV/PDF files for BM25, vector, and hybrid search, then exposes all of it as an MCP server so any agent can query it instead of grepping through your repo blind. It's pitched explicitly as agent memory and RAG infrastructure, with an Elasticsearch-compatible API and a 'Corpus Hub' of prebuilt reference corpora you can drop in. The pitch: stop giving your agent raw file access and give it a real search index instead. Worth trying before you roll your own retrieval layer for a large or messy codebase."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One researcher's agent-assisted archaeology hunt reads like an actual template, not a flex.",
+        "items": [
+          {
+            "title": "My AI agents found an unmapped Maya site?",
+            "url": "https://pietromiotti.com/latest/maya-site",
+            "source": "Hacker News",
+            "author": "eyvindn",
+            "body": "An independent researcher set a swarm of AI agents loose on satellite and LIDAR imagery of Central America, tasking them with flagging terrain anomalies consistent with buried structures -- raised platforms, canal patterns, the kind of geometry that shows up at known Maya sites but gets lost as noise to the human eye. The agents narrowed thousands of square kilometers down to a handful of candidate coordinates, which the author then cross-checked against existing archaeological survey databases and found no match -- meaning either a genuinely unmapped site or a false positive still waiting on ground-truthing. The post reads as a template more than a victory lap: define the anomaly signature you're looking for, let agents triage data at a scale no human team could cover, then verify by hand before claiming anything. 1,033 points and 392 comments suggests people are already trying to run the same pipeline over other regions."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-11-12",
     "date": "November 12, 2026",
     "title": "AI Pulse",
