@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-11-14",
+    "date": "November 14, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Google rewires Search around a new model, agents get a wallet, and CAD joins the MCP party",
+    "intro": "Google had the busiest shipping day by far, swapping in a new model for Search and shipping a narrower decisions API alongside it. OpenAI gave agents a way to actually spend money, with your approval required on every purchase. On GitHub, the DeepSeek harness ecosystem keeps metastasizing, but the sharper repos today are agent-native search, parametric CAD, and token-efficient image-to-3D tooling.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Google ships a new search model and a narrower decision-making API; OpenAI lets agents spend your money with approval.",
+        "items": [
+          {
+            "title": "Introducing ChatGPT Wallet",
+            "url": "https://openai.com/index/introducing-chatgpt-wallet",
+            "source": "OpenAI",
+            "body": "ChatGPT can now actually buy things. Wallet lets agents running in ChatGPT Work, Codex, and dots complete purchases with your approval, using your existing card protections rather than some new payment rail. Practically: an agent researching flights, software subscriptions, or supplies can take the purchase step itself instead of handing you a link and asking you to check out. You approve each transaction, so it's not autonomous spending, but it closes the gap between an agent finding the thing and an agent buying the thing. Worth watching how fast this becomes a target for prompt injection on shopping sites -- that's the obvious next fire drill."
+          },
+          {
+            "title": "Google Search gets a major upgrade with Gemini 4 Hydrogen",
+            "url": "https://blog.google/products-and-platforms/products/search/gemini-4-hydrogen-search-upgrade/",
+            "source": "Google",
+            "body": "Google Search is now running on Gemini 4 Hydrogen, a model built specifically for the search surface rather than a repurposed chat model. The rollout brings richer card-based results that reason over sources -- structured answers that compare and cite, not a wall of ten blue links with an AI summary bolted on top. For builders, the signal is that Google now treats search as its own model-tuned product surface instead of a generic assistant dropped into a search box. If anything you build depends on search traffic or snippet visibility, this is the version of Search you need to be testing your pages against starting now."
+          },
+          {
+            "title": "Gemini Decisions API: Fast, calibrated multimodal decisions",
+            "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+            "source": "Google",
+            "body": "Google shipped a new API built on a different model entirely, Gemini Decision, tuned for fast, calibrated classification instead of open-ended generation. Instead of prompting a general model and parsing its reply into a decision, you call an endpoint built to return calibrated confidence directly from text, image, or mixed input. That matters for anything doing moderation, routing, fraud checks, or triage at volume, where you need thresholds you can tune, not prose you have to post-process. It's a narrower, cheaper tool than reaching for a full Gemini call every time you just need a yes, no, or a class label."
+          },
+          {
+            "title": "We're bringing Adobe's creative and productivity tools closer to your everyday Google apps",
+            "url": "https://blog.google/company-news/inside-google/company-announcements/adobe-google-partnership-integration/",
+            "source": "Google",
+            "body": "Adobe's AI tools now live inside Google's everyday apps: you can edit PDFs directly in Drive and call Adobe's generative features from inside Gemini, instead of round-tripping files out to Acrobat or Photoshop. For builders, this closes a workflow gap that's existed since Drive became a default file store -- PDF editing has always meant leaving Google's ecosystem to do it. It also signals both companies would rather integrate than compete head-on in creative tooling. Worth checking whether PDF or asset handling is part of your product's value-add, since Google just made that a weaker differentiator."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "An agent harness ecosystem keeps spawning forks, while the standout repos give agents real search, real CAD, and real 3D.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "281k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness, built around one idea: everything -- model routing, tool calls, memory, UI -- is a plugin. That architecture is why the repo has spawned an entire ecosystem underneath it in days, not months: free-model plugins, desktop ports, mobile ports, menu-bar routers, all built by third parties on top of the same plugin interface. For builders, the interesting part isn't DeepSeek's own default agent, it's that the plugin surface is apparently simple enough for outsiders to ship meaningful extensions almost immediately. If you're picking a harness to build on top of rather than just use as-is, this is the one currently pulling the most third-party investment."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "19.1k",
+            "lang": "Rust",
+            "body": "One Rust binary that gives agents a real search engine over your code, docs, logs, and PDFs -- BM25 full-text, vector, and hybrid search, with an Elasticsearch-compatible API and an MCP server on top. The pitch is code search without grep, for agents that need to find things across a messy, heterogeneous corpus instead of a single indexed repo. It also ships agent memory and a Corpus Hub of prebuilt reference corpora, so an agent can know about a specific framework's docs without you indexing it yourself first. If you're tired of hand-wiring a vector DB plus a keyword index plus an MCP wrapper, this collapses it into one binary."
+          },
+          {
+            "title": "tangency-labs/solidcraft",
+            "url": "https://github.com/tangency-labs/solidcraft",
+            "source": "github.com",
+            "stars": "16.3k",
+            "lang": "Rust",
+            "body": "A real parametric CAD engine -- brep solid modeling, not mesh editing -- built in pure Rust, with an MCP server so agents can drive it directly. That's the actual news: CAD has mostly stayed closed-source and script-hostile, and this gives agents a genuine automation surface for designing physical parts instead of just rendering pictures of them. It runs as a desktop app or in the browser, so you can script a part, inspect the geometry, and iterate without leaving the agent loop. Worth a look if you touch 3D printing, manufacturing, or parametric design, where describe-the-part-get-the-geometry has been a long-standing gap."
+          },
+          {
+            "title": "img2threejs/img2threejs",
+            "url": "https://github.com/img2threejs/img2threejs",
+            "source": "github.com",
+            "stars": "21.4k",
+            "lang": "Python",
+            "body": "Feed it a reference image and it rebuilds the object as procedural, code-only Three.js -- actual parametric code you can keep editing, not a mesh dump. The novel part is the pipeline: it's quality-gated and built to be token-efficient, so an agent can iterate the generated code against the reference image across multiple passes without burning a huge context budget, and animation-ready output comes out the other end. That's a different approach from the usual image-to-3D path of diffusion-based mesh generation, which gives you geometry but nothing you can parametrically tweak afterward. Useful if you want 3D assets you can keep adjusting in code rather than one-shot meshes."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's crop documented an actual end-to-end build -- just launches, news, and takes.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-11-13",
     "date": "November 13, 2026",
     "title": "AI Pulse",
