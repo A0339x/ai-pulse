@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-11-18",
+    "date": "November 18, 2026",
+    "title": "AI Pulse",
+    "subtitle": "GPT-6.2 lands, Gemini goes task-mode, and a Rust CAD kernel lets agents actually model parts",
+    "intro": "OpenAI and Google both pushed real updates today -- GPT-6.2 Astra and Sol are live across ChatGPT, Codex, and the API, and Gemini picked up a dedicated task-delegation mode. On GitHub, the week's momentum is all agent infra: a plugin-first harness blowing up in stars, plus tools built agent-first instead of bolted onto software made for humans -- hybrid search, a Rust browser, a Rust CAD kernel. Nothing in today's build-log pile cleared the bar, so skip straight to shipping and climbing.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two model drops and two Google feature rollouts, all live as of today.",
+        "items": [
+          {
+            "title": "Introducing GPT-6.2 Astra and Sol",
+            "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol",
+            "source": "OpenAI",
+            "body": "OpenAI rolled out two new models, GPT-6.2 Astra and Sol, across ChatGPT Work, Codex, and the API starting today. Astra pushes professional-grade output quality, coding, and computer-use performance; Sol trades some of that for lower cost and faster responses, so you pick per task without touching your integration code. If you're already calling the prior GPT-6 tier, the upgrade is a drop-in swap. The headline for builders is cost: better coding and computer-use scores at a lower price than last generation matters directly if you're running agents that burn through tokens on every tool call."
+          },
+          {
+            "title": "Introducing ChatGPT for Sales",
+            "url": "https://openai.com/index/introducing-chatgpt-for-sales",
+            "source": "OpenAI",
+            "body": "ChatGPT now has a dedicated Sales plugin, part of a batch of 30+ new and expanded partner plugins shipping today in ChatGPT Work. It connects directly to CRM and prospect-research tools inside a chat session -- pull background on a lead, draft a pitch, push updates back to the CRM, without leaving the chat window. The bigger shift is the scale of the plugin drop: this is OpenAI's largest single partner-plugin expansion in ChatGPT Work so far, and the first one aimed squarely at sales workflows. If you've been wiring a sales-research agent together with raw API calls, this collapses a chunk of that into a native plugin."
+          },
+          {
+            "title": "Put Gemini to work for you",
+            "url": "https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/",
+            "source": "Google AI",
+            "body": "Google added a \"Tasks\" mode to the free tier of the Gemini app -- you type what you want done, and Gemini runs it as a standing job rather than a single back-and-forth chat turn. It's a genuine UI shift for the app: delegation instead of conversation, and it's free, not gated behind a subscription tier. For builders, it signals where Google wants the consumer app positioned -- less \"ask a question,\" more \"hand off a job\" -- which is worth watching if you're designing a competing agent UX and wondering how non-technical users expect task handoff to feel."
+          },
+          {
+            "title": "The Gemini app is now available on lower-memory Android devices",
+            "url": "https://blog.google/innovation-and-ai/products/gemini-app/gemini-lower-memory-devices/",
+            "source": "Google AI",
+            "body": "The Gemini app now runs on lower-memory Android phones, with Gemini Live and custom image generation included, not a stripped-down fallback build. Both of those features were previously out of reach on budget hardware because of memory ceilings. If you're building or testing anything that assumes a user has the Gemini app available -- voice features, in-app image gen -- your addressable device pool just got wider as of today, which matters if your target market skews toward budget Android phones outside the US and Western Europe."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent infra is the theme this week -- a plugin platform plus tools built agent-first instead of bolted onto software made for humans.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "283.6k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's agent harness is built around one idea: everything -- model routing, tool execution, UI widgets -- is a plugin. It's the base layer under a fast-growing cluster of spinoff repos this week: free-model plugins, a desktop client, even a mobile port that runs the harness on your phone and remote-controls your desktop. The core repo stays model-agnostic despite the name, so you're not locked into DeepSeek's own models. Worth a look less for any single feature and more as a bet on plugin-first agent architecture over the monolithic-agent pattern most frameworks default to."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "19.2k",
+            "lang": "Rust",
+            "body": "One Rust binary indexes your code, docs, logs, and PDFs, then serves BM25 full-text, vector, and hybrid search over all of it through an Elasticsearch-compatible API. It's built specifically as an MCP server, so agents get real code search instead of grepping, plus a standing agent-memory store they can read and write across sessions. The novel piece is Corpus Hub: hundreds of pre-built reference corpora you can mount instead of re-indexing docs yourself. If your agent's RAG setup is currently a pile of ad hoc embedding scripts, this swaps it for one binary and a real index."
+          },
+          {
+            "title": "tangency-labs/solidcraft",
+            "url": "https://github.com/tangency-labs/solidcraft",
+            "source": "github.com",
+            "stars": "17.1k",
+            "lang": "Rust",
+            "body": "A real parametric CAD kernel -- BREP, not mesh -- written in pure Rust, with desktop, web, and MCP interfaces all driving the same engine. The MCP server lets an agent perform actual solid-modeling operations, extrude, fillet, boolean, the way a human would in the GUI, instead of generating a mesh and hoping it's manufacturable. It's early, but it's one of the first open CAD tools built agent-first rather than automated after the fact. Worth watching if you're exploring AI-assisted mechanical design or want agents that produce real CAD files instead of renders."
+          },
+          {
+            "title": "lexmount/moli",
+            "url": "https://github.com/lexmount/moli",
+            "source": "github.com",
+            "stars": "24.0k",
+            "lang": "Rust",
+            "body": "A headless browser built from scratch in Rust for agent workloads, not a wrapped Chromium instance or a Playwright script. The pitch is speed and footprint: lighter than a full browser-automation stack, meant to run many concurrent agent sessions without the memory overhead Playwright or Puppeteer carry per instance. If web browsing or scraping is a core loop in your agent fleet, swapping a purpose-built engine in for a pile of headless Chrome processes is the kind of infra change that actually moves your cost and latency numbers."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Today's build-log pile was all study writeups and product launches -- nothing documented an actual step-by-step workflow.",
+        "items": []
+      }
+    ],
+    "closing": "Back tomorrow with whatever ships next."
+  },
+  {
     "id": "2026-11-14",
     "date": "November 14, 2026",
     "title": "AI Pulse",
