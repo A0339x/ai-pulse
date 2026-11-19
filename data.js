@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-11-19",
+    "date": "November 19, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Gemini learns to fetch its own tools, DeepSeek's harness goes vertical, and nothing on HN earned a build writeup",
+    "intro": "Today's shipping news is quiet but useful: Gemini's API gets smarter about handling large tool libraries, and a few agent frameworks tighten up reliability and features in point releases. The real story is on GitHub, where DeepSeek Harness's plugin ecosystem is pulling in stars at a pace that dwarfs everything else in the agent-tooling space. Nothing in today's HN queue documented an actual build end to end, so we're sitting this one out rather than padding the section.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "A scaling fix for agent tool calls, plus three point releases worth knowing about if you run these in production.",
+        "items": [
+          {
+            "title": "Introducing Tool Retrieval in the Gemini API",
+            "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
+            "source": "Google AI",
+            "body": "Gemini's API can now retrieve relevant tools from a large registry instead of requiring you to pass every tool/function definition on every call. If you're building an agent with dozens or hundreds of tools or MCP servers wired up, you no longer have to choose between blowing your context budget on tool schemas or hand-pruning the list per request. The API handles the retrieval step itself and only surfaces what's relevant to the current turn. That's a real fix for a problem anyone building tool-heavy agents has hit: past a certain tool count, stuffing every definition into context both wastes tokens and makes the model worse at picking the right one."
+          },
+          {
+            "title": "crewAI 1.15.44",
+            "url": "https://github.com/crewAIInc/crewAI/releases/tag/1.15.44",
+            "source": "crewAI",
+            "body": "crewAI can now save files produced during a crew or flow run as versioned, shareable artifacts, rather than leaving run outputs as throwaway temp files. That's a meaningful workflow change if you're running multi-step flows and want to hand off intermediate outputs to a teammate or another pipeline stage without rebuilding them. The release also tightens a few sharp edges: nested flow defaults no longer leak from a shared declaration, inline agent/crew references resolve correctly relative to the flow file, and image handling is now restricted to PNG/JPEG/GIF/WEBP for safety. Small release, but the artifact feature is the kind of thing that turns crewAI from a demo tool into something you can run in a real pipeline."
+          },
+          {
+            "title": "openclaw 2026.11.6",
+            "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.11.6",
+            "source": "openclaw",
+            "body": "If you run openclaw as your daily driver, upgrades and long-running agent turns both got more durable. Subagent and background turns now survive configuration edits mid-run instead of dying, and if a Gateway restart interrupts a response while it's being sent, the final answer still gets delivered rather than silently dropped. The updater path from 2026.11.5 is also bridged properly now, and staged plugin dependencies validate correctly on Windows. None of this is flashy, but it's exactly the kind of reliability work that matters once you're actually depending on an agent harness for real work rather than just poking at it."
+          },
+          {
+            "title": "AutoGPT Platform v0.12.0",
+            "url": "https://github.com/Significant-Gravitas/AutoGPT/releases/tag/autogpt-platform-beta-v0.12.0",
+            "source": "AutoGPT",
+            "body": "Breaking change for self-hosters: the AutoGPT frontend no longer reads TRUST_X_FORWARDED_FOR. If you set that flag by hand on a self-hosted frontend, it now gets no real client IP from X-Forwarded-For -- which quietly breaks sign-in IP logging, IP blocking, and per-visitor rate limiting until you set TRUSTED_PROXIES to the actual comma-separated list of proxy addresses in front of it. The single-container image and Vercel deployments aren't affected. If you're running a custom reverse proxy setup for AutoGPT Platform, this is worth checking before you upgrade, not after something silently stops blocking abuse."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "One framework is eating the agent-harness category, and three smaller repos push agent tooling into new territory.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "284k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own coding-agent harness, built around a literal \"everything is a plugin\" architecture -- models, tools, UI surfaces, and memory backends all swap in as plugins instead of being hardcoded into the core. At 284k stars it's already outpacing most of the established agent harnesses, and a visible plugin ecosystem is forming around it fast (free-model plugins, mobile ports, desktop apps all building on the same plugin interface). Worth a look if you're tired of being locked into one vendor's CLI and want a harness where swapping models, tools, or UI doesn't mean forking the whole project."
+          },
+          {
+            "title": "DietrichGebert/ponytail",
+            "url": "https://github.com/DietrichGebert/ponytail",
+            "source": "github.com",
+            "stars": "194k",
+            "lang": "JavaScript",
+            "body": "A set of agent skills and rules that push your coding agent toward writing less code, not more -- the operating philosophy is \"the best code is the code you never wrote.\" Instead of letting an agent default to scaffolding a new abstraction or a new file for every ask, ponytail biases it toward checking whether existing code already does the job, deleting before adding, and resisting unnecessary layers. It plugs into Claude Code and Cursor as a skill/rules pack. If you've been annoyed by agents that reflexively over-engineer simple requests, this is a direct counterweight encoded as a reusable skill rather than a one-off prompt."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "17.9k",
+            "lang": "Rust",
+            "body": "A single Rust binary that indexes code, docs, logs, and JSONL/CSV/PDF files, then serves BM25 full-text, vector, and hybrid search over all of it through an Elasticsearch-compatible API and an MCP server. It's built specifically as agent memory and RAG infrastructure: instead of standing up a vector DB, an embedding pipeline, and a separate keyword index, an agent gets one process and one endpoint for code search without grep plus durable memory. A bundled \"Corpus Hub\" also lets you mount pre-built reference corpora directly. Collapses what's usually a three-service RAG stack into something you can run with one binary."
+          },
+          {
+            "title": "tangency-labs/solidcraft",
+            "url": "https://github.com/tangency-labs/solidcraft",
+            "source": "github.com",
+            "stars": "17.2k",
+            "lang": "Rust",
+            "body": "A parametric, B-rep based CAD application written from scratch in Rust, with desktop, web, and MCP-driven automation as first-class surfaces. The point isn't just \"CAD in Rust\" -- it's that an agent can drive real solid-modeling operations over MCP instead of just generating meshes or point clouds, which is a meaningfully different capability from bolting an LLM plugin onto existing CAD software. If you're building toward agents that design physical parts rather than just write code, this is one of the first serious attempts at making the CAD kernel itself agent-native."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's queue actually documented a workflow worth replicating, so we're skipping this section rather than filling it with vague \"I asked an AI\" posts.",
+        "items": []
+      }
+    ],
+    "closing": "Gemini's tool retrieval and the DeepSeek Harness plugin wave are the two threads worth actually following out of today's pile."
+  },
+  {
     "id": "2026-11-18",
     "date": "November 18, 2026",
     "title": "AI Pulse",
