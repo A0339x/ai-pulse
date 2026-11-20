@@ -3,6 +3,83 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-11-20",
+    "date": "November 20, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Gemini learns to fetch its own tools, OpenHands adds automation hooks, and DeepSeek's plugin harness eats GitHub's trending page",
+    "intro": "Anthropic's IPO is sucking up all the headline space today, but the actual ship notes are quieter and more useful: Gemini gets a real fix for tool-bloat, OpenHands ships new automation and chat features, and GitHub's agent-tooling charts are dominated by a DeepSeek harness built entirely out of plugins. Pay closest attention to Gemini's tool retrieval rollout -- it's the first API-level answer to the context-bloat problem anyone building a large agent has already hit.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Google ships two real upgrades, OpenHands patches in automation and UI features.",
+        "items": [
+          {
+            "title": "Introducing Tool Retrieval in the Gemini API",
+            "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
+            "source": "Google",
+            "body": "Gemini API now does tool retrieval: register a huge catalog of functions or MCP tools, and instead of cramming every definition into the prompt, Gemini searches and pulls only the relevant ones at call time. That's the actual fix for the thing that breaks every large agent setup -- once you cross a few dozen tool definitions, context bloats and the model starts picking the wrong one, or picking nothing. Anyone wiring an agent to hundreds of internal APIs or MCP servers can now register the whole catalog and let Gemini narrow it down, instead of hand-rolling a retrieval layer in front of the actual model call."
+          },
+          {
+            "title": "Put Gemini to work for you",
+            "url": "https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/",
+            "source": "Google",
+            "body": "The Gemini app adds Tasks: type what you want done and Gemini runs it in the background, then checks back in with results, and it's free for all users, not locked behind a paid tier. It's Google's version of the agentic-task pattern OpenAI and Anthropic have been rolling into their apps -- the shift from \"chat with it\" to \"delegate to it\" for things like recurring reminders, price tracking, or multi-step plans. Worth watching mainly as a scale signal: this is agentic tasking shipped to a free consumer app with a huge install base, not gated behind an API key."
+          },
+          {
+            "title": "OpenHands v1.43.0",
+            "url": "https://github.com/OpenHands/OpenHands/releases/tag/v1.43.0",
+            "source": "OpenHands",
+            "body": "Three concrete additions in this release. Automations can now be turned on directly from the setup wizard, so a new project gets agent-triggered workflows (lint, test, review) wired up without hand-editing config. A new Features page exposes experimental flags for self-hosters who want to opt into in-progress capabilities gradually. And the chat UI gets \"decision cards\" that render an agent's branching choices inline instead of burying them in scrollback, so you can actually watch it weigh options mid-task instead of just seeing the final action. Useful if OpenHands is your daily-driver coding agent harness."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "A plugin-first agent harness, agent-driven CAD, and infra for giving agents real memory.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "284.7k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own coding-agent harness, built around a hard \"everything is a plugin\" rule -- model backends, tools, memory, even the CLI's own commands load through the same plugin interface rather than being baked into core. It's effectively DeepSeek's answer to Claude Code or Codex, except the plugin system is the product, not a bolt-on. The ecosystem is already spinning off sub-repos for free model access, desktop wrappers, and mobile ports within days of each other. Worth watching less for DeepSeek's models and more for the architecture itself -- a cleaner reference than most if you want to extend an agent harness instead of forking one."
+          },
+          {
+            "title": "tangency-labs/solidcraft",
+            "url": "https://github.com/tangency-labs/solidcraft",
+            "source": "github.com",
+            "stars": "17.4k",
+            "lang": "Rust",
+            "body": "A full parametric CAD application -- brep kernel included -- written in pure Rust, with MCP exposed so agents can drive it directly: create features, apply constraints, export geometry, with no human touching the GUI. That's the new part. Most \"AI plus CAD\" projects either wrap an existing kernel like OpenCascade or stop at text-to-mesh. SolidCraft builds the modeling kernel itself and exposes desktop, web, and automation through the same protocol, so an agent can iterate on an actual manufacturable part instead of generating a one-off shape with no constraint history behind it."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "19.1k",
+            "lang": "Rust",
+            "body": "A single Rust binary that indexes code, docs, logs, JSONL/CSV, and PDFs, then serves BM25, vector, and hybrid search over all of it through an Elasticsearch-compatible API plus an MCP server. It's built explicitly as agent memory and RAG infrastructure: point it at a corpus and get code search without grep, and persistent memory without standing up a separate vector database. The bundled \"Corpus Hub\" ships hundreds of pre-built reference corpora, so an agent can start from a working knowledge base instead of you indexing one from zero."
+          },
+          {
+            "title": "DietrichGebert/ponytail",
+            "url": "https://github.com/DietrichGebert/ponytail",
+            "source": "github.com",
+            "stars": "195.5k",
+            "lang": "JavaScript",
+            "body": "An agent-skills package that makes Claude Code and similar tools refuse to overengineer: it pushes back on unnecessary abstractions, speculative config, and premature helpers, and defaults to the smallest diff that actually solves the problem in front of it. Most agent tooling adds capability -- this adds restraint. Installed, your agent starts asking \"does this need to exist\" before writing a wrapper or a new interface, which targets the actual failure mode most people hit with autonomous coding agents: not incapability, but enthusiastic overbuilding."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's feed actually showed its work.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-11-19",
     "date": "November 19, 2026",
     "title": "AI Pulse",
