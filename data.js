@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-11-21",
+    "date": "November 21, 2026",
+    "title": "AI Pulse",
+    "subtitle": "DeepMind drops two new models, a DeepSeek plugin ecosystem goes vertical, and nothing on HN quite shows its receipts",
+    "intro": "DeepMind had the busiest desk today with a new Gemini tier and a wider Genie 4 rollout landing hours apart. On GitHub, the DeepSeek Harness ecosystem is pulling stars at a rate that dwarfs everything else in the agent-tooling space, plugins and all. The Built With AI queue was thin on actual receipts today, so we're sitting this one out rather than padding it.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two new DeepMind releases anchor the day, plus a Gemini API feature built for agents juggling big tool libraries.",
+        "items": [
+          {
+            "title": "Introducing Gemini 4 Neon",
+            "url": "https://deepmind.google/blog/introducing-gemini-4-neon/",
+            "source": "DeepMind",
+            "body": "Neon joins the Gemini 4 family as a new tier aimed at the gap between flagship quality and flash-tier speed. You get it today through the Gemini API and AI Studio alongside the rest of the Gemini 4 lineup, so switching a model string is the whole migration. For builders running agentic loops where every extra second of latency compounds across tool calls, Neon is the one to benchmark against whatever you're currently using for your hot path -- the pitch is flagship-adjacent reasoning without the flagship wait."
+          },
+          {
+            "title": "Genie 4 is now available",
+            "url": "https://deepmind.google/blog/genie-4-is-now-available/",
+            "source": "DeepMind",
+            "body": "Genie, DeepMind's line of world models that generate playable, interactive environments from a prompt or image, moves to broader availability with version 4. Where earlier Genies lived behind a research-preview waitlist, this release opens the door to more builders experimenting with generated environments for simulation, game prototyping, and training embodied agents. If you've been circling world models as a way to generate test environments on demand instead of hand-building levels, today's the day you can actually get in and try it instead of requesting access and waiting."
+          },
+          {
+            "title": "Introducing Tool Retrieval in the Gemini API",
+            "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
+            "source": "Google",
+            "body": "Tool Retrieval lets you register a large library of functions with Gemini and have the model pull in only the tools relevant to a given turn, instead of stuffing every tool schema into every request. That's the real unlock: agents that need hundreds of tools no longer eat the context and latency cost of describing all of them on every call. If you've been manually sharding tool definitions or building your own retrieval layer in front of function calling to keep prompts lean, you can rip that scaffolding out and let the API do it."
+          },
+          {
+            "title": "Can AI help scientists identify promising drug candidates?",
+            "url": "https://openai.com/index/introducing-medchembench",
+            "source": "OpenAI",
+            "body": "MedChemBench is a new benchmark testing how well models interpret molecular structures, reason from experimental evidence, and pick compounds worth pursuing in early drug discovery. It's narrow by design -- not a general chemistry quiz but a graded test of the specific judgment calls medicinal chemists make before a compound ever reaches a lab. If you're building or evaluating models for pharma or biotech workflows, this gives you a concrete, published yardstick for compound-selection reasoning instead of relying on vague claims about scientific capability."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "A plugin-first agent harness is eating the leaderboard, and infra for agent memory and CAD automation is quietly maturing underneath it.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "285k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own coding agent harness treats everything -- model backends, tools, UI -- as a swappable plugin, and it's pulling stars at a pace nothing else in the space is close to. The plugin architecture is the actual idea here: instead of a fixed harness with config flags, you install plugins for whatever you need, and a growing satellite ecosystem (free-model plugins, a desktop build, an Android build) has already spun up around it. If you want a sense of where Claude Code and Codex-style harnesses are headed next, this is the repo to watch."
+          },
+          {
+            "title": "yetone/magpie",
+            "url": "https://github.com/yetone/magpie",
+            "source": "github.com",
+            "stars": "39.8k",
+            "lang": "Go",
+            "body": "Magpie is a macOS menu bar app that decouples your coding agent from its model backend -- run Codex on DeepSeek, Claude Code on Kimi, swap providers per-agent without touching your harness config. It's a small idea executed well: a single place to manage API keys and routing for every CLI agent you run, instead of juggling provider config across five separate tools. For anyone cost-optimizing or benchmarking agents against multiple model backends, this removes the busywork of rewiring each harness by hand."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "19.2k",
+            "lang": "Rust",
+            "body": "A single Rust binary that indexes code, docs, logs, JSONL/CSV, and PDFs for BM25, vector, and hybrid search, with an Elasticsearch-compatible API and a built-in notion of agent memory. The pitch is code search without grep and RAG without standing up a vector database -- one binary that your agent calls as an MCP server for retrieval. Corpus Hub, its companion index of shared reference corpora, means you can point an agent at a prebuilt knowledge base instead of indexing everything from scratch. Useful for anyone building agents that need real recall over a large, messy corpus."
+          },
+          {
+            "title": "tangency-labs/solidcraft",
+            "url": "https://github.com/tangency-labs/solidcraft",
+            "source": "github.com",
+            "stars": "17.6k",
+            "lang": "Rust",
+            "body": "A parametric 3D CAD application built from scratch in Rust, with the boundary representation (B-rep) kernel underneath exposed through desktop, web, and MCP interfaces. The MCP angle is the novel part: an agent can drive real solid modeling -- extrude, fillet, constrain -- rather than just generating a script that a human then runs in Fusion or SolidWorks. It's early, but it's the first serious attempt at giving agents a CAD kernel they can actually manipulate directly."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's queue showed its actual workflow clearly enough to earn a slot.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-11-20",
     "date": "November 20, 2026",
     "title": "AI Pulse",
