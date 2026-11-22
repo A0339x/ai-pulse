@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-11-22",
+    "date": "November 22, 2026",
+    "title": "AI Pulse",
+    "subtitle": "DeepMind doubles up on Gemini and Genie, Google fixes the too-many-tools problem, and GitHub's agent-plugin wars escalate",
+    "intro": "DeepMind is the story today: a new Gemini 4 variant and a wider Genie 4 rollout landed within hours of each other. Google also quietly shipped the fix every heavy tool-caller has been waiting for. On GitHub, the DeepSeek Harness plugin ecosystem keeps swallowing the charts, and a few genuinely different tools -- a single-binary search engine, a parametric CAD app built for agents -- are worth a look underneath it.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two DeepMind drops and two quieter Google fixes that actually change your workflow.",
+        "items": [
+          {
+            "title": "Introducing Gemini 4 Neon",
+            "url": "https://deepmind.google/blog/introducing-gemini-4-neon/",
+            "source": "DeepMind",
+            "body": "DeepMind added a new variant to the Gemini 4 family today, code-named Neon. It sits alongside Pro and Flash as a distinct point on the speed-versus-depth curve, aimed at the high-volume, low-latency calls where a full reasoning pass is wasted spend. It's live now in the Gemini API and AI Studio, so you can route to it with a model-string swap -- no changes to your tool definitions or prompt structure required. If you've been splitting traffic between a cheap model for routing and an expensive one for reasoning, Neon is worth benchmarking as the new default for the cheap half of that split."
+          },
+          {
+            "title": "Genie 4 is now available",
+            "url": "https://deepmind.google/blog/genie-4-is-now-available/",
+            "source": "DeepMind",
+            "body": "Genie, DeepMind's world model that turns a single image or text prompt into a live, explorable, playable environment, is now out of research preview. Genie 4 is the version with the access to match the capability -- it's rolling out through DeepMind's API rather than staying locked to internal demos. That means you can now feed it a concept sketch or a photo and get back a simulated 3D space you can move through and interact with in real time, instead of a static render. The obvious users are game studios and robotics teams needing cheap simulation environments, but it's generally available, so anyone can try it."
+          },
+          {
+            "title": "Introducing Tool Retrieval in the Gemini API",
+            "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
+            "source": "Google AI",
+            "body": "Gemini's API now retrieves tools instead of making you stuff every function schema into context up front. If you've built an agent with fifty or a hundred MCP tools attached, you know the cost: every call pays the token tax for definitions the model never uses. Tool Retrieval indexes your tool set and pulls in only the schemas relevant to the current turn, the same way RAG pulls in relevant documents. It's available today as an opt-in flag on existing Gemini API calls, so wiring it into a tool-heavy agent is a config change, not a rebuild."
+          },
+          {
+            "title": "Put Gemini to work for you",
+            "url": "https://blog.google/innovation-and-ai/products/gemini-app/tasks-in-gemini-free-new-features/",
+            "source": "Google AI",
+            "body": "The Gemini app now has a dedicated Tasks mode: a prompt box that literally asks 'What can I get done for you?' instead of waiting for a chat message. Describe an outcome and Gemini runs the multi-step work behind it, then can re-run it on a schedule without you re-typing the request. It's rolling out free, not gated behind a subscription tier. This is Google's clearest consumer push yet toward agentic defaults rather than agentic opt-ins -- the chat box is still there, but it's no longer the first thing you see."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "An agent-harness ecosystem is eating the charts, and a few genuinely different tools are hiding under it.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "285.5k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's agent harness treats literally everything -- model backend, tool execution, memory, UI -- as a swappable plugin rather than a hardcoded layer. That architecture is why it's spawned its own ecosystem overnight: free third-party model plugins, a Go mobile port, a desktop app, all building on the same plugin contract instead of forking the core. If you've been frustrated by agent frameworks that bake in one model provider or one memory backend, this is the opposite bet: nothing is load-bearing except the plugin interface itself. Worth a look if you're building, or tired of rebuilding, your own agent runtime."
+          },
+          {
+            "title": "DietrichGebert/ponytail",
+            "url": "https://github.com/DietrichGebert/ponytail",
+            "source": "github.com",
+            "stars": "196.8k",
+            "lang": "JavaScript",
+            "body": "Ponytail is a ruleset you drop into Claude Code or Cursor that makes the agent argue against its own plans before writing code, the way a skeptical senior engineer would push back on a ticket. Instead of a system prompt that just says 'write clean code,' it injects a review step that actively looks for the version with fewer moving parts and fewer new files, and picks that one. It's a workflow fix for the specific failure mode of agents defaulting to the biggest plausible implementation instead of the smallest one that works."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "19.4k",
+            "lang": "Rust",
+            "body": "One Rust binary indexes your code, docs, logs, JSONL/CSV, and PDFs, then serves BM25, vector, and hybrid search over all of it through an Elasticsearch-compatible API and an MCP server. That's the pitch: skip standing up Elasticsearch plus a vector DB plus glue code just to give your agent decent recall over a codebase. It doubles as an agent-memory layer, and its Corpus Hub ships hundreds of pre-built reference corpora you can mount instead of indexing from scratch. If your agent's RAG setup is three services duct-taped together, this replaces all three."
+          },
+          {
+            "title": "tangency-labs/solidcraft",
+            "url": "https://github.com/tangency-labs/solidcraft",
+            "source": "github.com",
+            "stars": "17.7k",
+            "lang": "Rust",
+            "body": "SolidCraft is a parametric 3D CAD app -- real boundary-representation geometry, not a mesh toy -- written in pure Rust and exposed over MCP. That last part is the point: an agent can open a model, change a parameter, and regenerate the part through the same automation surface a human uses in the desktop or web app. It's an early but real answer to 'can an agent actually design physical objects,' not just render pictures of them. Worth watching if you're exploring agents in hardware, fabrication, or mechanical design workflows."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "One build pushes an agent onto hardware that shouldn't run one; the other rewrites a decades-old server in a new language with AI doing the heavy lifting.",
+        "items": [
+          {
+            "title": "ClawDOS - An AI coding agent for DOS",
+            "url": "http://ricapar.net/ClawDOS/",
+            "source": "Hacker News",
+            "author": "Ricapar",
+            "body": "Ricapar got a coding agent running on bare MS-DOS, a platform with no real networking stack and kilobytes of usable RAM, not gigabytes. The write-up walks through the actual constraint-solving: a thin DOS-side client handles the terminal UI and file edits in hand-tuned C, while the real model call rides over a serial link to a modern machine doing the inference. The interesting part isn't that it works, it's documenting exactly where DOS's limits forced different choices than a normal CLI agent would make -- chunking responses to fit the display buffer, keeping the local footprint small enough that DOS doesn't choke, and building a protocol thin enough to survive a serial connection instead of HTTP."
+          },
+          {
+            "title": "Muru - an AI-assisted Rust server for Python apps, by mod_wsgi's creator",
+            "url": "https://simonwillison.net/2026/Nov/21/muru/",
+            "source": "Hacker News",
+            "author": "joshcsimmons",
+            "body": "Graham Dumpleton, who built mod_wsgi, used AI assistance to write Muru, a Rust application server for serving Python WSGI and ASGI apps, and Simon Willison's write-up documents the actual back-and-forth rather than just the result. The pattern worth copying: Dumpleton let the AI draft the performance-critical Rust internals -- request routing, process management -- while he kept tight manual control over the Python-facing compatibility layer, since that's the part where a subtle bug breaks every app built on top of it. The post calls out specifically where AI-generated Rust held up under load testing and where it had to be rewritten by hand, which is the part most 'I shipped it with AI' posts skip entirely."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow with whatever ships next."
+  },
+  {
     "id": "2026-11-21",
     "date": "November 21, 2026",
     "title": "AI Pulse",
