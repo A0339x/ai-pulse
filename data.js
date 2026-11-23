@@ -3,6 +3,104 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-11-23",
+    "date": "November 23, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Gemini's API learns to fetch its own tools, a CAD app learns MCP, and someone built a coding agent for DOS",
+    "intro": "Today's shipping news is mostly plumbing: Gemini's API gets smarter about tool-calling at scale, OpenAI and Cisco ship a stopgap for unpatched Linux boxes, and two agent-coding platforms tighten up reliability after restarts. On GitHub, the DeepSeek Harness ecosystem keeps compounding, but the sharper climbers are single-purpose infra -- a hybrid search/MCP server in one Rust binary and a CAD app agents can drive directly. For builds, a from-scratch guide to fine-tuning Qwen locally and a coding agent squeezed onto bare DOS.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Less new models today, more infrastructure that makes agents actually reliable.",
+        "items": [
+          {
+            "title": "Introducing Tool Retrieval in the Gemini API",
+            "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
+            "source": "Google",
+            "body": "New Gemini API feature: instead of stuffing every tool definition into the prompt, you register a larger tool library and Gemini retrieves only the relevant ones at call time. That matters once an agent has dozens or hundreds of tools -- until now you were burning context and degrading tool-selection accuracy by dumping the whole catalog into every request. Now the retrieval step happens inside the model's call path instead of in your prompt-construction code. It's live now in the Gemini API for anyone building multi-tool agents that have outgrown a flat tool list."
+          },
+          {
+            "title": "OpenAI and Cisco introduce Shirudo",
+            "url": "https://openai.com/index/introducing-shirudo",
+            "source": "OpenAI",
+            "body": "OpenAI and Cisco shipped Shirudo, an open-source Linux runtime that shields running systems while patches roll out. The usual exposure window -- a known vulnerability sits live on production boxes until the next reboot-and-patch cycle -- gets a runtime-level mitigation instead: Shirudo intercepts exploit attempts against the unpatched code path while the real fix is still being staged. It's open source today, so you can drop it into a Linux fleet as a stopgap during patch windows rather than treating that exposure gap as an unavoidable cost."
+          },
+          {
+            "title": "openclaw 2026.11.7",
+            "url": "https://github.com/openclaw/openclaw/releases/tag/v2026.11.7",
+            "source": "openclaw",
+            "body": "Conversation recovery means a Gateway restart no longer drops pending work -- interrupted replies and child results now survive and resume instead of vanishing. Reliable automations let an automation's owner conversation repair its own failures, and the system now distinguishes a recovered or intentionally-skipped run from a genuine failure. If you're running openclaw as a long-lived agent gateway, this closes one of the more annoying failure modes: a server restart used to mean replaying or losing in-flight agent work, and now it doesn't."
+          },
+          {
+            "title": "OpenHands v1.44.0",
+            "url": "https://github.com/OpenHands/OpenHands/releases/tag/v1.44.0",
+            "source": "All-Hands-AI",
+            "body": "Conversation mentions land behind a flag, letting you reference specific conversations or agents directly inside chat. Automation owners can now set who's allowed to see a given automation, and the UI shows a readable error the moment a usage budget is hit instead of failing silently. Small release, but it tightens the multi-agent, multi-user workflow OpenHands is building toward -- less guesswork about which automation ran, who can see it, and why a run stopped."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Past the DeepSeek Harness plugin gold rush, the real standouts are agents that can touch real-world tools: CAD, VMs, and your own filesystem.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "286k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's agent harness, built around one idea: everything -- model routing, tools, UI, auth -- is a plugin. It's pulling ahead of comparable projects because the plugin surface is wide enough that a whole ecosystem spun up around it within weeks: free-model plugins, mobile ports, desktop wrappers, all installable without touching the core. If you want a coding-agent harness that doesn't lock you to one vendor's model or interface, this is the one to watch -- just check what any given community plugin actually does with your traffic before installing it."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "20.2k",
+            "lang": "Rust",
+            "body": "A single Rust binary that indexes code, docs, logs, and PDFs for BM25, vector, and hybrid search, then exposes the whole thing as an MCP server. The pitch: give your agent code search without shelling out to grep, plus a persistent memory layer it can read and write across sessions. It speaks an Elasticsearch-compatible API so existing tooling can point at it without a rewrite, and ships with a 'Corpus Hub' of hundreds of pre-built reference corpora you can mount directly. Useful if you're tired of wiring a vector DB, a keyword index, and a memory store separately."
+          },
+          {
+            "title": "tangency-labs/solidcraft",
+            "url": "https://github.com/tangency-labs/solidcraft",
+            "source": "github.com",
+            "stars": "17.9k",
+            "lang": "Rust",
+            "body": "A parametric, boundary-rep CAD application written in pure Rust -- exposed over MCP so an agent can drive it directly. That's the novel part: instead of screenshotting a CAD GUI for a vision model to interpret, an agent calls tools to extrude, fillet, and constrain geometry programmatically. Runs on desktop and in the browser, with automation available through the same MCP interface. Worth a look if you're building anything where an LLM needs to actually produce manufacturable 3D geometry rather than just describe it."
+          },
+          {
+            "title": "milind-soni/OpenMausBot",
+            "url": "https://github.com/milind-soni/OpenMausBot",
+            "source": "github.com",
+            "stars": "27.2k",
+            "lang": "TypeScript",
+            "body": "An open-source alternative to Grok's bot product, pairing an agent with a real virtual machine it can drive -- click, type, browse -- instead of restricting it to text-only tools. Ships as Docker and Electron builds, so you can run the VM locally and point any agent (Claude Code, Codex) at it for computer-use tasks. The appeal is transparency: you can watch exactly what the VM is doing in real time, instead of trusting a closed bot to act on your behalf."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Two builds you could actually replicate this weekend, down to the install commands.",
+        "items": [
+          {
+            "title": "A Beginner's Guide to Local AI with Inkling, Qwen, and Unsloth",
+            "url": "https://www.gpupartner.com/blog/beginners-guide-local-ai-inkling-qwen-unsloth",
+            "source": "Hacker News",
+            "author": "Retell15",
+            "body": "A full walkthrough of going from zero to a fine-tuned local model: pull a Qwen base model, fine-tune it with Unsloth (which handles quantization and LoRA setup so you're not hand-rolling a training loop), then serve and chat with the result through Inkling as the local front end. The post covers actual hardware requirements, where people get stuck -- VRAM budgeting, picking the right quant level -- and what the finished setup looks like running on a single consumer GPU. If the usual local-AI tutorials have been too hand-wavy about the actual commands, this one fills the gap -- it's written for someone doing this for the first time this weekend, not someone who's already fine-tuned a dozen models."
+          },
+          {
+            "title": "ClawDOS - An AI coding agent for DOS",
+            "url": "http://ricapar.net/ClawDOS/",
+            "source": "Hacker News",
+            "author": "Ricapar",
+            "body": "A coding agent that runs natively on DOS -- no modern OS, no containers, just an agent loop talking to an LLM API over whatever networking DOS can manage, editing files on a FAT filesystem, and shelling out to a DOS-era compiler to build and test its own output. The writeup walks through the real constraints: no native TLS stack to lean on, a text-mode UI instead of a terminal emulator, and squeezing an HTTP client into the memory DOS actually gives you. It's a good read for anyone curious how small an agent loop gets once you strip away every modern convenience it normally depends on."
+          }
+        ]
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-11-22",
     "date": "November 22, 2026",
     "title": "AI Pulse",
