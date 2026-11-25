@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-11-25",
+    "date": "November 25, 2026",
+    "title": "AI Pulse",
+    "subtitle": "Google widens the API toolbox, DeepSeek's plugin harness tops GitHub, and GPT-6 starts designing proteins",
+    "intro": "Today's shipping news skews infrastructure: Google adds tool retrieval to the Gemini API and folds your Gmail, Drive, and Photos into Search, while OpenAI and Cisco ship an open-source runtime for patching systems without taking them offline. On GitHub, DeepSeek's plugin-everything agent harness is the center of gravity, with a whole ecosystem of desktop, mobile, and menu-bar tools now built on top of it. No build-workflow posts cleared the bar today, so that section's empty.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Two API-level upgrades, an open-source security runtime, and a protein-design claim worth a second look.",
+        "items": [
+          {
+            "title": "OpenAI and Cisco introduce Shirudo",
+            "url": "https://openai.com/index/introducing-shirudo",
+            "source": "OpenAI",
+            "body": "Shirudo is a new open-source runtime for Linux built by OpenAI and Cisco. It lets teams protect systems that are actively running while patches roll out, instead of taking a box offline or waiting for a maintenance window to close a known vulnerability. Think of it as a buffer layer that blocks exploitation attempts against an unpatched CVE while the real fix moves through staging and deployment. It's open source and targets production Linux fleets where patch cadence lags disclosure, a gap that's widened as AI-assisted vulnerability research finds bugs faster than ops teams can close them."
+          },
+          {
+            "title": "Introducing Tool Retrieval in the Gemini API",
+            "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/",
+            "source": "Google AI",
+            "body": "The Gemini API now supports Tool Retrieval: instead of stuffing every tool definition into context, you register a large tool library and the model retrieves only the ones relevant to the current request. Past a handful of tools, each schema eats context and starts to tax tool-selection accuracy, so this matters once you're wiring up dozens of functions or MCP servers. With retrieval, you can hook up hundreds of tools without blowing your context budget or confusing the model about which one to call. It's live now for anyone building agents with large, growing tool catalogs."
+          },
+          {
+            "title": "A more tailored Google Search that's uniquely yours",
+            "url": "https://blog.google/products-and-platforms/products/search/google-search-personal-intelligence-apps/",
+            "source": "Google AI",
+            "body": "Google Search can now pull context from Gmail, Drive, Photos, Calendar, and Wallet to personalize results, a feature called Personal Intelligence. Search a flight and it can cross-reference your calendar and past bookings; search a product and it can check your order history in Gmail. It's opt-in and lives inside Search itself, not a separate assistant surface. The bigger shift: Google is turning Search into a retrieval layer over your own personal data stack, not just the web, which is the same move every assistant maker has been racing toward."
+          },
+          {
+            "title": "GPT-6 models demonstrate intrinsic protein-design capabilities",
+            "url": "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities",
+            "source": "OpenAI",
+            "body": "GPT-6 can design protein structures and sequences using plain reasoning and code, no specialized structural biology model required. OpenAI says lab tests found binding evidence across five target proteins, meaning the designs weren't just plausible-looking sequences, they worked when synthesized and tested. That's notable because protein design has mostly needed dedicated architectures like AlphaFold-style models; a general-purpose LLM producing wet-lab-validated designs through reasoning and code generation suggests that capability is becoming accessible through general models instead of bespoke ones."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "DeepSeek's plugin harness dominates the chart, with sharper infra and workflow tools underneath it.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "287k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness, built around one idea: everything, models, tools, memory, UI, is a plugin. It's the infrastructure behind \"dsh,\" the CLI/runtime that's spawned the ecosystem showing up elsewhere on this list: desktop apps, mobile clients, free-model plugins, menu-bar switchers. Instead of shipping a fixed agent with fixed capabilities, deepseek-harness ships a plugin API and lets the community build the rest, similar in spirit to how Claude Code's plugin system opened the door to third-party skills. The star count and the size of the ecosystem already built on top of it suggest it's becoming a default substrate for agent tooling outside the big-lab CLIs."
+          },
+          {
+            "title": "DietrichGebert/ponytail",
+            "url": "https://github.com/DietrichGebert/ponytail",
+            "source": "github.com",
+            "stars": "199k",
+            "lang": "JavaScript",
+            "body": "Ponytail is a set of agent rules built on one premise: the best code is the code you never wrote. It nudges Claude Code, Cursor, and similar agents toward reusing existing libraries, deleting instead of adding, and refusing speculative abstractions, basically encoding \"lazy senior engineer\" instincts as an installable skill instead of leaving it to prompting. It's a direct counter to the usual agent failure mode of generating sprawling, over-engineered solutions to simple problems. Install it as a Claude Code plugin or Cursor rule set and it changes how much code your agent proposes before you even review it."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "21.5k",
+            "lang": "Rust",
+            "body": "A single Rust binary that turns your codebase, docs, logs, and PDFs into a searchable index for agents, no grep required. It runs BM25 full-text, vector, and hybrid search behind an Elasticsearch-compatible API, and doubles as an MCP server so any agent can query it directly for code search or long-term memory. The pitch: agent memory and RAG shouldn't require standing up a vector DB and an embedding pipeline just to let an agent remember what it read last week. Its \"Corpus Hub\" also serves pre-built reference corpora other agents can search against, a neat idea for shared agent knowledge bases."
+          },
+          {
+            "title": "tangency-labs/solidcraft",
+            "url": "https://github.com/tangency-labs/solidcraft",
+            "source": "github.com",
+            "stars": "18.2k",
+            "lang": "Rust",
+            "body": "A parametric 3D CAD application built entirely in Rust, with desktop, web, and MCP-driven automation as first-class interfaces. That last part is the news: you can script and drive real CAD modeling, boundary representation geometry included, from an AI agent instead of clicking through a GUI. CAD has been one of the harder professional tools to hand to agents because precision geometry doesn't tolerate hallucination well. SolidCraft open-sources the whole stack, making it a plausible base for anyone building \"agent designs a part\" workflows without licensing a Fusion360 or SolidWorks API."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing today documented an actual end-to-end build, just launches and discussion threads.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan. Back tomorrow."
+  },
+  {
     "id": "2026-11-23",
     "date": "November 23, 2026",
     "title": "AI Pulse",
