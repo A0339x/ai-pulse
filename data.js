@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-11-26",
+    "date": "November 26, 2026",
+    "title": "AI Pulse",
+    "subtitle": "OpenAI and Cisco ship a live-patching runtime, GPT-6 moonlights as a protein designer, and the agent-harness wars produce a 287k-star contender",
+    "intro": "Today's shipping news skews infrastructure and research over consumer flash -- a live-patching runtime from OpenAI and Cisco, a benchmark dashboard for local inference, and evidence that GPT-6 can design proteins nobody specifically trained it to design. On GitHub, the agent-harness ecosystem keeps compounding: DeepSeek's new harness just cleared a quarter-million stars, and the infra climbing underneath it -- search, browsers, pentest frameworks -- is just as worth your attention. Nothing in today's build-journal crop documented a real step-by-step workflow, so that section sits empty.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Security infra, a surprise model capability, and tooling for people running local LLMs.",
+        "items": [
+          {
+            "title": "OpenAI and Cisco introduce Shirudo",
+            "url": "https://openai.com/index/introducing-shirudo",
+            "source": "OpenAI",
+            "body": "OpenAI and Cisco just open-sourced Shirudo, a runtime for Linux built to shield systems while a patch rolls out instead of forcing you to choose between patching fast and patching carefully. The gap between a vulnerability disclosure and a fully deployed fix is where most real-world breaches happen, and Shirudo is aimed squarely at narrowing it without a maintenance window. It's live today as open source, so you can pull it into an existing patch pipeline rather than wait on a vendor SKU or a support contract. Worth a look if you run anything at scale on Linux and dread the lag between CVE and fix."
+          },
+          {
+            "title": "GPT-6 models demonstrate intrinsic protein-design capabilities",
+            "url": "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities",
+            "source": "OpenAI",
+            "body": "Turns out GPT-6 can design proteins without any specialized biology training bolted on -- it gets there through general reasoning and code, the same way it solves any other hard problem. OpenAI ran lab tests across five binding targets and found evidence the model's designs actually bind, meaning the capability was sitting inside the general-purpose model all along, not added as a separate structure-prediction module like AlphaFold. That's a meaningfully different claim: a chat-and-code model that happens to also design molecules when you point it at the problem. If you're anywhere near computational biology, take this as a signal that frontier general models are creeping into territory that used to require dedicated scientific tooling."
+          },
+          {
+            "title": "Introducing the llama.cpp benchmark dashboard for AMD Ryzen and Radeon",
+            "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench",
+            "source": "Hugging Face",
+            "body": "There's now a public dashboard tracking llama.cpp inference speed across AMD Ryzen CPUs and Radeon GPUs, so you can see real tokens/sec numbers before buying hardware or picking a quant. Until now, AMD users ran local LLMs mostly on word-of-mouth benchmarks scattered across forum threads and GitHub issues -- nothing standing, nothing comparable across chip generations. This gives the AMD side of the local-inference world a reference point that's been available to Nvidia users for a while. If you're speccing out a local inference box and weighing AMD against Nvidia, this is the first place to check instead of re-running your own benchmarks from scratch."
+          },
+          {
+            "title": "A more tailored Google Search that's uniquely yours",
+            "url": "https://blog.google/products-and-platforms/products/search/google-search-personal-intelligence-apps/",
+            "source": "Google",
+            "body": "Google Search can now pull from your own Gmail, Drive, Photos, Calendar, and Wallet to personalize results, not just crawl the open web. Ask about the flight confirmation from last month or the restaurant you discussed over email, and Search reaches into your connected apps to answer instead of making you dig through each one separately. It's an opt-in layer rolling out now on top of regular search, not a replacement for it. For builders, it's a signal of where consumer search is heading: less a web index, more a personal-context retrieval layer with the open web as the fallback path."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "Agent-harness infra, purpose-built search and browsing for bots, and an evidence-backed pentest framework.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "287.6k",
+            "lang": "TypeScript",
+            "body": "DeepSeek's own agent harness treats everything -- models, tools, memory, UI, even the plugin loader itself -- as a swappable plugin. That's a different bet than Claude Code or Codex's extension model, where the core runtime is fixed and plugins only bolt onto the edges. Here the core is deliberately thin, so a community plugin can replace how the agent reasons, not just what tools it calls. It's already spawned a visible ecosystem -- free-model plugins and desktop wrappers are climbing right alongside it this week. If you want an agent harness shaped around your own workflow instead of adapting to someone else's defaults, this is the one to study."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "21.6k",
+            "lang": "Rust",
+            "body": "One Rust binary that indexes code, docs, logs, JSONL/CSV, and PDFs, then serves it back over BM25, vector, and hybrid search through an Elasticsearch-compatible API. The pitch for agent builders: stop wiring together a vector DB, a separate full-text index, and a memory store -- point your MCP server at this instead. It ships with Corpus Hub, hundreds of pre-built reference corpora you can mount instead of re-indexing public docs yourself. For anyone doing RAG or building an agent that needs to search its own codebase without shelling out to grep, this collapses three pieces of infrastructure into one."
+          },
+          {
+            "title": "lexmount/moli",
+            "url": "https://github.com/lexmount/moli",
+            "source": "github.com",
+            "stars": "24.5k",
+            "lang": "Rust",
+            "body": "A headless browser built from scratch in Rust specifically for agents driving it, not humans watching it. The pitch is right in its own description -- lite, fast, high-compatibility -- and it matters because most agent browsing today runs on Playwright or Puppeteer wrapping a full Chromium, paying a memory and cold-start tax for rendering nobody looks at. A browser built for agents from the ground up can skip work a human-facing browser can't avoid. If your agent pipeline's bottleneck is spinning up browser instances at scale, this is worth benchmarking against whatever you're running now."
+          },
+          {
+            "title": "BaaRai/ARTEX",
+            "url": "https://github.com/BaaRai/ARTEX",
+            "source": "github.com",
+            "stars": "22.1k",
+            "lang": "Go",
+            "body": "An autonomous penetration-testing system that's self-hosted, model-agnostic, and backs every finding with evidence rather than just an LLM's confident writeup -- a real gap in the current wave of AI-pentester tools. It's a community continuation of the now-inactive Autumn-27/ARTEX project, kept alive under AGPL-3.0. Model-agnostic matters here: you can swap in whichever model fits your threat model instead of being locked to one vendor's API. Worth evaluating if you're looking at AI-assisted tooling for authorized, sanctioned red-team engagements."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's crop documented a real end-to-end workflow, so this section is empty.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-11-25",
     "date": "November 25, 2026",
     "title": "AI Pulse",
