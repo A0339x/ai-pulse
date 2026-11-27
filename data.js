@@ -3,6 +3,89 @@
 // Manual additions: follow the same object structure and add to the top.
 const DIGESTS = [
   {
+    "id": "2026-11-27",
+    "date": "November 27, 2026",
+    "title": "AI Pulse",
+    "subtitle": "GPT-6 picks up protein design as a side effect, Google wires Search into your inbox, and GitHub's agent-plugin wars heat up",
+    "intro": "Today leans scientific on the shipping side: GPT-6 does protein design without anyone training it to, and DeepMind ships a skill pack that reads mass spec data inside its agentic IDE. On GitHub the story is plumbing -- pooling subscriptions, replacing grep, letting agents drive a real CAD kernel. Nothing in today's Built with AI pile had enough documented workflow to clear the bar, so that section sits empty.",
+    "sections": [
+      {
+        "label": "SHIPPING",
+        "blurb": "Four real capability or product drops today, not recap posts.",
+        "items": [
+          {
+            "title": "GPT-6 models demonstrate intrinsic protein-design capabilities",
+            "url": "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities",
+            "source": "OpenAI",
+            "body": "GPT-6 can now design protein structures and sequences on its own, using reasoning and generated code instead of a specialized biology model bolted on top. OpenAI ran wet-lab tests against five target proteins and found evidence of real binding, not just plausible-looking sequences. That means the model is doing structural reasoning as a byproduct of general capability gains, not something trained specifically for biology. For anyone building in computational biology, this is a sign that a general-purpose coding and reasoning model is now a viable starting point for early-stage protein design work, before you ever reach for a specialist structure-prediction tool."
+          },
+          {
+            "title": "OpenAI and Cisco introduce Shirudo",
+            "url": "https://openai.com/index/introducing-shirudo",
+            "source": "OpenAI",
+            "body": "Shirudo is a new open-source runtime for Linux, built jointly by OpenAI and Cisco, that shields running systems from known vulnerabilities while your team works through the actual patch rollout. It sits underneath existing workloads and holds the line without requiring a reboot or a downtime window. That gap between a CVE landing and every box actually getting patched is where most real-world breaches happen, and Shirudo is aimed squarely at closing it rather than replacing your patch process. It's open source now, so you can pull it down and run it against your own fleet today."
+          },
+          {
+            "title": "A more tailored Google Search that's uniquely yours",
+            "url": "https://blog.google/products-and-platforms/products/search/google-search-personal-intelligence-apps/",
+            "source": "Google AI",
+            "body": "Google Search now pulls directly from your Gmail, Drive, Photos, Calendar, and Wallet to answer queries with your own data, not just the open web. Ask a question and Search can surface a receipt buried in Gmail or a flight confirmation sitting in Drive alongside the usual results, no separate assistant app required. It's opt-in personalization baked straight into the search bar instead of a layer you have to remember to open. For builders, it's a signal of where Google wants the product to go: less ten blue links, more a personal context layer sitting on top of the index."
+          },
+          {
+            "title": "From spectrum to structure: Identifying molecules with Mass Spec Skills for Google Antigravity",
+            "url": "https://deepmind.google/blog/interpreting-mass-spectra-with-google-antigravity/",
+            "source": "DeepMind",
+            "body": "Mass Spec Skills is a new skill pack for Google Antigravity, DeepMind's agentic coding environment, that teaches agents to read tandem mass spectra and work backward to the molecule that produced them. Chemists can point an Antigravity agent at raw spectral data and get back structural hypotheses instead of manually cross-referencing spectral libraries by hand. It's a concrete example of what 'skills' mean for agentic tools right now: packaged procedural knowledge an agent can apply correctly to real scientific data, not just general chat. Worth a look if you're building agent tooling for any lab-adjacent workflow."
+          }
+        ]
+      },
+      {
+        "label": "CLIMBING",
+        "blurb": "This week's GitHub momentum is all plumbing: pooled subscriptions, agent-native search, and a CAD kernel agents can actually drive.",
+        "items": [
+          {
+            "title": "deepseek-ai/deepseek-harness",
+            "url": "https://github.com/deepseek-ai/deepseek-harness",
+            "source": "github.com",
+            "stars": "288k",
+            "lang": "TypeScript",
+            "body": "deepseek-harness treats the entire agent stack -- model routing, tool execution, memory, even the UI -- as swappable plugins instead of a monolithic CLI. Nothing is hardcoded: the model provider, the tool layer, and the chat interface are all plugin slots you can replace independently. That's why a whole ecosystem of drop-in plugins (free model providers, mobile clients, desktop apps) has already sprung up around it within days of launch. If you've been frustrated by how locked-down Claude Code's or Codex's extension points are, this is the opposite bet: a harness with almost no fixed architecture at all."
+          },
+          {
+            "title": "yetone/magpie",
+            "url": "https://github.com/yetone/magpie",
+            "source": "github.com",
+            "stars": "42.5k",
+            "lang": "Go",
+            "body": "magpie pools every AI subscription you already pay for -- Claude, ChatGPT, Copilot, GLM Coding Plan, Kimi Code -- into one quota and fails over to the next plan automatically when one runs dry. Point Claude Code, Codex, or Claude Desktop at magpie instead of a single provider, and it routes requests across whichever plan still has headroom. The novel part isn't the proxying, it's treating your pile of subscriptions as one pooled resource instead of picking a tool and living with its rate limits. If you're paying for three coding-agent plans and hitting caps on all of them, this is the fix."
+          },
+          {
+            "title": "xerj-org/xerj",
+            "url": "https://github.com/xerj-org/xerj",
+            "source": "github.com",
+            "stars": "22.2k",
+            "lang": "Rust",
+            "body": "xerj is a single Rust binary that indexes code, docs, logs, and JSONL/CSV/PDF files for BM25, vector, and hybrid search, then exposes the whole thing as an MCP server agents can query directly. The pitch is 'code search without grep' -- instead of an agent pattern-matching its way through a repo, it gets a ranked hybrid-search index plus a persistent agent-memory layer, with an Elasticsearch-compatible API if you want existing tooling to point at it. Corpus Hub adds hundreds of pre-built reference corpora you can mount for RAG. Worth trying if your agents keep burning context re-reading the same files."
+          },
+          {
+            "title": "tangency-labs/solidcraft",
+            "url": "https://github.com/tangency-labs/solidcraft",
+            "source": "github.com",
+            "stars": "18.7k",
+            "lang": "Rust",
+            "body": "SolidCraft is a parametric, boundary-rep CAD engine written in pure Rust, with a desktop app, a web version, and full automation exposed over MCP so agents can design and modify 3D parts directly. That last part is the interesting bit: it's not a CAD viewer with a chat sidebar bolted on, it's a real CAD kernel an agent can drive programmatically, parameter by parameter. If you've wanted to let an agent iterate on a mechanical part the way it already iterates on code, this is one of the first serious attempts at the primitives underneath that."
+          }
+        ]
+      },
+      {
+        "label": "BUILT WITH AI",
+        "blurb": "Nothing in today's pile documented a real end-to-end workflow in enough detail to earn a spot.",
+        "items": []
+      }
+    ],
+    "closing": "That's the scan -- back tomorrow."
+  },
+  {
     "id": "2026-11-26",
     "date": "November 26, 2026",
     "title": "AI Pulse",
